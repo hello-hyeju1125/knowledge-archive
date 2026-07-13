@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>헬로의 지식 아카이빙 — 읽고, 기록하고, 연결하다</title>
-<meta name="description" content="헬로(hello)가 읽은 책들의 기록. 리뷰와 별점, 인상 깊은 구절, 그리고 책과 책 사이의 연결을 지식 그래프로 아카이빙합니다." />
+<meta name="description" content="헬로(hello)가 책에서 수집한 문장들, 리뷰와 별점, 그리고 책과 책 사이의 연결을 지식 그래프로 아카이빙합니다." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="헬로의 지식 아카이빙" />
-<meta property="og:description" content="읽고, 기록하고, 연결하다 — 헬로의 독서 기록과 지식 그래프" />
+<meta property="og:description" content="읽고, 기록하고, 연결하다 — 헬로가 수집한 문장과 지식 그래프" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:url" content="https://hello-hyeju1125.github.io/knowledge-archive/" />
 <link rel="canonical" href="https://hello-hyeju1125.github.io/knowledge-archive/" />
@@ -60,77 +60,101 @@
   nav .add-mini:hover{background:var(--accent-hover);}
 
   /* ---------- hero ---------- */
-  .hero{text-align:center; padding:88px 24px 64px;}
+  .hero{text-align:center; padding:84px 24px 56px;}
   .hero .eyebrow{font-size:14px; font-weight:600; color:var(--accent); margin-bottom:12px;}
   .hero h1{font-size:clamp(38px,6vw,56px); font-weight:700; letter-spacing:-0.03em; line-height:1.12;}
   .hero p.tag{font-size:clamp(17px,2.4vw,22px); color:var(--text-2); margin-top:14px; font-weight:400;}
-  .hero .stats{
-    display:flex; gap:40px; justify-content:center; margin-top:40px; flex-wrap:wrap;
-  }
+  .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
   .hero .stat b{display:block; font-size:28px; font-weight:700; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
 
   /* ---------- sections ---------- */
-  section{padding:56px max(22px,4vw);}
-  .sec-head{max-width:1200px; margin:0 auto 26px;}
+  section{padding:52px max(22px,4vw);}
+  .sec-head{max-width:1200px; margin:0 auto 22px;}
   .sec-head h2{font-size:clamp(24px,3.4vw,32px); font-weight:700; letter-spacing:-0.025em;}
   .sec-head p{color:var(--text-2); font-size:15px; margin-top:6px;}
-  .sec-inner{max-width:1200px; margin:0 auto;}
 
-  /* ---------- book rail (카드뉴스) ---------- */
+  /* ---------- 공용 레일 ---------- */
   .rail-wrap{position:relative; max-width:1200px; margin:0 auto;}
   .rail{
-    display:flex; gap:18px; overflow-x:auto; padding:8px 4px 22px;
-    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    display:flex; gap:16px; overflow-x:auto; padding:8px 4px 22px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   .rail::-webkit-scrollbar{display:none;}
-  .bcard{
-    flex:0 0 168px; scroll-snap-align:start; border:none; background:none; padding:0;
-    text-align:left; transition:transform .25s ease; color:var(--text);
-  }
-  .bcard:hover{transform:translateY(-5px);}
-  .bcard .cover{
-    width:168px; height:246px; border-radius:14px; overflow:hidden; position:relative;
-    box-shadow:var(--shadow); background:var(--bg-soft);
-    outline:2.5px solid transparent; outline-offset:3px; transition:outline-color .2s, box-shadow .25s;
-  }
-  .bcard:hover .cover{box-shadow:var(--shadow-lg);}
-  .bcard.sel .cover{outline-color:var(--accent);}
-  .bcard .cover img{width:100%; height:100%; object-fit:cover; display:block;}
-  .cover .ph{
-    width:100%; height:100%; padding:18px 16px; display:flex; flex-direction:column;
-  }
-  .cover .ph .ph-title{font-size:15.5px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
-    display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
-  .cover .ph .ph-author{margin-top:auto; font-size:11.5px; color:var(--text-2);}
-  .bcard .meta{padding:11px 2px 0;}
-  .bcard .meta .t{font-size:13.5px; font-weight:600; letter-spacing:-0.01em; line-height:1.35;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .bcard .meta .s{font-size:12px; color:var(--star); margin-top:3px; letter-spacing:1px;}
-  .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
   .rail-nav{
-    position:absolute; top:100px; width:36px; height:36px; border-radius:50%;
+    position:absolute; top:45%; width:36px; height:36px; border-radius:50%;
     border:none; background:var(--card); box-shadow:var(--shadow-lg); color:var(--text);
     font-size:16px; display:flex; align-items:center; justify-content:center; z-index:5;
   }
   .rail-nav:hover{color:var(--accent);}
   .rail-nav.prev{left:-14px;} .rail-nav.next{right:-14px;}
 
-  /* ---------- detail ---------- */
+  /* ---------- 문장 카드 ---------- */
+  .tagbar{max-width:1200px; margin:0 auto 6px; display:flex; gap:8px; flex-wrap:wrap;}
+  .tagbtn{
+    border:1px solid var(--line); background:var(--bg); color:var(--text-2);
+    font-size:13px; padding:7px 16px; border-radius:980px; font-weight:500;
+  }
+  .tagbtn.on{background:var(--text); color:var(--bg); border-color:var(--text);}
+  .qcard{
+    flex:0 0 300px; scroll-snap-align:start; text-align:left; color:var(--text);
+    background:var(--bg-soft); border:none; border-radius:20px; padding:22px 22px 18px;
+    display:flex; flex-direction:column; min-height:210px;
+    transition:transform .22s ease, box-shadow .22s ease;
+  }
+  .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); background:var(--card);}
+  .qcard .qmark{font-size:30px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
+  .qcard .qtext{
+    font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
+    display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .qcard .qfoot{margin-top:auto; padding-top:14px; display:flex; align-items:baseline; gap:8px;}
+  .qcard .qbook{font-size:12.5px; font-weight:600; color:var(--text);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .qcard .qauthor{font-size:11.5px; color:var(--text-3); white-space:nowrap;}
+  .qcard .qtag{margin-left:auto; font-size:10.5px; color:var(--text-3); border:1px solid var(--line);
+    padding:2px 8px; border-radius:980px; flex:none;}
+  .more-note{max-width:1200px; margin:0 auto; font-size:13px; color:var(--text-3);}
+
+  /* ---------- 책 카드 ---------- */
+  .bcard{
+    flex:0 0 150px; scroll-snap-align:start; border:none; background:none; padding:0;
+    text-align:left; transition:transform .25s ease; color:var(--text);
+  }
+  .bcard:hover{transform:translateY(-5px);}
+  .bcard .cover{
+    width:150px; height:220px; border-radius:13px; overflow:hidden; position:relative;
+    box-shadow:var(--shadow); background:var(--bg-soft);
+    outline:2.5px solid transparent; outline-offset:3px; transition:outline-color .2s, box-shadow .25s;
+  }
+  .bcard:hover .cover{box-shadow:var(--shadow-lg);}
+  .bcard.sel .cover{outline-color:var(--accent);}
+  .bcard .cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cover .ph{width:100%; height:100%; padding:16px 14px; display:flex; flex-direction:column;}
+  .cover .ph .ph-title{font-size:14px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
+    display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
+  .cover .ph .ph-author{margin-top:auto; font-size:11px; color:var(--text-2);}
+  .bcard .meta{padding:10px 2px 0;}
+  .bcard .meta .t{font-size:13px; font-weight:600; letter-spacing:-0.01em; line-height:1.35;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .bcard .meta .s{font-size:11.5px; color:var(--star); margin-top:3px; letter-spacing:1px;}
+  .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
+  .bcard .meta .qn{font-size:11px; color:var(--text-3); margin-top:2px;}
+
+  /* ---------- 상세 ---------- */
   #detail{
     max-width:1200px; margin:8px auto 0; background:var(--bg-soft); border-radius:24px;
-    padding:clamp(24px,4vw,44px); display:none; scroll-margin-top:80px;
+    padding:clamp(24px,4vw,44px); display:none; scroll-margin-top:76px;
   }
   #detail.show{display:block; animation:fadeUp .35s ease;}
   @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
-  .d-grid{display:grid; grid-template-columns:230px 1fr; gap:clamp(24px,4vw,48px);}
+  .d-grid{display:grid; grid-template-columns:210px 1fr; gap:clamp(24px,4vw,48px);}
   @media (max-width:720px){ .d-grid{grid-template-columns:1fr;} .d-cover{margin:0 auto;} }
-  .d-cover{width:230px; height:337px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-lg); background:var(--card);}
+  .d-cover{width:210px; height:308px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-lg); background:var(--card); flex:none;}
   .d-cover img{width:100%; height:100%; object-fit:cover; display:block;}
-  .d-cover .ph{width:100%; height:100%; padding:26px 22px; display:flex; flex-direction:column;}
-  .d-cover .ph .ph-title{font-size:21px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;}
-  .d-cover .ph .ph-author{margin-top:auto; font-size:13px; color:var(--text-2);}
+  .d-cover .ph{width:100%; height:100%; padding:24px 20px; display:flex; flex-direction:column;}
+  .d-cover .ph .ph-title{font-size:19px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;}
+  .d-cover .ph .ph-author{margin-top:auto; font-size:12.5px; color:var(--text-2);}
   .d-body h3{font-size:clamp(22px,3vw,30px); font-weight:700; letter-spacing:-0.025em; line-height:1.2;}
   .d-body .byline{color:var(--text-2); font-size:15px; margin-top:6px;}
   .d-body .stars{color:var(--star); font-size:19px; letter-spacing:2.5px; margin-top:12px;}
@@ -147,6 +171,12 @@
     font-size:14.5px; line-height:1.7; box-shadow:var(--shadow);
   }
   blockquote::before{content:"“"; color:var(--accent); font-weight:700; margin-right:2px;}
+  blockquote .qmeta{display:block; margin-top:6px; font-size:11.5px; color:var(--text-3);}
+  .show-more{
+    background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
+    font-size:13px; padding:8px 18px; margin-top:4px;
+  }
+  .show-more:hover{border-color:var(--accent);}
   .buyrow{display:flex; gap:10px; margin-top:26px; flex-wrap:wrap;}
   .buy{
     display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500;
@@ -161,13 +191,22 @@
   /* ---------- graph ---------- */
   #graph-sec{background:var(--bg-soft);}
   .graph-shell{
+    position:relative;
     max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 330px;
     grid-template-rows:minmax(0,1fr);
     border-radius:24px; overflow:hidden; background:var(--card); box-shadow:var(--shadow);
-    height:560px;
+    height:600px;
   }
-  @media (max-width:860px){ .graph-shell{grid-template-columns:1fr; height:auto;} #graph{height:420px;} #gpanel{border-left:none; border-top:1px solid var(--line); max-height:340px;} }
+  @media (max-width:860px){ .graph-shell{grid-template-columns:1fr; height:auto;} #graph{height:440px;} #gpanel{border-left:none; border-top:1px solid var(--line); max-height:340px;} }
   #graph{min-width:0; height:100%;}
+  .gcontrols{position:absolute; left:14px; top:14px; display:flex; flex-direction:column; gap:6px; z-index:5;}
+  .gbtn{
+    width:34px; height:34px; border-radius:10px; border:1px solid var(--line);
+    background:var(--bg); color:var(--text); font-size:16px; font-weight:500;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .gbtn:hover{color:var(--accent); border-color:var(--accent);}
+  .gbtn.wide{width:auto; padding:0 12px; font-size:12px;}
   #gpanel{border-left:1px solid var(--line); overflow-y:auto; padding:22px;}
   #gpanel .empty{color:var(--text-3); font-size:13.5px; line-height:1.7; margin-top:30px; text-align:center;}
   #gpanel h4{font-size:17px; font-weight:700; letter-spacing:-0.01em;}
@@ -177,7 +216,7 @@
     background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
     font-size:12.5px; padding:6px 14px; margin-top:14px;
   }
-  .legend{display:flex; gap:18px; justify-content:center; margin-top:18px; font-size:12.5px; color:var(--text-2);}
+  .legend{display:flex; gap:18px; justify-content:center; margin-top:18px; font-size:12.5px; color:var(--text-2); flex-wrap:wrap;}
   .legend span{display:inline-flex; align-items:center; gap:6px;}
   .legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
 
@@ -244,6 +283,7 @@
 <nav>
   <span class="brand">헬로의 지식 아카이빙</span>
   <div class="links">
+    <a href="#quotes">수집한 문장</a>
     <a href="#books">읽은 책</a>
     <a href="#graph-sec">지식 그래프</a>
     <a href="#" id="exportBtn" title="화면에서 추가한 책을 books.js 코드로 내보내기">내보내기</a>
@@ -254,34 +294,52 @@
 <header class="hero">
   <div class="eyebrow">Hello's Knowledge Archive</div>
   <h1>읽고, 기록하고,<br>연결하다.</h1>
-  <p class="tag">헬로가 읽은 모든 책의 리뷰 · 별점 · 문장, 그리고 그 사이의 연결.</p>
+  <p class="tag">헬로가 책에서 건져 올린 문장들, 그리고 그 사이의 연결.</p>
   <div class="stats" id="heroStats"></div>
 </header>
 
-<section id="books" style="padding-top:20px;">
+<section id="quotes" style="padding-top:16px;">
+  <div class="sec-head">
+    <h2>수집한 문장</h2>
+    <p>문장을 누르면 그 문장이 실린 책이 아래에 펼쳐집니다.</p>
+  </div>
+  <div class="tagbar" id="tagbar"></div>
+  <div class="rail-wrap">
+    <button class="rail-nav prev" id="qPrev" aria-label="이전">‹</button>
+    <div class="rail" id="qrail"></div>
+    <button class="rail-nav next" id="qNext" aria-label="다음">›</button>
+  </div>
+  <div id="detail"></div>
+</section>
+
+<section id="books" style="padding-top:24px;">
   <div class="sec-head">
     <h2>최근 읽은 책</h2>
-    <p>카드를 누르면 아래에 리뷰와 인상 깊은 구절이 열립니다.</p>
+    <p>카드를 누르면 리뷰와 수집한 문장이 열립니다.</p>
   </div>
   <div class="rail-wrap">
     <button class="rail-nav prev" id="railPrev" aria-label="이전">‹</button>
     <div class="rail" id="rail"></div>
     <button class="rail-nav next" id="railNext" aria-label="다음">›</button>
   </div>
-  <div id="detail"></div>
 </section>
 
 <section id="graph-sec">
   <div class="sec-head">
     <h2>지식 그래프</h2>
-    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 점을 끌거나 눌러 탐험해 보세요.</p>
+    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 문장을 많이 수집한 책입니다.</p>
   </div>
   <div class="graph-shell">
     <div id="graph"></div>
+    <div class="gcontrols">
+      <button class="gbtn" id="gZoomIn" title="확대">＋</button>
+      <button class="gbtn" id="gZoomOut" title="축소">－</button>
+      <button class="gbtn wide" id="gFit" title="전체 보기">전체</button>
+    </div>
     <aside id="gpanel"><div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div></aside>
   </div>
   <div class="legend">
-    <span><i style="background:var(--node-book)"></i>책</span>
+    <span><i style="background:var(--node-book)"></i>책 (클수록 문장 많음)</span>
     <span><i style="background:var(--node-author)"></i>저자</span>
     <span><i style="background:var(--node-genre)"></i>장르</span>
   </div>
@@ -310,7 +368,7 @@
       <div class="inner">
         한국 책 검색은 카카오 API를 사용합니다(무료).
         <a href="https://developers.kakao.com" target="_blank" rel="noopener">developers.kakao.com</a>에서
-        앱을 만들고 <b>REST API 키</b>를 발급받아 아래에 붙여넣으세요. 이 브라우저에만 저장됩니다.
+        앱을 만들고 <b>REST API 키</b>(32자리 영문·숫자)를 발급받아 아래에 붙여넣으세요. 이 브라우저에만 저장됩니다.
         <div class="searchbar" style="margin-top:8px;">
           <input id="kakaoKey" placeholder="REST API 키" />
           <button class="btn" id="saveKey">저장</button>
@@ -360,6 +418,7 @@
 </div>
 
 <script src="books.js"></script>
+<script src="quotes.js"></script>
 <script>
 /* ================= 데이터 ================= */
 const LS_KEY = "myBooks_v1";
@@ -368,18 +427,28 @@ const saveLocal = a => localStorage.setItem(LS_KEY, JSON.stringify(a));
 
 // 전체 목록: 최신이 앞으로 (books.js는 아래에 추가할수록 최신, 화면 추가분은 그보다 더 최신)
 let ALL = [];
+let titleIndex = {}; // 책 제목 -> ALL 인덱스
 function collect(){
   ALL = [
     ...loadLocal().map(b => ({ ...b, _src:"local" })).reverse(),
     ...BOOKS.map((b,i) => ({ ...b, _src:"static", _si:i })).reverse(),
   ];
+  titleIndex = {};
+  ALL.forEach((b,i) => { if(!(b.title in titleIndex)) titleIndex[b.title] = i; });
+}
+
+// 책 한 권의 문장들: quotes.js(QUOTES) + 그 책 객체의 quotes[] 문자열
+function quotesFor(b){
+  const fromFile = QUOTES.filter(q => q.b === b.title);
+  const own = (b.quotes || []).map(t => ({ t, b:b.title, tag:"", d:"" }));
+  return [...fromFile, ...own];
 }
 
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const stars = n => "★★★★★☆☆☆☆☆".slice(5-(n||0), 10-(n||0));
 const PH = ["var(--ph1)","var(--ph2)","var(--ph3)","var(--ph4)","var(--ph5)"];
 const phColor = t => PH[[...t].reduce((a,c)=>a+c.charCodeAt(0),0) % PH.length];
-const coverHTML = (b, cls="") => b.cover
+const coverHTML = b => b.cover
   ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" loading="lazy" />`
   : `<div class="ph" style="background:${phColor(b.title)}"><div class="ph-title">${esc(b.title)}</div><div class="ph-author">${esc(b.author||"")}</div></div>`;
 
@@ -391,41 +460,86 @@ const buyLinks = b => {
 };
 
 /* ================= 히어로 통계 ================= */
+function totalQuoteCount(){
+  return QUOTES.length + loadLocal().reduce((a,b)=>a+(b.quotes?b.quotes.length:0),0);
+}
 function renderStats(){
   const yr = new Date().getFullYear();
   const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
   const thisYear = ALL.filter(b=>b.readYear===yr).length;
-  const quotes = ALL.reduce((a,b)=>a+(b.quotes?b.quotes.length:0),0);
   document.getElementById("heroStats").innerHTML = `
+    <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
     <div class="stat"><b>${ALL.length}</b><span>권의 책</span></div>
     <div class="stat"><b>${authors.size}</b><span>명의 저자</span></div>
-    <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>
-    <div class="stat"><b>${quotes}</b><span>수집한 문장</span></div>`;
+    <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>`;
 }
 
-/* ================= 카드 레일 ================= */
+/* ================= 문장 레일 ================= */
+let activeTag = "전체";
+function renderTagbar(){
+  const tags = ["전체", ...new Set(QUOTES.map(q=>q.tag).filter(Boolean))];
+  const counts = { "전체": QUOTES.length };
+  QUOTES.forEach(q => counts[q.tag] = (counts[q.tag]||0)+1);
+  document.getElementById("tagbar").innerHTML = tags.map(t =>
+    `<button class="tagbtn ${t===activeTag?"on":""}" data-t="${esc(t)}">${esc(t)} <span style="opacity:.55">${counts[t]||0}</span></button>`).join("");
+  document.querySelectorAll(".tagbtn").forEach(el => el.onclick = () => { activeTag = el.dataset.t; renderTagbar(); renderQuotes(); });
+}
+
+function authorOf(title){ const i = titleIndex[title]; return i!=null ? (ALL[i].author||"") : ""; }
+
+function renderQuotes(){
+  const list = activeTag==="전체" ? QUOTES : QUOTES.filter(q=>q.tag===activeTag);
+  document.getElementById("qrail").innerHTML = list.map((q,n) => `
+    <button class="qcard" data-b="${esc(q.b)}" aria-label="${esc(q.b)} 상세 보기">
+      <span class="qmark">“</span>
+      <div class="qtext">${esc(q.t)}</div>
+      <div class="qfoot">
+        <span class="qbook">${esc(q.b)}</span>
+        <span class="qauthor">${esc(authorOf(q.b))}</span>
+        <span class="qtag">${esc(q.tag||"메모")}</span>
+      </div>
+    </button>`).join("");
+  document.querySelectorAll("#qrail .qcard").forEach(el => el.onclick = () => {
+    const i = titleIndex[el.dataset.b];
+    if(i != null) selectBook(i, true);
+  });
+}
+document.getElementById("qPrev").onclick = () => document.getElementById("qrail").scrollBy({left:-640, behavior:"smooth"});
+document.getElementById("qNext").onclick = () => document.getElementById("qrail").scrollBy({left:640, behavior:"smooth"});
+
+/* ================= 책 레일 ================= */
 let selKey = null;
 function renderRail(){
-  const rail = document.getElementById("rail");
-  rail.innerHTML = ALL.map((b,i) => `
+  document.getElementById("rail").innerHTML = ALL.map((b,i) => {
+    const qn = quotesFor(b).length;
+    return `
     <button class="bcard ${selKey===i?"sel":""}" data-i="${i}" aria-label="${esc(b.title)} 상세 보기">
       <div class="cover">${coverHTML(b)}</div>
       <div class="meta">
         <div class="t">${esc(b.title)}</div>
-        <div class="s">${stars(b.rating)}<small>${b.readYear ?? ""}</small></div>
+        <div class="s">${b.rating ? stars(b.rating) : ""}<small>${b.readYear ?? ""}</small></div>
+        ${qn ? `<div class="qn">문장 ${qn}개</div>` : ""}
       </div>
-    </button>`).join("");
-  rail.querySelectorAll(".bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i, true));
+    </button>`;}).join("");
+  document.querySelectorAll("#rail .bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i, true));
 }
 document.getElementById("railPrev").onclick = () => document.getElementById("rail").scrollBy({left:-560, behavior:"smooth"});
 document.getElementById("railNext").onclick = () => document.getElementById("rail").scrollBy({left:560, behavior:"smooth"});
 
 /* ================= 상세 ================= */
+const QUOTE_PREVIEW = 6;
+function quoteBlock(q){
+  const meta = (q.tag||q.d) ? `<span class="qmeta">${esc(q.tag||"")}${q.tag&&q.d?" · ":""}${esc(q.d||"")}</span>` : "";
+  return `<blockquote>${esc(q.t)}${meta}</blockquote>`;
+}
 function selectBook(i, scroll){
   selKey = i;
   const b = ALL[i];
   const links = buyLinks(b);
+  const qs = quotesFor(b);
   const dim = t => t ? `<div class="v">${esc(t)}</div>` : `<div class="v dim">아직 기록하지 않았어요.</div>`;
+  const head = qs.slice(0, QUOTE_PREVIEW).map(quoteBlock).join("");
+  const rest = qs.slice(QUOTE_PREVIEW).map(quoteBlock).join("");
   const d = document.getElementById("detail");
   d.innerHTML = `
     <div class="d-grid">
@@ -433,12 +547,14 @@ function selectBook(i, scroll){
       <div class="d-body">
         <h3>${esc(b.title)}</h3>
         <div class="byline">${esc(b.author||"저자 미상")}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
-        <div class="stars">${stars(b.rating)}<small>${b.rating||0} / 5</small></div>
+        ${b.rating ? `<div class="stars">${stars(b.rating)}<small>${b.rating} / 5</small></div>` : ""}
         ${(b.genres&&b.genres.length) ? `<div class="chiprow">${b.genres.map(g=>`<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
         <div class="d-field"><div class="k">내 리뷰</div>${dim(b.review)}</div>
         <div class="d-field"><div class="k">줄거리</div>${dim(b.summary)}</div>
-        <div class="d-field"><div class="k">인상 깊은 구절</div>
-          ${(b.quotes&&b.quotes.length) ? b.quotes.map(q=>`<blockquote>${esc(q)}</blockquote>`).join("") : `<div class="v dim">아직 수집한 문장이 없어요.</div>`}
+        <div class="d-field"><div class="k">수집한 문장 ${qs.length ? "· "+qs.length+"개" : ""}</div>
+          ${qs.length ? head : `<div class="v dim">아직 수집한 문장이 없어요.</div>`}
+          ${rest ? `<div id="restQuotes" style="display:none">${rest}</div>
+                    <button class="show-more" id="showMoreBtn">문장 ${qs.length - QUOTE_PREVIEW}개 더 보기</button>` : ""}
         </div>
         <div class="buyrow">
           <a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>
@@ -447,6 +563,13 @@ function selectBook(i, scroll){
         ${b._src==="local" ? `<button class="del-link" onclick="deleteLocal('${b._id}')">이 책 삭제</button>` : ""}
       </div>
     </div>`;
+  const more = document.getElementById("showMoreBtn");
+  if(more) more.onclick = () => {
+    const r = document.getElementById("restQuotes");
+    const open = r.style.display !== "none";
+    r.style.display = open ? "none" : "block";
+    more.textContent = open ? `문장 ${qs.length - QUOTE_PREVIEW}개 더 보기` : "접기";
+  };
   d.classList.add("show");
   renderRail();
   if(scroll) d.scrollIntoView({behavior:"smooth", block:"nearest"});
@@ -466,44 +589,87 @@ const edges = new vis.DataSet();
 let byNode = {};
 const css = getComputedStyle(document.documentElement);
 const C = n => css.getPropertyValue(n).trim();
-const groupStyle = {
-  book:   { shape:"dot",      size:15, color:C("--node-book") },
-  author: { shape:"diamond",  size:13, color:C("--node-author") },
-  genre:  { shape:"triangle", size:11, color:C("--node-genre") },
-};
+const isDark = matchMedia("(prefers-color-scheme: dark)").matches;
 
 function rebuildGraph(){
   nodes.clear(); edges.clear(); byNode = {};
   const seen = new Set();
-  const addNode = (id,label,group) => { if(seen.has(id)) return; seen.add(id); nodes.add({id,label,group}); };
+  const genreCount = {}, authorCount = {};
+  ALL.forEach(b => {
+    if(b.author) authorCount[b.author] = (authorCount[b.author]||0)+1;
+    (b.genres||[]).forEach(g => genreCount[g] = (genreCount[g]||0)+1);
+  });
+
   ALL.forEach((b,i) => {
     const id = "book:"+i;
     byNode[id] = i;
-    addNode(id, b.title, "book");
-    if(b.author){ const a="author:"+b.author; addNode(a,b.author,"author"); edges.add({from:id,to:a}); }
-    (b.genres||[]).forEach(g => { const gd="genre:"+g; addNode(gd,g,"genre"); edges.add({from:id,to:gd}); });
+    const qn = quotesFor(b).length;
+    nodes.add({
+      id, label: b.title.length > 12 ? b.title.slice(0,11)+"…" : b.title,
+      group:"book", shape:"dot",
+      size: 10 + Math.min(14, Math.sqrt(qn)*3.5),
+      color: C("--node-book"),
+      font:{ color:C("--text-2"), size:12 },
+      title: b.title + (b.author ? " — "+b.author : ""),
+    });
+    if(b.author){
+      const a = "author:"+b.author;
+      if(!seen.has(a)){ seen.add(a);
+        nodes.add({ id:a, label:b.author, group:"author", shape:"diamond",
+          size: 11 + authorCount[b.author]*2, color:C("--node-author"),
+          font:{ color:C("--text-2"), size:12 }, title:"저자 · 책 "+authorCount[b.author]+"권" });
+      }
+      edges.add({ from:id, to:a });
+    }
+    (b.genres||[]).forEach(g => {
+      const gd = "genre:"+g;
+      if(!seen.has(gd)){ seen.add(gd);
+        nodes.add({ id:gd, label:g, group:"genre", shape:"circle",
+          color:{ background: isDark ? "#3a2f18" : "#fff3e0", border:C("--node-genre") },
+          borderWidth:1.5,
+          font:{ color: isDark ? "#ffd9a0" : "#8a5200", size: genreCount[g] >= 4 ? 16 : 13, face:"-apple-system, sans-serif" },
+          margin: genreCount[g] >= 4 ? 12 : 8,
+          title:"장르 · 책 "+genreCount[g]+"권" });
+      }
+      edges.add({ from:id, to:gd });
+    });
   });
-  if(typeof network !== "undefined") network.stabilize(200);
+  if(typeof network !== "undefined") network.stabilize(250);
 }
 
 const network = new vis.Network(document.getElementById("graph"), { nodes, edges }, {
-  groups: groupStyle,
-  nodes:{ font:{ color:C("--text"), size:12, face:"-apple-system, sans-serif" }, borderWidth:0 },
-  edges:{ color:{ color:C("--line"), highlight:C("--accent") }, smooth:{ type:"continuous" }, width:1 },
-  physics:{ barnesHut:{ gravitationalConstant:-3200, springLength:95, springConstant:0.05, centralGravity:0.45 },
-            stabilization:{ iterations:200 } },
-  interaction:{ hover:true, tooltipDelay:120 },
+  nodes:{ borderWidth:0 },
+  edges:{ color:{ color:C("--line"), highlight:C("--accent"), opacity:.8 }, smooth:false, width:1 },
+  physics:{
+    solver:"forceAtlas2Based",
+    forceAtlas2Based:{ gravitationalConstant:-42, springLength:105, springConstant:0.09, centralGravity:0.012, avoidOverlap:0.7 },
+    stabilization:{ iterations:250 },
+  },
+  interaction:{ hover:true, tooltipDelay:150 },
 });
 network.on("stabilizationIterationsDone", () => network.fit({ animation:false }));
 
+document.getElementById("gZoomIn").onclick  = () => network.moveTo({ scale: network.getScale()*1.35, animation:{duration:200} });
+document.getElementById("gZoomOut").onclick = () => network.moveTo({ scale: network.getScale()/1.35, animation:{duration:200} });
+document.getElementById("gFit").onclick     = () => network.fit({ animation:{duration:300} });
+
+let baseLook = {};   // 하이라이트 복원용
+function snapshotLook(){
+  baseLook = {};
+  nodes.forEach(n => baseLook[n.id] = { color:n.color, font:{...n.font} });
+}
 function highlight(nodeId){
   const conn = new Set(network.getConnectedNodes(nodeId)); conn.add(nodeId);
-  nodes.forEach(n => nodes.update({ id:n.id,
-    color: conn.has(n.id) ? groupStyle[n.group].color : C("--line"),
-    font:{ color: conn.has(n.id) ? C("--text") : C("--text-3") } }));
+  nodes.forEach(n => {
+    const on = conn.has(n.id);
+    nodes.update({ id:n.id,
+      color: on ? baseLook[n.id].color : C("--line"),
+      font:{ ...baseLook[n.id].font, color: on ? C("--text") : C("--text-3") },
+      opacity: on ? 1 : .35 });
+  });
 }
 function clearHighlight(){
-  nodes.forEach(n => nodes.update({ id:n.id, color:groupStyle[n.group].color, font:{ color:C("--text") } }));
+  nodes.forEach(n => nodes.update({ id:n.id, color:baseLook[n.id].color, font:{...baseLook[n.id].font}, opacity:1 }));
 }
 
 const gpanel = document.getElementById("gpanel");
@@ -513,10 +679,11 @@ network.on("click", params => {
   highlight(id);
   if(id.startsWith("book:")){
     const i = byNode[id]; const b = ALL[i];
+    const qn = quotesFor(b).length;
     gpanel.innerHTML = `
       <h4>${esc(b.title)}</h4>
-      <div class="sub">${esc(b.author||"저자 미상")}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
-      <div class="stars">${stars(b.rating)}</div>
+      <div class="sub">${esc(b.author||"저자 미상")}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}${qn ? " · 문장 "+qn+"개" : ""}</div>
+      ${b.rating ? `<div class="stars">${stars(b.rating)}</div>` : ""}
       <div style="font-size:13px; color:var(--text-2); line-height:1.65;">${esc(b.review || b.summary || "")}</div>
       <button class="open-detail" onclick="selectBook(${i},true)">카드에서 자세히 보기 ↑</button>`;
     return;
@@ -536,7 +703,7 @@ document.getElementById("saveKey").onclick = () => {
   document.getElementById("searchNote").textContent = "키가 저장되었습니다. 다시 검색해 보세요.";
 };
 
-let picked = null; // 검색에서 선택한 결과
+let picked = null;
 async function searchBooks(){
   const q = document.getElementById("q").value.trim();
   if(!q) return;
@@ -632,7 +799,7 @@ document.getElementById("saveBtn").onclick = () => {
   const list = loadLocal(); list.push(book); saveLocal(list);
   addOverlay.classList.remove("show");
   refresh();
-  selectBook(0, true); // 방금 추가한 책이 맨 앞
+  selectBook(0, true);
 };
 
 /* ================= 내보내기 ================= */
@@ -664,7 +831,7 @@ function injectJsonLd(){
   const ld = {
     "@context":"https://schema.org", "@type":"WebSite",
     "name":"헬로의 지식 아카이빙",
-    "description":"헬로가 읽은 책들의 리뷰, 별점, 인상 깊은 구절과 지식 그래프",
+    "description":"헬로가 책에서 수집한 문장, 리뷰, 별점과 지식 그래프",
     "inLanguage":"ko",
     "hasPart": ALL.slice(0,50).map(b => ({
       "@type":"Book", "name":b.title,
@@ -680,11 +847,10 @@ function injectJsonLd(){
 
 /* ================= 초기화 ================= */
 function refresh(){
-  collect(); renderStats(); renderRail(); rebuildGraph();
+  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); rebuildGraph(); snapshotLook();
 }
 refresh();
 injectJsonLd();
-if(ALL.length) selectBook(0, false); // 가장 최근 책을 기본으로 펼쳐 보여줌
 </script>
 </body>
 </html>
