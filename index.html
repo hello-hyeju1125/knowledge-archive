@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>헬로의 지식 아카이빙 — 읽고, 기록하고, 연결하다</title>
+<meta name="description" content="헬로(hello)가 읽은 책들의 기록. 리뷰와 별점, 인상 깊은 구절, 그리고 책과 책 사이의 연결을 지식 그래프로 아카이빙합니다." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="헬로의 지식 아카이빙" />
+<meta property="og:description" content="읽고, 기록하고, 연결하다 — 헬로의 독서 기록과 지식 그래프" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index, follow" />
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<style>
+  :root{
+    --bg:#ffffff; --bg-soft:#f5f5f7; --text:#1d1d1f; --text-2:#6e6e73; --text-3:#a1a1a6;
+    --line:#e8e8ed; --accent:#0071e3; --accent-hover:#0077ed;
+    --star:#f5b50a; --danger:#d70015;
+    --card:#ffffff; --shadow:0 2px 12px rgba(0,0,0,.06); --shadow-lg:0 8px 32px rgba(0,0,0,.10);
+    --node-book:#0071e3; --node-author:#34c759; --node-genre:#ff9500;
+    --ph1:#eef1f5; --ph2:#f3efe9; --ph3:#eaf2ec; --ph4:#f4edf1; --ph5:#eff0f6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#000000; --bg-soft:#1c1c1e; --text:#f5f5f7; --text-2:#a1a1a6; --text-3:#6e6e73;
+      --line:#2c2c2e; --accent:#2997ff; --accent-hover:#57aeff;
+      --card:#1c1c1e; --shadow:0 2px 12px rgba(0,0,0,.5); --shadow-lg:0 8px 32px rgba(0,0,0,.6);
+      --node-book:#2997ff; --node-author:#30d158; --node-genre:#ff9f0a;
+      --ph1:#26292e; --ph2:#2b2823; --ph3:#232b25; --ph4:#2b242a; --ph5:#25262e;
+    }
+  }
+  *{box-sizing:border-box; margin:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro KR","Apple SD Gothic Neo","Pretendard","Segoe UI",Roboto,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.5;
+    -webkit-font-smoothing:antialiased; letter-spacing:-0.01em;
+  }
+  button{font-family:inherit; cursor:pointer;}
+  a{color:var(--accent); text-decoration:none;}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky; top:0; z-index:50; height:52px;
+    display:flex; align-items:center; gap:28px; padding:0 max(22px, 4vw);
+    background:color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{font-size:15px; font-weight:700; color:var(--text); letter-spacing:-0.02em;}
+  nav .links{display:flex; gap:22px; margin-left:auto; align-items:center;}
+  nav .links a{color:var(--text-2); font-size:13px; transition:color .15s;}
+  nav .links a:hover{color:var(--text);}
+  nav .add-mini{
+    background:var(--accent); color:#fff; border:none; border-radius:980px;
+    font-size:12.5px; padding:6px 14px; font-weight:500;
+  }
+  nav .add-mini:hover{background:var(--accent-hover);}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center; padding:88px 24px 64px;}
+  .hero .eyebrow{font-size:14px; font-weight:600; color:var(--accent); margin-bottom:12px;}
+  .hero h1{font-size:clamp(38px,6vw,56px); font-weight:700; letter-spacing:-0.03em; line-height:1.12;}
+  .hero p.tag{font-size:clamp(17px,2.4vw,22px); color:var(--text-2); margin-top:14px; font-weight:400;}
+  .hero .stats{
+    display:flex; gap:40px; justify-content:center; margin-top:40px; flex-wrap:wrap;
+  }
+  .hero .stat b{display:block; font-size:28px; font-weight:700; letter-spacing:-0.02em;}
+  .hero .stat span{font-size:13px; color:var(--text-2);}
+
+  /* ---------- sections ---------- */
+  section{padding:56px max(22px,4vw);}
+  .sec-head{max-width:1200px; margin:0 auto 26px;}
+  .sec-head h2{font-size:clamp(24px,3.4vw,32px); font-weight:700; letter-spacing:-0.025em;}
+  .sec-head p{color:var(--text-2); font-size:15px; margin-top:6px;}
+  .sec-inner{max-width:1200px; margin:0 auto;}
+
+  /* ---------- book rail (카드뉴스) ---------- */
+  .rail-wrap{position:relative; max-width:1200px; margin:0 auto;}
+  .rail{
+    display:flex; gap:18px; overflow-x:auto; padding:8px 4px 22px;
+    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .rail::-webkit-scrollbar{display:none;}
+  .bcard{
+    flex:0 0 168px; scroll-snap-align:start; border:none; background:none; padding:0;
+    text-align:left; transition:transform .25s ease; color:var(--text);
+  }
+  .bcard:hover{transform:translateY(-5px);}
+  .bcard .cover{
+    width:168px; height:246px; border-radius:14px; overflow:hidden; position:relative;
+    box-shadow:var(--shadow); background:var(--bg-soft);
+    outline:2.5px solid transparent; outline-offset:3px; transition:outline-color .2s, box-shadow .25s;
+  }
+  .bcard:hover .cover{box-shadow:var(--shadow-lg);}
+  .bcard.sel .cover{outline-color:var(--accent);}
+  .bcard .cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cover .ph{
+    width:100%; height:100%; padding:18px 16px; display:flex; flex-direction:column;
+  }
+  .cover .ph .ph-title{font-size:15.5px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
+    display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
+  .cover .ph .ph-author{margin-top:auto; font-size:11.5px; color:var(--text-2);}
+  .bcard .meta{padding:11px 2px 0;}
+  .bcard .meta .t{font-size:13.5px; font-weight:600; letter-spacing:-0.01em; line-height:1.35;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
+  .bcard .meta .s{font-size:12px; color:var(--star); margin-top:3px; letter-spacing:1px;}
+  .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
+  .rail-nav{
+    position:absolute; top:100px; width:36px; height:36px; border-radius:50%;
+    border:none; background:var(--card); box-shadow:var(--shadow-lg); color:var(--text);
+    font-size:16px; display:flex; align-items:center; justify-content:center; z-index:5;
+  }
+  .rail-nav:hover{color:var(--accent);}
+  .rail-nav.prev{left:-14px;} .rail-nav.next{right:-14px;}
+
+  /* ---------- detail ---------- */
+  #detail{
+    max-width:1200px; margin:8px auto 0; background:var(--bg-soft); border-radius:24px;
+    padding:clamp(24px,4vw,44px); display:none; scroll-margin-top:80px;
+  }
+  #detail.show{display:block; animation:fadeUp .35s ease;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .d-grid{display:grid; grid-template-columns:230px 1fr; gap:clamp(24px,4vw,48px);}
+  @media (max-width:720px){ .d-grid{grid-template-columns:1fr;} .d-cover{margin:0 auto;} }
+  .d-cover{width:230px; height:337px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-lg); background:var(--card);}
+  .d-cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .d-cover .ph{width:100%; height:100%; padding:26px 22px; display:flex; flex-direction:column;}
+  .d-cover .ph .ph-title{font-size:21px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;}
+  .d-cover .ph .ph-author{margin-top:auto; font-size:13px; color:var(--text-2);}
+  .d-body h3{font-size:clamp(22px,3vw,30px); font-weight:700; letter-spacing:-0.025em; line-height:1.2;}
+  .d-body .byline{color:var(--text-2); font-size:15px; margin-top:6px;}
+  .d-body .stars{color:var(--star); font-size:19px; letter-spacing:2.5px; margin-top:12px;}
+  .d-body .stars small{color:var(--text-3); font-size:13px; letter-spacing:0; margin-left:8px;}
+  .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
+  .chip{background:var(--card); border:1px solid var(--line); color:var(--text-2);
+    font-size:12.5px; padding:4px 12px; border-radius:980px;}
+  .d-field{margin-top:22px;}
+  .d-field .k{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:var(--text-3); margin-bottom:7px;}
+  .d-field .v{font-size:15px; line-height:1.7;}
+  .d-field .v.dim{color:var(--text-3); font-style:italic;}
+  blockquote{
+    margin:0 0 10px; padding:14px 18px; background:var(--card); border-radius:14px;
+    font-size:14.5px; line-height:1.7; box-shadow:var(--shadow);
+  }
+  blockquote::before{content:"“"; color:var(--accent); font-weight:700; margin-right:2px;}
+  .buyrow{display:flex; gap:10px; margin-top:26px; flex-wrap:wrap;}
+  .buy{
+    display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500;
+    padding:9px 18px; border-radius:980px; border:1px solid var(--line);
+    background:var(--card); color:var(--text); transition:border-color .15s;
+  }
+  .buy:hover{border-color:var(--accent); color:var(--accent);}
+  .buy.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .buy.primary:hover{background:var(--accent-hover); color:#fff;}
+  .del-link{background:none; border:none; color:var(--danger); font-size:13px; padding:0; margin-top:20px; text-decoration:underline;}
+
+  /* ---------- graph ---------- */
+  #graph-sec{background:var(--bg-soft);}
+  .graph-shell{
+    max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 330px;
+    grid-template-rows:minmax(0,1fr);
+    border-radius:24px; overflow:hidden; background:var(--card); box-shadow:var(--shadow);
+    height:560px;
+  }
+  @media (max-width:860px){ .graph-shell{grid-template-columns:1fr; height:auto;} #graph{height:420px;} #gpanel{border-left:none; border-top:1px solid var(--line); max-height:340px;} }
+  #graph{min-width:0; height:100%;}
+  #gpanel{border-left:1px solid var(--line); overflow-y:auto; padding:22px;}
+  #gpanel .empty{color:var(--text-3); font-size:13.5px; line-height:1.7; margin-top:30px; text-align:center;}
+  #gpanel h4{font-size:17px; font-weight:700; letter-spacing:-0.01em;}
+  #gpanel .sub{color:var(--text-2); font-size:13px; margin:4px 0 12px;}
+  #gpanel .stars{color:var(--star); font-size:14px; letter-spacing:2px; margin-bottom:10px;}
+  #gpanel .open-detail{
+    background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
+    font-size:12.5px; padding:6px 14px; margin-top:14px;
+  }
+  .legend{display:flex; gap:18px; justify-content:center; margin-top:18px; font-size:12.5px; color:var(--text-2);}
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line); padding:36px 24px 60px; text-align:center;}
+  footer .f-brand{font-size:14px; font-weight:700;}
+  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+
+  /* ---------- modal ---------- */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,.45); display:none;
+    align-items:flex-start; justify-content:center; padding:5vh 20px; z-index:100;}
+  .overlay.show{display:flex;}
+  .modal{
+    background:var(--bg); border-radius:22px; width:100%; max-width:520px; max-height:88vh;
+    overflow-y:auto; padding:30px; box-shadow:var(--shadow-lg);
+  }
+  .modal h3{font-size:20px; font-weight:700; letter-spacing:-0.02em; margin-bottom:6px;}
+  .modal .m-sub{color:var(--text-2); font-size:13px; margin-bottom:20px;}
+  .searchbar{display:flex; gap:8px;}
+  .searchbar input{flex:1;}
+  input, textarea{
+    width:100%; font-family:inherit; font-size:14.5px; color:var(--text);
+    background:var(--bg-soft); border:1px solid transparent; border-radius:12px; padding:11px 14px;
+    outline:none; transition:border-color .15s;
+  }
+  input:focus, textarea:focus{border-color:var(--accent); background:var(--bg);}
+  textarea{resize:vertical; min-height:56px;}
+  .btn{
+    border:1px solid var(--line); background:var(--bg); color:var(--text);
+    font-size:14px; font-weight:500; padding:10px 18px; border-radius:980px;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-primary{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .btn-primary:hover{background:var(--accent-hover); color:#fff;}
+  .results{margin-top:14px; display:flex; flex-direction:column; gap:8px;}
+  .r-item{
+    display:flex; gap:12px; align-items:center; text-align:left; width:100%;
+    background:var(--bg-soft); border:1px solid transparent; border-radius:14px; padding:10px;
+  }
+  .r-item:hover{border-color:var(--accent);}
+  .r-item img, .r-item .noimg{width:42px; height:60px; border-radius:6px; object-fit:cover; background:var(--line); flex:none;
+    display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--text-3);}
+  .r-item .r-t{font-size:13.5px; font-weight:600; line-height:1.35;}
+  .r-item .r-a{font-size:12px; color:var(--text-2); margin-top:2px;}
+  .r-note{font-size:12.5px; color:var(--text-3); margin-top:12px; line-height:1.6;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .row{margin-top:14px;}
+  .row label{display:block; font-size:12px; font-weight:600; color:var(--text-2); margin-bottom:6px;}
+  .starpick{font-size:28px; color:var(--line); letter-spacing:5px; user-select:none;}
+  .starpick span{cursor:pointer; transition:color .1s;}
+  .starpick span.on{color:var(--star);}
+  .cover-preview{display:flex; align-items:center; gap:12px; margin-top:8px;}
+  .cover-preview img{width:48px; height:70px; border-radius:8px; object-fit:cover; box-shadow:var(--shadow);}
+  .modal-actions{display:flex; justify-content:flex-end; gap:10px; margin-top:26px;}
+  .divider{border:none; border-top:1px solid var(--line); margin:22px 0;}
+  details.keybox{margin-top:16px;}
+  details.keybox summary{font-size:12.5px; color:var(--text-3); cursor:pointer;}
+  details.keybox .inner{margin-top:10px; font-size:12.5px; color:var(--text-2); line-height:1.6;}
+  #exportArea{min-height:200px; font-family:ui-monospace,Menlo,monospace; font-size:12px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">헬로의 지식 아카이빙</span>
+  <div class="links">
+    <a href="#books">읽은 책</a>
+    <a href="#graph-sec">지식 그래프</a>
+    <a href="#" id="exportBtn" title="화면에서 추가한 책을 books.js 코드로 내보내기">내보내기</a>
+    <button class="add-mini" id="addBtn">＋ 책 추가</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="eyebrow">Hello's Knowledge Archive</div>
+  <h1>읽고, 기록하고,<br>연결하다.</h1>
+  <p class="tag">헬로가 읽은 모든 책의 리뷰 · 별점 · 문장, 그리고 그 사이의 연결.</p>
+  <div class="stats" id="heroStats"></div>
+</header>
+
+<section id="books" style="padding-top:20px;">
+  <div class="sec-head">
+    <h2>최근 읽은 책</h2>
+    <p>카드를 누르면 아래에 리뷰와 인상 깊은 구절이 열립니다.</p>
+  </div>
+  <div class="rail-wrap">
+    <button class="rail-nav prev" id="railPrev" aria-label="이전">‹</button>
+    <div class="rail" id="rail"></div>
+    <button class="rail-nav next" id="railNext" aria-label="다음">›</button>
+  </div>
+  <div id="detail"></div>
+</section>
+
+<section id="graph-sec">
+  <div class="sec-head">
+    <h2>지식 그래프</h2>
+    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 점을 끌거나 눌러 탐험해 보세요.</p>
+  </div>
+  <div class="graph-shell">
+    <div id="graph"></div>
+    <aside id="gpanel"><div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div></aside>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--node-book)"></i>책</span>
+    <span><i style="background:var(--node-author)"></i>저자</span>
+    <span><i style="background:var(--node-genre)"></i>장르</span>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand">헬로의 지식 아카이빙</div>
+  <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+</footer>
+
+<!-- ===== 책 추가 모달 ===== -->
+<div class="overlay" id="addOverlay">
+  <div class="modal">
+    <h3>책 추가</h3>
+    <p class="m-sub">제목을 검색하면 표지·저자·출간년도가 자동으로 채워집니다.</p>
+
+    <div class="searchbar">
+      <input id="q" placeholder="책 제목 검색 — 예: 유혹하는 글쓰기" />
+      <button class="btn btn-primary" id="searchGo">검색</button>
+    </div>
+    <div class="results" id="results"></div>
+    <div class="r-note" id="searchNote"></div>
+
+    <details class="keybox">
+      <summary>검색이 안 되나요? — 카카오 API 키 설정</summary>
+      <div class="inner">
+        한국 책 검색은 카카오 API를 사용합니다(무료).
+        <a href="https://developers.kakao.com" target="_blank" rel="noopener">developers.kakao.com</a>에서
+        앱을 만들고 <b>REST API 키</b>를 발급받아 아래에 붙여넣으세요. 이 브라우저에만 저장됩니다.
+        <div class="searchbar" style="margin-top:8px;">
+          <input id="kakaoKey" placeholder="REST API 키" />
+          <button class="btn" id="saveKey">저장</button>
+        </div>
+      </div>
+    </details>
+
+    <hr class="divider" />
+
+    <div class="row"><label>제목 *</label><input id="f_title" /></div>
+    <div class="form-grid">
+      <div class="row"><label>저자</label><input id="f_author" /></div>
+      <div class="row"><label>장르 (쉼표로 구분)</label><input id="f_genres" placeholder="소설, 에세이" /></div>
+    </div>
+    <div class="form-grid">
+      <div class="row"><label>출간년도</label><input id="f_published" type="number" /></div>
+      <div class="row"><label>읽은 해</label><input id="f_readYear" type="number" /></div>
+    </div>
+    <div class="row"><label>별점</label>
+      <div class="starpick" id="f_stars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+    </div>
+    <div class="row" id="coverRow" style="display:none;"><label>표지</label>
+      <div class="cover-preview"><img id="coverImg" alt="표지 미리보기" /><span style="font-size:12.5px;color:var(--text-2);">검색 결과에서 자동으로 가져왔어요.</span></div>
+    </div>
+    <div class="row"><label>줄거리</label><textarea id="f_summary"></textarea></div>
+    <div class="row"><label>내 리뷰</label><textarea id="f_review"></textarea></div>
+    <div class="row"><label>인상 깊은 구절 (한 줄에 하나씩)</label><textarea id="f_quotes"></textarea></div>
+
+    <div class="modal-actions">
+      <button class="btn" id="cancelBtn">취소</button>
+      <button class="btn btn-primary" id="saveBtn">저장</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 내보내기 모달 ===== -->
+<div class="overlay" id="exportOverlay">
+  <div class="modal">
+    <h3>books.js에 붙여넣을 코드</h3>
+    <p class="m-sub">화면에서 추가한 책들입니다. 복사해서 <b>books.js</b>의 <b>];</b> 바로 위에 붙여넣으면 영구 저장됩니다.</p>
+    <textarea id="exportArea" readonly></textarea>
+    <div class="modal-actions">
+      <button class="btn" id="exportClose">닫기</button>
+      <button class="btn btn-primary" id="copyBtn">복사</button>
+    </div>
+  </div>
+</div>
+
+<script src="books.js"></script>
+<script>
+/* ================= 데이터 ================= */
+const LS_KEY = "myBooks_v1";
+const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || "[]"); } catch(e){ return []; } };
+const saveLocal = a => localStorage.setItem(LS_KEY, JSON.stringify(a));
+
+// 전체 목록: 최신이 앞으로 (books.js는 아래에 추가할수록 최신, 화면 추가분은 그보다 더 최신)
+let ALL = [];
+function collect(){
+  ALL = [
+    ...loadLocal().map(b => ({ ...b, _src:"local" })).reverse(),
+    ...BOOKS.map((b,i) => ({ ...b, _src:"static", _si:i })).reverse(),
+  ];
+}
+
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const stars = n => "★★★★★☆☆☆☆☆".slice(5-(n||0), 10-(n||0));
+const PH = ["var(--ph1)","var(--ph2)","var(--ph3)","var(--ph4)","var(--ph5)"];
+const phColor = t => PH[[...t].reduce((a,c)=>a+c.charCodeAt(0),0) % PH.length];
+const coverHTML = (b, cls="") => b.cover
+  ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" loading="lazy" />`
+  : `<div class="ph" style="background:${phColor(b.title)}"><div class="ph-title">${esc(b.title)}</div><div class="ph-author">${esc(b.author||"")}</div></div>`;
+
+const buyLinks = b => {
+  const kw = encodeURIComponent(b.isbn || b.title);
+  const az = encodeURIComponent(b.title + (b.author ? " " + b.author : ""));
+  return { kyobo:`https://search.kyobobook.co.kr/search?keyword=${kw}`,
+           amazon:`https://www.amazon.com/s?k=${az}` };
+};
+
+/* ================= 히어로 통계 ================= */
+function renderStats(){
+  const yr = new Date().getFullYear();
+  const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
+  const thisYear = ALL.filter(b=>b.readYear===yr).length;
+  const quotes = ALL.reduce((a,b)=>a+(b.quotes?b.quotes.length:0),0);
+  document.getElementById("heroStats").innerHTML = `
+    <div class="stat"><b>${ALL.length}</b><span>권의 책</span></div>
+    <div class="stat"><b>${authors.size}</b><span>명의 저자</span></div>
+    <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>
+    <div class="stat"><b>${quotes}</b><span>수집한 문장</span></div>`;
+}
+
+/* ================= 카드 레일 ================= */
+let selKey = null;
+function renderRail(){
+  const rail = document.getElementById("rail");
+  rail.innerHTML = ALL.map((b,i) => `
+    <button class="bcard ${selKey===i?"sel":""}" data-i="${i}" aria-label="${esc(b.title)} 상세 보기">
+      <div class="cover">${coverHTML(b)}</div>
+      <div class="meta">
+        <div class="t">${esc(b.title)}</div>
+        <div class="s">${stars(b.rating)}<small>${b.readYear ?? ""}</small></div>
+      </div>
+    </button>`).join("");
+  rail.querySelectorAll(".bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i, true));
+}
+document.getElementById("railPrev").onclick = () => document.getElementById("rail").scrollBy({left:-560, behavior:"smooth"});
+document.getElementById("railNext").onclick = () => document.getElementById("rail").scrollBy({left:560, behavior:"smooth"});
+
+/* ================= 상세 ================= */
+function selectBook(i, scroll){
+  selKey = i;
+  const b = ALL[i];
+  const links = buyLinks(b);
+  const dim = t => t ? `<div class="v">${esc(t)}</div>` : `<div class="v dim">아직 기록하지 않았어요.</div>`;
+  const d = document.getElementById("detail");
+  d.innerHTML = `
+    <div class="d-grid">
+      <div class="d-cover">${coverHTML(b)}</div>
+      <div class="d-body">
+        <h3>${esc(b.title)}</h3>
+        <div class="byline">${esc(b.author||"저자 미상")}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
+        <div class="stars">${stars(b.rating)}<small>${b.rating||0} / 5</small></div>
+        ${(b.genres&&b.genres.length) ? `<div class="chiprow">${b.genres.map(g=>`<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
+        <div class="d-field"><div class="k">내 리뷰</div>${dim(b.review)}</div>
+        <div class="d-field"><div class="k">줄거리</div>${dim(b.summary)}</div>
+        <div class="d-field"><div class="k">인상 깊은 구절</div>
+          ${(b.quotes&&b.quotes.length) ? b.quotes.map(q=>`<blockquote>${esc(q)}</blockquote>`).join("") : `<div class="v dim">아직 수집한 문장이 없어요.</div>`}
+        </div>
+        <div class="buyrow">
+          <a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>
+          <a class="buy" href="${links.amazon}" target="_blank" rel="noopener">Amazon에서 보기</a>
+        </div>
+        ${b._src==="local" ? `<button class="del-link" onclick="deleteLocal('${b._id}')">이 책 삭제</button>` : ""}
+      </div>
+    </div>`;
+  d.classList.add("show");
+  renderRail();
+  if(scroll) d.scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+window.deleteLocal = id => {
+  if(!confirm("이 책을 삭제할까요?")) return;
+  saveLocal(loadLocal().filter(b => b._id !== id));
+  selKey = null;
+  document.getElementById("detail").classList.remove("show");
+  refresh();
+};
+
+/* ================= 그래프 ================= */
+const nodes = new vis.DataSet();
+const edges = new vis.DataSet();
+let byNode = {};
+const css = getComputedStyle(document.documentElement);
+const C = n => css.getPropertyValue(n).trim();
+const groupStyle = {
+  book:   { shape:"dot",      size:15, color:C("--node-book") },
+  author: { shape:"diamond",  size:13, color:C("--node-author") },
+  genre:  { shape:"triangle", size:11, color:C("--node-genre") },
+};
+
+function rebuildGraph(){
+  nodes.clear(); edges.clear(); byNode = {};
+  const seen = new Set();
+  const addNode = (id,label,group) => { if(seen.has(id)) return; seen.add(id); nodes.add({id,label,group}); };
+  ALL.forEach((b,i) => {
+    const id = "book:"+i;
+    byNode[id] = i;
+    addNode(id, b.title, "book");
+    if(b.author){ const a="author:"+b.author; addNode(a,b.author,"author"); edges.add({from:id,to:a}); }
+    (b.genres||[]).forEach(g => { const gd="genre:"+g; addNode(gd,g,"genre"); edges.add({from:id,to:gd}); });
+  });
+  if(typeof network !== "undefined") network.stabilize(200);
+}
+
+const network = new vis.Network(document.getElementById("graph"), { nodes, edges }, {
+  groups: groupStyle,
+  nodes:{ font:{ color:C("--text"), size:12, face:"-apple-system, sans-serif" }, borderWidth:0 },
+  edges:{ color:{ color:C("--line"), highlight:C("--accent") }, smooth:{ type:"continuous" }, width:1 },
+  physics:{ barnesHut:{ gravitationalConstant:-3200, springLength:95, springConstant:0.05, centralGravity:0.45 },
+            stabilization:{ iterations:200 } },
+  interaction:{ hover:true, tooltipDelay:120 },
+});
+network.on("stabilizationIterationsDone", () => network.fit({ animation:false }));
+
+function highlight(nodeId){
+  const conn = new Set(network.getConnectedNodes(nodeId)); conn.add(nodeId);
+  nodes.forEach(n => nodes.update({ id:n.id,
+    color: conn.has(n.id) ? groupStyle[n.group].color : C("--line"),
+    font:{ color: conn.has(n.id) ? C("--text") : C("--text-3") } }));
+}
+function clearHighlight(){
+  nodes.forEach(n => nodes.update({ id:n.id, color:groupStyle[n.group].color, font:{ color:C("--text") } }));
+}
+
+const gpanel = document.getElementById("gpanel");
+network.on("click", params => {
+  const id = params.nodes[0];
+  if(!id){ clearHighlight(); gpanel.innerHTML = `<div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div>`; return; }
+  highlight(id);
+  if(id.startsWith("book:")){
+    const i = byNode[id]; const b = ALL[i];
+    gpanel.innerHTML = `
+      <h4>${esc(b.title)}</h4>
+      <div class="sub">${esc(b.author||"저자 미상")}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
+      <div class="stars">${stars(b.rating)}</div>
+      <div style="font-size:13px; color:var(--text-2); line-height:1.65;">${esc(b.review || b.summary || "")}</div>
+      <button class="open-detail" onclick="selectBook(${i},true)">카드에서 자세히 보기 ↑</button>`;
+    return;
+  }
+  const titles = network.getConnectedNodes(id).filter(n=>n.startsWith("book:")).map(n=>esc(ALL[byNode[n]].title));
+  gpanel.innerHTML = `
+    <h4>${esc(nodes.get(id).label)}</h4>
+    <div class="sub">연결된 책 ${titles.length}권</div>
+    <div class="chiprow">${titles.map(t=>`<span class="chip">${t}</span>`).join("")}</div>`;
+});
+
+/* ================= 책 검색 (카카오 → 구글북스 폴백) ================= */
+const kakaoKeyInput = document.getElementById("kakaoKey");
+kakaoKeyInput.value = localStorage.getItem("kakaoKey") || "";
+document.getElementById("saveKey").onclick = () => {
+  localStorage.setItem("kakaoKey", kakaoKeyInput.value.trim());
+  document.getElementById("searchNote").textContent = "키가 저장되었습니다. 다시 검색해 보세요.";
+};
+
+let picked = null; // 검색에서 선택한 결과
+async function searchBooks(){
+  const q = document.getElementById("q").value.trim();
+  if(!q) return;
+  const resBox = document.getElementById("results");
+  const note = document.getElementById("searchNote");
+  resBox.innerHTML = ""; note.textContent = "검색 중…";
+  const key = localStorage.getItem("kakaoKey");
+  let items = [];
+  try{
+    if(key){
+      const r = await fetch("https://dapi.kakao.com/v3/search/book?size=6&query="+encodeURIComponent(q),
+        { headers:{ Authorization:"KakaoAK "+key } });
+      if(!r.ok) throw new Error("kakao "+r.status);
+      const d = await r.json();
+      items = (d.documents||[]).map(x => ({
+        title:x.title, author:(x.authors||[]).join(", "),
+        published:x.datetime ? +x.datetime.slice(0,4) : null,
+        cover:x.thumbnail || "", isbn:(x.isbn||"").split(" ").pop() || "",
+        summary:(x.contents||"").trim(), publisher:x.publisher||"",
+      }));
+    } else {
+      const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=6&q="+encodeURIComponent(q));
+      const d = await r.json();
+      if(d.error) throw new Error("google "+d.error.code);
+      items = (d.items||[]).map(x => { const v=x.volumeInfo;
+        return { title:v.title||"", author:(v.authors||[]).join(", "),
+          published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
+          cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
+          isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop() || "",
+          summary:(v.description||"").slice(0,300), publisher:v.publisher||"" };
+      });
+    }
+    note.textContent = items.length ? "결과를 누르면 아래 칸이 자동으로 채워집니다."
+      : "결과가 없어요. 아래 칸에 직접 입력해도 됩니다.";
+  }catch(e){
+    note.textContent = key
+      ? "검색에 실패했어요. 키를 확인하거나 잠시 후 다시 시도해 주세요. 직접 입력도 가능합니다."
+      : "지금은 자동 검색이 어려워요(카카오 키를 설정하면 안정적입니다). 직접 입력해 주세요.";
+  }
+  resBox.innerHTML = items.map((x,i) => `
+    <button class="r-item" data-i="${i}">
+      ${x.cover ? `<img src="${esc(x.cover)}" alt="" />` : `<div class="noimg">표지<br>없음</div>`}
+      <div><div class="r-t">${esc(x.title)}</div>
+      <div class="r-a">${esc(x.author)}${x.publisher ? " · "+esc(x.publisher) : ""}${x.published ? " · "+x.published : ""}</div></div>
+    </button>`).join("");
+  resBox.querySelectorAll(".r-item").forEach(el => el.onclick = () => {
+    picked = items[+el.dataset.i];
+    document.getElementById("f_title").value = picked.title;
+    document.getElementById("f_author").value = picked.author;
+    document.getElementById("f_published").value = picked.published ?? "";
+    if(picked.summary) document.getElementById("f_summary").value = picked.summary;
+    if(picked.cover){ document.getElementById("coverImg").src = picked.cover; document.getElementById("coverRow").style.display="block"; }
+    resBox.innerHTML = ""; note.textContent = `"${picked.title}" 선택됨 — 별점과 리뷰를 채우고 저장하세요.`;
+  });
+}
+document.getElementById("searchGo").onclick = searchBooks;
+document.getElementById("q").addEventListener("keydown", e => { if(e.key==="Enter") searchBooks(); });
+
+/* ================= 추가/저장 ================= */
+const addOverlay = document.getElementById("addOverlay");
+let pickedRating = 0;
+const starEls = [...document.querySelectorAll("#f_stars span")];
+starEls.forEach(s => s.onclick = () => { pickedRating = +s.dataset.v; starEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= pickedRating)); });
+
+document.getElementById("addBtn").onclick = () => {
+  ["q","f_title","f_author","f_genres","f_published","f_summary","f_review","f_quotes"].forEach(k=>document.getElementById(k).value="");
+  document.getElementById("f_readYear").value = new Date().getFullYear();
+  document.getElementById("results").innerHTML = ""; document.getElementById("searchNote").textContent = "";
+  document.getElementById("coverRow").style.display = "none";
+  picked = null; pickedRating = 0; starEls.forEach(x=>x.classList.remove("on"));
+  addOverlay.classList.add("show");
+  document.getElementById("q").focus();
+};
+document.getElementById("cancelBtn").onclick = () => addOverlay.classList.remove("show");
+addOverlay.onclick = e => { if(e.target === addOverlay) addOverlay.classList.remove("show"); };
+
+document.getElementById("saveBtn").onclick = () => {
+  const v = id => document.getElementById(id).value.trim();
+  const title = v("f_title");
+  if(!title){ alert("제목은 필수입니다."); return; }
+  const book = {
+    _id: Date.now().toString(36),
+    title,
+    author: v("f_author"),
+    genres: v("f_genres").split(/[,\n]/).map(x=>x.trim()).filter(Boolean),
+    published: v("f_published") ? +v("f_published") : null,
+    readYear: v("f_readYear") ? +v("f_readYear") : null,
+    summary: v("f_summary"), review: v("f_review"),
+    rating: pickedRating,
+    quotes: v("f_quotes").split(/\n/).map(x=>x.trim()).filter(Boolean),
+    cover: picked ? picked.cover : "", isbn: picked ? picked.isbn : "",
+  };
+  const list = loadLocal(); list.push(book); saveLocal(list);
+  addOverlay.classList.remove("show");
+  refresh();
+  selectBook(0, true); // 방금 추가한 책이 맨 앞
+};
+
+/* ================= 내보내기 ================= */
+const exportOverlay = document.getElementById("exportOverlay");
+document.getElementById("exportBtn").onclick = e => {
+  e.preventDefault();
+  const list = loadLocal();
+  const je = s => String(s ?? "").replace(/\\/g,"\\\\").replace(/"/g,'\\"');
+  const arr = a => "[" + (a||[]).map(x=>`"${je(x)}"`).join(", ") + "]";
+  document.getElementById("exportArea").value = list.length === 0
+    ? "// 화면에서 추가한 책이 아직 없습니다."
+    : list.map(b =>
+`  { title: "${je(b.title)}", author: "${je(b.author)}", genres: ${arr(b.genres)}, published: ${b.published ?? "null"}, readYear: ${b.readYear ?? "null"},
+    cover: "${je(b.cover)}", isbn: "${je(b.isbn)}",
+    summary: "${je(b.summary)}", review: "${je(b.review)}", rating: ${b.rating}, quotes: ${arr(b.quotes)} },`).join("\n");
+  exportOverlay.classList.add("show");
+};
+document.getElementById("exportClose").onclick = () => exportOverlay.classList.remove("show");
+exportOverlay.onclick = e => { if(e.target === exportOverlay) exportOverlay.classList.remove("show"); };
+document.getElementById("copyBtn").onclick = () => {
+  const ta = document.getElementById("exportArea"); ta.select();
+  try{ navigator.clipboard.writeText(ta.value); }catch(e){ document.execCommand("copy"); }
+  document.getElementById("copyBtn").textContent = "복사됨 ✓";
+  setTimeout(()=>document.getElementById("copyBtn").textContent="복사", 1500);
+};
+
+/* ================= SEO: JSON-LD ================= */
+function injectJsonLd(){
+  const ld = {
+    "@context":"https://schema.org", "@type":"WebSite",
+    "name":"헬로의 지식 아카이빙",
+    "description":"헬로가 읽은 책들의 리뷰, 별점, 인상 깊은 구절과 지식 그래프",
+    "inLanguage":"ko",
+    "hasPart": ALL.slice(0,50).map(b => ({
+      "@type":"Book", "name":b.title,
+      ...(b.author ? {"author":{"@type":"Person","name":b.author}} : {}),
+      ...(b.rating ? {"review":{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":b.rating,"bestRating":5},
+        "author":{"@type":"Person","name":"헬로"}}} : {}),
+    })),
+  };
+  const s = document.createElement("script");
+  s.type = "application/ld+json"; s.textContent = JSON.stringify(ld);
+  document.head.appendChild(s);
+}
+
+/* ================= 초기화 ================= */
+function refresh(){
+  collect(); renderStats(); renderRail(); rebuildGraph();
+}
+refresh();
+injectJsonLd();
+if(ALL.length) selectBook(0, false); // 가장 최근 책을 기본으로 펼쳐 보여줌
+</script>
+</body>
+</html>
