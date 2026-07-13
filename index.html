@@ -14,27 +14,37 @@
 <meta name="robots" content="index, follow" />
 <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 <style>
+@font-face{
+  font-family:"NanumSquareNeo";
+  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2") format("woff2");
+  font-weight:300 900; font-display:swap;
+}
+</style>
+<style>
   :root{
-    --bg:#ffffff; --bg-soft:#f5f5f7; --text:#1d1d1f; --text-2:#6e6e73; --text-3:#a1a1a6;
-    --line:#e8e8ed; --accent:#0071e3; --accent-hover:#0077ed;
-    --star:#f5b50a; --danger:#d70015;
-    --card:#ffffff; --shadow:0 2px 12px rgba(0,0,0,.06); --shadow-lg:0 8px 32px rgba(0,0,0,.10);
-    --node-book:#0071e3; --node-author:#34c759; --node-genre:#ff9500;
-    --ph1:#eef1f5; --ph2:#f3efe9; --ph3:#eaf2ec; --ph4:#f4edf1; --ph5:#eff0f6;
+    --bg:#ECFCFF; --bg-soft:#ffffff; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
+    --line:#CBE9F2; --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --star:#294AFF; --danger:#d70015;
+    --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 10px 34px rgba(41,74,255,.14);
+    --node-book:#294AFF; --node-author:#0DDF85; --node-genre:#294AFF;
+    --ph1:#E2F4FF; --ph2:#E7F0FF; --ph3:#DFFBEF; --ph4:#EAF6F1; --ph5:#E4EDFF;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#000000; --bg-soft:#1c1c1e; --text:#f5f5f7; --text-2:#a1a1a6; --text-3:#6e6e73;
-      --line:#2c2c2e; --accent:#2997ff; --accent-hover:#57aeff;
-      --card:#1c1c1e; --shadow:0 2px 12px rgba(0,0,0,.5); --shadow-lg:0 8px 32px rgba(0,0,0,.6);
-      --node-book:#2997ff; --node-author:#30d158; --node-genre:#ff9f0a;
-      --ph1:#26292e; --ph2:#2b2823; --ph3:#232b25; --ph4:#2b242a; --ph5:#25262e;
+      --bg:#050B1D; --bg-soft:#0D1730; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
+      --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
+      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
+      --star:#37FFA9;
+      --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5); --shadow-lg:0 10px 34px rgba(0,0,0,.65);
+      --node-book:#5E78FF; --node-author:#37FFA9; --node-genre:#5E78FF;
+      --ph1:#12203E; --ph2:#101E3B; --ph3:#0E2635; --ph4:#132239; --ph5:#111F42;
     }
   }
   *{box-sizing:border-box; margin:0;}
   html{scroll-behavior:smooth;}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro KR","Apple SD Gothic Neo","Pretendard","Segoe UI",Roboto,sans-serif;
+    font-family:"NanumSquareNeo","Apple SD Gothic Neo","Pretendard",-apple-system,sans-serif;
     background:var(--bg); color:var(--text); line-height:1.5;
     -webkit-font-smoothing:antialiased; letter-spacing:-0.01em;
   }
@@ -49,7 +59,7 @@
     backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
     border-bottom:1px solid var(--line);
   }
-  nav .brand{font-size:15px; font-weight:700; color:var(--text); letter-spacing:-0.02em;}
+  nav .brand{font-size:15px; font-weight:800; color:var(--text); letter-spacing:-0.02em;}
   nav .links{display:flex; gap:22px; margin-left:auto; align-items:center;}
   nav .links a{color:var(--text-2); font-size:13px; transition:color .15s;}
   nav .links a:hover{color:var(--text);}
@@ -61,17 +71,17 @@
 
   /* ---------- hero ---------- */
   .hero{text-align:center; padding:84px 24px 56px;}
-  .hero .eyebrow{font-size:14px; font-weight:600; color:var(--accent); margin-bottom:12px;}
-  .hero h1{font-size:clamp(38px,6vw,56px); font-weight:700; letter-spacing:-0.03em; line-height:1.12;}
+  .hero .eyebrow{font-size:14px; font-weight:700; letter-spacing:.06em; color:var(--accent); margin-bottom:12px;}
+  .hero h1{font-size:clamp(38px,6vw,56px); font-weight:900; letter-spacing:-0.03em; line-height:1.12;}
   .hero p.tag{font-size:clamp(17px,2.4vw,22px); color:var(--text-2); margin-top:14px; font-weight:400;}
   .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
-  .hero .stat b{display:block; font-size:28px; font-weight:700; letter-spacing:-0.02em;}
+  .hero .stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
 
   /* ---------- sections ---------- */
   section{padding:52px max(22px,4vw);}
   .sec-head{max-width:1200px; margin:0 auto 22px;}
-  .sec-head h2{font-size:clamp(24px,3.4vw,32px); font-weight:700; letter-spacing:-0.025em;}
+  .sec-head h2{font-size:clamp(24px,3.4vw,32px); font-weight:800; letter-spacing:-0.025em;}
   .sec-head p{color:var(--text-2); font-size:15px; margin-top:6px;}
 
   /* ---------- 공용 레일 ---------- */
@@ -95,14 +105,14 @@
     border:1px solid var(--line); background:var(--bg); color:var(--text-2);
     font-size:13px; padding:7px 16px; border-radius:980px; font-weight:500;
   }
-  .tagbtn.on{background:var(--text); color:var(--bg); border-color:var(--text);}
+  .tagbtn.on{background:var(--accent); color:#fff; border-color:var(--accent); font-weight:700;}
   .qcard{
     flex:0 0 300px; scroll-snap-align:start; text-align:left; color:var(--text);
-    background:var(--bg-soft); border:none; border-radius:20px; padding:22px 22px 18px;
+    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 22px 18px;
     display:flex; flex-direction:column; min-height:210px;
     transition:transform .22s ease, box-shadow .22s ease;
   }
-  .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); background:var(--card);}
+  .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);}
   .qcard .qmark{font-size:30px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
   .qcard .qtext{
     font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
@@ -112,7 +122,7 @@
   .qcard .qbook{font-size:12.5px; font-weight:600; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .qcard .qauthor{font-size:11.5px; color:var(--text-3); white-space:nowrap;}
-  .qcard .qtag{margin-left:auto; font-size:10.5px; color:var(--text-3); border:1px solid var(--line);
+  .qcard .qtag{margin-left:auto; font-size:10.5px; font-weight:700; color:var(--mint-text); background:var(--mint-soft); border:none;
     padding:2px 8px; border-radius:980px; flex:none;}
   .more-note{max-width:1200px; margin:0 auto; font-size:13px; color:var(--text-3);}
 
@@ -143,7 +153,7 @@
 
   /* ---------- 상세 ---------- */
   #detail{
-    max-width:1200px; margin:8px auto 0; background:var(--bg-soft); border-radius:24px;
+    max-width:1200px; margin:8px auto 0; background:var(--card); border:1px solid var(--line); border-radius:24px;
     padding:clamp(24px,4vw,44px); display:none; scroll-margin-top:76px;
   }
   #detail.show{display:block; animation:fadeUp .35s ease;}
@@ -160,7 +170,7 @@
   .d-body .stars{color:var(--star); font-size:19px; letter-spacing:2.5px; margin-top:12px;}
   .d-body .stars small{color:var(--text-3); font-size:13px; letter-spacing:0; margin-left:8px;}
   .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
-  .chip{background:var(--card); border:1px solid var(--line); color:var(--text-2);
+  .chip{background:var(--bg); border:1px solid var(--line); color:var(--text-2);
     font-size:12.5px; padding:4px 12px; border-radius:980px;}
   .chip-btn{cursor:pointer; font-family:inherit; transition:border-color .15s, color .15s;}
   .chip-btn:hover{border-color:var(--accent); color:var(--accent);}
@@ -169,8 +179,8 @@
   .d-field .v{font-size:15px; line-height:1.7;}
   .d-field .v.dim{color:var(--text-3); font-style:italic;}
   blockquote{
-    margin:0 0 10px; padding:14px 18px; background:var(--card); border-radius:14px;
-    font-size:14.5px; line-height:1.7; box-shadow:var(--shadow);
+    margin:0 0 10px; padding:14px 18px; background:var(--bg); border-radius:14px;
+    font-size:14.5px; line-height:1.7;
   }
   blockquote::before{content:"“"; color:var(--accent); font-weight:700; margin-right:2px;}
   blockquote .qmeta{display:block; margin-top:6px; font-size:11.5px; color:var(--text-3);}
@@ -241,14 +251,14 @@
   .searchbar input{flex:1;}
   input, textarea{
     width:100%; font-family:inherit; font-size:14.5px; color:var(--text);
-    background:var(--bg-soft); border:1px solid transparent; border-radius:12px; padding:11px 14px;
+    background:var(--bg); border:1px solid transparent; border-radius:12px; padding:11px 14px;
     outline:none; transition:border-color .15s;
   }
-  input:focus, textarea:focus{border-color:var(--accent); background:var(--bg);}
+  input:focus, textarea:focus{border-color:var(--accent); background:var(--card);}
   textarea{resize:vertical; min-height:56px;}
   .btn{
-    border:1px solid var(--line); background:var(--bg); color:var(--text);
-    font-size:14px; font-weight:500; padding:10px 18px; border-radius:980px;
+    border:1px solid var(--line); background:var(--card); color:var(--text);
+    font-size:14px; font-weight:600; padding:10px 18px; border-radius:980px;
   }
   .btn:hover{border-color:var(--accent); color:var(--accent);}
   .btn-primary{background:var(--accent); color:#fff; border-color:var(--accent);}
@@ -256,7 +266,7 @@
   .results{margin-top:14px; display:flex; flex-direction:column; gap:8px;}
   .r-item{
     display:flex; gap:12px; align-items:center; text-align:left; width:100%;
-    background:var(--bg-soft); border:1px solid transparent; border-radius:14px; padding:10px;
+    background:var(--bg); border:1px solid transparent; border-radius:14px; padding:10px;
   }
   .r-item:hover{border-color:var(--accent);}
   .r-item img, .r-item .noimg{width:42px; height:60px; border-radius:6px; object-fit:cover; background:var(--line); flex:none;
@@ -330,7 +340,7 @@
 
 <header class="hero">
   <div class="eyebrow">hello's library</div>
-  <h1>읽고, 잇다.</h1>
+  <h1>읽고, <span style="background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 2px;">잇다</span>.</h1>
   <p class="tag" id="heroTag">책의 별점과 문장, 그리고 그 사이의 연결.</p>
   <div class="stats" id="heroStats"></div>
 </header>
@@ -703,9 +713,9 @@ function rebuildGraph(){
       const gd = "genre:"+g;
       if(!seen.has(gd)){ seen.add(gd);
         nodes.add({ id:gd, label:g, group:"genre", shape:"circle",
-          color:{ background: isDark ? "#3a2f18" : "#fff3e0", border:C("--node-genre") },
+          color:{ background: isDark ? "#10254A" : "#DDF6FF", border:C("--node-genre") },
           borderWidth:1.5,
-          font:{ color: isDark ? "#ffd9a0" : "#8a5200", size: genreCount[g] >= 4 ? 16 : 13, face:"-apple-system, sans-serif" },
+          font:{ color: isDark ? "#9FD8FF" : "#14329E", size: genreCount[g] >= 4 ? 16 : 13, face:"NanumSquareNeo, sans-serif" },
           margin: genreCount[g] >= 4 ? 12 : 8,
           title:"장르 · 책 "+genreCount[g]+"권" });
       }
@@ -716,7 +726,7 @@ function rebuildGraph(){
 }
 
 const network = new vis.Network(document.getElementById("graph"), { nodes, edges }, {
-  nodes:{ borderWidth:0 },
+  nodes:{ borderWidth:0, font:{ face:"NanumSquareNeo, sans-serif" } },
   edges:{ color:{ color:C("--line"), highlight:C("--accent"), opacity:.8 }, smooth:false, width:1 },
   physics:{
     solver:"forceAtlas2Based",
@@ -1012,6 +1022,7 @@ function refresh(){
 }
 refresh();
 injectJsonLd();
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>network.redraw());
 </script>
 </body>
 </html>
