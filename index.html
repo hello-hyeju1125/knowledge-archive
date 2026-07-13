@@ -162,6 +162,8 @@
   .chiprow{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;}
   .chip{background:var(--card); border:1px solid var(--line); color:var(--text-2);
     font-size:12.5px; padding:4px 12px; border-radius:980px;}
+  .chip-btn{cursor:pointer; font-family:inherit; transition:border-color .15s, color .15s;}
+  .chip-btn:hover{border-color:var(--accent); color:var(--accent);}
   .d-field{margin-top:22px;}
   .d-field .k{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:var(--text-3); margin-bottom:7px;}
   .d-field .v{font-size:15px; line-height:1.7;}
@@ -773,11 +775,11 @@ network.on("click", params => {
   if(!id){ clearHighlight(); gpanel.innerHTML = `<div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div>`; return; }
   highlight(id);
   if(id.startsWith("book:")){ renderGraphBook(byNode[id], 1); return; }
-  const titles = network.getConnectedNodes(id).filter(n=>n.startsWith("book:")).map(n=>esc(ALL[byNode[n]].title));
+  const items = network.getConnectedNodes(id).filter(n=>n.startsWith("book:")).map(n=>byNode[n]);
   gpanel.innerHTML = `
     <h4>${esc(nodes.get(id).label)}</h4>
-    <div class="sub">연결된 책 ${titles.length}권</div>
-    <div class="chiprow">${titles.map(t=>`<span class="chip">${t}</span>`).join("")}</div>`;
+    <div class="sub">연결된 책 ${items.length}권 — 제목을 누르면 책 정보가 열립니다</div>
+    <div class="chiprow">${items.map(i=>`<button class="chip chip-btn" onclick="renderGraphBook(${i},1)">${esc(ALL[i].title)}</button>`).join("")}</div>`;
 });
 
 /* ================= 책 검색 (카카오 → 구글북스 폴백) ================= */
