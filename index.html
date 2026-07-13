@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>헬로의 지식 아카이빙 — 읽고, 기록하고, 연결하다</title>
-<meta name="description" content="헬로(hello)가 책에서 수집한 문장들, 리뷰와 별점, 그리고 책과 책 사이의 연결을 지식 그래프로 아카이빙합니다." />
+<title>헬로의 서재 — 읽고, 잇다</title>
+<meta name="description" content="헬로(hello)의 서재. 읽은 책의 별점과 문장, 그리고 책과 책 사이의 연결을 지식 그래프로 보여줍니다." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="헬로의 지식 아카이빙" />
-<meta property="og:description" content="읽고, 기록하고, 연결하다 — 헬로가 수집한 문장과 지식 그래프" />
+<meta property="og:title" content="헬로의 서재" />
+<meta property="og:description" content="읽고, 잇다 — 헬로가 읽은 책과 수집한 문장들" />
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:url" content="https://hello-hyeju1125.github.io/knowledge-archive/" />
 <link rel="canonical" href="https://hello-hyeju1125.github.io/knowledge-archive/" />
@@ -303,25 +303,35 @@
   .gq-pages button:hover{border-color:var(--accent); color:var(--accent);}
   .gq-pages button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
   .gq-pages .ell{color:var(--text-3); font-size:12px; padding:0 2px;}
+
+  /* ---------- 그래프 검색 ---------- */
+  .graph-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap;}
+  .gsearch{display:flex; gap:8px; flex:0 1 340px; min-width:240px;}
+  .gsearch input{
+    flex:1; font-family:inherit; font-size:14px; color:var(--text);
+    background:var(--card); border:1px solid var(--line); border-radius:980px; padding:9px 18px;
+    outline:none; transition:border-color .15s;
+  }
+  .gsearch input:focus{border-color:var(--accent);}
+  .gsearch .btn{padding:9px 16px; font-size:13px;}
 </style>
 </head>
 <body>
 
 <nav>
-  <span class="brand">헬로의 지식 아카이빙</span>
+  <span class="brand">헬로의 서재</span>
   <div class="links">
-    <a href="#quotes">수집한 문장</a>
-    <a href="#books">읽은 책</a>
-    <a href="#graph-sec">지식 그래프</a>
-    <a href="#" id="exportBtn" title="화면에서 추가한 책을 books.js 코드로 내보내기">내보내기</a>
+    <a href="#quotes">문장</a>
+    <a href="#books">책</a>
+    <a href="#graph-sec">지도</a>
     <button class="add-mini" id="addBtn">＋ 책 추가</button>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="eyebrow">Hello's Knowledge Archive</div>
-  <h1>읽고, 기록하고,<br>연결하다.</h1>
-  <p class="tag">헬로가 책에서 건져 올린 문장들, 그리고 그 사이의 연결.</p>
+  <div class="eyebrow">hello's library</div>
+  <h1>읽고, 잇다.</h1>
+  <p class="tag" id="heroTag">책의 별점과 문장, 그리고 그 사이의 연결.</p>
   <div class="stats" id="heroStats"></div>
 </header>
 
@@ -352,9 +362,15 @@
 </section>
 
 <section id="graph-sec">
-  <div class="sec-head">
-    <h2>지식 그래프</h2>
-    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 별점이 높은 책입니다.</p>
+  <div class="sec-head graph-head">
+    <div>
+      <h2>지식 그래프</h2>
+      <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 별점이 높은 책입니다.</p>
+    </div>
+    <div class="gsearch">
+      <input id="gq" placeholder="책 · 저자 · 장르 검색" aria-label="지식 그래프 검색" />
+      <button class="btn btn-primary" id="gqGo">검색</button>
+    </div>
   </div>
   <div class="graph-shell">
     <div id="graph"></div>
@@ -373,8 +389,9 @@
 </section>
 
 <footer>
-  <div class="f-brand">헬로의 지식 아카이빙</div>
+  <div class="f-brand">헬로의 서재</div>
   <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+  <p style="margin-top:14px;"><a href="#" id="exportBtn" style="color:var(--text-3); font-size:12px; text-decoration:underline;" title="화면에서 추가한 책을 books.js 코드로 내보내기">기록 내보내기</a></p>
 </footer>
 
 <!-- ===== 책 추가 모달 ===== -->
@@ -506,6 +523,8 @@ function renderStats(){
   const yr = new Date().getFullYear();
   const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
   const thisYear = ALL.filter(b=>b.readYear===yr).length;
+  document.getElementById("heroTag").textContent =
+    `책 ${ALL.length}권의 별점과 문장 ${totalQuoteCount()}개, 그리고 그 사이의 연결.`;
   document.getElementById("heroStats").innerHTML = `
     <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
     <div class="stat"><b>${ALL.length}</b><span>권의 책</span></div>
@@ -770,9 +789,7 @@ window.renderGraphBook = (i, page=1) => {
     </div>`;
 };
 
-network.on("click", params => {
-  const id = params.nodes[0];
-  if(!id){ clearHighlight(); gpanel.innerHTML = `<div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div>`; return; }
+function showNode(id){
   highlight(id);
   if(id.startsWith("book:")){ renderGraphBook(byNode[id], 1); return; }
   const items = network.getConnectedNodes(id).filter(n=>n.startsWith("book:")).map(n=>byNode[n]);
@@ -780,7 +797,64 @@ network.on("click", params => {
     <h4>${esc(nodes.get(id).label)}</h4>
     <div class="sub">연결된 책 ${items.length}권 — 제목을 누르면 책 정보가 열립니다</div>
     <div class="chiprow">${items.map(i=>`<button class="chip chip-btn" onclick="renderGraphBook(${i},1)">${esc(ALL[i].title)}</button>`).join("")}</div>`;
+}
+
+network.on("click", params => {
+  const id = params.nodes[0];
+  if(!id){ clearHighlight(); gpanel.innerHTML = `<div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div>`; return; }
+  showNode(id);
 });
+
+/* ---- 그래프 검색: 직접 일치 → 포커스, 없으면 연관 키워드 제안 ---- */
+const gnorm = s => String(s).toLowerCase().replace(/[\s.,!?"'“”‘’()\[\]:;·\-_~/]+/g,"");
+window.focusNode = id => {
+  if(!nodes.get(id)) return;
+  network.focus(id, { scale:0.9, animation:{duration:400} });
+  network.selectNodes([id]);
+  showNode(id);
+};
+function graphSearch(){
+  const q = document.getElementById("gq").value.trim();
+  if(!q) return;
+  const nq = gnorm(q);
+  // 1) 책 제목·저자·장르 직접 일치
+  const direct = [];
+  nodes.forEach(n => {
+    const full = n.id.startsWith("book:") ? ALL[byNode[n.id]].title : n.label;
+    if(gnorm(full).includes(nq)) direct.push({ id:n.id, label:full });
+  });
+  if(direct.length){
+    focusNode(direct[0].id);
+    if(direct.length > 1){
+      gpanel.insertAdjacentHTML("afterbegin",
+        `<div class="sub" style="margin-bottom:8px;">“${esc(q)}” 검색 결과 ${direct.length}건</div>
+         <div class="chiprow" style="margin-bottom:12px;">${direct.slice(0,12).map(d =>
+           `<button class="chip chip-btn" onclick="focusNode('${d.id.replace(/'/g,"\\'")}')">${esc(d.label)}</button>`).join("")}</div>
+         <hr class="divider" style="margin:14px 0;" />`);
+    }
+    return;
+  }
+  // 2) 줄거리·리뷰·수집한 문장 속 연관 검색
+  const rel = [];
+  ALL.forEach((b,i) => {
+    const hay = [b.summary||"", b.review||"", quotesFor(b).map(x=>x.t).join(" ")].join(" ");
+    if(gnorm(hay).includes(nq)) rel.push(i);
+  });
+  clearHighlight(); network.unselectAll();
+  if(rel.length){
+    gpanel.innerHTML = `<h4>“${esc(q)}”</h4>
+      <div class="sub">제목·저자·장르에는 없지만 줄거리·문장에서 ${rel.length}권이 발견됐어요</div>
+      <div class="chiprow">${rel.slice(0,15).map(i=>`<button class="chip chip-btn" onclick="focusNode('book:${i}')">${esc(ALL[i].title)}</button>`).join("")}</div>`;
+    return;
+  }
+  // 3) 결과 없음 → 연관 키워드(장르) 제안
+  const genres = [...new Set(ALL.flatMap(b=>b.genres||[]))];
+  gpanel.innerHTML = `<h4>“${esc(q)}”</h4>
+    <div class="sub">일치하는 결과가 없어요. 이런 키워드는 어때요?</div>
+    <div class="chiprow">${genres.map(g=>`<button class="chip chip-btn" onclick="focusNode('genre:${esc(g)}')">${esc(g)}</button>`).join("")}</div>`;
+}
+document.getElementById("gqGo").onclick = graphSearch;
+document.getElementById("gq").addEventListener("keydown", e => { if(e.key==="Enter") graphSearch(); });
 
 /* ================= 책 검색 (카카오 → 구글북스 폴백) ================= */
 const kakaoKeyInput = document.getElementById("kakaoKey");
@@ -917,8 +991,8 @@ document.getElementById("copyBtn").onclick = () => {
 function injectJsonLd(){
   const ld = {
     "@context":"https://schema.org", "@type":"WebSite",
-    "name":"헬로의 지식 아카이빙",
-    "description":"헬로가 책에서 수집한 문장, 리뷰, 별점과 지식 그래프",
+    "name":"헬로의 서재",
+    "description":"헬로가 읽은 책의 별점과 문장, 그리고 지식 그래프",
     "inLanguage":"ko",
     "hasPart": ALL.slice(0,50).map(b => ({
       "@type":"Book", "name":b.title,
