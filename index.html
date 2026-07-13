@@ -327,7 +327,7 @@
 <section id="graph-sec">
   <div class="sec-head">
     <h2>지식 그래프</h2>
-    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 문장을 많이 수집한 책입니다.</p>
+    <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 별점이 높은 책입니다.</p>
   </div>
   <div class="graph-shell">
     <div id="graph"></div>
@@ -339,7 +339,7 @@
     <aside id="gpanel"><div class="empty">노드를 클릭하면<br>간단한 정보가 나타납니다.</div></aside>
   </div>
   <div class="legend">
-    <span><i style="background:var(--node-book)"></i>책 (클수록 문장 많음)</span>
+    <span><i style="background:var(--node-book)"></i>책 (클수록 별점 높음)</span>
     <span><i style="background:var(--node-author)"></i>저자</span>
     <span><i style="background:var(--node-genre)"></i>장르</span>
   </div>
@@ -603,14 +603,13 @@ function rebuildGraph(){
   ALL.forEach((b,i) => {
     const id = "book:"+i;
     byNode[id] = i;
-    const qn = quotesFor(b).length;
     nodes.add({
       id, label: b.title.length > 12 ? b.title.slice(0,11)+"…" : b.title,
       group:"book", shape:"dot",
-      size: 10 + Math.min(14, Math.sqrt(qn)*3.5),
+      size: b.rating ? 8 + b.rating*3.2 : 8,   // 별점이 클수록 큰 원 (5점=24, 1점=11, 미평가=8)
       color: C("--node-book"),
       font:{ color:C("--text-2"), size:12 },
-      title: b.title + (b.author ? " — "+b.author : ""),
+      title: b.title + (b.author ? " — "+b.author : "") + (b.rating ? " · " + "★".repeat(b.rating) : ""),
     });
     if(b.author){
       const a = "author:"+b.author;
