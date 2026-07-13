@@ -62,7 +62,7 @@
   nav .brand{font-size:15px; font-weight:800; color:var(--text); letter-spacing:-0.02em;}
   nav .links{display:flex; gap:22px; margin-left:auto; align-items:center;}
   nav .links a{color:var(--text-2); font-size:13px; transition:color .15s;}
-  nav .links a:hover{color:var(--text);}
+  nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
   nav .add-mini{
     background:var(--accent); color:#fff; border:none; border-radius:980px;
     font-size:12.5px; padding:6px 14px; font-weight:500;
@@ -77,6 +77,8 @@
   .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
   .hero .stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
+  .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+  .marker-thin{background:linear-gradient(transparent 74%, var(--mint) 74%, var(--mint) 94%, transparent 94%); padding:0 2px;}
 
   /* ---------- sections ---------- */
   section{padding:52px max(22px,4vw);}
@@ -113,7 +115,7 @@
     transition:transform .22s ease, box-shadow .22s ease;
   }
   .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);}
-  .qcard .qmark{font-size:30px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
+  .qcard .qmark{font-size:30px; line-height:1; color:var(--mint); font-weight:700; font-family:Georgia,serif;}
   .qcard .qtext{
     font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
@@ -138,7 +140,7 @@
     outline:2.5px solid transparent; outline-offset:3px; transition:outline-color .2s, box-shadow .25s;
   }
   .bcard:hover .cover{box-shadow:var(--shadow-lg);}
-  .bcard.sel .cover{outline-color:var(--accent);}
+  .bcard.sel .cover{outline-color:var(--mint);}
   .bcard .cover img{width:100%; height:100%; object-fit:cover; display:block;}
   .cover .ph{width:100%; height:100%; padding:16px 14px; display:flex; flex-direction:column;}
   .cover .ph .ph-title{font-size:14px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
@@ -290,7 +292,7 @@
   #exportArea{min-height:200px; font-family:ui-monospace,Menlo,monospace; font-size:12px;}
 
   /* ---------- 문장 모달 ---------- */
-  .qm-mark{font-size:44px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
+  .qm-mark{font-size:44px; line-height:1; color:var(--mint); font-weight:700; font-family:Georgia,serif;}
   .qm-text{font-size:19px; line-height:1.8; font-weight:500; letter-spacing:-0.012em; margin:6px 0 26px; word-break:keep-all;}
   .qm-book{display:flex; align-items:baseline; gap:10px; padding-top:18px; border-top:1px solid var(--line); flex-wrap:wrap;}
   .qm-book .t{font-size:15.5px; font-weight:700;}
@@ -340,14 +342,14 @@
 
 <header class="hero">
   <div class="eyebrow">hello's library</div>
-  <h1>읽고, <span style="background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 2px;">잇다</span>.</h1>
-  <p class="tag" id="heroTag">책의 별점과 문장, 그리고 그 사이의 연결.</p>
+  <h1><span class="marker">읽고, 잇다</span>.</h1>
+  <p class="tag" id="heroTag">읽은 책은 문장으로 남고, 문장은 지도가 됩니다.</p>
   <div class="stats" id="heroStats"></div>
 </header>
 
 <section id="quotes" style="padding-top:16px;">
   <div class="sec-head">
-    <h2>수집한 문장</h2>
+    <h2><span class="marker-thin">수집한 문장</span></h2>
     <p>문장을 누르면 문장 카드가 크게 열립니다.</p>
   </div>
   <div class="tagbar" id="tagbar"></div>
@@ -360,7 +362,7 @@
 
 <section id="books" style="padding-top:24px;">
   <div class="sec-head">
-    <h2>최근 읽은 책</h2>
+    <h2><span class="marker-thin">최근 읽은 책</span></h2>
     <p>카드를 누르면 바로 아래에 리뷰와 수집한 문장이 열립니다.</p>
   </div>
   <div class="rail-wrap">
@@ -374,7 +376,7 @@
 <section id="graph-sec">
   <div class="sec-head graph-head">
     <div>
-      <h2>지식 그래프</h2>
+      <h2><span class="marker-thin">지식 그래프</span></h2>
       <p>같은 저자, 같은 장르로 이어진 책들의 지도. 원이 클수록 별점이 높은 책입니다.</p>
     </div>
     <div class="gsearch">
@@ -533,8 +535,6 @@ function renderStats(){
   const yr = new Date().getFullYear();
   const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
   const thisYear = ALL.filter(b=>b.readYear===yr).length;
-  document.getElementById("heroTag").textContent =
-    `책 ${ALL.length}권의 별점과 문장 ${totalQuoteCount()}개, 그리고 그 사이의 연결.`;
   document.getElementById("heroStats").innerHTML = `
     <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
     <div class="stat"><b>${ALL.length}</b><span>권의 책</span></div>
