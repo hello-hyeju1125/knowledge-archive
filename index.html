@@ -951,15 +951,7 @@ let pickedRating = 0;
 const starEls = [...document.querySelectorAll("#f_stars span")];
 starEls.forEach(s => s.onclick = () => { pickedRating = +s.dataset.v; starEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= pickedRating)); });
 
-document.getElementById("addBtn").onclick = () => {
-  ["q","f_title","f_author","f_genres","f_published","f_summary","f_review","f_quotes"].forEach(k=>document.getElementById(k).value="");
-  document.getElementById("f_readYear").value = new Date().getFullYear();
-  document.getElementById("results").innerHTML = ""; document.getElementById("searchNote").textContent = "";
-  document.getElementById("coverRow").style.display = "none";
-  picked = null; pickedRating = 0; starEls.forEach(x=>x.classList.remove("on"));
-  addOverlay.classList.add("show");
-  document.getElementById("q").focus();
-};
+document.getElementById("addBtn").onclick = () => location.href = "./admin.html";
 document.getElementById("cancelBtn").onclick = () => addOverlay.classList.remove("show");
 addOverlay.onclick = e => { if(e.target === addOverlay) addOverlay.classList.remove("show"); };
 
