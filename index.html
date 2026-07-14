@@ -25,6 +25,7 @@
     --bg:#ECFCFF; --bg-soft:#ffffff; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
     --line:#CBE9F2; --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --card-line:rgba(41,74,255,.4);
     --star:#294AFF; --danger:#d70015;
     --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 10px 34px rgba(41,74,255,.14);
     --node-book:#294AFF; --node-author:#0DDF85; --node-genre:#294AFF;
@@ -35,6 +36,7 @@
       --bg:#050B1D; --bg-soft:#0D1730; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
       --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
+      --card-line:rgba(94,120,255,.5);
       --star:#37FFA9;
       --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5); --shadow-lg:0 10px 34px rgba(0,0,0,.65);
       --node-book:#5E78FF; --node-author:#37FFA9; --node-genre:#5E78FF;
@@ -79,6 +81,9 @@
   .hero .stat span{font-size:13px; color:var(--text-2);}
   .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
   .marker-thin{background:linear-gradient(transparent 74%, var(--mint) 74%, var(--mint) 94%, transparent 94%); padding:0 2px;}
+  .hero-quote em{font-family:Georgia,"Times New Roman",serif; font-style:italic; font-size:clamp(17px,2.2vw,21px); color:var(--text);}
+  .hero-quote .hq-ko{display:block; margin-top:9px; font-size:14.5px; color:var(--text-2);}
+  .hero-quote .hq-by{display:block; margin-top:7px; font-size:12.5px; color:var(--text-3);}
 
   /* ---------- sections ---------- */
   section{padding:52px max(22px,4vw);}
@@ -110,12 +115,12 @@
   .tagbtn.on{background:var(--accent); color:#fff; border-color:var(--accent); font-weight:700;}
   .qcard{
     flex:0 0 300px; scroll-snap-align:start; text-align:left; color:var(--text);
-    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:22px 22px 18px;
+    background:var(--card); border:1px solid var(--card-line); border-radius:20px; padding:22px 22px 18px;
     display:flex; flex-direction:column; min-height:210px;
     transition:transform .22s ease, box-shadow .22s ease;
   }
   .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);}
-  .qcard .qmark{font-size:30px; line-height:1; color:var(--mint); font-weight:700; font-family:Georgia,serif;}
+  .qcard .qmark{font-size:30px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
   .qcard .qtext{
     font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
@@ -292,7 +297,7 @@
   #exportArea{min-height:200px; font-family:ui-monospace,Menlo,monospace; font-size:12px;}
 
   /* ---------- 문장 모달 ---------- */
-  .qm-mark{font-size:44px; line-height:1; color:var(--mint); font-weight:700; font-family:Georgia,serif;}
+  .qm-mark{font-size:44px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
   .qm-text{font-size:19px; line-height:1.8; font-weight:500; letter-spacing:-0.012em; margin:6px 0 26px; word-break:keep-all;}
   .qm-book{display:flex; align-items:baseline; gap:10px; padding-top:18px; border-top:1px solid var(--line); flex-wrap:wrap;}
   .qm-book .t{font-size:15.5px; font-weight:700;}
@@ -343,7 +348,11 @@
 <header class="hero">
   <div class="eyebrow">hello's library</div>
   <h1><span class="marker">읽고, 잇다</span>.</h1>
-  <p class="tag" id="heroTag">읽은 책은 문장으로 남고, 문장은 지도가 됩니다.</p>
+  <p class="tag hero-quote" id="heroTag">
+    <em>“A book must be the axe for the frozen sea within us.”</em>
+    <span class="hq-ko">책은 우리 안의 얼어붙은 바다를 깨는 도끼여야 한다.</span>
+    <span class="hq-by">— 프란츠 카프카</span>
+  </p>
   <div class="stats" id="heroStats"></div>
 </header>
 
