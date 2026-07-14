@@ -18,7 +18,7 @@
     --line:#CBE9F2; --card-line:rgba(41,74,255,.4);
     --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
-    --card:#ffffff; --danger:#d70015; --ok:#00875A;
+    --card:#ffffff; --danger:#d70015;
     --shadow:0 2px 14px rgba(41,74,255,.07);
   }
   @media (prefers-color-scheme: dark){
@@ -27,7 +27,7 @@
       --line:#1B2A4E; --card-line:rgba(94,120,255,.5);
       --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
-      --card:#0D1730; --ok:#37FFA9;
+      --card:#0D1730;
       --shadow:0 2px 14px rgba(0,0,0,.5);
     }
   }
@@ -35,24 +35,17 @@
   body{
     font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
     background:var(--bg); color:var(--text); line-height:1.5; letter-spacing:-0.01em;
-    padding:0 16px 90px; max-width:620px; margin:0 auto;
+    padding:0 16px 90px; max-width:560px; margin:0 auto;
   }
   a{color:var(--accent); text-decoration:none;}
   button{font-family:inherit; cursor:pointer;}
 
-  .top{display:flex; align-items:center; justify-content:space-between; margin:26px 0 6px;}
+  .top{display:flex; align-items:baseline; justify-content:space-between; margin:28px 0 20px;}
+  .top h1{font-size:20px; font-weight:900;}
+  .top h1 .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
   .top .back{font-size:13px; color:var(--text-2); font-weight:600;}
   .top .back:hover{color:var(--accent);}
-  h1{font-size:25px; font-weight:900; margin:6px 0 4px;}
-  h1 .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
-  .hello{color:var(--text-2); font-size:14px; margin-bottom:20px;}
 
-  .panel{
-    background:var(--card); border:1px solid var(--card-line); border-radius:20px;
-    padding:22px; box-shadow:var(--shadow); margin-bottom:14px;
-  }
-
-  /* 탭 */
   .tabs{display:flex; background:var(--card); border:1px solid var(--card-line);
     border-radius:980px; padding:5px; margin-bottom:14px;}
   .tabs button{
@@ -61,161 +54,156 @@
   }
   .tabs button.on{background:var(--accent); color:#fff;}
 
-  label{display:block; font-size:12.5px; font-weight:700; color:var(--text-2); margin:16px 0 7px;}
-  label:first-of-type{margin-top:0;}
+  .panel{
+    background:var(--card); border:1px solid var(--card-line); border-radius:20px;
+    padding:20px; box-shadow:var(--shadow); margin-bottom:14px;
+  }
   input, textarea{
     width:100%; font-family:inherit; font-size:16px; color:var(--text);
     background:var(--bg); border:1.5px solid transparent; border-radius:12px; padding:12px 14px;
-    outline:none;
+    outline:none; margin-bottom:10px;
   }
   input:focus, textarea:focus{border-color:var(--accent); background:var(--card);}
-  textarea{resize:vertical; min-height:110px; line-height:1.7;}
-  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  input::placeholder, textarea::placeholder{color:var(--text-3);}
+  textarea{resize:vertical; min-height:120px; line-height:1.7;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
 
-  .chips{display:flex; gap:7px; flex-wrap:wrap; margin-top:8px;}
+  .chips{display:flex; gap:7px; flex-wrap:wrap; margin:-2px 0 12px;}
   .chips button{
     border:1px solid var(--line); background:var(--bg); color:var(--text-2);
     font-size:12.5px; font-weight:600; padding:7px 13px; border-radius:980px;
     max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .chips button.on, .chips button:hover{border-color:var(--accent); color:var(--accent);}
-  .chips .hint{font-size:11.5px; color:var(--text-3); width:100%; margin-bottom:2px;}
 
-  .tagpick{display:flex; gap:8px; flex-wrap:wrap;}
+  .tagpick{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
   .tagpick button{
     border:1px solid var(--line); background:var(--bg); color:var(--text-2);
     font-size:14px; padding:9px 18px; border-radius:980px; font-weight:600;
   }
   .tagpick button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
 
-  .starpick{font-size:34px; color:var(--line); letter-spacing:7px; user-select:none;}
+  .starpick{font-size:34px; color:var(--line); letter-spacing:7px; user-select:none; margin-bottom:6px;}
   .starpick span{cursor:pointer;}
   .starpick span.on{color:var(--accent);}
 
   .btn{
-    width:100%; margin-top:20px; border:none; background:var(--accent); color:#fff;
+    width:100%; margin-top:12px; border:none; background:var(--accent); color:#fff;
     font-size:16px; font-weight:800; padding:15px; border-radius:980px;
   }
   .btn:hover{background:var(--accent-hover);}
   .btn:disabled{opacity:.5; cursor:default;}
   .btn-line{background:none; border:1.5px solid var(--accent); color:var(--accent);}
   .btn-line:hover{background:var(--accent); color:#fff;}
-  .btn-sm{width:auto; margin:0; padding:11px 18px; font-size:14px;}
+  .btn-sm{width:auto; margin:0; padding:12px 18px; font-size:14px; flex:none;}
 
-  .msg{margin-top:14px; font-size:14px; line-height:1.7; display:none; border-radius:12px; padding:12px 14px;}
+  .msg{margin-top:12px; font-size:14px; line-height:1.7; display:none; border-radius:12px; padding:12px 14px;}
   .msg.ok{display:block; color:var(--mint-text); background:var(--mint-soft); font-weight:700;}
   .msg.err{display:block; color:var(--danger); background:rgba(215,0,21,.07); font-weight:700;}
   .msg.info{display:block; color:var(--text-2); background:var(--bg);}
   .msg a{text-decoration:underline;}
+  .msg button{border:none; background:none; color:var(--danger); text-decoration:underline; padding:0; font-size:14px; font-weight:700;}
+
+  .results{display:flex; flex-direction:column; gap:8px; margin-bottom:4px;}
+  .results button{
+    text-align:left; background:var(--bg); border:1px solid transparent; border-radius:12px;
+    padding:12px 14px; font-size:14px; color:var(--text); font-weight:600;
+  }
+  .results button span{color:var(--text-3); font-weight:400; font-size:12.5px;}
+  .results button:hover{border-color:var(--accent);}
+  .plain{border:none; background:none; color:var(--text-3); font-size:12.5px; text-decoration:underline; padding:6px 0;}
 
   /* 온보딩 */
   .steps{margin-top:14px;}
-  .step{display:flex; gap:12px; margin-bottom:14px; font-size:14px; line-height:1.65; color:var(--text-2);}
+  .step{display:flex; gap:12px; margin-bottom:13px; font-size:14px; line-height:1.65; color:var(--text-2);}
   .step b{color:var(--text);}
   .step .n{
-    flex:none; width:26px; height:26px; border-radius:50%; background:var(--accent); color:#fff;
+    flex:none; width:25px; height:25px; border-radius:50%; background:var(--accent); color:#fff;
     font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; margin-top:2px;
   }
-  .keyrow{display:flex; gap:8px; margin-top:14px;}
-  .keyrow input{flex:1;}
-
-  /* 연결 상태 줄 */
-  .connbar{
-    display:flex; align-items:center; gap:8px; justify-content:center;
-    font-size:12.5px; color:var(--text-3); margin-top:22px;
-  }
-  .connbar .dot{width:8px; height:8px; border-radius:50%; background:var(--mint);}
-  .connbar button{border:none; background:none; color:var(--text-3); font-size:12.5px; text-decoration:underline; padding:0;}
+  .keyrow{display:flex; gap:8px;}
+  .keyrow input{margin-bottom:0;}
   .hidden{display:none !important;}
 </style>
 </head>
 <body>
 
 <div class="top">
-  <a class="back" href="./index.html">← 서재로 돌아가기</a>
+  <h1><span class="marker">서재 주인의 방</span></h1>
+  <a class="back" href="./index.html">← 서재로</a>
 </div>
-<h1><span class="marker">서재 주인의 방</span></h1>
-<p class="hello" id="greet">읽다가 만난 문장을 여기에 남기면, 서재에 바로 꽂힙니다.</p>
 
-<!-- ═══════════ 첫 방문: 열쇠 연결 온보딩 ═══════════ -->
+<!-- ═══ 첫 방문: 열쇠 연결 (연결되면 다시 안 보임) ═══ -->
 <div class="panel" id="onboard">
-  <h2 style="font-size:18px; font-weight:800;">🔑 처음 오셨네요 — 열쇠부터 만들어요</h2>
+  <h2 style="font-size:17px; font-weight:800;">열쇠부터 만들어요</h2>
   <p style="font-size:13.5px; color:var(--text-2); margin-top:6px; line-height:1.7;">
-    이 방은 서재 주인만 쓸 수 있어요. GitHub에서 열쇠(토큰)를 한 번만 발급받아 연결하면,
-    그다음부터는 문장이든 책이든 저장 버튼 하나로 사이트에 올라갑니다.</p>
-  <div class="steps" style="margin-top:18px;">
-    <div class="step"><span class="n">1</span><span><b>아래 버튼</b>으로 GitHub 토큰 페이지를 열고 <b>Generate new token</b>을 눌러요</span></div>
-    <div class="step"><span class="n">2</span><span>이름은 <b>seojae</b>, 기간은 <b>1년(Custom)</b>으로</span></div>
-    <div class="step"><span class="n">3</span><span>Repository access에서 <b>Only select repositories → knowledge-archive</b> 선택</span></div>
-    <div class="step"><span class="n">4</span><span>Permissions → Contents를 <b>Read and write</b>로 바꾸고 <b>Generate token</b></span></div>
-    <div class="step"><span class="n">5</span><span>초록 화면에 나온 <b>github_pat_…</b>을 복사해 아래에 붙여넣기</span></div>
+    이 방은 서재 주인만 쓸 수 있어요. GitHub에서 열쇠(토큰)를 한 번만 발급받아 연결하면 끝 —
+    그다음부터 이 안내는 다시 나타나지 않아요.</p>
+  <div class="steps" style="margin-top:16px;">
+    <div class="step"><span class="n">1</span><span><b>아래 버튼</b>으로 GitHub 토큰 페이지를 열고 <b>Generate new token</b></span></div>
+    <div class="step"><span class="n">2</span><span>이름 <b>seojae</b> · 기간 <b>1년(Custom)</b></span></div>
+    <div class="step"><span class="n">3</span><span>Repository access → <b>Only select repositories → knowledge-archive</b></span></div>
+    <div class="step"><span class="n">4</span><span>Permissions → Contents → <b>Read and write</b> → <b>Generate token</b></span></div>
+    <div class="step"><span class="n">5</span><span><b>github_pat_…</b>을 복사해 아래에 붙여넣기</span></div>
   </div>
   <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">
-    <button class="btn btn-line" style="margin-top:6px;">GitHub 토큰 페이지 열기 ↗</button>
+    <button class="btn btn-line" style="margin-top:4px;">GitHub 토큰 페이지 열기 ↗</button>
   </a>
-  <div class="keyrow">
+  <div class="keyrow" style="margin-top:10px;">
     <input id="ghToken" type="password" placeholder="github_pat_… 붙여넣기" />
-    <button class="btn btn-sm" style="margin:0" onclick="saveToken()">연결</button>
+    <button class="btn btn-sm" onclick="saveToken()">연결</button>
   </div>
   <div class="msg" id="tokenMsg"></div>
 </div>
 
-<!-- ═══════════ 평소: 수집 화면 ═══════════ -->
+<!-- ═══ 평소 화면: 인용구 추가 / 책 추가 ═══ -->
 <div id="workspace" class="hidden">
 
   <div class="tabs">
-    <button class="on" id="tabQ" onclick="showTab('q')">✍️ 문장 수집</button>
-    <button id="tabB" onclick="showTab('b')">📚 책 등록</button>
+    <button class="on" id="tabQ" onclick="showTab('q')">인용구 추가</button>
+    <button id="tabB" onclick="showTab('b')">책 추가</button>
   </div>
 
-  <!-- 문장 수집 -->
+  <!-- 인용구 추가 -->
   <div class="panel" id="paneQ">
-    <label>어느 책에서 만난 문장인가요?</label>
-    <input id="qBook" list="bookList" placeholder="책 제목을 쓰면 자동완성돼요" />
+    <input id="qBook" list="bookList" placeholder="책 제목" />
     <datalist id="bookList"></datalist>
     <div class="chips" id="recentChips"></div>
-    <label>문장</label>
-    <textarea id="qText" placeholder="마음에 남은 문장을 그대로 옮겨 적어주세요"></textarea>
-    <label>어떤 결의 문장인가요?</label>
+    <textarea id="qText" placeholder="문장을 그대로 옮겨 적어주세요"></textarea>
     <div class="tagpick" id="qTags">
       <button class="on" data-t="문학">문학</button>
       <button data-t="작법">작법</button>
       <button data-t="경영">경영</button>
       <button data-t="기타">기타</button>
     </div>
-    <button class="btn" id="qSave" onclick="saveQuote()">서재에 꽂기</button>
+    <button class="btn" id="qSave" onclick="saveQuote()">저장</button>
     <div class="msg" id="qMsg"></div>
   </div>
 
-  <!-- 책 등록 -->
+  <!-- 책 추가: 검색이 먼저, 세부 입력은 선택 후 공개 -->
   <div class="panel hidden" id="paneB">
-    <label>다 읽은 책을 검색해 보세요</label>
-    <div class="keyrow" style="margin-top:0;">
-      <input id="bSearch" placeholder="책 제목" />
-      <button class="btn btn-sm" style="margin:0" onclick="searchBook()">검색</button>
+    <div class="keyrow">
+      <input id="bSearch" placeholder="책 제목 검색" />
+      <button class="btn btn-sm" onclick="searchBook()">검색</button>
     </div>
-    <div class="chips" id="bResults"></div>
-    <label>제목 *</label>
-    <input id="bTitle" />
-    <div class="row2">
-      <div><label>저자</label><input id="bAuthor" /></div>
-      <div><label>장르 (쉼표 구분)</label><input id="bGenres" placeholder="소설, 에세이" /></div>
-    </div>
-    <div class="row2">
-      <div><label>읽은 해</label><input id="bYear" type="number" /></div>
-      <div><label>출간년도</label><input id="bPub" type="number" /></div>
-    </div>
-    <label>별점 — 얼마나 좋았나요?</label>
-    <div class="starpick" id="bStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
-    <label>한 줄 리뷰 (선택)</label>
-    <textarea id="bReview" style="min-height:70px;" placeholder="이 책, 어땠나요?"></textarea>
-    <button class="btn" id="bSave" onclick="saveBook()">서재에 꽂기</button>
-    <div class="msg" id="bMsg"></div>
-  </div>
+    <div class="results" id="bResults" style="margin-top:10px;"></div>
+    <button class="plain" id="manualBtn" onclick="openBookForm()">검색 없이 직접 입력할게요</button>
 
-  <div class="connbar">
-    <span class="dot"></span> 열쇠 연결됨
-    <button onclick="resetToken()">열쇠 바꾸기</button>
+    <div id="bForm" class="hidden" style="margin-top:8px;">
+      <input id="bTitle" placeholder="제목" />
+      <div class="row2">
+        <input id="bAuthor" placeholder="저자" />
+        <input id="bGenres" placeholder="장르 (쉼표 구분)" />
+      </div>
+      <div class="row2">
+        <input id="bYear" type="number" placeholder="읽은 해" />
+        <input id="bPub" type="number" placeholder="출간년도" />
+      </div>
+      <div class="starpick" id="bStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+      <textarea id="bReview" style="min-height:64px;" placeholder="한 줄 리뷰 (선택)"></textarea>
+      <button class="btn" id="bSave" onclick="saveBook()">저장</button>
+    </div>
+    <div class="msg" id="bMsg"></div>
   </div>
 </div>
 
@@ -226,12 +214,11 @@ const REPO = "hello-hyeju1125/knowledge-archive";
 const API = `https://api.github.com/repos/${REPO}/contents/`;
 const SITE = "https://hello-hyeju1125.github.io/knowledge-archive/";
 
-/* ---------- 상태 전환 ---------- */
+/* ---------- 상태 ---------- */
 function applyState(){
   const has = !!localStorage.getItem("ghToken");
   document.getElementById("onboard").classList.toggle("hidden", has);
   document.getElementById("workspace").classList.toggle("hidden", !has);
-  if(has) document.getElementById("greet").textContent = "어서 오세요, 서재 주인님. 오늘은 어떤 문장을 만나셨나요?";
 }
 async function saveToken(){
   const t = document.getElementById("ghToken").value.trim();
@@ -245,15 +232,13 @@ async function saveToken(){
     applyState();
   }catch(e){ msg("tokenMsg","err","⚠️ "+e.message); }
 }
-function resetToken(){
-  if(confirm("열쇠 연결을 해제할까요? 다시 연결하려면 토큰을 재입력해야 해요.")){
-    localStorage.removeItem("ghToken"); applyState();
-  }
-}
+function reconnect(){ localStorage.removeItem("ghToken"); applyState(); window.scrollTo(0,0); }
 function msg(id, type, html){
   const el = document.getElementById(id);
   el.className = "msg " + type; el.innerHTML = html;
 }
+const authFail = e => String(e.message||"").includes("401")
+  ? `열쇠가 만료된 것 같아요. <button onclick="reconnect()">다시 연결하기</button>` : "⚠️ " + e.message;
 function showTab(t){
   document.getElementById("tabQ").classList.toggle("on", t==="q");
   document.getElementById("tabB").classList.toggle("on", t==="b");
@@ -262,19 +247,16 @@ function showTab(t){
 }
 applyState();
 
-/* ---------- 책 자동완성 + 최근 책 바로 선택 ---------- */
+/* ---------- 자동완성 + 최근 책 칩 ---------- */
 document.getElementById("bookList").innerHTML =
   BOOKS.map(b => `<option value="${b.title.replace(/"/g,"&quot;")}">`).join("");
-const recent = BOOKS.slice(-5).reverse();
 document.getElementById("recentChips").innerHTML =
-  `<span class="hint">최근 서재에 꽂힌 책:</span>` +
-  recent.map(b=>`<button type="button" data-t="${b.title.replace(/"/g,"&quot;")}">${b.title}</button>`).join("");
+  BOOKS.slice(-4).reverse().map(b=>`<button type="button" data-t="${b.title.replace(/"/g,"&quot;")}">${b.title}</button>`).join("");
 document.querySelectorAll("#recentChips button").forEach(el => el.onclick = () => {
   document.getElementById("qBook").value = el.dataset.t;
   document.querySelectorAll("#recentChips button").forEach(x=>x.classList.toggle("on", x===el));
   document.getElementById("qText").focus();
 });
-document.getElementById("bYear").value = new Date().getFullYear();
 
 /* ---------- 분류 · 별점 ---------- */
 let qTag = "문학";
@@ -293,7 +275,7 @@ const b64decode = s => new TextDecoder().decode(Uint8Array.from(atob(s), c=>c.ch
 async function ghGet(path){
   const token = localStorage.getItem("ghToken");
   const r = await fetch(API + path, { headers:{ Authorization:"Bearer "+token, Accept:"application/vnd.github+json" }});
-  if(!r.ok) throw new Error("읽기 실패 (HTTP "+r.status+")"+(r.status===401?" — '열쇠 바꾸기'로 토큰을 다시 연결해 주세요":""));
+  if(!r.ok) throw new Error("읽기 실패 (HTTP "+r.status+")");
   const d = await r.json();
   return { text: b64decode(d.content.replace(/\n/g,"")), sha: d.sha };
 }
@@ -309,15 +291,15 @@ async function ghPut(path, text, sha, message){
 }
 const jsEsc = s => String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"');
 
-/* ---------- 문장 저장 ---------- */
+/* ---------- 인용구 저장 ---------- */
 async function saveQuote(){
   const book = document.getElementById("qBook").value.trim();
   const text = document.getElementById("qText").value.trim();
   if(!book){ msg("qMsg","err","어느 책의 문장인지 알려주세요."); return; }
   if(!text){ msg("qMsg","err","문장을 적어주세요."); return; }
-  if(!BOOKS.some(b=>b.title===book) && !confirm(`"${book}"은(는) 아직 서재에 없는 책이에요. 그래도 문장을 저장할까요?\n('책 등록' 탭에서 책을 먼저 꽂는 걸 추천해요)`)) return;
+  if(!BOOKS.some(b=>b.title===book) && !confirm(`"${book}"은(는) 아직 서재에 없는 책이에요. 그래도 저장할까요?\n('책 추가' 탭에서 책을 먼저 등록하는 걸 추천해요)`)) return;
   const btn = document.getElementById("qSave");
-  btn.disabled = true; btn.textContent = "꽂는 중…";
+  btn.disabled = true; btn.textContent = "저장 중…";
   try{
     const { text: src, sha } = await ghGet("quotes.js");
     const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
@@ -326,13 +308,19 @@ async function saveQuote(){
     if(!src.includes(marker)) throw new Error("quotes.js 형식을 인식하지 못했어요.");
     await ghPut("quotes.js", src.replace(marker, marker + "\n" + entry), sha, `문장 추가: ${book}`);
     document.getElementById("qText").value = "";
-    msg("qMsg","ok",`문장을 꽂았어요! 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a> 맨 앞에 나타납니다 📖`);
-  }catch(e){ msg("qMsg","err","⚠️ "+e.message); }
-  btn.disabled = false; btn.textContent = "서재에 꽂기";
+    msg("qMsg","ok",`저장 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
+  }catch(e){ msg("qMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
 }
 
-/* ---------- 책 검색 ---------- */
+/* ---------- 책 검색 → 선택 후 폼 공개 ---------- */
 let picked = null;
+function openBookForm(){
+  document.getElementById("bForm").classList.remove("hidden");
+  document.getElementById("manualBtn").classList.add("hidden");
+  if(!document.getElementById("bYear").value)
+    document.getElementById("bYear").value = new Date().getFullYear();
+}
 async function searchBook(){
   const q = document.getElementById("bSearch").value.trim();
   if(!q) return;
@@ -357,15 +345,18 @@ async function searchBook(){
           cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
           isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
     }
-    msg("bMsg", items.length?"info":"err", items.length?"아래에서 책을 골라주세요.":"검색 결과가 없어요 — 직접 입력해도 됩니다.");
-  }catch(e){ msg("bMsg","err","검색이 안 되네요 — 직접 입력해 주세요."); }
-  box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title}${x.author?" · "+x.author:""}</button>`).join("");
+    if(items.length) document.getElementById("bMsg").className = "msg";
+    else msg("bMsg","err","검색 결과가 없어요 — 아래 '직접 입력'을 눌러주세요.");
+  }catch(e){ msg("bMsg","err","검색이 안 되네요 — 아래 '직접 입력'을 눌러주세요."); }
+  box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title} <span>${x.author}${x.published?" · "+x.published:""}</span></button>`).join("");
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
     picked = items[+el.dataset.i];
+    openBookForm();
     document.getElementById("bTitle").value = picked.title;
     document.getElementById("bAuthor").value = picked.author;
     if(picked.published) document.getElementById("bPub").value = picked.published;
-    box.innerHTML = ""; msg("bMsg","info",`"${picked.title}" 선택 — 별점만 매기면 끝!`);
+    box.innerHTML = "";
+    document.getElementById("bMsg").className = "msg";
   });
 }
 document.getElementById("bSearch").addEventListener("keydown", e => { if(e.key==="Enter"){ e.preventDefault(); searchBook(); } });
@@ -374,10 +365,10 @@ document.getElementById("bSearch").addEventListener("keydown", e => { if(e.key==
 async function saveBook(){
   const v = id => document.getElementById(id).value.trim();
   const title = v("bTitle");
-  if(!title){ msg("bMsg","err","제목을 알려주세요 (검색하면 자동으로 채워져요)."); return; }
-  if(BOOKS.some(b=>b.title===title)){ msg("bMsg","err","이미 서재에 꽂혀 있는 책이에요."); return; }
+  if(!title){ msg("bMsg","err","제목을 알려주세요."); return; }
+  if(BOOKS.some(b=>b.title===title)){ msg("bMsg","err","이미 서재에 있는 책이에요."); return; }
   const btn = document.getElementById("bSave");
-  btn.disabled = true; btn.textContent = "꽂는 중…";
+  btn.disabled = true; btn.textContent = "저장 중…";
   try{
     const { text: src, sha } = await ghGet("books.js");
     const genres = v("bGenres").split(/[,\n]/).map(x=>x.trim()).filter(Boolean);
@@ -390,11 +381,13 @@ async function saveBook(){
     const idx = src.lastIndexOf("];");
     if(idx < 0) throw new Error("books.js 형식을 인식하지 못했어요.");
     await ghPut("books.js", src.slice(0,idx) + entry + src.slice(idx), sha, `책 추가: ${title}`);
-    ["bTitle","bAuthor","bGenres","bReview","bSearch","bPub"].forEach(id=>document.getElementById(id).value="");
+    ["bTitle","bAuthor","bGenres","bReview","bSearch","bPub","bYear"].forEach(id=>document.getElementById(id).value="");
     bRating = 0; starEls.forEach(x=>x.classList.remove("on")); picked = null;
-    msg("bMsg","ok",`책을 꽂았어요! 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a> 맨 앞에 나타납니다 📚`);
-  }catch(e){ msg("bMsg","err","⚠️ "+e.message); }
-  btn.disabled = false; btn.textContent = "서재에 꽂기";
+    document.getElementById("bForm").classList.add("hidden");
+    document.getElementById("manualBtn").classList.remove("hidden");
+    msg("bMsg","ok",`저장 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
+  }catch(e){ msg("bMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
 }
 </script>
 </body>
