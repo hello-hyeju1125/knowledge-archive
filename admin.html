@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>서재 관리 — 헬로의 서재</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+@font-face{
+  font-family:"NanumSquareNeo";
+  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2") format("woff2");
+  font-weight:300 900; font-display:swap;
+}
+</style>
+<style>
+  :root{
+    --bg:#ECFCFF; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
+    --line:#CBE9F2; --card-line:rgba(41,74,255,.4);
+    --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --card:#ffffff; --danger:#d70015; --ok:#00875A;
+    --shadow:0 2px 14px rgba(41,74,255,.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#050B1D; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
+      --line:#1B2A4E; --card-line:rgba(94,120,255,.5);
+      --accent:#5E78FF; --accent-hover:#7B90FF;
+      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
+      --card:#0D1730; --ok:#37FFA9;
+      --shadow:0 2px 14px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box; margin:0;}
+  body{
+    font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.5; letter-spacing:-0.01em;
+    padding:0 18px 80px;
+  }
+  header{max-width:640px; margin:36px auto 26px;}
+  header h1{font-size:26px; font-weight:900;}
+  header h1 .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+  header p{color:var(--text-2); font-size:13.5px; margin-top:8px;}
+  header a{color:var(--accent); text-decoration:none;}
+  .panel{
+    max-width:640px; margin:0 auto 18px; background:var(--card);
+    border:1px solid var(--card-line); border-radius:20px; padding:24px; box-shadow:var(--shadow);
+  }
+  .panel h2{font-size:17px; font-weight:800; margin-bottom:4px;}
+  .panel .sub{font-size:12.5px; color:var(--text-3); margin-bottom:16px; line-height:1.6;}
+  label{display:block; font-size:12px; font-weight:700; color:var(--text-2); margin:14px 0 6px;}
+  input, textarea, select{
+    width:100%; font-family:inherit; font-size:15px; color:var(--text);
+    background:var(--bg); border:1px solid transparent; border-radius:12px; padding:11px 14px;
+    outline:none;
+  }
+  input:focus, textarea:focus, select:focus{border-color:var(--accent); background:var(--card);}
+  textarea{resize:vertical; min-height:90px;}
+  .row2{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  button{font-family:inherit; cursor:pointer;}
+  .btn{
+    width:100%; margin-top:18px; border:none; background:var(--accent); color:#fff;
+    font-size:15px; font-weight:700; padding:13px; border-radius:980px;
+  }
+  .btn:hover{background:var(--accent-hover);}
+  .btn:disabled{opacity:.5; cursor:default;}
+  .btn-sm{width:auto; margin:0; padding:9px 16px; font-size:13px;}
+  .starpick{font-size:30px; color:var(--line); letter-spacing:6px; user-select:none;}
+  .starpick span{cursor:pointer;}
+  .starpick span.on{color:var(--accent);}
+  .tagpick{display:flex; gap:8px; flex-wrap:wrap;}
+  .tagpick button{
+    border:1px solid var(--line); background:var(--bg); color:var(--text-2);
+    font-size:13px; padding:7px 16px; border-radius:980px; font-weight:600;
+  }
+  .tagpick button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .msg{margin-top:14px; font-size:13px; line-height:1.6; display:none;}
+  .msg.ok{display:block; color:var(--ok); font-weight:700;}
+  .msg.err{display:block; color:var(--danger); font-weight:700;}
+  .msg.info{display:block; color:var(--text-2);}
+  details{margin-top:12px;}
+  details summary{font-size:12.5px; color:var(--text-3); cursor:pointer;}
+  details .inner{margin-top:10px; font-size:12.5px; color:var(--text-2); line-height:1.8;}
+  details .inner b{color:var(--text);}
+  .keyrow{display:flex; gap:8px; margin-top:6px;}
+  .keyrow input{flex:1;}
+  .lock{
+    max-width:640px; margin:0 auto 18px; text-align:center; font-size:13px;
+    color:var(--mint-text); background:var(--mint-soft); border-radius:12px; padding:10px;
+    font-weight:700; display:none;
+  }
+  .results{margin-top:10px; display:flex; flex-direction:column; gap:8px;}
+  .r-item{
+    display:flex; gap:12px; align-items:center; text-align:left; width:100%;
+    background:var(--bg); border:1px solid transparent; border-radius:14px; padding:10px;
+  }
+  .r-item:hover{border-color:var(--accent);}
+  .r-item img{width:40px; height:58px; border-radius:6px; object-fit:cover; background:var(--line); flex:none;}
+  .r-item .t{font-size:13.5px; font-weight:700;}
+  .r-item .a{font-size:12px; color:var(--text-2); margin-top:2px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="marker">서재 관리</span></h1>
+  <p>여기서 저장하면 GitHub에 자동 커밋되고, 1~2분 뒤 <a href="./index.html">헬로의 서재</a>에 반영됩니다.</p>
+</header>
+
+<div class="lock" id="tokenOk">🔑 토큰 연결됨 — 저장하면 사이트에 바로 반영돼요</div>
+
+<!-- ===== 토큰 설정 ===== -->
+<div class="panel" id="tokenPanel">
+  <h2>연결 설정</h2>
+  <p class="sub">이 페이지는 헬로의 GitHub 토큰이 있어야만 동작합니다. 토큰은 이 브라우저에만 저장돼요.</p>
+  <div class="keyrow">
+    <input id="ghToken" type="password" placeholder="GitHub 토큰 (github_pat_…)" />
+    <button class="btn btn-sm" onclick="saveToken()">저장</button>
+  </div>
+  <details>
+    <summary>토큰 발급 방법 (1회만, 5분)</summary>
+    <div class="inner">
+      1. <b>github.com/settings/personal-access-tokens</b> 접속 → <b>Generate new token</b><br>
+      2. Token name: <b>seojae-admin</b> / Expiration: <b>1년</b><br>
+      3. Repository access: <b>Only select repositories</b> → <b>knowledge-archive</b> 선택<br>
+      4. Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b><br>
+      5. Generate 후 <b>github_pat_…</b> 값을 위에 붙여넣고 저장
+    </div>
+  </details>
+  <div class="msg" id="tokenMsg"></div>
+</div>
+
+<!-- ===== 문장 추가 ===== -->
+<div class="panel">
+  <h2>문장 추가</h2>
+  <p class="sub">읽다가 만난 문장을 바로 수집하세요.</p>
+  <label>어느 책에서?</label>
+  <input id="qBook" list="bookList" placeholder="책 제목 입력 (자동완성)" />
+  <datalist id="bookList"></datalist>
+  <label>문장</label>
+  <textarea id="qText" placeholder="수집할 문장을 그대로 적어주세요"></textarea>
+  <label>분류</label>
+  <div class="tagpick" id="qTags">
+    <button class="on" data-t="문학">문학</button>
+    <button data-t="작법">작법</button>
+    <button data-t="경영">경영</button>
+    <button data-t="기타">기타</button>
+  </div>
+  <button class="btn" id="qSave" onclick="saveQuote()">문장 저장 → 사이트 반영</button>
+  <div class="msg" id="qMsg"></div>
+</div>
+
+<!-- ===== 책 추가 ===== -->
+<div class="panel">
+  <h2>책 추가</h2>
+  <p class="sub">제목을 검색하면 표지·저자가 자동으로 채워져요. (카카오 키가 설정된 경우)</p>
+  <div class="keyrow">
+    <input id="bSearch" placeholder="책 제목 검색" />
+    <button class="btn btn-sm" onclick="searchBook()">검색</button>
+  </div>
+  <div class="results" id="bResults"></div>
+  <label>제목 *</label>
+  <input id="bTitle" />
+  <div class="row2">
+    <div><label>저자</label><input id="bAuthor" /></div>
+    <div><label>장르 (쉼표 구분)</label><input id="bGenres" placeholder="소설, 에세이" /></div>
+  </div>
+  <div class="row2">
+    <div><label>읽은 해</label><input id="bYear" type="number" /></div>
+    <div><label>출간년도</label><input id="bPub" type="number" /></div>
+  </div>
+  <label>별점</label>
+  <div class="starpick" id="bStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+  <label>내 리뷰</label>
+  <textarea id="bReview" placeholder="선택사항"></textarea>
+  <button class="btn" onclick="saveBook()">책 저장 → 사이트 반영</button>
+  <div class="msg" id="bMsg"></div>
+</div>
+
+<script src="books.js"></script>
+<script src="quotes.js"></script>
+<script>
+const REPO = "hello-hyeju1125/knowledge-archive";
+const API = `https://api.github.com/repos/${REPO}/contents/`;
+
+/* ---------- 토큰 ---------- */
+const tokenInput = document.getElementById("ghToken");
+tokenInput.value = localStorage.getItem("ghToken") || "";
+function refreshTokenState(){
+  const has = !!localStorage.getItem("ghToken");
+  document.getElementById("tokenOk").style.display = has ? "block" : "none";
+}
+function saveToken(){
+  localStorage.setItem("ghToken", tokenInput.value.trim());
+  msg("tokenMsg", "ok", "저장되었습니다.");
+  refreshTokenState();
+}
+refreshTokenState();
+
+function msg(id, type, text){
+  const el = document.getElementById(id);
+  el.className = "msg " + type; el.textContent = text;
+}
+
+/* ---------- 책 자동완성 ---------- */
+document.getElementById("bookList").innerHTML =
+  BOOKS.map(b => `<option value="${b.title.replace(/"/g,"&quot;")}">`).join("");
+document.getElementById("bYear").value = new Date().getFullYear();
+
+/* ---------- 분류 선택 ---------- */
+let qTag = "문학";
+document.querySelectorAll("#qTags button").forEach(el => el.onclick = () => {
+  qTag = el.dataset.t;
+  document.querySelectorAll("#qTags button").forEach(x=>x.classList.toggle("on", x===el));
+});
+
+/* ---------- 별점 ---------- */
+let bRating = 0;
+const starEls = [...document.querySelectorAll("#bStars span")];
+starEls.forEach(s => s.onclick = () => { bRating = +s.dataset.v;
+  starEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= bRating)); });
+
+/* ---------- GitHub 파일 읽기/커밋 ---------- */
+const b64encode = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const b64decode = s => new TextDecoder().decode(Uint8Array.from(atob(s), c=>c.charCodeAt(0)));
+
+async function ghGet(path){
+  const token = localStorage.getItem("ghToken");
+  const r = await fetch(API + path, { headers:{ Authorization:"Bearer "+token, Accept:"application/vnd.github+json" }});
+  if(!r.ok) throw new Error("읽기 실패 HTTP "+r.status+(r.status===401?" — 토큰을 확인해 주세요":""));
+  const d = await r.json();
+  return { text: b64decode(d.content.replace(/\n/g,"")), sha: d.sha };
+}
+async function ghPut(path, text, sha, message){
+  const token = localStorage.getItem("ghToken");
+  const r = await fetch(API + path, {
+    method:"PUT",
+    headers:{ Authorization:"Bearer "+token, Accept:"application/vnd.github+json" },
+    body: JSON.stringify({ message, content: b64encode(text), sha }),
+  });
+  if(!r.ok){
+    const e = await r.json().catch(()=>({}));
+    throw new Error("저장 실패 HTTP "+r.status+" "+(e.message||""));
+  }
+}
+const jsEsc = s => String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"');
+
+/* ---------- 문장 저장 ---------- */
+async function saveQuote(){
+  const book = document.getElementById("qBook").value.trim();
+  const text = document.getElementById("qText").value.trim();
+  if(!book || !text){ msg("qMsg","err","책 제목과 문장을 모두 입력해 주세요."); return; }
+  if(!localStorage.getItem("ghToken")){ msg("qMsg","err","먼저 위에서 GitHub 토큰을 설정해 주세요."); return; }
+  if(!BOOKS.some(b=>b.title===book) && !confirm(`"${book}"은(는) 아직 서재에 없는 책이에요. 그래도 문장을 저장할까요?\n(아래 '책 추가'로 책을 먼저 등록하는 걸 추천해요)`)) return;
+  const btn = document.getElementById("qSave"); btn.disabled = true;
+  msg("qMsg","info","저장 중…");
+  try{
+    const { text: src, sha } = await ghGet("quotes.js");
+    const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    const entry = `  {"t": "${jsEsc(text)}", "b": "${jsEsc(book)}", "tag": "${jsEsc(qTag)}", "d": "${ds}"},`;
+    const marker = "const QUOTES = [";
+    if(!src.includes(marker)) throw new Error("quotes.js 형식을 인식하지 못했어요.");
+    const updated = src.replace(marker, marker + "\n" + entry);
+    await ghPut("quotes.js", updated, sha, `문장 추가: ${book}`);
+    document.getElementById("qText").value = "";
+    msg("qMsg","ok",`저장 완료! 1~2분 뒤 사이트에 반영됩니다. (${book})`);
+  }catch(e){ msg("qMsg","err","⚠️ "+e.message); }
+  btn.disabled = false;
+}
+
+/* ---------- 책 검색 (카카오 → 구글북스) ---------- */
+let picked = null;
+async function searchBook(){
+  const q = document.getElementById("bSearch").value.trim();
+  if(!q) return;
+  const box = document.getElementById("bResults");
+  box.innerHTML = ""; msg("bMsg","info","검색 중…");
+  const key = localStorage.getItem("kakaoKey");
+  let items = [];
+  try{
+    if(key){
+      const r = await fetch("https://dapi.kakao.com/v3/search/book?size=5&query="+encodeURIComponent(q),
+        { headers:{ Authorization:"KakaoAK "+key } });
+      const d = await r.json();
+      items = (d.documents||[]).map(x => ({ title:x.title, author:(x.authors||[]).join(", "),
+        published:x.datetime ? +x.datetime.slice(0,4) : null,
+        cover:x.thumbnail||"", isbn:(x.isbn||"").split(" ").pop()||"", summary:(x.contents||"").trim() }));
+    }else{
+      const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=5&q="+encodeURIComponent(q));
+      const d = await r.json();
+      items = (d.items||[]).map(x => { const v=x.volumeInfo;
+        return { title:v.title||"", author:(v.authors||[]).join(", "),
+          published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
+          cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
+          isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
+    }
+    msg("bMsg", items.length?"info":"err", items.length?"결과를 누르면 자동으로 채워져요.":"결과가 없어요 — 직접 입력해 주세요.");
+  }catch(e){ msg("bMsg","err","검색 실패 — 직접 입력해 주세요."); }
+  box.innerHTML = items.map((x,i)=>`
+    <button class="r-item" data-i="${i}">
+      ${x.cover?`<img src="${x.cover}" alt="" />`:`<div style="width:40px"></div>`}
+      <div><div class="t">${x.title}</div><div class="a">${x.author}${x.published?" · "+x.published:""}</div></div>
+    </button>`).join("");
+  box.querySelectorAll(".r-item").forEach(el => el.onclick = () => {
+    picked = items[+el.dataset.i];
+    document.getElementById("bTitle").value = picked.title;
+    document.getElementById("bAuthor").value = picked.author;
+    if(picked.published) document.getElementById("bPub").value = picked.published;
+    box.innerHTML = ""; msg("bMsg","info",`"${picked.title}" 선택됨`);
+  });
+}
+document.getElementById("bSearch").addEventListener("keydown", e => { if(e.key==="Enter") searchBook(); });
+
+/* ---------- 책 저장 ---------- */
+async function saveBook(){
+  const v = id => document.getElementById(id).value.trim();
+  const title = v("bTitle");
+  if(!title){ msg("bMsg","err","제목은 필수입니다."); return; }
+  if(!localStorage.getItem("ghToken")){ msg("bMsg","err","먼저 위에서 GitHub 토큰을 설정해 주세요."); return; }
+  if(BOOKS.some(b=>b.title===title)){ msg("bMsg","err","이미 서재에 있는 책이에요."); return; }
+  msg("bMsg","info","저장 중…");
+  try{
+    const { text: src, sha } = await ghGet("books.js");
+    const genres = v("bGenres").split(/[,\n]/).map(x=>x.trim()).filter(Boolean);
+    const cover = picked && picked.isbn ? `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${picked.isbn}.jpg` : (picked ? picked.cover : "");
+    const entry =
+`  { title: "${jsEsc(title)}", author: "${jsEsc(v("bAuthor"))}", genres: [${genres.map(g=>`"${jsEsc(g)}"`).join(", ")}], published: ${v("bPub")||"null"}, readYear: ${v("bYear")||"null"},
+    cover: "${jsEsc(cover)}", isbn: "${jsEsc(picked?picked.isbn:"")}",
+    summary: "${jsEsc(picked?picked.summary:"")}", review: "${jsEsc(v("bReview"))}", rating: ${bRating||"null"}, quotes: [] },
+`;
+    const idx = src.lastIndexOf("];");
+    if(idx < 0) throw new Error("books.js 형식을 인식하지 못했어요.");
+    const updated = src.slice(0, idx) + entry + src.slice(idx);
+    await ghPut("books.js", updated, sha, `책 추가: ${title}`);
+    ["bTitle","bAuthor","bGenres","bReview","bSearch","bPub"].forEach(id=>document.getElementById(id).value="");
+    bRating = 0; starEls.forEach(x=>x.classList.remove("on")); picked = null;
+    msg("bMsg","ok",`저장 완료! 1~2분 뒤 사이트에 반영됩니다. (${title})`);
+  }catch(e){ msg("bMsg","err","⚠️ "+e.message); }
+}
+</script>
+</body>
+</html>
