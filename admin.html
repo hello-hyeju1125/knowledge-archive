@@ -160,8 +160,9 @@
 <div id="workspace" class="hidden">
 
   <div class="tabs">
-    <button class="on" id="tabQ" onclick="showTab('q')">인용구 추가</button>
+    <button class="on" id="tabQ" onclick="showTab('q')">인용구</button>
     <button id="tabB" onclick="showTab('b')">책 추가</button>
+    <button id="tabE" onclick="showTab('e')">책 수정</button>
   </div>
 
   <!-- 인용구 추가 -->
@@ -205,6 +206,19 @@
     </div>
     <div class="msg" id="bMsg"></div>
   </div>
+
+  <!-- 책 수정: 서재에서 찾아 별점·리뷰 고치기 -->
+  <div class="panel hidden" id="paneE">
+    <input id="eSearch" placeholder="수정할 책 검색" autocomplete="off" />
+    <div class="results" id="eResults"></div>
+    <div id="eForm" class="hidden">
+      <div id="eTitle" style="font-weight:800; font-size:16px; margin:6px 0 12px;"></div>
+      <div class="starpick" id="eStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+      <textarea id="eReview" style="min-height:80px;" placeholder="한 줄 리뷰"></textarea>
+      <button class="btn" id="eSave" onclick="saveEdit()">저장</button>
+    </div>
+    <div class="msg" id="eMsg"></div>
+  </div>
 </div>
 
 <script src="books.js"></script>
@@ -240,10 +254,10 @@ function msg(id, type, html){
 const authFail = e => String(e.message||"").includes("401")
   ? `열쇠가 만료된 것 같아요. <button onclick="reconnect()">다시 연결하기</button>` : "⚠️ " + e.message;
 function showTab(t){
-  document.getElementById("tabQ").classList.toggle("on", t==="q");
-  document.getElementById("tabB").classList.toggle("on", t==="b");
-  document.getElementById("paneQ").classList.toggle("hidden", t!=="q");
-  document.getElementById("paneB").classList.toggle("hidden", t!=="b");
+  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabE","paneE","e"]]){
+    document.getElementById(tab).classList.toggle("on", t===k);
+    document.getElementById(pane).classList.toggle("hidden", t!==k);
+  }
 }
 applyState();
 
@@ -387,6 +401,52 @@ async function saveBook(){
     document.getElementById("manualBtn").classList.remove("hidden");
     msg("bMsg","ok",`저장 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
   }catch(e){ msg("bMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
+}
+
+/* ---------- 책 수정: 검색 즉시 필터 → 선택 → 별점·리뷰 편집 ---------- */
+let editBook = null, eRating = 0;
+const eStarEls = [...document.querySelectorAll("#eStars span")];
+eStarEls.forEach(el => el.onclick = () => { eRating = +el.dataset.v;
+  eStarEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= eRating)); });
+
+document.getElementById("eSearch").addEventListener("input", () => {
+  const q = document.getElementById("eSearch").value.trim().toLowerCase();
+  const box = document.getElementById("eResults");
+  document.getElementById("eForm").classList.add("hidden");
+  if(!q){ box.innerHTML=""; return; }
+  const hits = BOOKS.filter(b => b.title.toLowerCase().includes(q) || (b.author||"").toLowerCase().includes(q)).slice(0,8);
+  box.innerHTML = hits.map(b=>`<button type="button" data-t="${b.title.replace(/"/g,"&quot;")}">${b.title} <span>${b.author||""}${b.rating?" · ★"+b.rating:" · 미평가"}</span></button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => {
+    editBook = BOOKS.find(b => b.title === el.dataset.t);
+    box.innerHTML = ""; document.getElementById("eSearch").value = "";
+    document.getElementById("eTitle").textContent = editBook.title + (editBook.author ? " — " + editBook.author : "");
+    eRating = editBook.rating || 0;
+    eStarEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= eRating));
+    document.getElementById("eReview").value = editBook.review || "";
+    document.getElementById("eForm").classList.remove("hidden");
+    document.getElementById("eMsg").className = "msg";
+  });
+});
+
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+async function saveEdit(){
+  if(!editBook) return;
+  const review = document.getElementById("eReview").value.trim();
+  const btn = document.getElementById("eSave");
+  btn.disabled = true; btn.textContent = "저장 중…";
+  try{
+    const { text: src, sha } = await ghGet("books.js");
+    const blockRe = new RegExp('\\{ title: "' + reEsc(jsEsc(editBook.title)) + '",[\\s\\S]*?quotes: \\[[^\\]]*\\] \\}');
+    const m = src.match(blockRe);
+    if(!m) throw new Error("books.js에서 이 책을 찾지 못했어요.");
+    let block = m[0];
+    block = block.replace(/review: "(?:[^"\\]|\\.)*"/, 'review: "' + jsEsc(review) + '"');
+    block = block.replace(/rating: (?:null|\d)/, 'rating: ' + (eRating || "null"));
+    await ghPut("books.js", src.replace(m[0], block), sha, `책 수정: ${editBook.title}`);
+    editBook.rating = eRating || null; editBook.review = review;   // 화면 데이터도 갱신
+    msg("eMsg","ok",`저장 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
+  }catch(e){ msg("eMsg","err",authFail(e)); }
   btn.disabled = false; btn.textContent = "저장";
 }
 </script>
