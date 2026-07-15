@@ -577,5 +577,5 @@ const BOOKS = [
   { title: "설득", author: "제인 오스틴", genres: ["소설", "고전"], published: 1817, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788937463488.jpg", isbn: "9788937463488",
     summary: "집안의 설득으로 파혼했던 앤 엘리엇이 8년 만에 웬트워스 대령과 재회하며 다시 사랑을 확인해 가는 제인 오스틴의 마지막 소설.",
-    review: "", rating: null, quotes: [] },
+    review: "둘째들은 더욱 공감할 것. 명불허전 로맨스.", rating: 4, quotes: [] },
 ];
