@@ -651,7 +651,7 @@ function selectBook(i, scroll){
       <div class="d-cover">${coverHTML(b)}</div>
       <div class="d-body">
         <h3>${esc(b.title)}</h3>
-        <div class="byline">${esc(b.author||"저자 미상")}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
+        <div class="byline">${esc(b.author||"저자 미상")}${b.publisher ? " · " + esc(b.publisher) : ""}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
         ${b.rating ? `<div class="stars">${stars(b.rating)}<small>${b.rating} / 5</small></div>` : ""}
         ${(b.genres&&b.genres.length) ? `<div class="chiprow">${b.genres.map(g=>`<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
         <div class="d-field"><div class="k">내 리뷰</div>${dim(b.review)}</div>

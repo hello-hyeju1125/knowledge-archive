@@ -194,12 +194,14 @@
       <input id="bTitle" placeholder="제목" />
       <div class="row2">
         <input id="bAuthor" placeholder="저자" />
-        <input id="bGenres" placeholder="장르 (쉼표 구분)" />
+        <input id="bPublisher" placeholder="출판사" />
       </div>
       <div class="row2">
         <input id="bYear" type="number" placeholder="읽은 해" />
         <input id="bPub" type="number" placeholder="출간년도" />
       </div>
+      <input id="bGenres" placeholder="장르 (아래에서 탭하거나 직접 입력)" />
+      <div class="chips" id="genreChips"></div>
       <div class="starpick" id="bStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
       <textarea id="bReview" style="min-height:64px;" placeholder="한 줄 리뷰 (선택)"></textarea>
       <button class="btn" id="bSave" onclick="saveBook()">저장</button>
@@ -327,52 +329,94 @@ async function saveQuote(){
   btn.disabled = false; btn.textContent = "저장";
 }
 
-/* ---------- 책 검색 → 선택 후 폼 공개 ---------- */
+/* ---------- 책 검색: 교보문고(프록시) → 카카오 → 구글 ---------- */
 let picked = null;
+const PROXY = u => "https://corsproxy.io/?url=" + encodeURIComponent(u);
 function openBookForm(){
   document.getElementById("bForm").classList.remove("hidden");
   document.getElementById("manualBtn").classList.add("hidden");
   if(!document.getElementById("bYear").value)
     document.getElementById("bYear").value = new Date().getFullYear();
 }
+async function searchKyobo(q){
+  const r = await fetch(PROXY("https://search.kyobobook.co.kr/search?keyword=" + encodeURIComponent(q)));
+  if(!r.ok) throw new Error("kyobo " + r.status);
+  const h = await r.text();
+  return h.split('<li class="prod_item">').slice(1, 9).map(b => {
+    const g = re => (b.match(re) || [])[1];
+    const isbn = g(/data-bid="(97[89]\d{10})"/);
+    if(!isbn || !b.includes('data-code="KOR"')) return null;
+    const authors = [...b.matchAll(/<a[^>]*class="author[^"]*"[^>]*>([^<]+)<\/a>/g)].map(m => m[1].trim());
+    const intro = (g(/class="prod_introduction"[^>]*>\s*([^<]{20,400})/) || "").replace(/\s+/g, " ").trim();
+    return {
+      title: (g(/data-name="([^"]+)"/) || "").replace(/&quot;/g, '"'),
+      author: authors[0] || "",
+      publisher: g(/publish[^>]*>\s*<a[^>]*>([^<]+)</) || "",
+      published: +g(/(\d{4})년\s*\d{1,2}월/) || null,
+      isbn, cover: `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${isbn}.jpg`,
+      summary: intro,
+    };
+  }).filter(Boolean).slice(0, 5);
+}
 async function searchBook(){
   const q = document.getElementById("bSearch").value.trim();
   if(!q) return;
   const box = document.getElementById("bResults");
   box.innerHTML = ""; msg("bMsg","info","검색 중…");
-  const key = localStorage.getItem("kakaoKey");
   let items = [];
-  try{
-    if(key){
-      const r = await fetch("https://dapi.kakao.com/v3/search/book?size=5&query="+encodeURIComponent(q),
-        { headers:{ Authorization:"KakaoAK "+key } });
-      const d = await r.json();
-      items = (d.documents||[]).map(x => ({ title:x.title, author:(x.authors||[]).join(", "),
-        published:x.datetime ? +x.datetime.slice(0,4) : null,
-        cover:x.thumbnail||"", isbn:(x.isbn||"").split(" ").pop()||"", summary:(x.contents||"").trim() }));
-    }else{
-      const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=5&q="+encodeURIComponent(q));
-      const d = await r.json();
-      items = (d.items||[]).map(x => { const v=x.volumeInfo;
-        return { title:v.title||"", author:(v.authors||[]).join(", "),
-          published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
-          cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
-          isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
-    }
-    if(items.length) document.getElementById("bMsg").className = "msg";
-    else msg("bMsg","err","검색 결과가 없어요 — 아래 '직접 입력'을 눌러주세요.");
-  }catch(e){ msg("bMsg","err","검색이 안 되네요 — 아래 '직접 입력'을 눌러주세요."); }
-  box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title} <span>${x.author}${x.published?" · "+x.published:""}</span></button>`).join("");
+  try{ items = await searchKyobo(q); }catch(e){}
+  if(!items.length){
+    try{
+      const key = localStorage.getItem("kakaoKey");
+      if(key){
+        const r = await fetch("https://dapi.kakao.com/v3/search/book?size=5&query="+encodeURIComponent(q),
+          { headers:{ Authorization:"KakaoAK "+key } });
+        const d = await r.json();
+        items = (d.documents||[]).map(x => ({ title:x.title, author:(x.authors||[]).join(", "),
+          publisher:x.publisher||"", published:x.datetime ? +x.datetime.slice(0,4) : null,
+          cover:x.thumbnail||"", isbn:(x.isbn||"").split(" ").pop()||"", summary:(x.contents||"").trim() }));
+      }else{
+        const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=5&q="+encodeURIComponent(q));
+        const d = await r.json();
+        items = (d.items||[]).map(x => { const v=x.volumeInfo;
+          return { title:v.title||"", author:(v.authors||[]).join(", "), publisher:v.publisher||"",
+            published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
+            cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
+            isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
+      }
+    }catch(e){}
+  }
+  if(items.length) document.getElementById("bMsg").className = "msg";
+  else msg("bMsg","err","검색 결과가 없어요 — 아래 '직접 입력'을 눌러주세요.");
+  box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title} <span>${x.author}${x.publisher?" · "+x.publisher:""}${x.published?" · "+x.published:""}</span></button>`).join("");
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
     picked = items[+el.dataset.i];
     openBookForm();
     document.getElementById("bTitle").value = picked.title;
     document.getElementById("bAuthor").value = picked.author;
+    document.getElementById("bPublisher").value = picked.publisher || "";
     if(picked.published) document.getElementById("bPub").value = picked.published;
     box.innerHTML = "";
-    document.getElementById("bMsg").className = "msg";
+    msg("bMsg","info","표지·저자·출판사가 채워졌어요. 장르를 고르고 별점만 매기면 끝!");
   });
 }
+
+/* ---------- 장르 원탭 칩 (서재에서 많이 쓴 순) ---------- */
+(function(){
+  const count = {};
+  BOOKS.forEach(b => (b.genres||[]).forEach(g => count[g]=(count[g]||0)+1));
+  const top = Object.entries(count).sort((a,b)=>b[1]-a[1]).slice(0,12).map(x=>x[0]);
+  const box = document.getElementById("genreChips");
+  box.innerHTML = top.map(g=>`<button type="button" data-g="${g}">${g}</button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => {
+    const inp = document.getElementById("bGenres");
+    let list = inp.value.split(/[,\s]+/).map(x=>x.trim()).filter(Boolean);
+    const g = el.dataset.g;
+    if(list.includes(g)) list = list.filter(x=>x!==g); else list.push(g);
+    inp.value = list.join(", ");
+    el.classList.toggle("on", list.includes(g));
+  });
+})();
 document.getElementById("bSearch").addEventListener("keydown", e => { if(e.key==="Enter"){ e.preventDefault(); searchBook(); } });
 
 /* ---------- 책 저장 ---------- */
@@ -388,14 +432,15 @@ async function saveBook(){
     const genres = v("bGenres").split(/[,\n]/).map(x=>x.trim()).filter(Boolean);
     const cover = picked && picked.isbn ? `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${picked.isbn}.jpg` : (picked ? picked.cover : "");
     const entry =
-`  { title: "${jsEsc(title)}", author: "${jsEsc(v("bAuthor"))}", genres: [${genres.map(g=>`"${jsEsc(g)}"`).join(", ")}], published: ${v("bPub")||"null"}, readYear: ${v("bYear")||"null"},
+`  { title: "${jsEsc(title)}", author: "${jsEsc(v("bAuthor"))}", publisher: "${jsEsc(v("bPublisher"))}", genres: [${genres.map(g=>`"${jsEsc(g)}"`).join(", ")}], published: ${v("bPub")||"null"}, readYear: ${v("bYear")||"null"},
     cover: "${jsEsc(cover)}", isbn: "${jsEsc(picked?picked.isbn:"")}",
     summary: "${jsEsc(picked?picked.summary:"")}", review: "${jsEsc(v("bReview"))}", rating: ${bRating||"null"}, quotes: [] },
 `;
     const idx = src.lastIndexOf("];");
     if(idx < 0) throw new Error("books.js 형식을 인식하지 못했어요.");
     await ghPut("books.js", src.slice(0,idx) + entry + src.slice(idx), sha, `책 추가: ${title}`);
-    ["bTitle","bAuthor","bGenres","bReview","bSearch","bPub","bYear"].forEach(id=>document.getElementById(id).value="");
+    ["bTitle","bAuthor","bPublisher","bGenres","bReview","bSearch","bPub","bYear"].forEach(id=>document.getElementById(id).value="");
+    document.querySelectorAll("#genreChips button").forEach(x=>x.classList.remove("on"));
     bRating = 0; starEls.forEach(x=>x.classList.remove("on")); picked = null;
     document.getElementById("bForm").classList.add("hidden");
     document.getElementById("manualBtn").classList.remove("hidden");
