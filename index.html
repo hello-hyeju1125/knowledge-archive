@@ -216,8 +216,12 @@
     border-radius:24px; overflow:hidden; background:var(--card); box-shadow:var(--shadow);
     height:600px;
   }
-  @media (max-width:860px){ .graph-shell{grid-template-columns:1fr; height:auto;} #graph{height:440px;} #gpanel{border-left:none; border-top:1px solid var(--line); max-height:340px;} }
   #graph{min-width:0; height:100%;}
+  @media (max-width:860px){
+    .graph-shell{grid-template-columns:1fr; grid-template-rows:440px auto; height:auto;}
+    #graph{height:440px;}
+    #gpanel{border-left:none; border-top:1px solid var(--line); max-height:340px;}
+  }
   .gcontrols{position:absolute; left:14px; top:14px; display:flex; flex-direction:column; gap:6px; z-index:5;}
   .gbtn{
     width:34px; height:34px; border-radius:10px; border:1px solid var(--line);
