@@ -246,8 +246,11 @@
   </div>
 </div>
 
-<script src="books.js"></script>
-<script src="quotes.js"></script>
+<script>
+// 데이터 파일은 항상 최신으로 (GitHub Pages 10분 캐시 우회)
+document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
+</script>
 <script>
 const REPO = "hello-hyeju1125/knowledge-archive";
 const API = `https://api.github.com/repos/${REPO}/contents/`;
