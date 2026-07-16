@@ -96,6 +96,10 @@
   .btn-line{background:none; border:1.5px solid var(--accent); color:var(--accent);}
   .btn-line:hover{background:var(--accent); color:#fff;}
   .btn-sm{width:auto; margin:0; padding:12px 18px; font-size:14px; flex:none;}
+  .btn-danger{background:none; border:1.5px solid var(--danger); color:var(--danger);}
+  .btn-danger:hover{background:var(--danger); color:#fff;}
+  .row-btns{display:flex; gap:10px;}
+  .row-btns .btn{flex:1;}
 
   .msg{margin-top:12px; font-size:14px; line-height:1.7; display:none; border-radius:12px; padding:12px 14px;}
   .msg.ok{display:block; color:var(--mint-text); background:var(--mint-soft); font-weight:700;}
@@ -162,7 +166,7 @@
   <div class="tabs">
     <button class="on" id="tabQ" onclick="showTab('q')">인용구</button>
     <button id="tabB" onclick="showTab('b')">책 추가</button>
-    <button id="tabE" onclick="showTab('e')">책 수정</button>
+    <button id="tabE" onclick="showTab('e')">수정·삭제</button>
   </div>
 
   <!-- 인용구 추가 -->
@@ -209,15 +213,34 @@
     <div class="msg" id="bMsg"></div>
   </div>
 
-  <!-- 책 수정: 서재에서 찾아 별점·리뷰 고치기 -->
+  <!-- 수정·삭제: 책·문장을 찾아 고치거나 지우기 -->
   <div class="panel hidden" id="paneE">
-    <input id="eSearch" placeholder="수정할 책 검색" autocomplete="off" />
+    <input id="eSearch" placeholder="책 제목·저자·문장으로 검색" autocomplete="off" />
     <div class="results" id="eResults"></div>
+
     <div id="eForm" class="hidden">
       <div id="eTitle" style="font-weight:800; font-size:16px; margin:6px 0 12px;"></div>
       <div class="starpick" id="eStars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
       <textarea id="eReview" style="min-height:80px;" placeholder="한 줄 리뷰"></textarea>
-      <button class="btn" id="eSave" onclick="saveEdit()">저장</button>
+      <div class="row-btns">
+        <button class="btn" id="eSave" onclick="saveEdit()">저장</button>
+        <button class="btn btn-danger" id="eDel" onclick="deleteBook()">책 삭제</button>
+      </div>
+    </div>
+
+    <div id="eqForm" class="hidden">
+      <div id="eqBook" style="font-size:13px; color:var(--text-3); margin:6px 0 10px;"></div>
+      <textarea id="eqText" style="min-height:110px;"></textarea>
+      <div class="tagpick" id="eqTags">
+        <button data-t="문학">문학</button>
+        <button data-t="작법">작법</button>
+        <button data-t="경영">경영</button>
+        <button data-t="기타">기타</button>
+      </div>
+      <div class="row-btns" style="margin-top:8px;">
+        <button class="btn" id="eqSave" onclick="saveQuoteEdit()">저장</button>
+        <button class="btn btn-danger" id="eqDel" onclick="deleteQuote()">문장 삭제</button>
+      </div>
     </div>
     <div class="msg" id="eMsg"></div>
   </div>
@@ -455,24 +478,107 @@ const eStarEls = [...document.querySelectorAll("#eStars span")];
 eStarEls.forEach(el => el.onclick = () => { eRating = +el.dataset.v;
   eStarEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= eRating)); });
 
+let editQuote = null, eqTag = "문학";
+document.querySelectorAll("#eqTags button").forEach(el => el.onclick = () => {
+  eqTag = el.dataset.t;
+  document.querySelectorAll("#eqTags button").forEach(x=>x.classList.toggle("on", x===el));
+});
+
 document.getElementById("eSearch").addEventListener("input", () => {
   const q = document.getElementById("eSearch").value.trim().toLowerCase();
   const box = document.getElementById("eResults");
   document.getElementById("eForm").classList.add("hidden");
+  document.getElementById("eqForm").classList.add("hidden");
   if(!q){ box.innerHTML=""; return; }
-  const hits = BOOKS.filter(b => b.title.toLowerCase().includes(q) || (b.author||"").toLowerCase().includes(q)).slice(0,8);
-  box.innerHTML = hits.map(b=>`<button type="button" data-t="${b.title.replace(/"/g,"&quot;")}">${b.title} <span>${b.author||""}${b.rating?" · ★"+b.rating:" · 미평가"}</span></button>`).join("");
+  const bHits = BOOKS.filter(b => b.title.toLowerCase().includes(q) || (b.author||"").toLowerCase().includes(q)).slice(0,5);
+  const qHits = QUOTES.map((x,i)=>({x,i})).filter(({x}) => x.t.toLowerCase().includes(q) || x.b.toLowerCase().includes(q)).slice(0,5);
+  box.innerHTML =
+    bHits.map(b=>`<button type="button" data-kind="b" data-t="${b.title.replace(/"/g,"&quot;")}">📕 ${b.title} <span>${b.author||""}${b.rating?" · ★"+b.rating:" · 미평가"}</span></button>`).join("") +
+    qHits.map(({x,i})=>`<button type="button" data-kind="q" data-i="${i}">❝ ${x.t.slice(0,42)}${x.t.length>42?"…":""} <span>${x.b}</span></button>`).join("");
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
-    editBook = BOOKS.find(b => b.title === el.dataset.t);
     box.innerHTML = ""; document.getElementById("eSearch").value = "";
-    document.getElementById("eTitle").textContent = editBook.title + (editBook.author ? " — " + editBook.author : "");
-    eRating = editBook.rating || 0;
-    eStarEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= eRating));
-    document.getElementById("eReview").value = editBook.review || "";
-    document.getElementById("eForm").classList.remove("hidden");
     document.getElementById("eMsg").className = "msg";
+    if(el.dataset.kind === "b"){
+      editBook = BOOKS.find(b => b.title === el.dataset.t);
+      document.getElementById("eTitle").textContent = editBook.title + (editBook.author ? " — " + editBook.author : "");
+      eRating = editBook.rating || 0;
+      eStarEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= eRating));
+      document.getElementById("eReview").value = editBook.review || "";
+      document.getElementById("eForm").classList.remove("hidden");
+    }else{
+      editQuote = QUOTES[+el.dataset.i];
+      document.getElementById("eqBook").textContent = editQuote.b + (editQuote.d ? " · " + editQuote.d : "");
+      document.getElementById("eqText").value = editQuote.t;
+      eqTag = editQuote.tag || "기타";
+      document.querySelectorAll("#eqTags button").forEach(x=>x.classList.toggle("on", x.dataset.t===eqTag));
+      document.getElementById("eqForm").classList.remove("hidden");
+    }
   });
 });
+
+/* ---- 문장 한 줄 찾기 (quotes.js 안에서) ---- */
+function findQuoteLine(src, q){
+  const i = src.indexOf('"t": ' + JSON.stringify(q.t));
+  if(i < 0) return null;
+  const start = src.lastIndexOf("\n", i) + 1;
+  let end = src.indexOf("\n", i);
+  if(end < 0) end = src.length;
+  return { start, end };
+}
+
+async function saveQuoteEdit(){
+  if(!editQuote) return;
+  const text = document.getElementById("eqText").value.trim();
+  if(!text){ msg("eMsg","err","문장이 비어 있어요. 지우려면 '문장 삭제'를 눌러주세요."); return; }
+  const btn = document.getElementById("eqSave");
+  btn.disabled = true; btn.textContent = "저장 중…";
+  try{
+    const { text: src, sha } = await ghGet("quotes.js");
+    const pos = findQuoteLine(src, editQuote);
+    if(!pos) throw new Error("이 문장을 파일에서 찾지 못했어요. 방금 추가한 문장이면 1~2분 뒤 다시 시도해 주세요.");
+    const line = `  {"t": ${JSON.stringify(text)}, "b": ${JSON.stringify(editQuote.b)}, "tag": ${JSON.stringify(eqTag)}, "d": ${JSON.stringify(editQuote.d||"")}},`;
+    await ghPut("quotes.js", src.slice(0,pos.start) + line + src.slice(pos.end), sha, `문장 수정: ${editQuote.b}`);
+    editQuote.t = text; editQuote.tag = eqTag;
+    msg("eMsg","ok",`수정 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
+}
+
+async function deleteQuote(){
+  if(!editQuote) return;
+  if(!confirm(`이 문장을 서재에서 지울까요?\n\n"${editQuote.t.slice(0,60)}…"`)) return;
+  const btn = document.getElementById("eqDel");
+  btn.disabled = true; btn.textContent = "삭제 중…";
+  try{
+    const { text: src, sha } = await ghGet("quotes.js");
+    const pos = findQuoteLine(src, editQuote);
+    if(!pos) throw new Error("이 문장을 파일에서 찾지 못했어요.");
+    await ghPut("quotes.js", src.slice(0,pos.start) + src.slice(pos.end+1), sha, `문장 삭제: ${editQuote.b}`);
+    QUOTES.splice(QUOTES.indexOf(editQuote), 1);
+    document.getElementById("eqForm").classList.add("hidden");
+    msg("eMsg","ok","삭제 완료 — 1~2분 뒤 사이트에서 사라져요.");
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "문장 삭제";
+}
+
+async function deleteBook(){
+  if(!editBook) return;
+  const linked = QUOTES.filter(q => q.b === editBook.title).length;
+  if(!confirm(`『${editBook.title}』을(를) 서재에서 지울까요?` + (linked ? `\n\n이 책에 연결된 문장 ${linked}개는 남아 있게 됩니다.` : ""))) return;
+  const btn = document.getElementById("eDel");
+  btn.disabled = true; btn.textContent = "삭제 중…";
+  try{
+    const { text: src, sha } = await ghGet("books.js");
+    const blockRe = new RegExp('[ ]*\\{ title: "' + reEsc(jsEsc(editBook.title)) + '",[\\s\\S]*?quotes: \\[[^\\]]*\\] \\},?\\n?');
+    const m = src.match(blockRe);
+    if(!m) throw new Error("books.js에서 이 책을 찾지 못했어요.");
+    await ghPut("books.js", src.replace(m[0], ""), sha, `책 삭제: ${editBook.title}`);
+    BOOKS.splice(BOOKS.indexOf(editBook), 1);
+    document.getElementById("eForm").classList.add("hidden");
+    msg("eMsg","ok","삭제 완료 — 1~2분 뒤 사이트에서 사라져요.");
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "책 삭제";
+}
 
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 async function saveEdit(){
