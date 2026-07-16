@@ -465,7 +465,7 @@ const BOOKS = [
   { title: "유혹하는 글쓰기", author: "스티븐 킹", genres: ["글쓰기", "에세이"], published: 2000, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324901.jpg", isbn: "9791173324901",
     summary: "스티븐 킹이 자신의 삶과 창작 과정을 솔직하게 풀어낸 글쓰기 지침서.",
-    review: "", rating: 5, quotes: [] },
+    review: "최고의 책, 글쓰는 방법을 소개하지만 인생을 사는 법까지 알려준다.", rating: 5, quotes: [] },
   { title: "스페이스X 일론머스크", author: "에릭 버거", genres: ["경제경영"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124248270.jpg", isbn: "9791124248270",
     summary: "“인류의 역사 기록에 반드시 추가해야 할 책!”_앤디 랩사, 스토크스페이스 CEO퓰리처상 최종 후보자 에릭 버거의 최신작전미 인디 엑설런스 어워드 기술 부문 수상작 ⟨이코노미스트⟩ 선정 최고의 책, ⟨USA 투데이⟩ 베스트셀러기술, 광기, 야망이 이룩한 우주 ...", review: "", rating: 3, quotes: [] },
