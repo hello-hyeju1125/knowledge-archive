@@ -580,5 +580,5 @@ const BOOKS = [
     review: "둘째들은 더욱 공감할 것. 명불허전 로맨스.", rating: 4, quotes: [] },
   { title: "여름", author: "이디스 워튼", publisher: "민음사", genres: ["소설", "고전"], published: 2020, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788937463686.jpg", isbn: "9788937463686",
-    summary: "", review: "", rating: null, quotes: [] },
+    summary: "", review: "한여름 밤의 꿈에서 깨어난 채리티가 그래도 구원자를 만나 다행이다", rating: 4, quotes: [] },
 ];
