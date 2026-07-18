@@ -581,4 +581,7 @@ const BOOKS = [
   { title: "여름", author: "이디스 워튼", publisher: "민음사", genres: ["소설", "고전"], published: 2020, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788937463686.jpg", isbn: "9788937463686",
     summary: "", review: "한여름 밤의 꿈에서 깨어난 채리티가 그래도 구원자를 만나 다행이다", rating: 4, quotes: [] },
+  { title: "캐릭터 심리 사전", author: "린다 N. 에델스타인", publisher: "부키", genres: ["글쓰기"], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791175780170.jpg", isbn: "9791175780170",
+    summary: "", review: "", rating: null, quotes: [] },
 ];
