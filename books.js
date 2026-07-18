@@ -584,4 +584,7 @@ const BOOKS = [
   { title: "캐릭터 심리 사전", author: "린다 N. 에델스타인", publisher: "부키", genres: ["글쓰기"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791175780170.jpg", isbn: "9791175780170",
     summary: "", review: "", rating: null, quotes: [] },
+  { title: "저궤도인간", author: "조은영", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=840510", status: "연재중", genres: ["드라마", "예술", "현대"], published: 2025, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/840510/thumbnail/thumbnail_IMAG21_e5ef3ad0-9b40-4ec1-a05a-f6e1f546d7b8.jpg", isbn: "",
+    summary: "대학교 시간강사이자 무명작가인 서른 아홉의 주재열. 궤도에 오르지 못한 삶에 불안이 커져가던 어느 날 후배의 죽음으로 주인 없는 행운을 쥐게 된다. 마침내 그도 궤도에 오를 수 있을까.", review: "가보지 못한 길을 미리 경험할 수 있었다.", rating: 5, quotes: [] },
 ];
