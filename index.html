@@ -147,6 +147,8 @@
   .bcard:hover .cover{box-shadow:var(--shadow-lg);}
   .bcard.sel .cover{outline-color:var(--mint);}
   .bcard .cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .wbadge{position:absolute; top:8px; left:8px; background:var(--mint); color:#063a26;
+    font-size:10px; font-weight:800; padding:2px 8px; border-radius:980px; z-index:2;}
   .cover .ph{width:100%; height:100%; padding:16px 14px; display:flex; flex-direction:column;}
   .cover .ph .ph-title{font-size:14px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
@@ -375,7 +377,7 @@
 
 <section id="books" style="padding-top:24px;">
   <div class="sec-head">
-    <h2><span class="marker-thin">최근 읽은 책</span></h2>
+    <h2><span class="marker-thin">최근 읽은 것들</span></h2>
     <p>카드를 누르면 바로 아래에 리뷰와 수집한 문장이 열립니다.</p>
   </div>
   <div class="rail-wrap">
@@ -554,9 +556,11 @@ function renderStats(){
   const yr = new Date().getFullYear();
   const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
   const thisYear = ALL.filter(b=>b.readYear===yr).length;
+  const toonN = ALL.filter(b=>b.type==="webtoon").length;
   document.getElementById("heroStats").innerHTML = `
     <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
-    <div class="stat"><b>${ALL.length}</b><span>권의 책</span></div>
+    <div class="stat"><b>${ALL.length - toonN}</b><span>권의 책</span></div>
+    ${toonN ? `<div class="stat"><b>${toonN}</b><span>편의 웹툰</span></div>` : ""}
     <div class="stat"><b>${authors.size}</b><span>명의 저자</span></div>
     <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>`;
 }
@@ -602,6 +606,7 @@ function openQuoteModal(q){
     ...(b.genres||[]),
     ...(b.published ? [b.published+"년출간"] : []),
     ...(b.readYear ? [b.readYear+"년에읽음"] : []),
+    ...(b.platform ? [b.platform] : []),
     ...(b.rating ? ["별점"+"★".repeat(b.rating)] : []),
     ...(q.tag ? [q.tag+"_문장"] : []),
   ];
@@ -622,7 +627,7 @@ function renderRail(){
     const qn = quotesFor(b).length;
     return `
     <button class="bcard ${selKey===i?"sel":""}" data-i="${i}" aria-label="${esc(b.title)} 상세 보기">
-      <div class="cover">${coverHTML(b)}</div>
+      <div class="cover">${coverHTML(b)}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
       <div class="meta">
         <div class="t">${esc(b.title)}</div>
         <div class="s">${b.rating ? stars(b.rating) : ""}<small>${b.readYear ?? ""}</small></div>
@@ -654,7 +659,7 @@ function selectBook(i, scroll){
       <div class="d-cover">${coverHTML(b)}</div>
       <div class="d-body">
         <h3>${esc(b.title)}</h3>
-        <div class="byline">${esc(b.author||"저자 미상")}${b.publisher ? " · " + esc(b.publisher) : ""}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
+        <div class="byline">${esc(b.author||"저자 미상")}${b.platform ? " · " + esc(b.platform) : (b.publisher ? " · " + esc(b.publisher) : "")}${b.status ? " · " + esc(b.status) : ""}${b.published ? " · " + b.published + "년 출간" : ""}${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</div>
         ${b.rating ? `<div class="stars">${stars(b.rating)}<small>${b.rating} / 5</small></div>` : ""}
         ${(b.genres&&b.genres.length) ? `<div class="chiprow">${b.genres.map(g=>`<span class="chip">${esc(g)}</span>`).join("")}</div>` : ""}
         <div class="d-field"><div class="k">내 리뷰</div>${dim(b.review)}</div>
@@ -665,8 +670,10 @@ function selectBook(i, scroll){
                     <button class="show-more" id="showMoreBtn">문장 ${qs.length - QUOTE_PREVIEW}개 더 보기</button>` : ""}
         </div>
         <div class="buyrow">
-          <a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>
-          <a class="buy" href="${links.amazon}" target="_blank" rel="noopener">Amazon에서 보기</a>
+          ${b.type==="webtoon"
+            ? `<a class="buy primary" href="${esc(b.link||"https://comic.naver.com")}" target="_blank" rel="noopener">네이버웹툰에서 보기</a>`
+            : `<a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>
+               <a class="buy" href="${links.amazon}" target="_blank" rel="noopener">Amazon에서 보기</a>`}
         </div>
         ${b._src==="local" ? `<button class="del-link" onclick="deleteLocal('${b._id}')">이 책 삭제</button>` : ""}
       </div>
@@ -713,7 +720,7 @@ function rebuildGraph(){
     byNode[id] = i;
     nodes.add({
       id, label: b.title.length > 12 ? b.title.slice(0,11)+"…" : b.title,
-      group:"book", shape:"dot",
+      group:"book", shape: b.type==="webtoon" ? "square" : "dot",
       size: b.rating ? 8 + b.rating*3.2 : 8,   // 별점이 클수록 큰 원 (5점=24, 1점=11, 미평가=8)
       color: C("--node-book"),
       font:{ color:C("--text-2"), size:12 },

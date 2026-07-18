@@ -196,6 +196,7 @@
       <button class="on" data-t="문학">문학</button>
       <button data-t="작법">작법</button>
       <button data-t="경영">경영</button>
+      <button data-t="웹툰">웹툰</button>
       <button data-t="기타">기타</button>
     </div>
     <button class="btn" id="qSave" onclick="saveQuote()">저장</button>
@@ -204,6 +205,10 @@
 
   <!-- 책 추가: 검색이 먼저, 세부 입력은 선택 후 공개 -->
   <div class="panel hidden" id="paneB">
+    <div class="tagpick" id="bMode" style="margin-bottom:10px;">
+      <button class="on" data-m="book">책</button>
+      <button data-m="webtoon">웹툰</button>
+    </div>
     <div class="keyrow">
       <input id="bSearch" placeholder="책 제목 검색" />
       <button class="btn btn-sm" onclick="searchBook()">검색</button>
@@ -261,7 +266,8 @@
         <button data-t="문학">문학</button>
         <button data-t="작법">작법</button>
         <button data-t="경영">경영</button>
-        <button data-t="기타">기타</button>
+        <button data-t="웹툰">웹툰</button>
+      <button data-t="기타">기타</button>
       </div>
       <div class="row-btns" style="margin-top:8px;">
         <button class="btn" id="eqSave" onclick="saveQuoteEdit()">저장</button>
@@ -383,8 +389,41 @@ async function saveQuote(){
 }
 
 /* ---------- 책 검색: 교보문고(프록시) → 카카오 → 구글 ---------- */
-let picked = null;
+let picked = null, bMode = "book";
 const PROXY = u => "https://corsproxy.io/?url=" + encodeURIComponent(u);
+document.querySelectorAll("#bMode button").forEach(el => el.onclick = () => {
+  bMode = el.dataset.m;
+  document.querySelectorAll("#bMode button").forEach(x=>x.classList.toggle("on", x===el));
+  document.getElementById("bSearch").placeholder = bMode==="webtoon" ? "웹툰 제목 검색" : "책 제목 검색";
+  document.getElementById("bResults").innerHTML = "";
+});
+
+async function searchNaverWebtoon(q){
+  const r = await fetch(PROXY("https://comic.naver.com/api/search/all?keyword=" + encodeURIComponent(q)));
+  if(!r.ok) throw new Error("naver " + r.status);
+  const d = await r.json();
+  return ((d.searchWebtoonResult && d.searchWebtoonResult.searchViewList) || []).slice(0,5).map(w => ({
+    type: "webtoon",
+    title: w.titleName,
+    author: (w.displayAuthor || "").replace(/\s*\/\s*/g, "·"),
+    publisher: "네이버웹툰",
+    published: null,
+    titleId: w.titleId,
+    link: "https://comic.naver.com/webtoon/list?titleId=" + w.titleId,
+    status: w.finished ? "완결" : "연재중",
+    cover: w.thumbnailUrl || "",
+    isbn: "",
+    summary: (w.synopsis || "").replace(/\s+/g, " ").slice(0, 200),
+  }));
+}
+async function fetchWebtoonGenres(titleId){
+  try{
+    const r = await fetch(PROXY("https://comic.naver.com/api/article/list/info?titleId=" + titleId));
+    const d = await r.json();
+    const skip = ["명작","세계관","연재","완결","정주행","단행본"];
+    return (d.curationTagList || []).map(t=>t.tagName).filter(t=>!skip.includes(t)).slice(0,3);
+  }catch(e){ return []; }
+}
 function openBookForm(){
   document.getElementById("bForm").classList.remove("hidden");
   document.getElementById("manualBtn").classList.add("hidden");
@@ -417,6 +456,25 @@ async function searchBook(){
   const box = document.getElementById("bResults");
   box.innerHTML = ""; msg("bMsg","info","검색 중…");
   let items = [];
+  if(bMode === "webtoon"){
+    try{ items = await searchNaverWebtoon(q); }catch(e){}
+    if(items.length) document.getElementById("bMsg").className = "msg";
+    else msg("bMsg","err","네이버웹툰에서 찾지 못했어요 — 아래 '직접 입력'을 눌러주세요.");
+    box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title} <span>${x.author} · ${x.status}</span></button>`).join("");
+    box.querySelectorAll("button").forEach(el => el.onclick = async () => {
+      picked = items[+el.dataset.i];
+      openBookForm();
+      document.getElementById("bTitle").value = picked.title;
+      document.getElementById("bAuthor").value = picked.author;
+      document.getElementById("bPublisher").value = "네이버웹툰";
+      box.innerHTML = "";
+      msg("bMsg","info","장르를 가져오는 중…");
+      const gs = await fetchWebtoonGenres(picked.titleId);
+      if(gs.length) document.getElementById("bGenres").value = gs.join(", ");
+      msg("bMsg","info","정보가 채워졌어요. 별점만 매기면 끝!");
+    });
+    return;
+  }
   try{ items = await searchKyobo(q); }catch(e){}
   if(!items.length){
     try{
@@ -484,14 +542,18 @@ async function saveBook(){
     const { text: src, sha } = await ghGet("books.js");
     const genres = v("bGenres").split(/[,\n]/).map(x=>x.trim()).filter(Boolean);
     const cover = picked && picked.isbn ? `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${picked.isbn}.jpg` : (picked ? picked.cover : "");
+    const isToon = (picked && picked.type === "webtoon") || bMode === "webtoon";
+    const toonFields = isToon
+      ? `type: "webtoon", platform: "네이버웹툰", link: "${jsEsc(picked ? picked.link : "")}", status: "${jsEsc(picked ? picked.status : "")}", `
+      : "";
     const entry =
-`  { title: "${jsEsc(title)}", author: "${jsEsc(v("bAuthor"))}", publisher: "${jsEsc(v("bPublisher"))}", genres: [${genres.map(g=>`"${jsEsc(g)}"`).join(", ")}], published: ${v("bPub")||"null"}, readYear: ${v("bYear")||"null"},
+`  { title: "${jsEsc(title)}", author: "${jsEsc(v("bAuthor"))}", publisher: "${jsEsc(v("bPublisher"))}", ${toonFields}genres: [${genres.map(g=>`"${jsEsc(g)}"`).join(", ")}], published: ${v("bPub")||"null"}, readYear: ${v("bYear")||"null"},
     cover: "${jsEsc(cover)}", isbn: "${jsEsc(picked?picked.isbn:"")}",
     summary: "${jsEsc(picked?picked.summary:"")}", review: "${jsEsc(v("bReview"))}", rating: ${bRating||"null"}, quotes: [] },
 `;
     const idx = src.lastIndexOf("];");
     if(idx < 0) throw new Error("books.js 형식을 인식하지 못했어요.");
-    await ghPut("books.js", src.slice(0,idx) + entry + src.slice(idx), sha, `책 추가: ${title}`);
+    await ghPut("books.js", src.slice(0,idx) + entry + src.slice(idx), sha, (isToon?"웹툰 추가: ":"책 추가: ") + title);
     ["bTitle","bAuthor","bPublisher","bGenres","bReview","bSearch","bPub","bYear"].forEach(id=>document.getElementById(id).value="");
     document.querySelectorAll("#genreChips button").forEach(x=>x.classList.remove("on"));
     bRating = 0; starEls.forEach(x=>x.classList.remove("on")); picked = null;
@@ -551,8 +613,8 @@ function renderEList(){
 
   const rows = slice.map(it => {
     if(eKind === "b"){
-      return `<div class="mrow"><div class="mtxt">${escH(it.title)}
-        <span class="msub">${escH(it.author||"저자 미상")}${it.rating?" · ★"+it.rating:" · 미평가"}${it.readYear?" · "+it.readYear:""}</span></div>
+      return `<div class="mrow"><div class="mtxt">${it.type==="webtoon"?"🟩 ":""}${escH(it.title)}
+        <span class="msub">${it.type==="webtoon"?"웹툰 · ":""}${escH(it.author||"저자 미상")}${it.rating?" · ★"+it.rating:" · 미평가"}${it.readYear?" · "+it.readYear:""}</span></div>
         <div class="act"><button class="ed" data-t="${escH(it.title)}">수정</button><button class="de" data-t="${escH(it.title)}">삭제</button></div></div>`;
     }
     const qi = QUOTES.indexOf(it);
