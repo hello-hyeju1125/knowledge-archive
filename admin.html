@@ -364,7 +364,7 @@ async function ghPut(path, text, sha, message){
   if(!r.ok){ const e = await r.json().catch(()=>({}));
     throw new Error("저장 실패 (HTTP "+r.status+") "+(e.message||"")); }
 }
-const jsEsc = s => String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"');
+const jsEsc = s => String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/\r/g,"").replace(/\n/g,"\\n").replace(/\t/g,"\\t");
 
 /* ---------- 인용구 저장 ---------- */
 async function saveQuote(){
