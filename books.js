@@ -626,4 +626,7 @@ const BOOKS = [
   { title: "당골", author: "남승우·김교", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=838215", status: "연재중", genres: ["스릴러", "동양", "미스터리"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/838215/thumbnail/thumbnail_IMAG21_7121dab6-9290-4272-a840-607a84db9f53.jpg", isbn: "",
     summary: "영월당에 무당 “만신 김서령” 무당 집안에 태어나 신줄을 거부하고 살아가는 의뢰인 “노승래” 딸의 눈이 보이지 않는다는 의뢰를 받아 찾아간 서령, 무속신앙을 믿지 않고 무시하는 승래의 태도에 서령은 의뢰를 받지 않고 돌아간다. 하지만 그날 이후 계속되는 서령의 꿈속, 승래의 과거가 비친다. 결국, 서령은 승래의 집안 뒤를 밟아보는데… 이 집안 딸내미 기운이", review: "흥미진진한 스토리. 밤에 보면 좀 무서움.", rating: 4, quotes: [] },
+  { title: "투신전생기", author: "청담", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=774044", status: "연재중", genres: ["액션", "회귀", "이능력배틀물"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/774044/thumbnail/thumbnail_IMAG21_81504afb-1a05-41b0-9650-0c9aa1d741d9.jpg", isbn: "",
+    summary: "인류 최강자의 회귀 액션 판타지. \"역겨운 신들이 줬다고 해도 기회는 기회. 뒈지고 싶다는데 죽여 줘야지.\" 인류 최후의 생존자 제피르. 마신과의 고독한 싸움은 패배로 끝났으나, 신들이 준 기회로 10년 전으로 돌아왔다. 모든 것을 빼앗아갔던 마신과 인간을 구경거리 취급한 신들. 이번에는 내가 너희를 물어뜯겠다.", review: "작가 혼자 모든 것을 그리고 만들었다니 믿기지 않는다. 도대체 언제 돌아올 거냐? 기다리는 중.", rating: 4, quotes: [] },
 ];
