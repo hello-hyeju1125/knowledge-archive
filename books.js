@@ -587,4 +587,7 @@ const BOOKS = [
   { title: "저궤도인간", author: "조은영", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=840510", status: "연재중", genres: ["드라마", "예술", "현대"], published: 2025, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/840510/thumbnail/thumbnail_IMAG21_e5ef3ad0-9b40-4ec1-a05a-f6e1f546d7b8.jpg", isbn: "",
     summary: "대학교 시간강사이자 무명작가인 서른 아홉의 주재열. 궤도에 오르지 못한 삶에 불안이 커져가던 어느 날 후배의 죽음으로 주인 없는 행운을 쥐게 된다. 마침내 그도 궤도에 오를 수 있을까.", review: "가보지 못한 길을 미리 경험할 수 있었다.", rating: 5, quotes: [] },
+  { title: "매스커레이드 라이프", author: "히가시노 게이고", publisher: "현대문학", genres: ["스릴러"], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791167903662.jpg", isbn: "9791167903662",
+    summary: "대표작 『나미야 잡화점의 기적』으로 미스터리 팬을 넘어 전 세계 독자들에게 ‘작은 선의의 선택들이 모였을 때, 우리의 삶이 어떤 기적으로 이어질 수 있는가’를 선보인 히가시노 게이고의 누적 판매 550만 부 인기 시리즈 최신작 『매스커레이드 라이프』가 현대문학에서 출간되었다.  다작으로 유명한 히가시노 게이고지만 그 중 시리즈물은 흔치 않다. 작가가 가장 사랑하는 캐릭터인 유가와 마나부가 등장하는 ‘탐정 갈릴레오 시리즈’, 야성의 감이 살아있는 캐릭터 가가 교이", review: "잘 가다 말았다. 이럴거면 호기심을 자극 하지 말지.", rating: 3, quotes: [] },
 ];
