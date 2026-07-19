@@ -182,8 +182,9 @@
 
   <div class="tabs">
     <button class="on" id="tabQ" onclick="showTab('q')">인용구</button>
-    <button id="tabB" onclick="showTab('b')">책 추가</button>
-    <button id="tabE" onclick="showTab('e')">수정·삭제</button>
+    <button id="tabB" onclick="showTab('b')">책</button>
+    <button id="tabP" onclick="showTab('p')">글</button>
+    <button id="tabE" onclick="showTab('e')">관리</button>
   </div>
 
   <!-- 인용구 추가 -->
@@ -247,12 +248,25 @@
     <div class="msg" id="bMsg"></div>
   </div>
 
+  <!-- 글쓰기: 작법 노트 발행 -->
+  <div class="panel hidden" id="paneP">
+    <input id="pTitle" placeholder="글 제목" />
+    <input id="pCat" placeholder="분류 (기본: 작법)" />
+    <textarea id="pBody" style="min-height:320px; line-height:1.8;" placeholder="본문을 적어주세요.
+
+## 소제목    **강조**    - 목록    > 인용
+위 마크다운 문법을 쓰면 예쁘게 표시돼요."></textarea>
+    <button class="btn" id="pSave" onclick="savePost()">발행</button>
+    <div class="msg" id="pMsg"></div>
+  </div>
+
   <!-- 수정·삭제: 전체 목록에서 바로 고치거나 지우기 -->
   <div class="panel hidden" id="paneE">
     <div id="eListView">
       <div class="tagpick" id="eKind" style="margin-bottom:10px;">
         <button class="on" data-k="b">책</button>
         <button data-k="q">문장</button>
+        <button data-k="p">글</button>
       </div>
       <input id="eSearch" placeholder="목록에서 찾기 (선택)" autocomplete="off" />
       <div id="eList"></div>
@@ -286,6 +300,16 @@
         <button class="btn btn-danger" id="eqDel" onclick="deleteQuote()">문장 삭제</button>
       </div>
     </div>
+    <div id="epForm" class="hidden">
+      <button class="plain" onclick="backToList()">← 목록으로</button>
+      <input id="epTitle" placeholder="글 제목" style="margin-top:8px;" />
+      <input id="epCat" placeholder="분류" />
+      <textarea id="epBody" style="min-height:300px; line-height:1.8;"></textarea>
+      <div class="row-btns">
+        <button class="btn" id="epSave" onclick="savePostEdit()">저장</button>
+        <button class="btn btn-danger" id="epDel" onclick="deletePost()">글 삭제</button>
+      </div>
+    </div>
     <div class="msg" id="eMsg"></div>
   </div>
 </div>
@@ -294,6 +318,7 @@
 // 데이터 파일은 항상 최신으로 (GitHub Pages 10분 캐시 우회)
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const REPO = "hello-hyeju1125/knowledge-archive";
@@ -326,7 +351,7 @@ function msg(id, type, html){
 const authFail = e => String(e.message||"").includes("401")
   ? `열쇠가 만료된 것 같아요. <button onclick="reconnect()">다시 연결하기</button>` : "⚠️ " + e.message;
 function showTab(t){
-  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabE","paneE","e"]]){
+  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabP","paneP","p"],["tabE","paneE","e"]]){
     document.getElementById(tab).classList.toggle("on", t===k);
     document.getElementById(pane).classList.toggle("hidden", t!==k);
   }
@@ -645,6 +670,9 @@ function renderEList(){
   if(eKind === "b"){
     items = [...BOOKS].reverse();  // 최신 등록이 위로
     if(q) items = items.filter(b => b.title.toLowerCase().includes(q) || (b.author||"").toLowerCase().includes(q));
+  }else if(eKind === "p"){
+    items = POSTS;                 // 최신 발행이 위로
+    if(q) items = items.filter(p => p.title.toLowerCase().includes(q) || (p.body||"").toLowerCase().includes(q));
   }else{
     items = QUOTES;                // 이미 최신순
     if(q) items = items.filter(x => x.t.toLowerCase().includes(q) || x.b.toLowerCase().includes(q));
@@ -654,6 +682,12 @@ function renderEList(){
   const slice = items.slice((ePage-1)*E_PER, ePage*E_PER);
 
   const rows = slice.map(it => {
+    if(eKind === "p"){
+      const pi = POSTS.indexOf(it);
+      return `<div class="mrow"><div class="mtxt">${escH(it.title)}
+        <span class="msub">${escH(it.category||"노트")}${it.d?" · "+it.d:""} · ${Math.max(1,Math.round((it.body||"").length/550))}분 분량</span></div>
+        <div class="act"><button class="ed" data-i="${pi}">수정</button><button class="de" data-i="${pi}">삭제</button></div></div>`;
+    }
     if(eKind === "b"){
       return `<div class="mrow"><div class="mtxt">${it.type==="webtoon"?"🟩 ":""}${escH(it.title)}
         <span class="msub">${it.type==="webtoon"?"웹툰 · ":""}${escH(it.author||"저자 미상")}${it.rating?" · ★"+it.rating:" · 미평가"}${it.readYear?" · "+it.readYear:""}</span></div>
@@ -672,10 +706,14 @@ function renderEList(){
     ${pageWin(ePage,total).map(p=>p==="…"?`<span class="ell">…</span>`:`<button class="${p===ePage?"cur":""}" onclick="ePage=${p};renderEList()">${p}</button>`).join("")}
     <button onclick="ePage++;renderEList()" ${ePage===total?"disabled":""}>›</button>` : "";
 
-  document.querySelectorAll("#eList .ed").forEach(el => el.onclick = () =>
-    eKind==="b" ? openBookEditor(BOOKS.find(b=>b.title===el.dataset.t)) : openQuoteEditor(QUOTES[+el.dataset.i]));
+  document.querySelectorAll("#eList .ed").forEach(el => el.onclick = () => {
+    if(eKind==="b") openBookEditor(BOOKS.find(b=>b.title===el.dataset.t));
+    else if(eKind==="p") openPostEditor(POSTS[+el.dataset.i]);
+    else openQuoteEditor(QUOTES[+el.dataset.i]);
+  });
   document.querySelectorAll("#eList .de").forEach(el => el.onclick = () => {
     if(eKind==="b"){ editBook = BOOKS.find(b=>b.title===el.dataset.t); deleteBook(); }
+    else if(eKind==="p"){ editPost = POSTS[+el.dataset.i]; deletePost(); }
     else{ editQuote = QUOTES[+el.dataset.i]; deleteQuote(); }
   });
 }
@@ -703,6 +741,7 @@ function openQuoteEditor(x){
 function backToList(){
   document.getElementById("eForm").classList.add("hidden");
   document.getElementById("eqForm").classList.add("hidden");
+  document.getElementById("epForm").classList.add("hidden");
   document.getElementById("eListView").classList.remove("hidden");
   renderEList();
 }
@@ -794,6 +833,84 @@ async function saveEdit(){
     msg("eMsg","ok",`저장 완료 — 1~2분 뒤 <a href="${SITE}" target="_blank">서재</a>에 반영돼요.`);
   }catch(e){ msg("eMsg","err",authFail(e)); }
   btn.disabled = false; btn.textContent = "저장";
+}
+
+/* ---------- 작법 노트: 발행·수정·삭제 ---------- */
+let editPost = null;
+const postLine = p => "  " + JSON.stringify(p) + ",";
+function findPostLine(src, id){
+  const i = src.indexOf('"id":' + JSON.stringify(id));
+  if(i < 0) return null;
+  const start = src.lastIndexOf("\n", i) + 1;
+  let end = src.indexOf("\n", i);
+  if(end < 0) end = src.length;
+  return { start, end };
+}
+
+async function savePost(){
+  const title = document.getElementById("pTitle").value.trim();
+  const body = document.getElementById("pBody").value.trim();
+  if(!title){ msg("pMsg","err","제목을 적어주세요."); return; }
+  if(!body){ msg("pMsg","err","본문을 적어주세요."); return; }
+  const btn = document.getElementById("pSave");
+  btn.disabled = true; btn.textContent = "발행 중…";
+  try{
+    const { text: src, sha } = await ghGet("posts.js");
+    const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    const post = { id: Date.now().toString(36), title,
+      category: document.getElementById("pCat").value.trim() || "작법", d: ds, body };
+    const marker = "const POSTS = [";
+    if(!src.includes(marker)) throw new Error("posts.js 형식을 인식하지 못했어요.");
+    await ghPut("posts.js", src.replace(marker, marker + "\n" + postLine(post)), sha, `글 발행: ${title}`);
+    document.getElementById("pTitle").value = ""; document.getElementById("pBody").value = "";
+    msg("pMsg","ok",`발행 완료 — 1~2분 뒤 <a href="https://hellmeone.com/notes.html" target="_blank">작법 노트</a>에 올라갑니다 ✍️`);
+  }catch(e){ msg("pMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "발행";
+}
+
+function openPostEditor(p){
+  editPost = p;
+  document.getElementById("eListView").classList.add("hidden");
+  document.getElementById("eMsg").className = "msg";
+  document.getElementById("epTitle").value = p.title;
+  document.getElementById("epCat").value = p.category || "";
+  document.getElementById("epBody").value = p.body;
+  document.getElementById("epForm").classList.remove("hidden");
+}
+async function savePostEdit(){
+  if(!editPost) return;
+  const title = document.getElementById("epTitle").value.trim();
+  const body = document.getElementById("epBody").value.trim();
+  if(!title || !body){ msg("eMsg","err","제목과 본문을 채워주세요."); return; }
+  const btn = document.getElementById("epSave");
+  btn.disabled = true; btn.textContent = "저장 중…";
+  try{
+    const { text: src, sha } = await ghGet("posts.js");
+    const pos = findPostLine(src, editPost.id);
+    if(!pos) throw new Error("이 글을 파일에서 찾지 못했어요. 방금 발행했다면 1~2분 뒤 다시 시도해 주세요.");
+    const updated = { id: editPost.id, title,
+      category: document.getElementById("epCat").value.trim() || "작법", d: editPost.d, body };
+    await ghPut("posts.js", src.slice(0,pos.start) + postLine(updated) + src.slice(pos.end), sha, `글 수정: ${title}`);
+    Object.assign(editPost, updated);
+    msg("eMsg","ok",`수정 완료 — 1~2분 뒤 반영돼요.`);
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
+}
+async function deletePost(){
+  if(!editPost) return;
+  if(!confirm(`『${editPost.title}』 글을 삭제할까요?`)) return;
+  const btn = document.getElementById("epDel");
+  if(btn){ btn.disabled = true; btn.textContent = "삭제 중…"; }
+  try{
+    const { text: src, sha } = await ghGet("posts.js");
+    const pos = findPostLine(src, editPost.id);
+    if(!pos) throw new Error("이 글을 파일에서 찾지 못했어요.");
+    await ghPut("posts.js", src.slice(0,pos.start) + src.slice(pos.end+1), sha, `글 삭제: ${editPost.title}`);
+    POSTS.splice(POSTS.indexOf(editPost), 1);
+    backToList();
+    msg("eMsg","ok","삭제 완료 — 1~2분 뒤 반영돼요.");
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  if(btn){ btn.disabled = false; btn.textContent = "글 삭제"; }
 }
 </script>
 </body>

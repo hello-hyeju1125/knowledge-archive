@@ -82,6 +82,11 @@
   .hero .stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
   .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+  .hero-cta{
+    display:inline-block; margin-top:28px; border:1.5px solid var(--accent); color:var(--accent);
+    font-size:14.5px; font-weight:700; padding:11px 26px; border-radius:980px; transition:all .15s;
+  }
+  .hero-cta:hover{background:var(--accent); color:#fff;}
   .marker-thin{background:linear-gradient(transparent 74%, var(--mint) 74%, var(--mint) 94%, transparent 94%); padding:0 2px;}
   .hero-quote em{font-family:Georgia,"Times New Roman",serif; font-style:italic; font-size:clamp(17px,2.2vw,21px); color:var(--text);}
   .hero-quote .hq-ko{display:block; margin-top:9px; font-size:14.5px; color:var(--text-2);}
@@ -349,6 +354,7 @@
     <a href="#quotes">문장</a>
     <a href="#books">책</a>
     <a href="#graph-sec">지도</a>
+    <a href="./notes.html">노트</a>
     <button class="add-mini" id="addBtn">서재 주인 접근</button>
   </div>
 </nav>
@@ -362,6 +368,7 @@
     <span class="hq-by">— 프란츠 카프카</span>
   </p>
   <div class="stats" id="heroStats"></div>
+  <a class="hero-cta" href="./notes.html">작법 노트 →</a>
 </header>
 
 <section id="quotes" style="padding-top:16px;">
@@ -421,6 +428,7 @@
   <div class="f-brand">헬로의 서재</div>
   <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
   <p style="margin-top:14px;">
+    <a href="./notes.html" style="color:var(--text-3); font-size:12px; text-decoration:underline; margin-right:14px;">작법 노트</a>
     <a href="./admin.html" style="color:var(--text-3); font-size:12px; text-decoration:underline; margin-right:14px;">서재 관리</a>
     <a href="#" id="exportBtn" style="color:var(--text-3); font-size:12px; text-decoration:underline;" title="화면에서 추가한 책을 books.js 코드로 내보내기">기록 내보내기</a>
   </p>

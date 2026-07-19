@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>작법 노트 — 헬로의 서재</title>
+<meta name="description" content="헬로가 작법서를 읽고 길게 풀어 쓰는 노트. 글쓰기에 대한 기록." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="작법 노트 — 헬로의 서재" />
+<meta property="og:description" content="읽으며 배운 작법을, 길게 풀어 씁니다." />
+<link rel="canonical" href="https://hellmeone.com/notes.html" />
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<style>
+@font-face{
+  font-family:"NanumSquareNeo";
+  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2") format("woff2");
+  font-weight:300 900; font-display:swap;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ECFCFF; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
+    --line:#CBE9F2; --card-line:rgba(41,74,255,.4);
+    --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#050B1D; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
+      --line:#1B2A4E; --card-line:rgba(94,120,255,.5);
+      --accent:#5E78FF; --accent-hover:#7B90FF;
+      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
+      --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
+    }
+  }
+  *{box-sizing:border-box; margin:0;}
+  body{
+    font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+
+  nav{
+    position:sticky; top:0; z-index:50; height:52px;
+    display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
+    background:color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{font-size:15px; font-weight:800; color:var(--text);}
+  nav .links{margin-left:auto; display:flex; gap:20px;}
+  nav .links a{color:var(--text-2); font-size:13px;}
+  nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
+
+  /* ---------- 목록 ---------- */
+  .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
+  .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
+  .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
+  .cats{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px;}
+  .cats button{
+    border:1px solid var(--line); background:var(--card); color:var(--text-2);
+    font-size:13px; font-weight:600; padding:7px 16px; border-radius:980px;
+  }
+  .cats button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .plist{margin-top:26px;}
+  .prow{
+    display:block; padding:22px 4px; border-bottom:1px solid var(--line);
+    color:var(--text); cursor:pointer;
+  }
+  .prow:hover .pt{color:var(--accent);}
+  .prow .pt{font-size:19px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
+  .prow .pm{font-size:12.5px; color:var(--text-3); margin-top:7px;}
+  .prow .pm .cat{color:var(--mint-text); background:var(--mint-soft); padding:2px 9px; border-radius:980px; font-weight:700; margin-right:8px;}
+  .prow .px{
+    font-size:14px; color:var(--text-2); margin-top:10px; line-height:1.7;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
+
+  /* ---------- 본문 (가독성 최우선) ---------- */
+  .article{display:none;}
+  .article.show{display:block; animation:fadeUp .3s ease;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+  .a-back{font-size:13px; color:var(--text-2); font-weight:600;}
+  .a-back:hover{color:var(--accent);}
+  .a-cat{display:inline-block; font-size:12px; font-weight:700; color:var(--mint-text);
+    background:var(--mint-soft); padding:3px 12px; border-radius:980px; margin-top:30px;}
+  .a-title{font-size:clamp(26px,4.6vw,36px); font-weight:900; letter-spacing:-0.025em; line-height:1.35; margin-top:14px;}
+  .a-meta{font-size:13px; color:var(--text-3); margin-top:14px; padding-bottom:26px; border-bottom:1px solid var(--line);}
+  .a-body{
+    font-family:"Noto Serif KR","NanumSquareNeo",serif;
+    font-size:17.5px; line-height:2.0; letter-spacing:-0.003em;
+    color:var(--text); margin-top:34px; word-break:keep-all; overflow-wrap:break-word;
+  }
+  .a-body p{margin:0 0 1.5em;}
+  .a-body h2{
+    font-family:"NanumSquareNeo",sans-serif; font-size:21px; font-weight:800;
+    letter-spacing:-0.02em; margin:2.2em 0 0.9em; line-height:1.5;
+  }
+  .a-body h3{font-family:"NanumSquareNeo",sans-serif; font-size:17.5px; font-weight:800; margin:1.8em 0 0.7em;}
+  .a-body ul, .a-body ol{margin:0 0 1.5em; padding-left:1.3em;}
+  .a-body li{margin-bottom:0.55em;}
+  .a-body blockquote{
+    margin:1.8em 0; padding:4px 0 4px 20px; border-left:3px solid var(--mint);
+    color:var(--text-2); font-style:normal;
+  }
+  .a-body blockquote p{margin-bottom:0.4em;}
+  .a-body strong{font-weight:600; background:linear-gradient(transparent 70%, var(--mint-soft) 70%);}
+  .a-body a{text-decoration:underline; text-underline-offset:3px;}
+  .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
+  .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
+  .a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  .a-end a{font-size:13.5px; font-weight:600;}
+  footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
+  footer .f-brand{font-size:14px; font-weight:800;}
+  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="./index.html">헬로의 서재</a>
+  <div class="links">
+    <a href="./index.html#quotes">문장</a>
+    <a href="./index.html#books">책</a>
+    <a href="./index.html#graph-sec">지도</a>
+    <a href="./notes.html" style="color:var(--text); font-weight:700;">노트</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <!-- 목록 -->
+  <div id="listView">
+    <div class="head">
+      <h1><span class="marker">작법 노트</span></h1>
+      <p>읽으며 배운 작법을, 길게 풀어 씁니다.</p>
+    </div>
+    <div class="cats" id="cats"></div>
+    <div class="plist" id="plist"></div>
+  </div>
+
+  <!-- 본문 -->
+  <article class="article" id="article">
+    <a class="a-back" href="#" onclick="closePost(event)">← 목록으로</a>
+    <div><span class="a-cat" id="aCat"></span></div>
+    <h1 class="a-title" id="aTitle"></h1>
+    <div class="a-meta" id="aMeta"></div>
+    <div class="a-body" id="aBody"></div>
+    <div class="a-end">
+      <a href="#" onclick="closePost(event)">← 목록으로</a>
+      <a href="./index.html">서재로 가기 →</a>
+    </div>
+  </article>
+</div>
+
+<footer>
+  <div class="f-brand">헬로의 서재</div>
+  <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+</footer>
+
+<script>
+document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+</script>
+<script>
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const readMin = t => Math.max(1, Math.round(t.length / 550));  // 분당 550자 기준
+
+/* 마크다운 렌더 (marked 실패 시 문단 폴백) */
+function render(md){
+  try{ if(window.marked) return marked.parse(md); }catch(e){}
+  return md.split(/\n\n+/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("");
+}
+
+let activeCat = "전체";
+function renderCats(){
+  const cats = [...new Set(POSTS.map(p=>p.category).filter(Boolean))];
+  const box = document.getElementById("cats");
+  if(cats.length < 2){ box.style.display = "none"; return; }
+  box.innerHTML = ["전체", ...cats].map(c =>
+    `<button class="${c===activeCat?"on":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => { activeCat = el.dataset.c; renderCats(); renderList(); });
+}
+
+function renderList(){
+  const list = activeCat==="전체" ? POSTS : POSTS.filter(p=>p.category===activeCat);
+  document.getElementById("plist").innerHTML = list.length ? list.map(p => `
+    <a class="prow" href="#${encodeURIComponent(p.id)}">
+      <div class="pt">${esc(p.title)}</div>
+      <div class="pm"><span class="cat">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분</div>
+      <div class="px">${esc(p.body.replace(/[#>*\-`]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
+    </a>`).join("")
+    : `<div class="empty">아직 글이 없어요. 서재 주인의 방에서 첫 글을 발행해 보세요.</div>`;
+}
+
+function openPost(p){
+  document.getElementById("listView").style.display = "none";
+  document.getElementById("aCat").textContent = p.category || "노트";
+  document.getElementById("aTitle").textContent = p.title;
+  document.getElementById("aMeta").textContent = `${p.d || ""} · 읽는 시간 약 ${readMin(p.body)}분`;
+  document.getElementById("aBody").innerHTML = render(p.body);
+  document.getElementById("article").classList.add("show");
+  document.title = p.title + " — 작법 노트";
+  window.scrollTo(0, 0);
+}
+function closePost(e){
+  if(e) e.preventDefault();
+  history.pushState("", document.title, location.pathname);
+  document.getElementById("article").classList.remove("show");
+  document.getElementById("listView").style.display = "";
+  document.title = "작법 노트 — 헬로의 서재";
+}
+function route(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  const p = id && POSTS.find(x => x.id === id);
+  if(p) openPost(p); else closePost();
+}
+window.addEventListener("hashchange", route);
+renderCats(); renderList(); route();
+</script>
+</body>
+</html>
