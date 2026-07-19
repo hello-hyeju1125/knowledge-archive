@@ -635,4 +635,7 @@ const BOOKS = [
   { title: "아수라", author: "류기운·문정후", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=826670", status: "연재중", genres: ["판타지", "동양", "모험"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/826670/thumbnail/thumbnail_IMAG21_ecfd3f55-b872-45a8-9837-a94d1dcb9f72.jpg", isbn: "",
     summary: "최초로 대륙을 통일한 절대자로부터 불사의 비밀을 알아오라는 명을 받고 떠난 이가 있었다. 세상의 모든 곳을 찾아다녀서라도 반드시 불사의 비밀을 알아올 것으로 믿었던 그는 절대자가 죽고 제국이 몰락할 때까지 끝내 돌아오지 않았고, 수많은 억측만을 남긴 채 사람들의 기억 속에서도 차츰 잊혀져갔다. 그리고 오랜 시간이 흐른 뒤...", review: "대작이라던데, 몇번이나 시도했지만 중도 하차함.", rating: 2, quotes: [] },
+  { title: "상남자", author: "하늘소·도가도·김태궁", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=751168", status: "연재중", genres: ["드라마", "사이다", "오피스"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/751168/thumbnail/thumbnail_IMAG21_db791b21-1a43-4a47-bfe4-09f504e0c246.jpg", isbn: "",
+    summary: "오로지 성공만을 바라보며 기업 정점의 자리까지 오른, 최고의 샐러리맨 한유현. 대가로 사랑하던 모든 이를 잃어버린 후, 후회 섞인 인생을 돌아보는데... 어느 날 모든 기억을 안은 채, 젊은 시절의 그때로 돌아가게 된다. 모든 것의 시작점인 신입사원의 위치에서, 그가 다시 삶을 설계한다!", review: "삼성전자, 엘지전자...우리나라 제조업에 대해 엿볼 수 있는 웹툰.", rating: 4, quotes: [] },
 ];
