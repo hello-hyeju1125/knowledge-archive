@@ -461,7 +461,7 @@ const BOOKS = [
     review: "", rating: 5, quotes: [] },
   { title: "세상 대신 샌드백을 때리기로 했습니다", author: "윤리", genres: ["에세이"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124370483.jpg", isbn: "9791124370483",
-    summary: "남들과 자신을 끊임없이 비교하며 지쳐가는 시대. 『세상 대신 샌드백을 때리기로 했습니다』는 타인의 기준에 맞추기 위해 애쓰다 결국 스스로를 잃어버린 사람들에게 건네는 다정한 위로이자, 다시 일어설 수 있는 용기에 대한 이야기다.저자는 복싱이라는 운동을 통해 삶...", review: "", rating: 1, quotes: [] },
+    summary: "남들과 자신을 끊임없이 비교하며 지쳐가는 시대. 『세상 대신 샌드백을 때리기로 했습니다』는 타인의 기준에 맞추기 위해 애쓰다 결국 스스로를 잃어버린 사람들에게 건네는 다정한 위로이자, 다시 일어설 수 있는 용기에 대한 이야기다.저자는 복싱이라는 운동을 통해 삶...", review: "종이야 나무야 미안해. 이런 글도 책으로 나오는데.", rating: 1, quotes: [] },
   { title: "유혹하는 글쓰기", author: "스티븐 킹", genres: ["글쓰기", "에세이"], published: 2000, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173324901.jpg", isbn: "9791173324901",
     summary: "스티븐 킹이 자신의 삶과 창작 과정을 솔직하게 풀어낸 글쓰기 지침서.",
