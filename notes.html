@@ -69,6 +69,14 @@
   }
   nav .add-mini:hover{background:var(--accent-hover) !important;}
 
+  @media (max-width:640px){
+    nav{gap:12px; padding:0 16px;}
+    nav .brand{font-size:14px; white-space:nowrap;}
+    nav .links{gap:13px;}
+    nav .links a{font-size:12.5px; white-space:nowrap;}
+    nav .add-mini{display:none;}
+  }
+
   /* ---------- 목록 ---------- */
   .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
   .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
