@@ -181,6 +181,7 @@ const readMin = t => Math.max(1, Math.round(t.length / 550));  // 분당 550자 
 /* 마크다운 렌더 (marked 실패 시 문단 폴백) */
 function render(md){
   md = md.replace(/^(#{1,4})(?=[^#\s])/gm, "$1 ");   // "##제목"처럼 공백 없이 써도 소제목 인식
+  md = md.replace(/\*\*[ \t]*([^*\n]+?)[ \t]*\*\*/g, (m,t)=>"**"+t+"**");  // "** 강조 **"처럼 공백 있어도 인식
   try{ if(window.marked) return marked.parse(md); }catch(e){}
   return md.split(/\n\n+/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("");
 }
