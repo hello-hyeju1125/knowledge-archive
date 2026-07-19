@@ -505,7 +505,7 @@ const BOOKS = [
   { title: "열두살에 부자가된 키라", author: "보도 섀퍼", genres: ["경제경영", "자기계발"], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173470905.jpg", isbn: "9791173470905",
     summary: "소녀 키라가 말하는 개 '머니'를 만나 돈과 저축, 목표 세우기를 배우며 성장하는 어린이 경제 동화.",
-    review: "", rating: 5, quotes: [] },
+    review: "어릴 때 이 책을 읽었다면 내 인생도 많이 달라졌을까?", rating: 5, quotes: [] },
   { title: "결국 너의 시간은 온다", author: "염경엽", genres: ["자기계발"], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788901298757.jpg", isbn: "9788901298757",
     summary: "LG 트윈스 최초 두 번의 통합우승 달성!왕조의 시작, 명장의 탄생을 알리는 뜨거운 승리 너머의 이야기실패한 1할 타자에서 최고의 감독이 되기까지,끝끝내 자신을 증명해온 감독 염경엽의 시간선수·단장·감독으로서 모두 우승을 경험한 KBO 최초의 인물이자, 프로야...", review: "", rating: 3, quotes: [] },
