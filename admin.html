@@ -215,6 +215,18 @@
     </div>
     <div class="results" id="bResults" style="margin-top:10px;"></div>
     <button class="plain" id="manualBtn" onclick="openBookForm()">검색 없이 직접 입력할게요</button>
+    <details style="margin-top:6px;">
+      <summary style="font-size:12.5px; color:var(--text-3); cursor:pointer;">검색이 잘 안 되나요? — 카카오 키 연결 (권장, 1회)</summary>
+      <div style="margin-top:10px; font-size:12.5px; color:var(--text-2); line-height:1.7;">
+        <a href="https://developers.kakao.com/console/app" target="_blank" rel="noopener">developers.kakao.com</a> →
+        애플리케이션 추가 → 만든 앱 클릭 → <b>앱 설정 › 앱 키</b>에서 <b>REST API 키</b>
+        (<b>32자리 영문·숫자</b>, github_pat처럼 긴 것 아님!)를 복사해 붙여넣으세요.
+        <div class="keyrow" style="margin-top:8px;">
+          <input id="kakaoKey" placeholder="REST API 키 (32자리)" />
+          <button class="btn btn-sm" onclick="saveKakaoKey()">저장</button>
+        </div>
+      </div>
+    </details>
 
     <div id="bForm" class="hidden" style="margin-top:8px;">
       <input id="bTitle" placeholder="제목" />
@@ -390,7 +402,32 @@ async function saveQuote(){
 
 /* ---------- 책 검색: 교보문고(프록시) → 카카오 → 구글 ---------- */
 let picked = null, bMode = "book";
-const PROXY = u => "https://corsproxy.io/?url=" + encodeURIComponent(u);
+/* 무료 프록시는 수시로 죽으므로 3중 폴백 */
+const PROXIES = [
+  u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
+  u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u),
+  u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
+];
+async function fetchViaProxy(url, validate){
+  for(const px of PROXIES){
+    try{
+      const r = await fetch(px(url), { signal: AbortSignal.timeout(12000) });
+      if(!r.ok) continue;
+      const t = await r.text();
+      if(validate(t)) return t;
+    }catch(e){}
+  }
+  throw new Error("proxy-all-failed");
+}
+const PROXY = u => PROXIES[0](u);   // (구버전 호환)
+
+function saveKakaoKey(){
+  const v = document.getElementById("kakaoKey").value.trim();
+  if(!/^[0-9a-f]{32}$/i.test(v)){ msg("bMsg","err","형식이 달라요 — REST API 키는 32자리 영문·숫자예요. '앱 키' 화면에서 다시 복사해 주세요."); return; }
+  localStorage.setItem("kakaoKey", v);
+  msg("bMsg","ok","카카오 키 연결 완료! 이제 검색이 안정적으로 동작해요.");
+}
+if(document.getElementById("kakaoKey")) document.getElementById("kakaoKey").value = localStorage.getItem("kakaoKey") || "";
 document.querySelectorAll("#bMode button").forEach(el => el.onclick = () => {
   bMode = el.dataset.m;
   document.querySelectorAll("#bMode button").forEach(x=>x.classList.toggle("on", x===el));
@@ -399,9 +436,9 @@ document.querySelectorAll("#bMode button").forEach(el => el.onclick = () => {
 });
 
 async function searchNaverWebtoon(q){
-  const r = await fetch(PROXY("https://comic.naver.com/api/search/all?keyword=" + encodeURIComponent(q)));
-  if(!r.ok) throw new Error("naver " + r.status);
-  const d = await r.json();
+  const t = await fetchViaProxy("https://comic.naver.com/api/search/all?keyword=" + encodeURIComponent(q),
+    x => { try{ JSON.parse(x); return true; }catch(e){ return false; } });
+  const d = JSON.parse(t);
   return ((d.searchWebtoonResult && d.searchWebtoonResult.searchViewList) || []).slice(0,5).map(w => ({
     type: "webtoon",
     title: w.titleName,
@@ -418,8 +455,9 @@ async function searchNaverWebtoon(q){
 }
 async function fetchWebtoonGenres(titleId){
   try{
-    const r = await fetch(PROXY("https://comic.naver.com/api/article/list/info?titleId=" + titleId));
-    const d = await r.json();
+    const t = await fetchViaProxy("https://comic.naver.com/api/article/list/info?titleId=" + titleId,
+      x => { try{ JSON.parse(x); return true; }catch(e){ return false; } });
+    const d = JSON.parse(t);
     const skip = ["명작","세계관","연재","완결","정주행","단행본"];
     return (d.curationTagList || []).map(t=>t.tagName).filter(t=>!skip.includes(t)).slice(0,3);
   }catch(e){ return []; }
@@ -431,9 +469,8 @@ function openBookForm(){
     document.getElementById("bYear").value = new Date().getFullYear();
 }
 async function searchKyobo(q){
-  const r = await fetch(PROXY("https://search.kyobobook.co.kr/search?keyword=" + encodeURIComponent(q)));
-  if(!r.ok) throw new Error("kyobo " + r.status);
-  const h = await r.text();
+  const h = await fetchViaProxy("https://search.kyobobook.co.kr/search?keyword=" + encodeURIComponent(q),
+    t => t.includes("prod_item") || t.includes("data-bid"));
   return h.split('<li class="prod_item">').slice(1, 9).map(b => {
     const g = re => (b.match(re) || [])[1];
     const isbn = g(/data-bid="(97[89]\d{10})"/);
@@ -475,30 +512,35 @@ async function searchBook(){
     });
     return;
   }
-  try{ items = await searchKyobo(q); }catch(e){}
+  const key = localStorage.getItem("kakaoKey");
+  if(key){  // 1순위: 카카오 공식 API (제목·작가 모두 검색됨)
+    try{
+      const r = await fetch("https://dapi.kakao.com/v3/search/book?size=6&query="+encodeURIComponent(q),
+        { headers:{ Authorization:"KakaoAK "+key } });
+      const d = await r.json();
+      items = (d.documents||[]).map(x => ({ title:x.title, author:(x.authors||[]).join(", "),
+        publisher:x.publisher||"", published:x.datetime ? +x.datetime.slice(0,4) : null,
+        cover:x.thumbnail||"", isbn:(x.isbn||"").split(" ").pop()||"", summary:(x.contents||"").trim() }));
+      // 카카오 표지는 작지만, ISBN이 있으면 교보 고화질 표지로 승격
+      items.forEach(x => { if(x.isbn && /^97[89]/.test(x.isbn)) x.cover = `https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/${x.isbn}.jpg`; });
+    }catch(e){}
+  }
+  if(!items.length){ try{ items = await searchKyobo(q); }catch(e){} }
   if(!items.length){
     try{
-      const key = localStorage.getItem("kakaoKey");
-      if(key){
-        const r = await fetch("https://dapi.kakao.com/v3/search/book?size=5&query="+encodeURIComponent(q),
-          { headers:{ Authorization:"KakaoAK "+key } });
-        const d = await r.json();
-        items = (d.documents||[]).map(x => ({ title:x.title, author:(x.authors||[]).join(", "),
-          publisher:x.publisher||"", published:x.datetime ? +x.datetime.slice(0,4) : null,
-          cover:x.thumbnail||"", isbn:(x.isbn||"").split(" ").pop()||"", summary:(x.contents||"").trim() }));
-      }else{
-        const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=5&q="+encodeURIComponent(q));
-        const d = await r.json();
-        items = (d.items||[]).map(x => { const v=x.volumeInfo;
-          return { title:v.title||"", author:(v.authors||[]).join(", "), publisher:v.publisher||"",
-            published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
-            cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
-            isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
-      }
+      const r = await fetch("https://www.googleapis.com/books/v1/volumes?maxResults=5&q="+encodeURIComponent(q));
+      const d = await r.json();
+      items = (d.items||[]).map(x => { const v=x.volumeInfo;
+        return { title:v.title||"", author:(v.authors||[]).join(", "), publisher:v.publisher||"",
+          published:v.publishedDate ? +v.publishedDate.slice(0,4) : null,
+          cover:v.imageLinks ? (v.imageLinks.thumbnail||"").replace("http://","https://") : "",
+          isbn:(v.industryIdentifiers||[]).map(z=>z.identifier).pop()||"", summary:(v.description||"").slice(0,200) }; });
     }catch(e){}
   }
   if(items.length) document.getElementById("bMsg").className = "msg";
-  else msg("bMsg","err","검색 결과가 없어요 — 아래 '직접 입력'을 눌러주세요.");
+  else msg("bMsg","err", key
+    ? "검색 결과가 없어요 — 철자를 확인하거나 아래 '직접 입력'을 눌러주세요."
+    : "검색 통로가 모두 불안정해요. 아래 '카카오 키 연결'(1회, 5분)을 하면 앞으로 항상 안정적으로 검색됩니다.");
   box.innerHTML = items.map((x,i)=>`<button type="button" data-i="${i}">${x.title} <span>${x.author}${x.publisher?" · "+x.publisher:""}${x.published?" · "+x.published:""}</span></button>`).join("");
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
     picked = items[+el.dataset.i];
