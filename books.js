@@ -458,7 +458,7 @@ const BOOKS = [
   { title: "일요일에 잊힌 사람들", author: "발레리 페랭", genres: ["소설"], published: 2015, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191247749.jpg", isbn: "9791191247749",
     summary: "요양원에서 일하는 쥐스틴이 노인들의 잊힌 삶과 감춰진 비밀을 마주하며 자신의 과거와도 화해해 가는 이야기.",
-    review: "", rating: 5, quotes: [] },
+    review: "프랑스 소설 별로 안 좋아하는데, 역대급이다. 짜임있는 구성, 실감나는 스토리, 공감가는 등장인물.", rating: 5, quotes: [] },
   { title: "세상 대신 샌드백을 때리기로 했습니다", author: "윤리", genres: ["에세이"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124370483.jpg", isbn: "9791124370483",
     summary: "남들과 자신을 끊임없이 비교하며 지쳐가는 시대. 『세상 대신 샌드백을 때리기로 했습니다』는 타인의 기준에 맞추기 위해 애쓰다 결국 스스로를 잃어버린 사람들에게 건네는 다정한 위로이자, 다시 일어설 수 있는 용기에 대한 이야기다.저자는 복싱이라는 운동을 통해 삶...", review: "종이야 나무야 미안해. 이런 글도 책으로 나오는데.", rating: 1, quotes: [] },
