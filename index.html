@@ -252,6 +252,15 @@
   .legend span{display:inline-flex; align-items:center; gap:6px;}
   .legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
 
+  /* ---------- 작법 노트 섹션 ---------- */
+  .nwrap{max-width:760px; margin:0 auto;}
+  .nrow{display:block; padding:18px 4px; border-bottom:1px solid var(--line); color:var(--text);}
+  .nrow:hover .nt{color:var(--accent);}
+  .nrow .nt{font-size:17.5px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
+  .nrow .nm{font-size:12.5px; color:var(--text-3); margin-top:6px;}
+  .nrow .nm .cat{color:var(--mint-text); background:var(--mint-soft); padding:2px 9px; border-radius:980px; font-weight:700; margin-right:8px;}
+  .notes-cta{text-align:center; margin-top:28px;}
+
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line); padding:36px 24px 60px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:700;}
@@ -368,7 +377,6 @@
     <span class="hq-by">— 프란츠 카프카</span>
   </p>
   <div class="stats" id="heroStats"></div>
-  <a class="hero-cta" href="./notes.html">작법 노트 →</a>
 </header>
 
 <section id="quotes" style="padding-top:16px;">
@@ -422,6 +430,15 @@
     <span><i style="background:var(--node-author)"></i>저자</span>
     <span><i style="background:var(--node-genre)"></i>장르</span>
   </div>
+</section>
+
+<section id="notes-sec">
+  <div class="sec-head" style="max-width:760px;">
+    <h2><span class="marker-thin">작법 노트</span></h2>
+    <p>읽으며 배운 작법을, 길게 풀어 씁니다. 제목을 누르면 글이 열려요.</p>
+  </div>
+  <div class="nwrap" id="noteList"></div>
+  <div class="notes-cta"><a class="hero-cta" style="margin-top:0;" href="./notes.html">작법 노트 전체 보기 →</a></div>
 </section>
 
 <footer>
@@ -517,6 +534,7 @@
 // 데이터 파일은 항상 최신으로 (GitHub Pages 10분 캐시 우회)
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 /* ================= 데이터 ================= */
@@ -1043,9 +1061,22 @@ function injectJsonLd(){
   document.head.appendChild(s);
 }
 
+/* ================= 작법 노트 미리보기 ================= */
+function renderNotes(){
+  const box = document.getElementById("noteList");
+  if(typeof POSTS === "undefined" || !POSTS.length){
+    document.getElementById("notes-sec").style.display = "none"; return;
+  }
+  box.innerHTML = POSTS.slice(0, 6).map(p => `
+    <a class="nrow" href="./notes.html#${encodeURIComponent(p.id)}">
+      <div class="nt">${esc(p.title)}</div>
+      <div class="nm"><span class="cat">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${Math.max(1,Math.round((p.body||"").length/550))}분</div>
+    </a>`).join("");
+}
+
 /* ================= 초기화 ================= */
 function refresh(){
-  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); rebuildGraph(); snapshotLook();
+  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); renderNotes(); rebuildGraph(); snapshotLook();
 }
 refresh();
 injectJsonLd();
