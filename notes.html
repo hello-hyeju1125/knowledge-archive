@@ -36,6 +36,7 @@
       --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
     }
   }
+  body.reading{--bg:var(--card);}
   *{box-sizing:border-box; margin:0;}
   body{
     font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
@@ -57,6 +58,11 @@
   nav .links{margin-left:auto; display:flex; gap:20px;}
   nav .links a{color:var(--text-2); font-size:13px;}
   nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
+  nav .add-mini{
+    background:var(--accent); color:#fff !important; border:none; border-radius:980px;
+    font-size:12.5px; padding:6px 14px; font-weight:600;
+  }
+  nav .add-mini:hover{background:var(--accent-hover) !important;}
 
   /* ---------- 목록 ---------- */
   .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
@@ -111,7 +117,7 @@
     color:var(--text-2); font-style:normal;
   }
   .a-body blockquote p{margin-bottom:0.4em;}
-  .a-body strong{font-weight:600; background:linear-gradient(transparent 70%, var(--mint-soft) 70%);}
+  .a-body strong{font-weight:700; background:linear-gradient(transparent 55%, var(--mint) 55%, var(--mint) 92%, transparent 92%); padding:0 2px;}
   .a-body a{text-decoration:underline; text-underline-offset:3px;}
   .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
   .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
@@ -131,6 +137,7 @@
     <a href="./index.html#books">책</a>
     <a href="./index.html#graph-sec">지도</a>
     <a href="./notes.html" style="color:var(--text); font-weight:700;">노트</a>
+    <a class="add-mini" href="./admin.html">서재 주인 접근</a>
   </div>
 </nav>
 
@@ -173,6 +180,7 @@ const readMin = t => Math.max(1, Math.round(t.length / 550));  // 분당 550자 
 
 /* 마크다운 렌더 (marked 실패 시 문단 폴백) */
 function render(md){
+  md = md.replace(/^(#{1,4})(?=[^#\s])/gm, "$1 ");   // "##제목"처럼 공백 없이 써도 소제목 인식
   try{ if(window.marked) return marked.parse(md); }catch(e){}
   return md.split(/\n\n+/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("");
 }
@@ -199,6 +207,7 @@ function renderList(){
 }
 
 function openPost(p){
+  document.body.classList.add("reading");
   document.getElementById("listView").style.display = "none";
   document.getElementById("aCat").textContent = p.category || "노트";
   document.getElementById("aTitle").textContent = p.title;
@@ -210,6 +219,7 @@ function openPost(p){
 }
 function closePost(e){
   if(e) e.preventDefault();
+  document.body.classList.remove("reading");
   history.pushState("", document.title, location.pathname);
   document.getElementById("article").classList.remove("show");
   document.getElementById("listView").style.display = "";

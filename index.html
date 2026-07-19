@@ -570,7 +570,6 @@ function renderStats(){
   document.getElementById("heroStats").innerHTML = `
     <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
     <div class="stat"><b>${ALL.length - toonN}</b><span>권의 책</span></div>
-    ${toonN ? `<div class="stat"><b>${toonN}</b><span>편의 웹툰</span></div>` : ""}
     <div class="stat"><b>${authors.size}</b><span>명의 저자</span></div>
     <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>`;
 }
