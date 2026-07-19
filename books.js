@@ -468,7 +468,7 @@ const BOOKS = [
     review: "최고의 책, 글쓰는 방법을 소개하지만 인생을 사는 법까지 알려준다.", rating: 5, quotes: [] },
   { title: "스페이스X 일론머스크", author: "에릭 버거", genres: ["경제경영"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124248270.jpg", isbn: "9791124248270",
-    summary: "“인류의 역사 기록에 반드시 추가해야 할 책!”_앤디 랩사, 스토크스페이스 CEO퓰리처상 최종 후보자 에릭 버거의 최신작전미 인디 엑설런스 어워드 기술 부문 수상작 ⟨이코노미스트⟩ 선정 최고의 책, ⟨USA 투데이⟩ 베스트셀러기술, 광기, 야망이 이룩한 우주 ...", review: "", rating: 3, quotes: [] },
+    summary: "“인류의 역사 기록에 반드시 추가해야 할 책!”_앤디 랩사, 스토크스페이스 CEO퓰리처상 최종 후보자 에릭 버거의 최신작전미 인디 엑설런스 어워드 기술 부문 수상작 ⟨이코노미스트⟩ 선정 최고의 책, ⟨USA 투데이⟩ 베스트셀러기술, 광기, 야망이 이룩한 우주 ...", review: "읽다가 너무 고통스러웠다.", rating: 3, quotes: [] },
   { title: "우리는 가장 밝은 밤에 헤어졌다", author: "표도르 도스토예프스키", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791199757684.jpg", isbn: "9791199757684",
     summary: "대문호 도스토옙스키가 26세에 쓴, 가장 투명하고 순수한 연가!`영원하지 않아도 좋았다, 당신과 함께 숨 쉬던 그 찰나의 눈부심이라면…….`가장 밝은 밤에 ...", review: "", rating: 3, quotes: [] },
