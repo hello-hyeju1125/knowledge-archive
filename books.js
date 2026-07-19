@@ -605,4 +605,7 @@ const BOOKS = [
   { title: "마도전생기", author: "포스스튜디오·codezero", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=807777", status: "연재중", genres: ["무협/사극", "전쟁", "악역이주인공"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/807777/thumbnail/thumbnail_IMAG21_e47489ea-bf97-4726-a8e7-6403092a303a.jpg", isbn: "",
     summary: "정파무림 의천맹의 최강 살수, 천하진. 자유를 찾기 위해 탈출을 감행하지만 코앞에서 목숨을 잃고 만다. 그런데… '신교불패, 만마앙복. 삼공자님의 쾌유를 경하드리옵니다!' 무림의 공적, 마교의 삼공자로 전생해버렸다?! 정파무림 최강 비밀병기 천하진의 마도무림 정복기.", review: "역시나 명작이다. 압도적 분량과 서사. 읽다 읽다 읽어도 끝나지 않는다.", rating: 4, quotes: [] },
+  { title: "나노마신", author: "현절무·금강불괴·한중월야", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=747271", status: "연재중", genres: ["무협/사극", "레드아이스 스튜디오", "사이다"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/747271/thumbnail/thumbnail_IMAG21_d46b4a69-6de0-41be-b368-ce5e74ab8f76.jpg", isbn: "",
+    summary: "갖은 멸시와 목숨의 위협을 받던 마교의 사생아 천여운, 미래에서 나타난 후손이 천여운의 몸에 나노 머신을 주입한 후 그의 인생이 송두리째 바뀐다. 마교를 넘어 무림 최고의 자리에 오르기 위한 천여운의 거침없는 이야기가 시작된다!", review: "가면 갈수록 혼종이 되어가는 중. 아쉽다.", rating: 4, quotes: [] },
 ];
