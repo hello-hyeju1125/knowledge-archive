@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://hello-hyeju1125.github.io/knowledge-archive/sitemap.xml
+Sitemap: https://hellmeone.com/sitemap.xml
