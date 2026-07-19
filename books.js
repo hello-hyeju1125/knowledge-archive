@@ -498,7 +498,7 @@ const BOOKS = [
     summary: "전 세계 27개국 번역 출간! 75만 독자가 열광한 초대형 베스트셀러", review: "", rating: 3, quotes: [] },
   { title: "비범한 평범", author: "조수용", genres: [], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193383285.jpg", isbn: "9791193383285",
-    summary: "‘브랜드란 평범한 아이디어를 구체적인 현실로 만들어가는 비범한 과정의 결과물이다’매거진《B》 발행인 조수용의 본격 브랜드 이야기매거진《B》의 발행인 조수용의 신간 《비범한 평범》이 출간되었다. 작년에 출간된 첫 단독 에세이 《일의 감각》에서 디자인과 크리에이티...", review: "", rating: 3, quotes: [] },
+    summary: "‘브랜드란 평범한 아이디어를 구체적인 현실로 만들어가는 비범한 과정의 결과물이다’매거진《B》 발행인 조수용의 본격 브랜드 이야기매거진《B》의 발행인 조수용의 신간 《비범한 평범》이 출간되었다. 작년에 출간된 첫 단독 에세이 《일의 감각》에서 디자인과 크리에이티...", review: "지금까지 나온 내용을 묶어둔 책인줄 알았다면 사지 않았을 것.", rating: 3, quotes: [] },
   { title: "일본 광고 카피 도감", author: "오하림", genres: ["광고", "글쓰기"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791199555112.jpg", isbn: "9791199555112",
     summary: "마음에 시동을 거는 `여행` 카피 특별부록TBWA에서 오랜 카피라이터 시절을 보내고 무신사를 거쳐 29CM에서 헤드 카피라이터로 ...", review: "", rating: 3, quotes: [] },
