@@ -623,4 +623,7 @@ const BOOKS = [
   { title: "전지적 독자 시점", author: "UMI·슬리피-C·싱숑", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=747269", status: "연재중", genres: ["판타지", "레드아이스 스튜디오", "게임"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/747269/thumbnail/thumbnail_IMAG21_aabd9952-ff45-47a2-a543-33f19a5c6708.jpg", isbn: "",
     summary: "'이건 내가 아는 그 전개다' 한순간에 세계가 멸망하고, 새로운 세상이 펼쳐졌다. 오직 나만이 완주했던 소설 세계에서 평범했던 독자의 새로운 삶이 시작된다.", review: "탁월한 세계관, 주인공 포함 등장인물의 매력도. 독자와 작가의 관계성까지. 안 볼 이유가 없다.", rating: 5, quotes: [] },
+  { title: "당골", author: "남승우·김교", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=838215", status: "연재중", genres: ["스릴러", "동양", "미스터리"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/838215/thumbnail/thumbnail_IMAG21_7121dab6-9290-4272-a840-607a84db9f53.jpg", isbn: "",
+    summary: "영월당에 무당 “만신 김서령” 무당 집안에 태어나 신줄을 거부하고 살아가는 의뢰인 “노승래” 딸의 눈이 보이지 않는다는 의뢰를 받아 찾아간 서령, 무속신앙을 믿지 않고 무시하는 승래의 태도에 서령은 의뢰를 받지 않고 돌아간다. 하지만 그날 이후 계속되는 서령의 꿈속, 승래의 과거가 비친다. 결국, 서령은 승래의 집안 뒤를 밟아보는데… 이 집안 딸내미 기운이", review: "흥미진진한 스토리. 밤에 보면 좀 무서움.", rating: 4, quotes: [] },
 ];
