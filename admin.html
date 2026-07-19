@@ -228,6 +228,21 @@
         </div>
       </div>
     </details>
+    <details style="margin-top:6px;">
+      <summary style="font-size:12.5px; color:var(--text-3); cursor:pointer;">웹툰 검색이 계속 불안정한가요? — 나만의 통로 만들기 (무료, 5분)</summary>
+      <div style="margin-top:10px; font-size:12.5px; color:var(--text-2); line-height:1.7;">
+        웹툰 검색은 공용 중계 서버를 거치는데, 이 서버들이 종종 멈춰요. 내 전용 통로를 만들면 영구히 안정됩니다.<br>
+        1. <a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener">dash.cloudflare.com</a> 가입(무료)
+        → <b>Workers &amp; Pages → Create → Worker → Deploy</b><br>
+        2. <b>Edit code</b>를 누르고 기본 코드를 전부 지운 뒤,
+        <a href="https://github.com/hello-hyeju1125/knowledge-archive/blob/main/proxy-worker.js" target="_blank" rel="noopener">이 코드</a>를 붙여넣고 <b>Deploy</b><br>
+        3. 발급된 주소(<b>https://….workers.dev</b>)를 아래에 붙여넣고 저장
+        <div class="keyrow" style="margin-top:8px;">
+          <input id="proxyUrl" placeholder="https://….workers.dev" />
+          <button class="btn btn-sm" onclick="saveProxyUrl()">저장</button>
+        </div>
+      </div>
+    </details>
 
     <div id="bForm" class="hidden" style="margin-top:8px;">
       <input id="bTitle" placeholder="제목" />
@@ -427,14 +442,20 @@ async function saveQuote(){
 
 /* ---------- 책 검색: 교보문고(프록시) → 카카오 → 구글 ---------- */
 let picked = null, bMode = "book";
-/* 무료 프록시는 수시로 죽으므로 3중 폴백 */
-const PROXIES = [
-  u => "https://corsproxy.io/?url=" + encodeURIComponent(u),
-  u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u),
-  u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u),
-];
+/* 무료 프록시는 수시로 죽으므로 다중 폴백 + 전용 통로(최우선) */
+function proxyList(){
+  const list = [];
+  const own = localStorage.getItem("proxyUrl");
+  if(own) list.push(u => own.replace(/\/+$/,"") + "/?url=" + encodeURIComponent(u));
+  list.push(u => "https://cors.eu.org/" + u);
+  list.push(u => "https://proxy.cors.sh/" + u);
+  list.push(u => "https://corsproxy.io/?url=" + encodeURIComponent(u));
+  list.push(u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u));
+  list.push(u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u));
+  return list;
+}
 async function fetchViaProxy(url, validate){
-  for(const px of PROXIES){
+  for(const px of proxyList()){
     try{
       const r = await fetch(px(url), { signal: AbortSignal.timeout(12000) });
       if(!r.ok) continue;
@@ -453,6 +474,13 @@ function saveKakaoKey(){
   msg("bMsg","ok","카카오 키 연결 완료! 이제 검색이 안정적으로 동작해요.");
 }
 if(document.getElementById("kakaoKey")) document.getElementById("kakaoKey").value = localStorage.getItem("kakaoKey") || "";
+function saveProxyUrl(){
+  const v = document.getElementById("proxyUrl").value.trim();
+  if(v && !/^https:\/\/.+\.workers\.dev\/?$/.test(v)){ msg("bMsg","err","주소 형식이 달라요 — https://로 시작하고 .workers.dev로 끝나야 해요."); return; }
+  if(v) localStorage.setItem("proxyUrl", v); else localStorage.removeItem("proxyUrl");
+  msg("bMsg","ok", v ? "전용 통로 연결 완료! 이제 웹툰 검색이 항상 안정적으로 동작해요." : "전용 통로를 해제했어요.");
+}
+if(document.getElementById("proxyUrl")) document.getElementById("proxyUrl").value = localStorage.getItem("proxyUrl") || "";
 document.querySelectorAll("#bMode button").forEach(el => el.onclick = () => {
   bMode = el.dataset.m;
   document.querySelectorAll("#bMode button").forEach(x=>x.classList.toggle("on", x===el));
