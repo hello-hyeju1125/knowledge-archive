@@ -602,4 +602,7 @@ const BOOKS = [
   { title: "재벌집 막내아들", author: "JP·김병관·산경(山景)", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=800770", status: "연재중", genres: ["드라마", "고자극드라마", "오피스"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/800770/thumbnail/thumbnail_IMAG21_d2e1e7ee-fc83-4030-a1e7-200378bc088f.jpg", isbn: "",
     summary: "[화제의 드라마 원작 웹툰!] 13년 동안의 수고를 배신으로 돌려받다니! 머슴처럼 살다 버려진 순양그룹의 실장, 윤현우. 모든 게 끝났다 싶었을 즘, 순양그룹 진 회장의 손주 진도준으로 깨어난다! 하지만 상속권과는 거리가 먼 재벌집 막내아들 진도준. 과연 그는 가족 정치극에서 최후의 승자가 될 수 있을 것인가! 순양그룹을 집어삼키기 위한 윤현우의 통쾌한 복", review: "한국 비즈니스의 모든 것을 이렇게 쉽게 배울 수 있다니!", rating: 5, quotes: [] },
+  { title: "마도전생기", author: "포스스튜디오·codezero", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=807777", status: "연재중", genres: ["무협/사극", "전쟁", "악역이주인공"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/807777/thumbnail/thumbnail_IMAG21_e47489ea-bf97-4726-a8e7-6403092a303a.jpg", isbn: "",
+    summary: "정파무림 의천맹의 최강 살수, 천하진. 자유를 찾기 위해 탈출을 감행하지만 코앞에서 목숨을 잃고 만다. 그런데… '신교불패, 만마앙복. 삼공자님의 쾌유를 경하드리옵니다!' 무림의 공적, 마교의 삼공자로 전생해버렸다?! 정파무림 최강 비밀병기 천하진의 마도무림 정복기.", review: "역시나 명작이다. 압도적 분량과 서사. 읽다 읽다 읽어도 끝나지 않는다.", rating: 4, quotes: [] },
 ];
