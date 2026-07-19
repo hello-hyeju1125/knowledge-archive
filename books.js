@@ -593,4 +593,7 @@ const BOOKS = [
   { title: "절대회귀", author: "JP·박진환·장영훈", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=828715", status: "연재중", genres: ["무협/사극", "참교육", "미친작화"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/828715/thumbnail/thumbnail_IMAG21_8957548a-2eb2-4ddf-a50e-dbc7fddc16a7.jpg", isbn: "",
     summary: "\"나를 과거로 보내주시오.\" 이 시대에서 그를 죽일 수 없다면, 과거로 돌아가면 되리라. 시간을 거스를 수 있는 '회귀대법(回歸大法)'으로 그토록 원하던 과거로 회귀한 한 남자. 가족도, 친구도, 삶도, 모두 잃었던 '검무극(劍無極)'의 복수를 위한 첫걸음이 시작된다.", review: "인생 최고의 무협지를 뽑으라면, 바로 이 웹툰이다.", rating: 5, quotes: [] },
+  { title: "화산귀환", author: "ARCHE, LICO·비가", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=769209", status: "연재중", genres: ["무협/사극", "개그", "동양풍판타지"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/769209/thumbnail/thumbnail_IMAG21_3511dcdd-6e33-4171-8839-598d6d266215.jpg", isbn: "",
+    summary: "대 화산파 13대 제자.천하삼대검수 매화검존 청명. 천하를 혼란에 빠뜨린 고금제일마 천마의 목을 치고 십만대산의 정상에서 영면. 백 년의 시간을 뛰어넘어 아이의 몸으로 다시 살아나다. ......뭐? 화산이 망해? 이게 뭔 개소리야!?", review: "킬링타임용 입문용 최고의 무협지.", rating: 5, quotes: [] },
 ];
