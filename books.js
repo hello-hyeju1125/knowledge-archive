@@ -441,7 +441,7 @@ const BOOKS = [
     summary: "“『액스』를 영화로 만드는 것은 제 필생의 프로젝트입니다.”“어떤 이론서보다 자본주의 체제에서의 노동자의 처지를 정확하게 묘사한 이 소설을 무릇 월급쟁이라면 다 읽어야 한다고 나는 생각합니다.”_박찬욱 에드거 상 3회 수상에 빛나는 추리소설의 대가 도널드 E....", review: "", rating: 5, quotes: [] },
   { title: "트라이브즈", author: "세스 고딘", genres: ["경제경영", "마케팅"], published: 2026, readYear: null,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193262993.jpg", isbn: "9791193262993",
-    summary: "“세상을 바꾸는 힘, 트라이브즈“세계적인 마케팅 전략가 세스 고딘의 또 다른 예언서!누구도 대신할 수 없는 대체 불가능한 조직의 조건초개인화 사회, 나의 가치를 극대화할 최적의 조직과 연결하라!", review: "", rating: 4, quotes: [] },
+    summary: "“세상을 바꾸는 힘, 트라이브즈“세계적인 마케팅 전략가 세스 고딘의 또 다른 예언서!누구도 대신할 수 없는 대체 불가능한 조직의 조건초개인화 사회, 나의 가치를 극대화할 최적의 조직과 연결하라!", review: "블로그 글 묶어놓기.", rating: 4, quotes: [] },
   { title: "더 기버 1", author: "밥 버그·존 데이비드 만", genres: ["자기계발"], published: 2026, readYear: null,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791175771963.jpg", isbn: "9791175771963",
     summary: "애덤 그랜트, 세스 고딘, 브라이언 트레이시 강력 추천“베푸는 자에게는 거대한 성공이 알아서 찾아온다!”가치, 보상, 영향력, 진정성, 수용...", review: "", rating: 5, quotes: [] },
