@@ -614,4 +614,7 @@ const BOOKS = [
   { title: "미래의 골동품 가게", author: "구아진", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=742105", status: "연재중", genres: ["스릴러", "오컬트판타지", "시리어스"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/742105/thumbnail/thumbnail_IMAG21_a3860cc1-f927-4031-92fd-8d89b9801127.jpg", isbn: "",
     summary: "남해의 먼 섬에 살고 있는 소녀, '미래'. 미래의 부모님이 바다에서 돌아오지 못한 그날부터, 모든 것들이 변하기 시작했다. 저주를 풀기 위한 단 한 가지의 방법. 소중한 것들을 지키기 위한 기묘한 소녀의 퇴마가 시작된다.", review: "최고의 오컬트. 초반은 너무 재밌게 봤지만, 가면 갈수록 too much 전문적 이야기가 많이 나와 일단 대기하는 중.", rating: 4, quotes: [] },
+  { title: "천화서고 대공자", author: "128·MIDNIGHT STUDIO·김현영", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=805193", status: "연재중", genres: ["무협/사극", "사이다", "동양"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/805193/thumbnail/thumbnail_IMAG21_72d0c645-de0a-43f2-9674-73909671fa5e.jpg", isbn: "",
+    summary: "넉넉한 풍채가 매력적인 무림맹주 후공은 어느 날 느닷없이 웬 비루먹을 청년의 몸에 들어오게 된다. 청년의 이름은 범항. 강호 3대 서고인 ‘천화서고’의 대공자이자 답이 없는 자살희망자. 후공은 환혼의 원인을 파악하기 위해 범항의 몸을 단련하기 시작하고 과거와는 180도 달라진 천화서고 대공자의 움직임에 온 강호가 주목하기 시작하는데…", review: "킬링 타임 용으로 그냥 볼만함.", rating: 3, quotes: [] },
 ];
