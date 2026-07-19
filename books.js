@@ -560,7 +560,7 @@ const BOOKS = [
     summary: "행복 만능주의에 대한 괴상하지만 냉철한 반격“행복해지려고 하지 마라! 그 생각이 당신을 불행하게 할 것이다”", review: "", rating: 2, quotes: [] },
   { title: "강하고 아름다운 할머니가 되고 싶어", author: "김슬기", genres: ["에세이"], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193235607.jpg", isbn: "9791193235607",
-    summary: "제12회 브런치북 출판 프로젝트 대상소설 부문 최초 수상작고수리 작가 · 황예인 문학평론가 추천“다 자란 어른이 회복하는 데도 온 마을이 필요하다”몸은 자랐지만 마음은 아직 다 자라지 못한 지친 어른을 구하러 온, 진짜 강하고 아름다운 어른들!", review: "", rating: 3, quotes: [] },
+    summary: "제12회 브런치북 출판 프로젝트 대상소설 부문 최초 수상작고수리 작가 · 황예인 문학평론가 추천“다 자란 어른이 회복하는 데도 온 마을이 필요하다”몸은 자랐지만 마음은 아직 다 자라지 못한 지친 어른을 구하러 온, 진짜 강하고 아름다운 어른들!", review: "신선한 제목이지만, 내용은 딱히. 왜 요즘 젊은 여자들은 아름다운 할머니에 집착하는가?", rating: 3, quotes: [] },
   { title: "달러 자산 1억으로 평생 월급 완성하라", author: "채부심(채상욱)", genres: ["재테크", "투자"], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791199229976.jpg", isbn: "9791199229976",
     summary: "부록 1. 이재명 시대, 자산시장 대전환 실전 가이드북부록 2. 지금 사야 할 주식 - ETF 비공개 강의 이 책은 단기 수...", review: "", rating: 3, quotes: [] },
