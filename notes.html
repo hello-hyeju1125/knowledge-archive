@@ -38,6 +38,11 @@
   }
   body.reading{--bg:var(--card);}
   *{box-sizing:border-box; margin:0;}
+  /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
+  body{-webkit-user-select:none; -moz-user-select:none; user-select:none;}
+  input, textarea{-webkit-user-select:text; -moz-user-select:text; user-select:text;}
+  img{-webkit-user-drag:none; user-drag:none;}
+
   body{
     font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
     background:var(--bg); color:var(--text); line-height:1.6; letter-spacing:-0.01em;
@@ -233,6 +238,14 @@ function route(){
 }
 window.addEventListener("hashchange", route);
 renderCats(); renderList(); route();
+</script>
+<script>
+/* ---------- 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) ---------- */
+(function(){
+  const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
+  ["copy","cut","dragstart","contextmenu"].forEach(ev =>
+    document.addEventListener(ev, e => { if(!exempt(e)) e.preventDefault(); }));
+})();
 </script>
 </body>
 </html>
