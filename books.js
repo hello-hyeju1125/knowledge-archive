@@ -492,7 +492,7 @@ const BOOKS = [
     summary: "누군가가 곁에서 나란히 걸어준다는 것만으로도 인생은 달라질지 모른다한 걸음씩 내디딜 때마다 홀가분해지는 33일의 순례길 여정극작가 출신 케이팝 기획자 나상천이 선사하는 힐링 드라마밀리의서재 연재 최단기간 최다 ‘밀어주리’ 달성시인 원태연, ‘시든 꽃에 물을 주...", review: "", rating: 2, quotes: [] },
   { title: "AI 최전선", author: "애덤 브로트먼", genres: ["과학기술"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791155818961.jpg", isbn: "9791155818961",
-    summary: "급변하는 AX 시대에 발맞춰 가기 위한 실리콘밸리 구루들의 명쾌하고 실천적인 해답. 『AI 최전선』은 시장을 지배하는 5%와 도태되는 95% 기업의 결정적 차이를 낱낱이 파헤치는 책이다. “AI가 일의 95%를 대체할 것이다.” 샘 올트먼의 섬뜩한 예언 앞에 ...", review: "", rating: 1, quotes: [] },
+    summary: "급변하는 AX 시대에 발맞춰 가기 위한 실리콘밸리 구루들의 명쾌하고 실천적인 해답. 『AI 최전선』은 시장을 지배하는 5%와 도태되는 95% 기업의 결정적 차이를 낱낱이 파헤치는 책이다. “AI가 일의 95%를 대체할 것이다.” 샘 올트먼의 섬뜩한 예언 앞에 ...", review: "AI가 써준 책. 번역은 왜 이리 구리지.", rating: 1, quotes: [] },
   { title: "내면 근력", author: "짐 머피", genres: ["자기계발"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791155819227.jpg", isbn: "9791155819227",
     summary: "전 세계 27개국 번역 출간! 75만 독자가 열광한 초대형 베스트셀러", review: "", rating: 3, quotes: [] },
