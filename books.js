@@ -611,4 +611,7 @@ const BOOKS = [
   { title: "광마회귀", author: "JP·이히·유진성", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=776601", status: "연재중", genres: ["무협/사극", "사이다", "회귀"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/776601/thumbnail/thumbnail_IMAG21_7365135131254864183.jpg", isbn: "",
     summary: "무공에 미친 광마 이자하. 그는 마교 교주의 천옥을 훔쳐 쫓기던 중 벼랑에서 떨어지게 된다. 모든 게 끝났다고 생각한 순간 눈을 떠보니, 사람들에게 무시당하던 점소이 시절로 돌아와 있는데... 게다가 억울한 누명으로 두들겨 맞고 객잔은 박살이 나 있는 상황. ​점소이 시절로 회귀한 광마! 사내는 다시 미치게 될 것인가? 아니면 사내의 적들이 미치게 될 것인", review: "주인공을 사랑할 수 있다면 계속 봐라.", rating: 4, quotes: [] },
+  { title: "미래의 골동품 가게", author: "구아진", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=742105", status: "연재중", genres: ["스릴러", "오컬트판타지", "시리어스"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/742105/thumbnail/thumbnail_IMAG21_a3860cc1-f927-4031-92fd-8d89b9801127.jpg", isbn: "",
+    summary: "남해의 먼 섬에 살고 있는 소녀, '미래'. 미래의 부모님이 바다에서 돌아오지 못한 그날부터, 모든 것들이 변하기 시작했다. 저주를 풀기 위한 단 한 가지의 방법. 소중한 것들을 지키기 위한 기묘한 소녀의 퇴마가 시작된다.", review: "최고의 오컬트. 초반은 너무 재밌게 봤지만, 가면 갈수록 too much 전문적 이야기가 많이 나와 일단 대기하는 중.", rating: 4, quotes: [] },
 ];
