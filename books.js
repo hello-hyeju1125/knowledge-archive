@@ -596,4 +596,7 @@ const BOOKS = [
   { title: "화산귀환", author: "ARCHE, LICO·비가", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=769209", status: "연재중", genres: ["무협/사극", "개그", "동양풍판타지"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/769209/thumbnail/thumbnail_IMAG21_3511dcdd-6e33-4171-8839-598d6d266215.jpg", isbn: "",
     summary: "대 화산파 13대 제자.천하삼대검수 매화검존 청명. 천하를 혼란에 빠뜨린 고금제일마 천마의 목을 치고 십만대산의 정상에서 영면. 백 년의 시간을 뛰어넘어 아이의 몸으로 다시 살아나다. ......뭐? 화산이 망해? 이게 뭔 개소리야!?", review: "킬링타임용 입문용 최고의 무협지.", rating: 5, quotes: [] },
+  { title: "참교육", author: "채용택·한가람", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=758037", status: "연재중", genres: ["액션", "사이다", "학원액션"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/758037/thumbnail/thumbnail_IMAG21_6323d62f-2b2d-4668-9373-156f16487568.jpg", isbn: "",
+    summary: "무너진 교권을 지키기 위해 교권보호국 소속 나화진의 참교육이 시작된다! <부활남> 채용택 작가 X <신석기녀> 한가람 작가의 신작!", review: "웹툰은 읽다 하차했다. 초반만 신선, 나머지는 반복. 지루했다.", rating: 2, quotes: [] },
 ];
