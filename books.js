@@ -632,4 +632,7 @@ const BOOKS = [
   { title: "무림서부", author: "MIDNIGHT STUDIO·정한길·컵라면.", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=784417", status: "연재중", genres: ["무협/사극", "힘숨찐", "판무"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/784417/thumbnail/thumbnail_IMAG21_f997ffe9-465a-4be8-a0bb-b5d0ef5cedea.jpg", isbn: "",
     summary: "황제가 무공을 통한 철혈정치로 제국을 천년동안 유지함에 따라, 오로지 황군 무공만이 힘이요 법도로 살아남고, 고전 무공들은 스러지고 만다. 이런 세계에 환생한 무협지 마니아, 주인공 장건. 과연 그는 동경하던 고전 무공을 되살릴 수 있을까. 서부 대륙 개척지에서 벌어지는 정통 무협의 정수!", review: "색다른 배경. 예측 불허의 스토리. 볼만했다.", rating: 3, quotes: [] },
+  { title: "아수라", author: "류기운·문정후", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=826670", status: "연재중", genres: ["판타지", "동양", "모험"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/826670/thumbnail/thumbnail_IMAG21_ecfd3f55-b872-45a8-9837-a94d1dcb9f72.jpg", isbn: "",
+    summary: "최초로 대륙을 통일한 절대자로부터 불사의 비밀을 알아오라는 명을 받고 떠난 이가 있었다. 세상의 모든 곳을 찾아다녀서라도 반드시 불사의 비밀을 알아올 것으로 믿었던 그는 절대자가 죽고 제국이 몰락할 때까지 끝내 돌아오지 않았고, 수많은 억측만을 남긴 채 사람들의 기억 속에서도 차츰 잊혀져갔다. 그리고 오랜 시간이 흐른 뒤...", review: "대작이라던데, 몇번이나 시도했지만 중도 하차함.", rating: 2, quotes: [] },
 ];
