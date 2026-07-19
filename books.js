@@ -414,7 +414,7 @@ const BOOKS = [
     summary: "연봉 40만 달러 META, TikTok 전략 임원 출신셀프 브랜딩이 중요해진 시대, 직장 생활도 마찬가지다!‘존재감’ 있게 일하고 ‘성공적’인 인생을 설계하는 힘...", review: "", rating: 2, quotes: [] },
   { title: "인생을 바꾸는 이메일 쓰기", author: "이슬아", genres: ["에세이", "글쓰기"], published: 2025, readYear: null,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791194184331.jpg", isbn: "9791194184331",
-    summary: "전설의 귀환 「일간 이슬아」의 영업비밀 공개!“이메일로 팔자 고친다는 말이 과장처럼 들리는가?” 이메일로 천냥 빚을 갚고,한국문학의 판도를 이메일로 바꿔버린이슬아 작가가 직접 풀어놓는 섭외와 조율, 설득의 비법여기 제도권의 그 어떤 청탁도, 초대도 없이 오직 ...", review: "", rating: 5, quotes: [] },
+    summary: "전설의 귀환 「일간 이슬아」의 영업비밀 공개!“이메일로 팔자 고친다는 말이 과장처럼 들리는가?” 이메일로 천냥 빚을 갚고,한국문학의 판도를 이메일로 바꿔버린이슬아 작가가 직접 풀어놓는 섭외와 조율, 설득의 비법여기 제도권의 그 어떤 청탁도, 초대도 없이 오직 ...", review: "메일 한통, 한줄에 녹아난 슬아 작가의 찬란한 메세지.", rating: 5, quotes: [] },
   { title: "월스트리트저널 인포그래픽 가이드", author: "도나 M. 웡", genres: ["디자인"], published: 2014, readYear: null,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788966260935.jpg", isbn: "9788966260935",
     summary: "에드워드 터프티(Edward Tufte)의 이론과 다양한 실무 사례로 녹여낸 데이터 시각화 핵심 가이드. 데이터 시각화를 똑똑하게 보여주는 차트 작성의 기본 원칙: 해야 할 것 vs. 하지 말아야 할 것, 풍부한 콘텐츠를 흡인력 있는 시각화로 정교하게 구현하는...", review: "", rating: 5, quotes: [] },
