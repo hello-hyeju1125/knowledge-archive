@@ -620,4 +620,7 @@ const BOOKS = [
   { title: "오늘만 사는 기사", author: "가나라·이안·소울풍", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=824543", status: "연재중", genres: ["판타지", "액션판타지", "시리어스"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/824543/thumbnail/thumbnail_IMAG21_7b913673-101c-4472-8889-1918ed4e87a4.jpg", isbn: "",
     summary: "\"넌 천재다\" 어릴 때 들었던 말이 독이었다. 엔크리드는 기사를 꿈꿨다. 헛된 꿈이라는 건 금세 알았다. \"그런 실력으로 칼밥을 먹겠다고?\" 누군가는 비웃고. \"그만둬라.\" 누군가는 조언했다. 그럼에도 빛 바랜 꿈은 그대로였다. 덜 자고 더 뛰고 더 휘둘렀다. 그리 살던 어느 날이었다. 전장에서 목이 찔려 죽은 뒤였다. 다시 눈을 뜬 엔크리드는 죽기 전 '", review: "엔크리드의 노력을 보고 있으면 나태한 스스로를 채찍질 하고 싶다 (but 현실은 침대 위)", rating: 4, quotes: [] },
+  { title: "전지적 독자 시점", author: "UMI·슬리피-C·싱숑", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=747269", status: "연재중", genres: ["판타지", "레드아이스 스튜디오", "게임"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/747269/thumbnail/thumbnail_IMAG21_aabd9952-ff45-47a2-a543-33f19a5c6708.jpg", isbn: "",
+    summary: "'이건 내가 아는 그 전개다' 한순간에 세계가 멸망하고, 새로운 세상이 펼쳐졌다. 오직 나만이 완주했던 소설 세계에서 평범했던 독자의 새로운 삶이 시작된다.", review: "탁월한 세계관, 주인공 포함 등장인물의 매력도. 독자와 작가의 관계성까지. 안 볼 이유가 없다.", rating: 5, quotes: [] },
 ];
