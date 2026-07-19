@@ -608,4 +608,7 @@ const BOOKS = [
   { title: "나노마신", author: "현절무·금강불괴·한중월야", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=747271", status: "연재중", genres: ["무협/사극", "레드아이스 스튜디오", "사이다"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/747271/thumbnail/thumbnail_IMAG21_d46b4a69-6de0-41be-b368-ce5e74ab8f76.jpg", isbn: "",
     summary: "갖은 멸시와 목숨의 위협을 받던 마교의 사생아 천여운, 미래에서 나타난 후손이 천여운의 몸에 나노 머신을 주입한 후 그의 인생이 송두리째 바뀐다. 마교를 넘어 무림 최고의 자리에 오르기 위한 천여운의 거침없는 이야기가 시작된다!", review: "가면 갈수록 혼종이 되어가는 중. 아쉽다.", rating: 4, quotes: [] },
+  { title: "광마회귀", author: "JP·이히·유진성", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=776601", status: "연재중", genres: ["무협/사극", "사이다", "회귀"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/776601/thumbnail/thumbnail_IMAG21_7365135131254864183.jpg", isbn: "",
+    summary: "무공에 미친 광마 이자하. 그는 마교 교주의 천옥을 훔쳐 쫓기던 중 벼랑에서 떨어지게 된다. 모든 게 끝났다고 생각한 순간 눈을 떠보니, 사람들에게 무시당하던 점소이 시절로 돌아와 있는데... 게다가 억울한 누명으로 두들겨 맞고 객잔은 박살이 나 있는 상황. ​점소이 시절로 회귀한 광마! 사내는 다시 미치게 될 것인가? 아니면 사내의 적들이 미치게 될 것인", review: "주인공을 사랑할 수 있다면 계속 봐라.", rating: 4, quotes: [] },
 ];
