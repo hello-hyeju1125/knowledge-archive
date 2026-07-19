@@ -617,4 +617,7 @@ const BOOKS = [
   { title: "천화서고 대공자", author: "128·MIDNIGHT STUDIO·김현영", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=805193", status: "연재중", genres: ["무협/사극", "사이다", "동양"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/805193/thumbnail/thumbnail_IMAG21_72d0c645-de0a-43f2-9674-73909671fa5e.jpg", isbn: "",
     summary: "넉넉한 풍채가 매력적인 무림맹주 후공은 어느 날 느닷없이 웬 비루먹을 청년의 몸에 들어오게 된다. 청년의 이름은 범항. 강호 3대 서고인 ‘천화서고’의 대공자이자 답이 없는 자살희망자. 후공은 환혼의 원인을 파악하기 위해 범항의 몸을 단련하기 시작하고 과거와는 180도 달라진 천화서고 대공자의 움직임에 온 강호가 주목하기 시작하는데…", review: "킬링 타임 용으로 그냥 볼만함.", rating: 3, quotes: [] },
+  { title: "오늘만 사는 기사", author: "가나라·이안·소울풍", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=824543", status: "연재중", genres: ["판타지", "액션판타지", "시리어스"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/824543/thumbnail/thumbnail_IMAG21_7b913673-101c-4472-8889-1918ed4e87a4.jpg", isbn: "",
+    summary: "\"넌 천재다\" 어릴 때 들었던 말이 독이었다. 엔크리드는 기사를 꿈꿨다. 헛된 꿈이라는 건 금세 알았다. \"그런 실력으로 칼밥을 먹겠다고?\" 누군가는 비웃고. \"그만둬라.\" 누군가는 조언했다. 그럼에도 빛 바랜 꿈은 그대로였다. 덜 자고 더 뛰고 더 휘둘렀다. 그리 살던 어느 날이었다. 전장에서 목이 찔려 죽은 뒤였다. 다시 눈을 뜬 엔크리드는 죽기 전 '", review: "엔크리드의 노력을 보고 있으면 나태한 스스로를 채찍질 하고 싶다 (but 현실은 침대 위)", rating: 4, quotes: [] },
 ];
