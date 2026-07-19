@@ -629,4 +629,7 @@ const BOOKS = [
   { title: "투신전생기", author: "청담", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=774044", status: "연재중", genres: ["액션", "회귀", "이능력배틀물"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/774044/thumbnail/thumbnail_IMAG21_81504afb-1a05-41b0-9650-0c9aa1d741d9.jpg", isbn: "",
     summary: "인류 최강자의 회귀 액션 판타지. \"역겨운 신들이 줬다고 해도 기회는 기회. 뒈지고 싶다는데 죽여 줘야지.\" 인류 최후의 생존자 제피르. 마신과의 고독한 싸움은 패배로 끝났으나, 신들이 준 기회로 10년 전으로 돌아왔다. 모든 것을 빼앗아갔던 마신과 인간을 구경거리 취급한 신들. 이번에는 내가 너희를 물어뜯겠다.", review: "작가 혼자 모든 것을 그리고 만들었다니 믿기지 않는다. 도대체 언제 돌아올 거냐? 기다리는 중.", rating: 4, quotes: [] },
+  { title: "무림서부", author: "MIDNIGHT STUDIO·정한길·컵라면.", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=784417", status: "연재중", genres: ["무협/사극", "힘숨찐", "판무"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/784417/thumbnail/thumbnail_IMAG21_f997ffe9-465a-4be8-a0bb-b5d0ef5cedea.jpg", isbn: "",
+    summary: "황제가 무공을 통한 철혈정치로 제국을 천년동안 유지함에 따라, 오로지 황군 무공만이 힘이요 법도로 살아남고, 고전 무공들은 스러지고 만다. 이런 세계에 환생한 무협지 마니아, 주인공 장건. 과연 그는 동경하던 고전 무공을 되살릴 수 있을까. 서부 대륙 개척지에서 벌어지는 정통 무협의 정수!", review: "색다른 배경. 예측 불허의 스토리. 볼만했다.", rating: 3, quotes: [] },
 ];
