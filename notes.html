@@ -130,7 +130,10 @@
     color:var(--text-2); font-style:normal;
   }
   .a-body blockquote p{margin-bottom:0.4em;}
-  .a-body strong{font-weight:700; background:linear-gradient(transparent 55%, var(--mint) 55%, var(--mint) 92%, transparent 92%); padding:0 2px;}
+  .a-body strong{
+    font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:5px;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  }
   .a-body a{text-decoration:underline; text-underline-offset:3px;}
   .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
   .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
