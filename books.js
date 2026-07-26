@@ -659,4 +659,7 @@ const BOOKS = [
   { title: "빅토리안 사이코", author: "버지니아 페이토", publisher: "현대문학", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791167903655.jpg", isbn: "9791167903655",
     summary: "‘고딕 블랙코미디의 마녀’ 버지니아 페이토의 장편소설 『빅토리안 사이코』가 국내 독자들을 찾아온다. 세상에서 가장 매혹적인 사이코가 탄생했다. 일말의 두려움을 모르는, 어둠과 단짝인 어느 가정교사의 잔혹하고도 유쾌한 복수극! 이 작품을 원작으로 한 동명의 영화는 2026 칸 영화제 ‘주목할 만한 시선’ 부문 상영작으로 선정되어 일찌감치 화제를 모았으며 오는 9월 극장 개봉을 앞두고 있다.  크리스마스를 앞두고, 새 가정교사 위니프레드 노티는 음울한", review: "", rating: null, quotes: [] },
+  { title: "플레이어가 과거를 숨김", author: "콘차·비누끼·베데스", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=811707", status: "연재중", genres: ["게임판타지", "빙의"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/811707/thumbnail/thumbnail_IMAG21_f4e13838-985e-42d2-84d3-46a987a3469c.jpg", isbn: "",
+    summary: "가상현실게임 '아르카나 대륙전기'가 현실과 동화되면서, 자신의 게임 캐릭터와 동화된 '플레이어'가 등장해 세계를 지키기 시작한다. 평범한 직장인 이호열 역시, 중2때 만든 흑역사 가득 캐릭터 \"그랑펠 클라우디 아르페우스 로미오\"에 빙의되는데?! 평상시에는 망직이지만 악마족의 천적이라는 \"악마 사냥꾼\"의 직업을 가진 그랑펠, 그의 긍지는 악마 앞에서 가장 드", review: "제목 다시 지어라. 제목 대비 내용이 훨 낫다.", rating: 4, quotes: [] },
 ];
