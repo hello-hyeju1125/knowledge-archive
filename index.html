@@ -271,7 +271,22 @@
   .nrow:hover .nt{color:var(--accent);}
   .nrow .nt{font-size:17.5px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
   .nrow .nm{font-size:12.5px; color:var(--text-3); margin-top:6px;}
-  .nrow .nm .cat{color:var(--mint-text); background:var(--mint-soft); padding:2px 9px; border-radius:980px; font-weight:700; margin-right:8px;}
+  .nrow .nm .cat{padding:2px 9px; border-radius:980px; font-weight:700; margin-right:8px; display:inline-block;}
+  /* 분류별 색상 (노트 페이지와 동일 팔레트) */
+  .cat.c0{color:#00875A; background:#D9FFEF;}
+  .cat.c1{color:#1E3AE0; background:#E1E8FF;}
+  .cat.c2{color:#9A5B00; background:#FFF0D6;}
+  .cat.c3{color:#8A2BC4; background:#F4E6FF;}
+  .cat.c4{color:#0E7490; background:#DCF5FB;}
+  .cat.c5{color:#B03060; background:#FFE4EF;}
+  @media (prefers-color-scheme: dark){
+    .cat.c0{color:#37FFA9; background:#0C3A2B;}
+    .cat.c1{color:#9DB0FF; background:#16224A;}
+    .cat.c2{color:#FFD08A; background:#3A2C14;}
+    .cat.c3{color:#DCB0FF; background:#2C1A3D;}
+    .cat.c4{color:#8FE2F5; background:#0F2E38;}
+    .cat.c5{color:#FFA8C8; background:#3A1626;}
+  }
   .notes-cta{text-align:center; margin-top:28px;}
 
   /* ---------- footer ---------- */
@@ -1080,10 +1095,15 @@ function renderNotes(){
   if(typeof POSTS === "undefined" || !POSTS.length){
     document.getElementById("notes-sec").style.display = "none"; return;
   }
+  const catClass = c => {
+    const s = String(c||"노트");
+    let h = 0; for(let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) >>> 0;
+    return "c" + (h % 6);
+  };
   box.innerHTML = POSTS.slice(0, 6).map(p => `
     <a class="nrow" href="./notes.html#${encodeURIComponent(p.id)}">
       <div class="nt">${esc(p.title)}</div>
-      <div class="nm"><span class="cat">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${Math.max(1,Math.round((p.body||"").length/550))}분</div>
+      <div class="nm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${Math.max(1,Math.round((p.body||"").length/550))}분</div>
     </a>`).join("");
 }
 

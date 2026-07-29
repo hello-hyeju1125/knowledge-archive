@@ -236,9 +236,13 @@ function render(md){
 let activeCat = "전체", page = 1;
 const PER_PAGE = 8;
 
-/* 분류별 고정 색상 (등장 순서 기준) */
+/* 분류별 고정 색상 (분류명 기준 — 어느 페이지에서나 같은 색) */
 const catOrder = [...new Set(POSTS.map(p=>p.category).filter(Boolean))];
-const catClass = c => "c" + (Math.max(0, catOrder.indexOf(c)) % 6);
+const catClass = c => {
+    const s = String(c||"노트");
+    let h = 0; for(let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) >>> 0;
+    return "c" + (h % 6);
+  };
 
 function renderCats(){
   const box = document.getElementById("cats");
