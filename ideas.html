@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>소설의 재료 — 헬로의 서재</title>
-<meta name="description" content="헬로가 책을 읽다 떠올린 소설의 재료들. 인물, 설정, 장면의 씨앗을 모읍니다." />
+<title>빛나는 아이디어 — 헬로의 서재</title>
+<meta name="description" content="헬로가 책을 읽다 떠올린 생각의 조각들. 언젠가 이야기가 될지도 모르는 아이디어." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="소설의 재료 — 헬로의 서재" />
-<meta property="og:description" content="읽다가 떠오른 이야기의 씨앗들" />
+<meta property="og:title" content="빛나는 아이디어 — 헬로의 서재" />
+<meta property="og:description" content="읽다가 떠오른 생각의 조각들" />
 <link rel="canonical" href="https://hellmeone.com/ideas.html" />
 <style>
 @font-face{
@@ -24,6 +24,7 @@
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
     --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
     --shadow-lg:0 10px 34px rgba(41,74,255,.14);
+    --heart:#FF4D6D;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -33,6 +34,7 @@
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
       --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
       --shadow-lg:0 10px 34px rgba(0,0,0,.65);
+      --heart:#FF6B85;
     }
   }
   *{box-sizing:border-box; margin:0;}
@@ -70,78 +72,42 @@
   .wrap{max-width:1100px; margin:0 auto; padding:46px 20px 100px;}
   .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
   .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
-  .bar{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px; align-items:center;}
-  .bar button{
-    border:1px solid var(--line); background:var(--card); color:var(--text-2);
-    font-size:13px; font-weight:600; padding:7px 16px; border-radius:980px;
-  }
-  .bar button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .bar .mix{margin-left:auto; border-color:var(--accent); color:var(--accent); font-weight:700;}
-  .bar .mix:hover{background:var(--accent); color:#fff;}
-
-  /* 태그 색상 (노트와 동일 팔레트) */
-  .tag{display:inline-block; padding:2px 10px; border-radius:980px; font-weight:700; font-size:11.5px;}
-  .tag.c0{color:#00875A; background:#D9FFEF;}
-  .tag.c1{color:#1E3AE0; background:#E1E8FF;}
-  .tag.c2{color:#9A5B00; background:#FFF0D6;}
-  .tag.c3{color:#8A2BC4; background:#F4E6FF;}
-  .tag.c4{color:#0E7490; background:#DCF5FB;}
-  .tag.c5{color:#B03060; background:#FFE4EF;}
-  @media (prefers-color-scheme: dark){
-    .tag.c0{color:#37FFA9; background:#0C3A2B;} .tag.c1{color:#9DB0FF; background:#16224A;}
-    .tag.c2{color:#FFD08A; background:#3A2C14;} .tag.c3{color:#DCB0FF; background:#2C1A3D;}
-    .tag.c4{color:#8FE2F5; background:#0F2E38;} .tag.c5{color:#FFA8C8; background:#3A1626;}
-  }
-  .bar button.on.c0{background:#00875A; border-color:#00875A; color:#fff;}
-  .bar button.on.c1{background:#1E3AE0; border-color:#1E3AE0; color:#fff;}
-  .bar button.on.c2{background:#9A5B00; border-color:#9A5B00; color:#fff;}
-  .bar button.on.c3{background:#8A2BC4; border-color:#8A2BC4; color:#fff;}
-  .bar button.on.c4{background:#0E7490; border-color:#0E7490; color:#fff;}
-  .bar button.on.c5{background:#B03060; border-color:#B03060; color:#fff;}
 
   /* 벽돌(Masonry) 보드 */
-  .board{columns:3 280px; column-gap:16px; margin-top:26px;}
+  .board{columns:3 300px; column-gap:16px; margin-top:30px;}
   @media (max-width:720px){ .board{columns:1;} }
   .icard{
     break-inside:avoid; background:var(--card); border:1px solid var(--card-line);
-    border-radius:16px; padding:18px 18px 15px; margin-bottom:16px;
-    transition:transform .2s, box-shadow .2s; position:relative;
+    border-radius:16px; padding:20px; margin-bottom:16px;
+    transition:transform .2s, box-shadow .2s;
   }
   .icard:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg);}
-  .icard .pin{position:absolute; top:-7px; right:14px; font-size:15px;}
-  .icard .it{font-size:15.5px; font-weight:700; line-height:1.55; margin-top:10px; word-break:keep-all;}
-  .icard .ib{font-size:13.5px; color:var(--text-2); line-height:1.75; margin-top:9px; word-break:keep-all;}
-  .icard .ib.locked{
-    filter:blur(4.5px); user-select:none; pointer-events:none;
-    -webkit-mask-image:linear-gradient(180deg, #000 30%, transparent 100%);
-    mask-image:linear-gradient(180deg, #000 30%, transparent 100%);
+  .icard .it{
+    font-size:14.5px; line-height:1.85; color:var(--text); word-break:keep-all;
+    transition:filter .35s ease;
   }
-  .icard .im{font-size:11.5px; color:var(--text-3); margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;}
+  .icard .it.locked{
+    filter:blur(4.5px); pointer-events:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 25%,rgba(0,0,0,.25) 100%);
+    mask-image:linear-gradient(180deg,#000 25%,rgba(0,0,0,.25) 100%);
+  }
+  .icard .foot{
+    display:flex; align-items:center; gap:10px; margin-top:16px;
+    padding-top:13px; border-top:1px solid var(--line);
+  }
+  .icard .date{font-size:11.5px; color:var(--text-3); margin-left:auto;}
+  .like{
+    display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line);
+    background:var(--bg); color:var(--text-2); border-radius:980px;
+    font-size:13px; font-weight:700; padding:7px 15px; transition:all .18s;
+  }
+  .like:hover{border-color:var(--heart); color:var(--heart);}
+  .like.on{background:var(--heart); border-color:var(--heart); color:#fff;}
+  .like .hh{font-size:14px; line-height:1;}
+  .like.on .hh{animation:pop .35s ease;}
+  @keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.5);}100%{transform:scale(1);}}
+  .hint{font-size:11.5px; color:var(--text-3);}
   .empty{text-align:center; color:var(--text-3); padding:70px 0; font-size:14px;}
-
-  /* 섞어보기 */
-  .mixbox{
-    display:none; margin-top:26px; padding:22px; border-radius:18px;
-    background:var(--card); border:1.5px dashed var(--accent);
-  }
-  .mixbox.show{display:block;}
-  .mixbox h3{font-size:15px; font-weight:800; margin-bottom:14px;}
-  .mixgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
-  .mixitem{background:var(--bg); border-radius:12px; padding:14px;}
-  .mixitem .mt{font-size:14px; font-weight:700; line-height:1.5; margin-top:8px;}
-
-  /* 티저 안내 */
-  .teaser{
-    margin-top:40px; padding:24px; border-radius:18px; background:var(--card);
-    border:1px solid var(--card-line); text-align:center;
-  }
-  .teaser p{font-size:14px; color:var(--text-2); line-height:1.8;}
-  .teaser b{color:var(--text);}
-  .teaser a.cta{
-    display:inline-block; margin-top:14px; border:1.5px solid var(--accent); color:var(--accent);
-    font-size:14px; font-weight:700; padding:10px 22px; border-radius:980px;
-  }
-  .teaser a.cta:hover{background:var(--accent); color:#fff;}
 
   footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:800;}
@@ -157,30 +123,17 @@
     <a href="./index.html#books">책</a>
     <a href="./index.html#graph-sec">지도</a>
     <a href="./notes.html">노트</a>
-    <a href="./ideas.html" style="color:var(--text); font-weight:700;">재료</a>
+    <a href="./ideas.html" style="color:var(--text); font-weight:700;">아이디어</a>
     <a class="add-mini" href="./admin.html">서재 주인 접근</a>
   </div>
 </nav>
 
 <div class="wrap">
   <div class="head">
-    <h1><span class="marker">소설의 재료</span></h1>
-    <p>책을 읽다 떠오른 이야기의 씨앗들. 언젠가 소설이 될지도 모르는 조각입니다.</p>
+    <h1><span class="marker">빛나는 아이디어</span></h1>
+    <p id="headDesc">읽다가 떠오른 생각의 조각들. 하트를 누르면 아이디어가 펼쳐집니다.</p>
   </div>
-  <div class="bar" id="bar"></div>
-
-  <div class="mixbox" id="mixbox">
-    <h3>🎲 이 재료들을 섞으면?</h3>
-    <div class="mixgrid" id="mixgrid"></div>
-  </div>
-
   <div class="board" id="board"></div>
-
-  <div class="teaser" id="teaser">
-    <p><b>재료의 속살은 아직 접어두었습니다.</b><br>
-      씨앗이 어떤 이야기로 자랄지 궁금하시다면, 혹은 함께 굴려보고 싶은 생각이 있다면 —</p>
-    <a class="cta" href="mailto:hjagape@gmail.com?subject=%ED%97%AC%EB%A1%9C%EC%9D%98%20%EC%84%9C%EC%9E%AC%20%EC%86%8C%EC%84%A4%EC%9D%98%20%EC%9E%AC%EB%A3%8C%EC%97%90%20%EB%8C%80%ED%95%B4">헬로에게 연락하기 →</a>
-  </div>
 </div>
 
 <footer>
@@ -193,60 +146,70 @@ document.write('<script src="ideas.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const tagClass = (() => {
-  const order = [...new Set(IDEAS.map(i=>i.tag).filter(Boolean))].sort();
-  return t => "c" + (Math.max(0, order.indexOf(String(t||"재료"))) % 6);
-})();
-/* 주인 여부: 관리 페이지에서 토큰을 연결한 브라우저면 전체 공개 */
-const isOwner = !!localStorage.getItem("ghToken");
+const isOwner = !!localStorage.getItem("ghToken");   // 관리 토큰이 있으면 주인 → 전부 공개
+const NS = "hellmeone-ideas";                        // 좋아요 카운터 네임스페이스
+const likedKey = id => "liked_" + id;
+const hasLiked = id => !!localStorage.getItem(likedKey(id));
 
-let activeTag = "전체";
-function renderBar(){
-  const tags = [...new Set(IDEAS.map(i=>i.tag).filter(Boolean))];
-  const counts = { "전체": IDEAS.length };
-  IDEAS.forEach(i => counts[i.tag] = (counts[i.tag]||0)+1);
-  document.getElementById("bar").innerHTML =
-    ["전체", ...tags].map(t => {
-      const cls = t==="전체" ? "" : tagClass(t);
-      return `<button class="${t===activeTag?"on "+cls:cls}" data-t="${esc(t)}">${esc(t)} <span style="opacity:.55">${counts[t]||0}</span></button>`;
-    }).join("") +
-    (IDEAS.length >= 2 ? `<button class="mix" onclick="mix()">🎲 섞어보기</button>` : "");
-  document.querySelectorAll("#bar button[data-t]").forEach(el => el.onclick = () => {
-    activeTag = el.dataset.t; renderBar(); renderBoard();
-  });
-}
-
-function renderBoard(){
-  const list = (activeTag==="전체" ? IDEAS : IDEAS.filter(i=>i.tag===activeTag))
-    .slice().sort((a,b) => (b.pin?1:0)-(a.pin?1:0));
-  document.getElementById("board").innerHTML = list.length ? list.map(i => `
-    <div class="icard">
-      ${i.pin ? `<span class="pin">📌</span>` : ""}
-      <span class="tag ${tagClass(i.tag)}">${esc(i.tag||"재료")}</span>
-      <div class="it">${esc(i.title)}</div>
-      ${i.body ? `<div class="ib ${isOwner?"":"locked"}">${esc(isOwner ? i.body : i.body.slice(0,60))}</div>` : ""}
-      <div class="im">${i.book ? `<span>📕 ${esc(i.book)}</span>` : ""}<span>${i.d||""}</span></div>
-    </div>`).join("")
-    : `<div class="empty">아직 재료가 없어요. 서재 주인의 방에서 첫 씨앗을 심어보세요.</div>`;
-  document.getElementById("teaser").style.display = (isOwner || !IDEAS.length) ? "none" : "";
-}
-
-function mix(){
-  const pool = IDEAS.slice();
-  const n = Math.min(3, pool.length);
-  const picked = [];
-  while(picked.length < n && pool.length){
-    picked.push(pool.splice(Math.floor(Math.random()*pool.length), 1)[0]);
+function render(){
+  const box = document.getElementById("board");
+  if(!IDEAS.length){
+    box.innerHTML = `<div class="empty">아직 아이디어가 없어요. 서재 주인의 방에서 첫 조각을 남겨보세요.</div>`;
+    return;
   }
-  document.getElementById("mixgrid").innerHTML = picked.map(i => `
-    <div class="mixitem">
-      <span class="tag ${tagClass(i.tag)}">${esc(i.tag||"재료")}</span>
-      <div class="mt">${esc(i.title)}</div>
-    </div>`).join("");
-  document.getElementById("mixbox").classList.add("show");
+  if(isOwner) document.getElementById("headDesc").textContent = "읽다가 떠오른 생각의 조각들.";
+  box.innerHTML = IDEAS.map(i => {
+    const open = isOwner || hasLiked(i.id);
+    return `
+    <div class="icard" data-id="${esc(i.id)}">
+      <div class="it ${open?"":"locked"}">${esc(i.text)}</div>
+      <div class="foot">
+        <button class="like ${hasLiked(i.id)?"on":""}" data-id="${esc(i.id)}">
+          <span class="hh">${hasLiked(i.id)?"♥":"♡"}</span><span class="cnt">–</span>
+        </button>
+        ${open ? "" : `<span class="hint">하트를 누르면 펼쳐져요</span>`}
+        <span class="date">${i.d||""}</span>
+      </div>
+    </div>`;
+  }).join("");
+  box.querySelectorAll(".like").forEach(el => el.onclick = () => toggleLike(el.dataset.id, el));
+  loadCounts();
 }
 
-renderBar(); renderBoard();
+/* 저장된 좋아요 수 불러오기 (읽기 전용) */
+async function loadCounts(){
+  await Promise.all(IDEAS.map(async i => {
+    const el = document.querySelector(`.like[data-id="${CSS.escape(i.id)}"] .cnt`);
+    if(!el) return;
+    try{
+      const r = await fetch(`https://abacus.jasoncameron.dev/get/${NS}/${encodeURIComponent(i.id)}`);
+      const d = await r.json();
+      el.textContent = typeof d.value === "number" ? d.value : 0;
+    }catch(e){ el.textContent = "0"; }
+  }));
+}
+
+/* 하트 = 좋아요 + 내용 펼치기 (한 번만 집계) */
+async function toggleLike(id, btn){
+  const card = btn.closest(".icard");
+  const body = card.querySelector(".it");
+  const hint = card.querySelector(".hint");
+  body.classList.remove("locked");
+  if(hint) hint.remove();
+  if(hasLiked(id)) return;                 // 이미 누른 사람은 카운트 그대로
+  localStorage.setItem(likedKey(id), "1");
+  btn.classList.add("on");
+  btn.querySelector(".hh").textContent = "♥";
+  const cnt = btn.querySelector(".cnt");
+  cnt.textContent = (parseInt(cnt.textContent) || 0) + 1;   // 즉시 반응
+  try{
+    const r = await fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${encodeURIComponent(id)}`);
+    const d = await r.json();
+    if(typeof d.value === "number") cnt.textContent = d.value;
+  }catch(e){}
+}
+
+render();
 
 /* 콘텐츠 보호 */
 (function(){
