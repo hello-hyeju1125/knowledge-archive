@@ -184,6 +184,7 @@
     <button class="on" id="tabQ" onclick="showTab('q')">인용구</button>
     <button id="tabB" onclick="showTab('b')">책</button>
     <button id="tabP" onclick="showTab('p')">글</button>
+    <button id="tabI" onclick="showTab('i')">재료</button>
     <button id="tabE" onclick="showTab('e')">관리</button>
   </div>
 
@@ -275,6 +276,20 @@
     <div class="msg" id="pMsg"></div>
   </div>
 
+  <!-- 재료: 소설의 씨앗 -->
+  <div class="panel hidden" id="paneI">
+    <input id="iTitle" placeholder="한 줄 요약 (공개됨)" />
+    <div class="chips" id="tagChips"></div>
+    <input id="iTag" placeholder="태그 — 인물 · 설정 · 장면 등 자유롭게" />
+    <textarea id="iBody" style="min-height:110px;" placeholder="자세한 내용 (나만 보임 — 방문자에겐 흐리게 가려져요)"></textarea>
+    <input id="iBook" list="bookList" placeholder="어느 책에서 떠올랐나요? (선택)" />
+    <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text-2); margin:2px 0 4px;">
+      <input type="checkbox" id="iPin" style="width:auto; margin:0;" /> 📌 상단에 고정
+    </label>
+    <button class="btn" id="iSave" onclick="saveIdea()">씨앗 심기</button>
+    <div class="msg" id="iMsg"></div>
+  </div>
+
   <!-- 수정·삭제: 전체 목록에서 바로 고치거나 지우기 -->
   <div class="panel hidden" id="paneE">
     <div id="eListView">
@@ -282,6 +297,7 @@
         <button class="on" data-k="b">책</button>
         <button data-k="q">문장</button>
         <button data-k="p">글</button>
+        <button data-k="i">재료</button>
       </div>
       <input id="eSearch" placeholder="목록에서 찾기 (선택)" autocomplete="off" />
       <div id="eList"></div>
@@ -325,6 +341,20 @@
         <button class="btn btn-danger" id="epDel" onclick="deletePost()">글 삭제</button>
       </div>
     </div>
+    <div id="eiForm" class="hidden">
+      <button class="plain" onclick="backToList()">← 목록으로</button>
+      <input id="eiTitle" placeholder="한 줄 요약" style="margin-top:8px;" />
+      <input id="eiTag" placeholder="태그" />
+      <textarea id="eiBody" style="min-height:110px;" placeholder="자세한 내용"></textarea>
+      <input id="eiBook" placeholder="관련 책 (선택)" />
+      <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text-2); margin:2px 0 4px;">
+        <input type="checkbox" id="eiPin" style="width:auto; margin:0;" /> 📌 상단에 고정
+      </label>
+      <div class="row-btns">
+        <button class="btn" id="eiSave" onclick="saveIdeaEdit()">저장</button>
+        <button class="btn btn-danger" id="eiDel" onclick="deleteIdea()">재료 삭제</button>
+      </div>
+    </div>
     <div class="msg" id="eMsg"></div>
   </div>
 </div>
@@ -334,6 +364,7 @@
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="ideas.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const REPO = "hello-hyeju1125/knowledge-archive";
@@ -366,7 +397,7 @@ function msg(id, type, html){
 const authFail = e => String(e.message||"").includes("401")
   ? `열쇠가 만료된 것 같아요. <button onclick="reconnect()">다시 연결하기</button>` : "⚠️ " + e.message;
 function showTab(t){
-  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabP","paneP","p"],["tabE","paneE","e"]]){
+  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabP","paneP","p"],["tabI","paneI","i"],["tabE","paneE","e"]]){
     document.getElementById(tab).classList.toggle("on", t===k);
     document.getElementById(pane).classList.toggle("hidden", t!==k);
   }
@@ -701,6 +732,9 @@ function renderEList(){
   }else if(eKind === "p"){
     items = POSTS;                 // 최신 발행이 위로
     if(q) items = items.filter(p => p.title.toLowerCase().includes(q) || (p.body||"").toLowerCase().includes(q));
+  }else if(eKind === "i"){
+    items = IDEAS;
+    if(q) items = items.filter(x => x.title.toLowerCase().includes(q) || (x.body||"").toLowerCase().includes(q) || (x.tag||"").toLowerCase().includes(q));
   }else{
     items = QUOTES;                // 이미 최신순
     if(q) items = items.filter(x => x.t.toLowerCase().includes(q) || x.b.toLowerCase().includes(q));
@@ -710,6 +744,12 @@ function renderEList(){
   const slice = items.slice((ePage-1)*E_PER, ePage*E_PER);
 
   const rows = slice.map(it => {
+    if(eKind === "i"){
+      const ii = IDEAS.indexOf(it);
+      return `<div class="mrow"><div class="mtxt">${it.pin?"📌 ":""}${escH(it.title)}
+        <span class="msub">${escH(it.tag||"재료")}${it.book?" · "+escH(it.book):""}${it.d?" · "+it.d:""}</span></div>
+        <div class="act"><button class="ed" data-i="${ii}">수정</button><button class="de" data-i="${ii}">삭제</button></div></div>`;
+    }
     if(eKind === "p"){
       const pi = POSTS.indexOf(it);
       return `<div class="mrow"><div class="mtxt">${escH(it.title)}
@@ -737,11 +777,13 @@ function renderEList(){
   document.querySelectorAll("#eList .ed").forEach(el => el.onclick = () => {
     if(eKind==="b") openBookEditor(BOOKS.find(b=>b.title===el.dataset.t));
     else if(eKind==="p") openPostEditor(POSTS[+el.dataset.i]);
+    else if(eKind==="i") openIdeaEditor(IDEAS[+el.dataset.i]);
     else openQuoteEditor(QUOTES[+el.dataset.i]);
   });
   document.querySelectorAll("#eList .de").forEach(el => el.onclick = () => {
     if(eKind==="b"){ editBook = BOOKS.find(b=>b.title===el.dataset.t); deleteBook(); }
     else if(eKind==="p"){ editPost = POSTS[+el.dataset.i]; deletePost(); }
+    else if(eKind==="i"){ editIdea = IDEAS[+el.dataset.i]; deleteIdea(); }
     else{ editQuote = QUOTES[+el.dataset.i]; deleteQuote(); }
   });
 }
@@ -770,6 +812,7 @@ function backToList(){
   document.getElementById("eForm").classList.add("hidden");
   document.getElementById("eqForm").classList.add("hidden");
   document.getElementById("epForm").classList.add("hidden");
+  document.getElementById("eiForm").classList.add("hidden");
   document.getElementById("eListView").classList.remove("hidden");
   renderEList();
 }
@@ -939,6 +982,100 @@ async function deletePost(){
     msg("eMsg","ok","삭제 완료 — 1~2분 뒤 반영돼요.");
   }catch(e){ msg("eMsg","err",authFail(e)); }
   if(btn){ btn.disabled = false; btn.textContent = "글 삭제"; }
+}
+
+/* ---------- 소설의 재료: 추가·수정·삭제 ---------- */
+let editIdea = null;
+const ideaLine = i => "  " + JSON.stringify(i) + ",";
+function findIdeaLine(src, id){
+  const i = src.indexOf('"id":' + JSON.stringify(id));
+  if(i < 0) return null;
+  const start = src.lastIndexOf("\n", i) + 1;
+  let end = src.indexOf("\n", i);
+  if(end < 0) end = src.length;
+  return { start, end };
+}
+
+/* 기존 태그 원탭 칩 */
+(function(){
+  const box = document.getElementById("tagChips");
+  if(!box || typeof IDEAS === "undefined") return;
+  const tags = [...new Set(IDEAS.map(i=>i.tag).filter(Boolean))].slice(0,10);
+  const base = ["인물","설정","장면","문장씨앗","플롯","질문"];
+  const all = [...new Set([...tags, ...base])].slice(0,10);
+  box.innerHTML = all.map(t=>`<button type="button" data-t="${t}">${t}</button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => {
+    document.getElementById("iTag").value = el.dataset.t;
+    box.querySelectorAll("button").forEach(x=>x.classList.toggle("on", x===el));
+  });
+})();
+
+async function saveIdea(){
+  const v = id => document.getElementById(id).value.trim();
+  const title = v("iTitle");
+  if(!title){ msg("iMsg","err","한 줄 요약을 적어주세요."); return; }
+  const btn = document.getElementById("iSave");
+  btn.disabled = true; btn.textContent = "심는 중…";
+  try{
+    const { text: src, sha } = await ghGet("ideas.js");
+    const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+    const idea = { id: Date.now().toString(36), tag: v("iTag") || "재료", title,
+      body: v("iBody"), book: v("iBook"), d: ds, pin: document.getElementById("iPin").checked };
+    const marker = "const IDEAS = [";
+    if(!src.includes(marker)) throw new Error("ideas.js 형식을 인식하지 못했어요.");
+    await ghPut("ideas.js", src.replace(marker, marker + "\n" + ideaLine(idea)), sha, `재료 추가: ${title}`);
+    ["iTitle","iBody","iBook"].forEach(id=>document.getElementById(id).value="");
+    document.getElementById("iPin").checked = false;
+    msg("iMsg","ok",`씨앗을 심었어요 — 1~2분 뒤 <a href="https://hellmeone.com/ideas.html" target="_blank">재료 보드</a>에 나타납니다 🌱`);
+  }catch(e){ msg("iMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "씨앗 심기";
+}
+
+function openIdeaEditor(x){
+  editIdea = x;
+  document.getElementById("eListView").classList.add("hidden");
+  document.getElementById("eMsg").className = "msg";
+  document.getElementById("eiTitle").value = x.title;
+  document.getElementById("eiTag").value = x.tag || "";
+  document.getElementById("eiBody").value = x.body || "";
+  document.getElementById("eiBook").value = x.book || "";
+  document.getElementById("eiPin").checked = !!x.pin;
+  document.getElementById("eiForm").classList.remove("hidden");
+}
+async function saveIdeaEdit(){
+  if(!editIdea) return;
+  const v = id => document.getElementById(id).value.trim();
+  const title = v("eiTitle");
+  if(!title){ msg("eMsg","err","한 줄 요약을 채워주세요."); return; }
+  const btn = document.getElementById("eiSave");
+  btn.disabled = true; btn.textContent = "저장 중…";
+  try{
+    const { text: src, sha } = await ghGet("ideas.js");
+    const pos = findIdeaLine(src, editIdea.id);
+    if(!pos) throw new Error("이 재료를 파일에서 찾지 못했어요. 방금 심었다면 1~2분 뒤 다시 시도해 주세요.");
+    const updated = { id: editIdea.id, tag: v("eiTag") || "재료", title,
+      body: v("eiBody"), book: v("eiBook"), d: editIdea.d, pin: document.getElementById("eiPin").checked };
+    await ghPut("ideas.js", src.slice(0,pos.start) + ideaLine(updated) + src.slice(pos.end), sha, `재료 수정: ${title}`);
+    Object.assign(editIdea, updated);
+    msg("eMsg","ok","수정 완료 — 1~2분 뒤 반영돼요.");
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  btn.disabled = false; btn.textContent = "저장";
+}
+async function deleteIdea(){
+  if(!editIdea) return;
+  if(!confirm(`『${editIdea.title}』 재료를 삭제할까요?`)) return;
+  const btn = document.getElementById("eiDel");
+  if(btn){ btn.disabled = true; btn.textContent = "삭제 중…"; }
+  try{
+    const { text: src, sha } = await ghGet("ideas.js");
+    const pos = findIdeaLine(src, editIdea.id);
+    if(!pos) throw new Error("이 재료를 파일에서 찾지 못했어요.");
+    await ghPut("ideas.js", src.slice(0,pos.start) + src.slice(pos.end+1), sha, `재료 삭제: ${editIdea.title}`);
+    IDEAS.splice(IDEAS.indexOf(editIdea), 1);
+    backToList();
+    msg("eMsg","ok","삭제 완료 — 1~2분 뒤 반영돼요.");
+  }catch(e){ msg("eMsg","err",authFail(e)); }
+  if(btn){ btn.disabled = false; btn.textContent = "재료 삭제"; }
 }
 </script>
 </body>

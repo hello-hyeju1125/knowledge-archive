@@ -392,6 +392,7 @@
     <a href="#books">책</a>
     <a href="#graph-sec">지도</a>
     <a href="./notes.html">노트</a>
+    <a href="./ideas.html">재료</a>
     <button class="add-mini" id="addBtn">서재 주인 접근</button>
   </div>
 </nav>
@@ -1095,11 +1096,10 @@ function renderNotes(){
   if(typeof POSTS === "undefined" || !POSTS.length){
     document.getElementById("notes-sec").style.display = "none"; return;
   }
-  const catClass = c => {
-    const s = String(c||"노트");
-    let h = 0; for(let i=0;i<s.length;i++) h = (h*31 + s.charCodeAt(i)) >>> 0;
-    return "c" + (h % 6);
-  };
+  const catClass = (() => {
+    const order = [...new Set(POSTS.map(p=>p.category).filter(Boolean))].sort();
+    return c => "c" + (Math.max(0, order.indexOf(String(c||"노트"))) % 6);
+  })();
   box.innerHTML = POSTS.slice(0, 6).map(p => `
     <a class="nrow" href="./notes.html#${encodeURIComponent(p.id)}">
       <div class="nt">${esc(p.title)}</div>
