@@ -26,6 +26,7 @@
     --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
     --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
+    --note-bg:#F5F8FF; --note-line:#E0E8FF;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -34,6 +35,7 @@
       --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
       --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
+      --note-bg:#121D3A; --note-line:#24365F;
     }
   }
   body.reading{--bg:var(--card);}
@@ -164,6 +166,15 @@
     font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:5px;
     -webkit-box-decoration-break:clone; box-decoration-break:clone;
   }
+  /* 내 생각 첨언 — 본문(명조 필사)과 서체부터 구분되는 고딕 카드 */
+  .a-body .mynote{
+    font-family:"NanumSquareNeo",sans-serif;
+    font-size:16px; line-height:1.85; letter-spacing:-0.012em;
+    color:var(--text-2);
+    background:var(--note-bg); border:1px solid var(--note-line);
+    border-radius:14px; padding:18px 20px; margin:2em 0;
+  }
+  .a-body .mynote strong{background:none; padding:0; color:var(--accent); font-weight:800;}
   .a-body a{text-decoration:underline; text-underline-offset:3px;}
   .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
   .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
@@ -230,8 +241,18 @@ const readMin = t => Math.max(1, Math.round(t.length / 550));  // 분당 550자 
 function render(md){
   md = md.replace(/^(#{1,4})(?=[^#\s])/gm, "$1 ");   // "##제목"처럼 공백 없이 써도 소제목 인식
   md = md.replace(/\*\*[ \t]*([^*\n]+?)[ \t]*\*\*/g, (m,t)=>"**"+t+"**");  // "** 강조 **"처럼 공백 있어도 인식
+  md = md.replace(/(?:^\/\/[^\n]*(?:\n|$))+/gm, block => {   // "// 내 생각" — 이어진 줄은 한 덩어리로
+    const inner = block.split("\n")
+      .map(l => esc(l.replace(/^\/\/[ \t]*/, "").trim()))
+      .filter(Boolean)
+      .join("<br>")
+      .replace(/\*\*([^*\n]+?)\*\*/g, "<strong>$1</strong>");
+    return inner ? `\n\n<aside class="mynote">${inner}</aside>\n\n` : "\n\n";
+  });
   try{ if(window.marked) return marked.parse(md); }catch(e){}
-  return md.split(/\n\n+/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("");
+  return md.split(/\n\n+/).filter(p=>p.trim()).map(p=>
+    p.trim().startsWith("<aside") ? p.trim() : `<p>${esc(p).replace(/\n/g,"<br>")}</p>`
+  ).join("");
 }
 
 let activeCat = "전체", page = 1;
@@ -276,7 +297,7 @@ function renderList(){
     <a class="prow" href="#${encodeURIComponent(p.id)}">
       <div class="pt">${esc(p.title)}</div>
       <div class="pm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분</div>
-      <div class="px">${esc(p.body.replace(/[#>*\-`]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
+      <div class="px">${esc(p.body.replace(/[#>*\-`\/]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
     </a>`).join("")
     : `<div class="empty">아직 글이 없어요. 서재 주인의 방에서 첫 글을 발행해 보세요.</div>`;
 
