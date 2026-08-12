@@ -95,6 +95,13 @@
   .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
   .hero .stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
+  /* 모바일에서는 넷이 3+1로 갈라져 보였다. 칸을 4등분해 한 줄에 고정하고
+     글자만 줄인다 — 폭에 따라 줄어들게 해서 좁은 화면에서도 넘치지 않는다. */
+  @media (max-width:640px){
+    .hero .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:30px;}
+    .hero .stat b{font-size:clamp(19px,5.6vw,24px);}
+    .hero .stat span{font-size:clamp(10px,3vw,12px); white-space:nowrap;}
+  }
   .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
   .hero-cta{
     display:inline-block; margin-top:28px; border:1.5px solid var(--accent); color:var(--accent);
