@@ -1,0 +1,44 @@
+# 글을 발행·수정·삭제하면(= posts.js가 바뀌면) 글 페이지를 다시 만들어 커밋한다.
+# 서재 관리(admin.html)에서 발행해도 1~2분 뒤 p/*.html·sitemap.xml·feed.xml이 저절로 따라온다.
+name: 생각 노트 페이지 다시 만들기
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - posts.js
+      - books.js
+      - build_notes.py
+      - notes-post.css
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-notes
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 글 페이지·사이트맵·RSS 생성
+        run: python3 build_notes.py
+
+      - name: 바뀐 게 있으면 커밋
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add p slugs.js sitemap.xml feed.xml
+          if git diff --cached --quiet; then
+            echo "바뀐 내용 없음 — 커밋 건너뜀"
+          else
+            git commit -m "노트 페이지 자동 생성"
+            git push
+          fi

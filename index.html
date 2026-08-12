@@ -11,6 +11,7 @@
 <meta property="og:locale" content="ko_KR" />
 <meta property="og:url" content="https://hellmeone.com/" />
 <link rel="canonical" href="https://hellmeone.com/" />
+<link rel="alternate" type="application/rss+xml" title="헬로의 서재 — 생각 노트" href="./feed.xml" />
 <meta name="robots" content="index, follow" />
 <meta name="google-site-verification" content="eXUWHms_f5PaUu66rephC9LpoIIBwqu6hhJhbPxl5KQ" />
 <meta name="naver-site-verification" content="1a08a95edd219c3b2337076840079c8a917ea817" />
@@ -563,6 +564,7 @@
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="slugs.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 /* ================= 데이터 ================= */
@@ -1100,7 +1102,7 @@ function renderNotes(){
     return c => "c" + (Math.max(0, order.indexOf(String(c||"노트"))) % 6);
   })();
   box.innerHTML = POSTS.slice(0, 6).map(p => `
-    <a class="nrow" href="./notes.html#${encodeURIComponent(p.id)}">
+    <a class="nrow" href="./p/${encodeURIComponent((typeof SLUGS !== "undefined" && SLUGS[p.id]) || p.id)}.html">
       <div class="nt">${esc(p.title)}</div>
       <div class="nm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${Math.max(1,Math.round((p.body||"").length/550))}분</div>
     </a>`).join("");

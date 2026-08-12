@@ -8,8 +8,11 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="생각 노트 — 헬로의 서재" />
 <meta property="og:description" content="읽고 생각한 것을, 길게 풀어 씁니다." />
+<meta property="og:url" content="https://hellmeone.com/notes.html" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index, follow, max-snippet:-1" />
 <link rel="canonical" href="https://hellmeone.com/notes.html" />
-<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<link rel="alternate" type="application/rss+xml" title="헬로의 서재 — 생각 노트" href="./feed.xml" />
 <style>
 @font-face{
   font-family:"NanumSquareNeo";
@@ -40,7 +43,6 @@
       --note-text:#C3CBDB; --note-lab:#DCE6F7; --note-strong:#EAF0FA;
     }
   }
-  body.reading{--bg:var(--card);}
   *{box-sizing:border-box; margin:0;}
   /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
   body{-webkit-user-select:none; -moz-user-select:none; user-select:none;}
@@ -137,89 +139,6 @@
   .pager button:disabled{opacity:.35;}
   .pager .ell{color:var(--text-3); font-size:12px;}
 
-  /* ---------- 본문 (가독성 최우선) ---------- */
-  .article{display:none;}
-  .article.show{display:block; animation:fadeUp .3s ease;}
-  @keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
-  .a-back{font-size:13px; color:var(--text-2); font-weight:600;}
-  .a-back:hover{color:var(--accent);}
-  .a-cat{display:inline-block; font-size:12px; font-weight:700; padding:3px 12px; border-radius:980px; margin-top:30px;}
-  .a-title{font-size:clamp(26px,4.6vw,36px); font-weight:900; letter-spacing:-0.025em; line-height:1.35; margin-top:14px;}
-  .a-meta{font-size:13px; color:var(--text-3); margin-top:14px; padding-bottom:26px; border-bottom:1px solid var(--line);}
-  .a-body{
-    font-family:"Noto Serif KR","NanumSquareNeo",serif;
-    font-size:17.5px; line-height:2.0; letter-spacing:-0.003em;
-    color:var(--text); margin-top:34px; word-break:keep-all; overflow-wrap:break-word;
-  }
-  .a-body p{margin:0 0 1.5em;}
-  .a-body h2{
-    font-family:"NanumSquareNeo",sans-serif; font-size:21px; font-weight:800;
-    letter-spacing:-0.02em; margin:2.2em 0 0.9em; line-height:1.5;
-  }
-  .a-body h3{font-family:"NanumSquareNeo",sans-serif; font-size:17.5px; font-weight:800; margin:1.8em 0 0.7em;}
-  .a-body ul, .a-body ol{margin:0 0 1.5em; padding-left:1.3em;}
-  .a-body li{margin-bottom:0.55em;}
-  .a-body blockquote{
-    margin:1.8em 0; padding:4px 0 4px 20px; border-left:3px solid var(--mint);
-    color:var(--text-2); font-style:normal;
-  }
-  .a-body blockquote p{margin-bottom:0.4em;}
-  .a-body strong{
-    font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:5px;
-    -webkit-box-decoration-break:clone; box-decoration-break:clone;
-  }
-  /* 내 생각 첨언 — 본문(명조 필사) 옆에 덧붙인 여백 메모.
-     색을 칠하는 대신 '다른 종이'로 구분한다. 배경은 거의 무채색이고
-     그 위에 SVG 노이즈로 종이 결만 얹었다. 인용(>)이 세로선을 쓰므로
-     여기는 선을 쓰지 않는다 — 인용은 선, 내 생각은 면. */
-  .a-body .mynote{
-    font-family:"NanumSquareNeo",sans-serif;
-    font-size:15.5px; line-height:1.9; letter-spacing:-0.012em;
-    color:var(--note-text);
-    background-color:var(--note-bg);
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23p)' opacity='0.075'/%3E%3C/svg%3E");
-    background-repeat:repeat;
-    border:none; border-radius:0;
-    padding:19px 22px; margin:2.4em 0 2.4em 2.2em;
-  }
-  .a-body .mynote::before{
-    content:"My Note"; display:block;
-    font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
-    font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
-    color:var(--note-lab); margin-bottom:11px;
-  }
-  .a-body .mynote strong{background:none; padding:0; color:var(--note-strong); font-weight:800;}
-  /* 어두운 배경에서는 같은 결이 묻히므로 노이즈를 조금 더 올린다 */
-  @media (prefers-color-scheme: dark){
-    .a-body .mynote{
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23p)' opacity='0.08'/%3E%3C/svg%3E");
-    }
-  }
-  @media (max-width:640px){
-    .a-body .mynote{margin-left:0; padding:17px 18px;}
-  }
-  .a-body a{text-decoration:underline; text-underline-offset:3px;}
-  .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
-  .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
-  /* 글 끝 출처 카드 — 이 글이 어느 책에서 나왔는지 */
-  .a-src{
-    display:flex; align-items:center; gap:16px; margin-top:46px;
-    padding:16px 18px; border:1px solid var(--line); border-radius:16px;
-    background:var(--src-bg); text-decoration:none; color:inherit;
-  }
-  .a-src:hover{border-color:var(--accent);}
-  .a-src img, .a-src .s-ph{width:46px; height:66px; border-radius:7px; flex:0 0 auto; object-fit:cover;}
-  .a-src .s-ph{
-    background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;
-    font-family:"NanumSquareNeo",sans-serif; font-size:20px; font-weight:800;
-  }
-  .a-src .s-txt{flex:1 1 auto; min-width:0; font-family:"NanumSquareNeo",sans-serif; line-height:1.5;}
-  .a-src .s-lab{font-size:11.5px; font-weight:700; color:var(--text-3); letter-spacing:0.01em;}
-  .a-src .s-t{font-size:16px; font-weight:800; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .a-src .s-s{font-size:12.5px; color:var(--text-2); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .a-src .s-go{color:var(--accent); font-size:16px; font-weight:700; flex:0 0 auto;}
-  .a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
-  .a-end a{font-size:13.5px; font-weight:600;}
   footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:800;}
   footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
@@ -250,19 +169,6 @@
     <div class="pager" id="pager"></div>
   </div>
 
-  <!-- 본문 -->
-  <article class="article" id="article">
-    <a class="a-back" href="#" onclick="closePost(event)">← 목록으로</a>
-    <div><span class="a-cat cat" id="aCat"></span></div>
-    <h1 class="a-title" id="aTitle"></h1>
-    <div class="a-meta" id="aMeta"></div>
-    <div class="a-body" id="aBody"></div>
-    <div id="aSource"></div>
-    <div class="a-end">
-      <a href="#" onclick="closePost(event)">← 목록으로</a>
-      <a href="./index.html">서재로 가기 →</a>
-    </div>
-  </article>
 </div>
 
 <footer>
@@ -272,48 +178,21 @@
 
 <script>
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
-document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="slugs.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const readMin = t => Math.max(1, Math.round(t.length / 550));  // 분당 550자 기준
 
-/* 마크다운 렌더 (marked 실패 시 문단 폴백) */
-function render(md){
-  md = md.replace(/^(#{1,4})(?=[^#\s])/gm, "$1 ");   // "##제목"처럼 공백 없이 써도 소제목 인식
-  md = md.replace(/\*\*[ \t]*([^*\n]+?)[ \t]*\*\*/g, (m,t)=>"**"+t+"**");  // "** 강조 **"처럼 공백 있어도 인식
-  md = md.replace(/(?:^\/\/[^\n]*(?:\n|$))+/gm, block => {   // "// 내 생각" — 이어진 줄은 한 덩어리로
-    const inner = block.split("\n")
-      .map(l => esc(l.replace(/^\/\/[ \t]*/, "").trim()))
-      .filter(Boolean)
-      .join("<br>")
-      .replace(/\*\*([^*\n]+?)\*\*/g, "<strong>$1</strong>");
-    return inner ? `\n\n<aside class="mynote">${inner}</aside>\n\n` : "\n\n";
-  });
-  try{ if(window.marked) return marked.parse(md); }catch(e){}
-  return md.split(/\n\n+/).filter(p=>p.trim()).map(p=>
-    p.trim().startsWith("<aside") ? p.trim() : `<p>${esc(p).replace(/\n/g,"<br>")}</p>`
-  ).join("");
-}
+/* 글 한 편의 주소. 본문은 p/<슬러그>.html에 미리 만들어 둔 진짜 페이지다
+   (build_notes.py가 만든다) — 검색엔진이 글마다 따로 읽어 갈 수 있게. */
+const postHref = id => "./p/" + encodeURIComponent((typeof SLUGS !== "undefined" && SLUGS[id]) || id) + ".html";
 
-/* 글에 연결된 책 — 서재 정보를 찾아 글 끝에 출처 카드로 */
-function sourceCard(title){
-  if(!title) return "";
-  const b = (typeof BOOKS !== "undefined" ? BOOKS : []).find(x => x.title === title) || { title };
-  const sub = [b.author, b.publisher, b.published].filter(Boolean).join(" · ");
-  const cover = b.cover
-    ? `<img src="${esc(b.cover).replace(/"/g,"&quot;")}" alt="" loading="lazy" />`
-    : `<div class="s-ph">${esc(title.slice(0,1))}</div>`;
-  return `<a class="a-src" href="./index.html#book/${encodeURIComponent(title)}">
-    ${cover}
-    <div class="s-txt">
-      <div class="s-lab">이 글은 이 책을 읽고 썼습니다</div>
-      <div class="s-t">${esc(title)}</div>
-      ${sub ? `<div class="s-s">${esc(sub)}</div>` : ""}
-    </div>
-    <span class="s-go">→</span>
-  </a>`;
-}
+/* 예전 주소(notes.html#아이디)로 들어온 사람을 새 주소로 넘겨준다 */
+(function(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  if(id && typeof SLUGS !== "undefined" && SLUGS[id]) location.replace(postHref(id));
+})();
 
 let activeCat = "전체", page = 1;
 const PER_PAGE = 8;
@@ -354,7 +233,7 @@ function renderList(){
   page = Math.min(page, total);
   const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
   document.getElementById("plist").innerHTML = list.length ? list.map(p => `
-    <a class="prow" href="#${encodeURIComponent(p.id)}">
+    <a class="prow" href="${postHref(p.id)}">
       <div class="pt">${esc(p.title)}</div>
       <div class="pm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분${p.book ? ` · 『${esc(p.book)}』` : ""}</div>
       <div class="px">${esc(p.body.replace(/[#>*\-`\/]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
@@ -368,35 +247,7 @@ function renderList(){
 }
 function goPage(p){ page = p; renderList(); document.getElementById("listView").scrollIntoView({behavior:"smooth", block:"start"}); }
 
-function openPost(p){
-  document.body.classList.add("reading");
-  document.getElementById("listView").style.display = "none";
-  const aCat = document.getElementById("aCat");
-  aCat.textContent = p.category || "노트";
-  aCat.className = "a-cat cat " + catClass(p.category);
-  document.getElementById("aTitle").textContent = p.title;
-  document.getElementById("aMeta").textContent = `${p.d || ""} · 읽는 시간 약 ${readMin(p.body)}분`;
-  document.getElementById("aBody").innerHTML = render(p.body);
-  document.getElementById("aSource").innerHTML = sourceCard(p.book);
-  document.getElementById("article").classList.add("show");
-  document.title = p.title + " — 생각 노트";
-  window.scrollTo(0, 0);
-}
-function closePost(e){
-  if(e) e.preventDefault();
-  document.body.classList.remove("reading");
-  history.pushState("", document.title, location.pathname);
-  document.getElementById("article").classList.remove("show");
-  document.getElementById("listView").style.display = "";
-  document.title = "생각 노트 — 헬로의 서재";
-}
-function route(){
-  const id = decodeURIComponent(location.hash.slice(1));
-  const p = id && POSTS.find(x => x.id === id);
-  if(p) openPost(p); else closePost();
-}
-window.addEventListener("hashchange", route);
-renderCats(); renderList(); route();
+renderCats(); renderList();
 </script>
 <script>
 /* ---------- 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) ---------- */

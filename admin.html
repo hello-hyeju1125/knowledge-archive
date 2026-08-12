@@ -919,7 +919,7 @@ async function savePost(){
     await ghPut("posts.js", src.replace(marker, marker + "\n" + postLine(post)), sha, `글 발행: ${title}`);
     document.getElementById("pTitle").value = ""; document.getElementById("pBody").value = "";
     renderBookChips("pBookChips", "");
-    msg("pMsg","ok",`발행 완료 — 1~2분 뒤 <a href="https://hellmeone.com/notes.html" target="_blank">작법 노트</a>에 올라갑니다 ✍️`);
+    msg("pMsg","ok",`발행 완료 — 1~2분 뒤 <a href="https://hellmeone.com/notes.html" target="_blank">생각 노트</a>에 올라갑니다. 글 하나짜리 주소(검색 노출용)도 자동으로 만들어져요 ✍️`);
   }catch(e){ msg("pMsg","err",authFail(e)); }
   btn.disabled = false; btn.textContent = "발행";
 }
