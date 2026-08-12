@@ -186,7 +186,6 @@
     <button class="on" id="tabQ" onclick="showTab('q')">인용구</button>
     <button id="tabB" onclick="showTab('b')">책</button>
     <button id="tabP" onclick="showTab('p')">글</button>
-    <button id="tabI" onclick="showTab('i')">아이디어</button>
     <button id="tabE" onclick="showTab('e')">관리</button>
   </div>
 
@@ -281,13 +280,6 @@
     <div class="msg" id="pMsg"></div>
   </div>
 
-  <!-- 빛나는 아이디어 -->
-  <div class="panel hidden" id="paneI">
-    <textarea id="iText" style="min-height:150px;" placeholder="떠오른 생각을 그대로 적어주세요."></textarea>
-    <button class="btn" id="iSave" onclick="saveIdea()">아이디어 남기기</button>
-    <div class="msg" id="iMsg"></div>
-  </div>
-
   <!-- 수정·삭제: 전체 목록에서 바로 고치거나 지우기 -->
   <div class="panel hidden" id="paneE">
     <div id="eListView">
@@ -295,7 +287,6 @@
         <button class="on" data-k="b">책</button>
         <button data-k="q">문장</button>
         <button data-k="p">글</button>
-        <button data-k="i">아이디어</button>
       </div>
       <input id="eSearch" placeholder="목록에서 찾기 (선택)" autocomplete="off" />
       <div id="eList"></div>
@@ -341,15 +332,6 @@
         <button class="btn btn-danger" id="epDel" onclick="deletePost()">글 삭제</button>
       </div>
     </div>
-    <div id="eiForm" class="hidden">
-      <button class="plain" onclick="backToList()">← 목록으로</button>
-      <div id="eiLikes" style="font-size:13px; color:var(--text-2); margin:6px 0 8px;"></div>
-      <textarea id="eiText" style="min-height:150px;"></textarea>
-      <div class="row-btns">
-        <button class="btn" id="eiSave" onclick="saveIdeaEdit()">저장</button>
-        <button class="btn btn-danger" id="eiDel" onclick="deleteIdea()">아이디어 삭제</button>
-      </div>
-    </div>
     <div class="msg" id="eMsg"></div>
   </div>
 </div>
@@ -359,7 +341,6 @@
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
-document.write('<script src="ideas.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const REPO = "hello-hyeju1125/knowledge-archive";
@@ -392,7 +373,7 @@ function msg(id, type, html){
 const authFail = e => String(e.message||"").includes("401")
   ? `열쇠가 만료된 것 같아요. <button onclick="reconnect()">다시 연결하기</button>` : "⚠️ " + e.message;
 function showTab(t){
-  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabP","paneP","p"],["tabI","paneI","i"],["tabE","paneE","e"]]){
+  for(const [tab,pane,k] of [["tabQ","paneQ","q"],["tabB","paneB","b"],["tabP","paneP","p"],["tabE","paneE","e"]]){
     document.getElementById(tab).classList.toggle("on", t===k);
     document.getElementById(pane).classList.toggle("hidden", t!==k);
   }
@@ -745,9 +726,6 @@ function renderEList(){
   }else if(eKind === "p"){
     items = POSTS;                 // 최신 발행이 위로
     if(q) items = items.filter(p => p.title.toLowerCase().includes(q) || (p.body||"").toLowerCase().includes(q));
-  }else if(eKind === "i"){
-    items = IDEAS;
-    if(q) items = items.filter(x => (x.text||"").toLowerCase().includes(q));
   }else{
     items = QUOTES;                // 이미 최신순
     if(q) items = items.filter(x => x.t.toLowerCase().includes(q) || x.b.toLowerCase().includes(q));
@@ -757,12 +735,6 @@ function renderEList(){
   const slice = items.slice((ePage-1)*E_PER, ePage*E_PER);
 
   const rows = slice.map(it => {
-    if(eKind === "i"){
-      const ii = IDEAS.indexOf(it);
-      return `<div class="mrow"><div class="mtxt">${escH((it.text||"").slice(0,60))}${(it.text||"").length>60?"…":""}
-        <span class="msub"><span style="color:#FF4D6D; font-weight:700;">♥ <span class="lk" data-id="${escH(it.id)}">–</span></span>${it.d?" · "+it.d:""}</span></div>
-        <div class="act"><button class="ed" data-i="${ii}">수정</button><button class="de" data-i="${ii}">삭제</button></div></div>`;
-    }
     if(eKind === "p"){
       const pi = POSTS.indexOf(it);
       return `<div class="mrow"><div class="mtxt">${escH(it.title)}
@@ -787,17 +759,14 @@ function renderEList(){
     ${pageWin(ePage,total).map(p=>p==="…"?`<span class="ell">…</span>`:`<button class="${p===ePage?"cur":""}" onclick="ePage=${p};renderEList()">${p}</button>`).join("")}
     <button onclick="ePage++;renderEList()" ${ePage===total?"disabled":""}>›</button>` : "";
 
-  if(eKind === "i") loadIdeaLikes();
   document.querySelectorAll("#eList .ed").forEach(el => el.onclick = () => {
     if(eKind==="b") openBookEditor(BOOKS.find(b=>b.title===el.dataset.t));
     else if(eKind==="p") openPostEditor(POSTS[+el.dataset.i]);
-    else if(eKind==="i") openIdeaEditor(IDEAS[+el.dataset.i]);
     else openQuoteEditor(QUOTES[+el.dataset.i]);
   });
   document.querySelectorAll("#eList .de").forEach(el => el.onclick = () => {
     if(eKind==="b"){ editBook = BOOKS.find(b=>b.title===el.dataset.t); deleteBook(); }
     else if(eKind==="p"){ editPost = POSTS[+el.dataset.i]; deletePost(); }
-    else if(eKind==="i"){ editIdea = IDEAS[+el.dataset.i]; deleteIdea(); }
     else{ editQuote = QUOTES[+el.dataset.i]; deleteQuote(); }
   });
 }
@@ -826,7 +795,6 @@ function backToList(){
   document.getElementById("eForm").classList.add("hidden");
   document.getElementById("eqForm").classList.add("hidden");
   document.getElementById("epForm").classList.add("hidden");
-  document.getElementById("eiForm").classList.add("hidden");
   document.getElementById("eListView").classList.remove("hidden");
   renderEList();
 }
@@ -1005,95 +973,6 @@ async function deletePost(){
   if(btn){ btn.disabled = false; btn.textContent = "글 삭제"; }
 }
 
-/* ---------- 소설의 재료: 추가·수정·삭제 ---------- */
-let editIdea = null;
-const ideaLine = i => "  " + JSON.stringify(i) + ",";
-function findIdeaLine(src, id){
-  const i = src.indexOf('"id":' + JSON.stringify(id));
-  if(i < 0) return null;
-  const start = src.lastIndexOf("\n", i) + 1;
-  let end = src.indexOf("\n", i);
-  if(end < 0) end = src.length;
-  return { start, end };
-}
-
-/* 좋아요 수 불러오기 (abacus 카운터) */
-const LIKE_NS = "hellmeone-ideas";
-async function likeCount(id){
-  try{
-    const r = await fetch(`https://abacus.jasoncameron.dev/get/${LIKE_NS}/${encodeURIComponent(id)}`);
-    const d = await r.json();
-    return typeof d.value === "number" ? d.value : 0;
-  }catch(e){ return 0; }
-}
-async function loadIdeaLikes(){
-  document.querySelectorAll("#eList .lk").forEach(async el => {
-    el.textContent = await likeCount(el.dataset.id);
-  });
-}
-
-async function saveIdea(){
-  const text = document.getElementById("iText").value.trim();
-  if(!text){ msg("iMsg","err","내용을 적어주세요."); return; }
-  const btn = document.getElementById("iSave");
-  btn.disabled = true; btn.textContent = "남기는 중…";
-  try{
-    const { text: src, sha } = await ghGet("ideas.js");
-    const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
-    const idea = { id: Date.now().toString(36), text, d: ds };
-    const marker = "const IDEAS = [";
-    if(!src.includes(marker)) throw new Error("ideas.js 형식을 인식하지 못했어요.");
-    await ghPut("ideas.js", src.replace(marker, marker + "\n" + ideaLine(idea)), sha, `아이디어 추가: ${text.replace(/\s+/g," ").slice(0,20)}`);
-    document.getElementById("iText").value = "";
-    msg("iMsg","ok",`남겼어요 — 1~2분 뒤 <a href="https://hellmeone.com/ideas.html" target="_blank">빛나는 아이디어</a>에 나타납니다 ✨`);
-  }catch(e){ msg("iMsg","err",authFail(e)); }
-  btn.disabled = false; btn.textContent = "아이디어 남기기";
-}
-
-async function openIdeaEditor(x){
-  editIdea = x;
-  document.getElementById("eListView").classList.add("hidden");
-  document.getElementById("eMsg").className = "msg";
-  document.getElementById("eiText").value = x.text || "";
-  document.getElementById("eiForm").classList.remove("hidden");
-  const box = document.getElementById("eiLikes");
-  box.innerHTML = `<span style="color:#FF4D6D; font-weight:700;">♥ …</span> 좋아요`;
-  const n = await likeCount(x.id);
-  box.innerHTML = `<span style="color:#FF4D6D; font-weight:700;">♥ ${n}</span> 좋아요${x.d ? " · " + x.d : ""}`;
-}
-async function saveIdeaEdit(){
-  if(!editIdea) return;
-  const text = document.getElementById("eiText").value.trim();
-  if(!text){ msg("eMsg","err","내용을 채워주세요."); return; }
-  const btn = document.getElementById("eiSave");
-  btn.disabled = true; btn.textContent = "저장 중…";
-  try{
-    const { text: src, sha } = await ghGet("ideas.js");
-    const pos = findIdeaLine(src, editIdea.id);
-    if(!pos) throw new Error("이 아이디어를 파일에서 찾지 못했어요. 방금 남겼다면 1~2분 뒤 다시 시도해 주세요.");
-    const updated = { id: editIdea.id, text, d: editIdea.d };
-    await ghPut("ideas.js", src.slice(0,pos.start) + ideaLine(updated) + src.slice(pos.end), sha, `아이디어 수정: ${text.replace(/\s+/g," ").slice(0,20)}`);
-    Object.assign(editIdea, updated);
-    msg("eMsg","ok","수정 완료 — 1~2분 뒤 반영돼요.");
-  }catch(e){ msg("eMsg","err",authFail(e)); }
-  btn.disabled = false; btn.textContent = "저장";
-}
-async function deleteIdea(){
-  if(!editIdea) return;
-  if(!confirm(`이 아이디어를 삭제할까요?\n\n"${(editIdea.text||"").slice(0,50)}…"`)) return;
-  const btn = document.getElementById("eiDel");
-  if(btn){ btn.disabled = true; btn.textContent = "삭제 중…"; }
-  try{
-    const { text: src, sha } = await ghGet("ideas.js");
-    const pos = findIdeaLine(src, editIdea.id);
-    if(!pos) throw new Error("이 아이디어를 파일에서 찾지 못했어요.");
-    await ghPut("ideas.js", src.slice(0,pos.start) + src.slice(pos.end+1), sha, `아이디어 삭제: ${(editIdea.text||"").replace(/\s+/g," ").slice(0,20)}`);
-    IDEAS.splice(IDEAS.indexOf(editIdea), 1);
-    backToList();
-    msg("eMsg","ok","삭제 완료 — 1~2분 뒤 반영돼요.");
-  }catch(e){ msg("eMsg","err",authFail(e)); }
-  if(btn){ btn.disabled = false; btn.textContent = "아이디어 삭제"; }
-}
 </script>
 </body>
 </html>

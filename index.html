@@ -289,34 +289,6 @@
   }
   .notes-cta{text-align:center; margin-top:28px;}
 
-  /* ---------- 빛나는 아이디어 ---------- */
-  .iwrap{max-width:1100px; margin:0 auto; columns:3 300px; column-gap:16px;}
-  @media (max-width:720px){ .iwrap{columns:1;} }
-  .icard{
-    break-inside:avoid; background:var(--card); border:1px solid var(--card-line);
-    border-radius:16px; padding:20px; margin-bottom:16px; transition:transform .2s, box-shadow .2s;
-  }
-  .icard:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg);}
-  .icard .it{font-size:14.5px; line-height:1.85; color:var(--text); word-break:keep-all; transition:filter .35s ease;}
-  .icard .it.locked{
-    filter:blur(4.5px); pointer-events:none;
-    -webkit-mask-image:linear-gradient(180deg,#000 25%,rgba(0,0,0,.25) 100%);
-    mask-image:linear-gradient(180deg,#000 25%,rgba(0,0,0,.25) 100%);
-  }
-  .icard .foot{display:flex; align-items:center; gap:10px; margin-top:16px; padding-top:13px; border-top:1px solid var(--line);}
-  .icard .date{font-size:11.5px; color:var(--text-3); margin-left:auto;}
-  .like{
-    display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line);
-    background:var(--bg); color:var(--text-2); border-radius:980px;
-    font-size:13px; font-weight:700; padding:7px 15px; transition:all .18s;
-  }
-  .like:hover{border-color:#FF4D6D; color:#FF4D6D;}
-  .like.on{background:#FF4D6D; border-color:#FF4D6D; color:#fff;}
-  .like .hh{font-size:14px; line-height:1;}
-  .like.on .hh{animation:pop .35s ease;}
-  @keyframes pop{0%{transform:scale(1);}45%{transform:scale(1.5);}100%{transform:scale(1);}}
-  .ihint{font-size:11.5px; color:var(--text-3);}
-
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line); padding:36px 24px 60px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:700;}
@@ -420,7 +392,6 @@
     <a href="#books">책</a>
     <a href="#graph-sec">지도</a>
     <a href="./notes.html">노트</a>
-    <a href="./ideas.html">아이디어</a>
     <button class="add-mini" id="addBtn">서재 주인 접근</button>
   </div>
 </nav>
@@ -496,15 +467,6 @@
   </div>
   <div class="nwrap" id="noteList"></div>
   <div class="notes-cta"><a class="hero-cta" style="margin-top:0;" href="./notes.html">생각 노트 전체 보기 →</a></div>
-</section>
-
-<section id="ideas-sec">
-  <div class="sec-head" style="max-width:1100px;">
-    <h2><span class="marker-thin">빛나는 아이디어</span></h2>
-    <p id="ideasDesc">읽다가 떠오른 생각의 조각들. 하트를 누르면 펼쳐집니다.</p>
-  </div>
-  <div class="iwrap" id="ideaList"></div>
-  <div class="notes-cta"><a class="hero-cta" style="margin-top:0;" href="./ideas.html">아이디어 전체 보기 →</a></div>
 </section>
 
 <footer>
@@ -601,7 +563,6 @@
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
-document.write('<script src="ideas.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 /* ================= 데이터 ================= */
@@ -1145,64 +1106,10 @@ function renderNotes(){
     </a>`).join("");
 }
 
-/* ================= 빛나는 아이디어 ================= */
-const IDEA_NS = "hellmeone-ideas";
-const ideaLiked = id => !!localStorage.getItem("liked_" + id);
-const ideaOwner = () => !!localStorage.getItem("ghToken");
-
-function renderIdeas(){
-  const box = document.getElementById("ideaList");
-  if(typeof IDEAS === "undefined" || !IDEAS.length){
-    document.getElementById("ideas-sec").style.display = "none"; return;
-  }
-  if(ideaOwner()) document.getElementById("ideasDesc").textContent = "읽다가 떠오른 생각의 조각들.";
-  box.innerHTML = IDEAS.slice(0, 6).map(i => {
-    const open = ideaOwner() || ideaLiked(i.id);
-    return `
-    <div class="icard">
-      <div class="it ${open?"":"locked"}">${esc(i.text)}</div>
-      <div class="foot">
-        <button class="like ${ideaLiked(i.id)?"on":""}" data-id="${esc(i.id)}">
-          <span class="hh">${ideaLiked(i.id)?"♥":"♡"}</span><span class="cnt">–</span>
-        </button>
-        ${open ? "" : `<span class="ihint">하트를 누르면 펼쳐져요</span>`}
-        <span class="date">${i.d||""}</span>
-      </div>
-    </div>`;
-  }).join("");
-  box.querySelectorAll(".like").forEach(el => el.onclick = () => likeIdea(el.dataset.id, el));
-  IDEAS.slice(0, 6).forEach(async i => {
-    const el = box.querySelector(`.like[data-id="${CSS.escape(i.id)}"] .cnt`);
-    if(!el) return;
-    try{
-      const r = await fetch(`https://abacus.jasoncameron.dev/get/${IDEA_NS}/${encodeURIComponent(i.id)}`);
-      const d = await r.json();
-      el.textContent = typeof d.value === "number" ? d.value : 0;
-    }catch(e){ el.textContent = "0"; }
-  });
-}
-
-async function likeIdea(id, btn){
-  const card = btn.closest(".icard");
-  card.querySelector(".it").classList.remove("locked");
-  const hint = card.querySelector(".ihint");
-  if(hint) hint.remove();
-  if(ideaLiked(id)) return;
-  localStorage.setItem("liked_" + id, "1");
-  btn.classList.add("on");
-  btn.querySelector(".hh").textContent = "♥";
-  const cnt = btn.querySelector(".cnt");
-  cnt.textContent = (parseInt(cnt.textContent) || 0) + 1;
-  try{
-    const r = await fetch(`https://abacus.jasoncameron.dev/hit/${IDEA_NS}/${encodeURIComponent(id)}`);
-    const d = await r.json();
-    if(typeof d.value === "number") cnt.textContent = d.value;
-  }catch(e){}
-}
 
 /* ================= 초기화 ================= */
 function refresh(){
-  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); renderNotes(); renderIdeas(); rebuildGraph(); snapshotLook();
+  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); renderNotes(); rebuildGraph(); snapshotLook();
 }
 refresh();
 
