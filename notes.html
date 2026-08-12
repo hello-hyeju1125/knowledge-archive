@@ -26,7 +26,8 @@
     --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
     --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
-    --note-bg:#F5F8FF; --note-line:#E0E8FF;
+    --note-bg:#F7F5F1; --src-bg:#F5F8FF;
+    --note-edge:#D6CEC1; --note-text:#4B463F; --note-lab:#A79C8C; --note-strong:#2E2A24;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -35,7 +36,8 @@
       --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
       --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
-      --note-bg:#121D3A; --note-line:#24365F;
+      --note-bg:#161B26; --src-bg:#121D3A;
+      --note-edge:#3E4657; --note-text:#C6C9D1; --note-lab:#7C8494; --note-strong:#EDEFF3;
     }
   }
   body.reading{--bg:var(--card);}
@@ -166,15 +168,27 @@
     font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:5px;
     -webkit-box-decoration-break:clone; box-decoration-break:clone;
   }
-  /* 내 생각 첨언 — 본문(명조 필사)과 서체부터 구분되는 고딕 카드 */
+  /* 내 생각 첨언 — 본문(명조 필사) 옆에 덧붙인 여백 메모.
+     둥근 카드가 아니라 각진 직사각형 + 따뜻한 회색 명암으로 '나중에 적어넣은 것'처럼 */
   .a-body .mynote{
     font-family:"NanumSquareNeo",sans-serif;
-    font-size:16px; line-height:1.85; letter-spacing:-0.012em;
-    color:var(--text-2);
-    background:var(--note-bg); border:1px solid var(--note-line);
-    border-radius:14px; padding:18px 20px; margin:2em 0;
+    font-size:15.5px; line-height:1.9; letter-spacing:-0.012em;
+    color:var(--note-text);
+    background:var(--note-bg);
+    border:none; border-radius:0;
+    box-shadow:inset 3px 0 0 var(--note-edge);
+    padding:19px 22px; margin:2.4em 0 2.4em 2.2em;
   }
-  .a-body .mynote strong{background:none; padding:0; color:var(--accent); font-weight:800;}
+  .a-body .mynote::before{
+    content:"My Note"; display:block;
+    font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    font-size:10.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--note-lab); margin-bottom:11px;
+  }
+  .a-body .mynote strong{background:none; padding:0; color:var(--note-strong); font-weight:800;}
+  @media (max-width:640px){
+    .a-body .mynote{margin-left:0; padding:17px 18px;}
+  }
   .a-body a{text-decoration:underline; text-underline-offset:3px;}
   .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
   .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
@@ -182,7 +196,7 @@
   .a-src{
     display:flex; align-items:center; gap:16px; margin-top:46px;
     padding:16px 18px; border:1px solid var(--line); border-radius:16px;
-    background:var(--note-bg); text-decoration:none; color:inherit;
+    background:var(--src-bg); text-decoration:none; color:inherit;
   }
   .a-src:hover{border-color:var(--accent);}
   .a-src img, .a-src .s-ph{width:46px; height:66px; border-radius:7px; flex:0 0 auto; object-fit:cover;}
