@@ -1137,5 +1137,13 @@ if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>network
     document.addEventListener(ev, e => { if(!exempt(e)) e.preventDefault(); }));
 })();
 </script>
+<!-- 네이버 애널리틱스 — 방문자 수·유입 검색어·인기 페이지.
+     서재 주인만 쓰는 admin.html에는 넣지 않는다(내 방문이 통계를 오염시키므로). -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "995a28458386";
+if(window.wcs) { wcs_do(); }
+</script>
 </body>
 </html>

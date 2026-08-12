@@ -335,6 +335,14 @@ def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
     document.addEventListener(ev, e => {{ if(!exempt(e)) e.preventDefault(); }}));
 }})();
 </script>
+<!-- 네이버 애널리틱스 — 방문자 수·유입 검색어·인기 페이지.
+     index.html·notes.html에도 같은 조각이 들어 있다(셋 다 같은 ID를 써야 한 사이트로 집계된다). -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {{}};
+wcs_add["wa"] = "995a28458386";
+if(window.wcs) {{ wcs_do(); }}
+</script>
 </body>
 </html>
 """.format(
@@ -357,9 +365,11 @@ def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
 
 # ---------------------------------------------------------------- 사이트맵·RSS
 def write_sitemap(posts, slugs):
-    today = datetime.now(KST).strftime("%Y-%m-%d")
-    urls = [("%s/" % SITE, today, "daily", "1.0"),
-            ("%s/notes.html" % SITE, today, "daily", "0.9")]
+    # '지금'이 아니라 가장 최근 글의 날짜를 쓴다 — 돌릴 때마다 결과가 달라지면
+    # 내용이 그대로여도 자동 빌드가 매번 빈 커밋을 남긴다.
+    latest = max(p["d"] for p in posts) if posts else "2026-01-01"
+    urls = [("%s/" % SITE, latest, "daily", "1.0"),
+            ("%s/notes.html" % SITE, latest, "daily", "0.9")]
     urls += [(post_url(slugs[p["id"]]), p["d"], "monthly", "0.8") for p in posts]
     body = "\n".join(
         "  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n"
@@ -372,11 +382,12 @@ def write_sitemap(posts, slugs):
 
 def write_feed(posts, slugs):
     """RSS — 네이버·다음 검색과 구독기가 새 글을 빨리 알아채는 통로."""
-    now = datetime.now(KST).strftime("%a, %d %b %Y %H:%M:%S +0900")
 
     def pubdate(d):
         return datetime.strptime(d, "%Y-%m-%d").replace(tzinfo=KST).strftime(
             "%a, %d %b %Y 09:00:00 +0900")
+
+    now = pubdate(max(p["d"] for p in posts)) if posts else pubdate("2026-01-01")
 
     items = "\n".join("""  <item>
     <title>{t}</title>
