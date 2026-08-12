@@ -178,6 +178,23 @@
   .a-body a{text-decoration:underline; text-underline-offset:3px;}
   .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
   .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--card); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
+  /* 글 끝 출처 카드 — 이 글이 어느 책에서 나왔는지 */
+  .a-src{
+    display:flex; align-items:center; gap:16px; margin-top:46px;
+    padding:16px 18px; border:1px solid var(--line); border-radius:16px;
+    background:var(--note-bg); text-decoration:none; color:inherit;
+  }
+  .a-src:hover{border-color:var(--accent);}
+  .a-src img, .a-src .s-ph{width:46px; height:66px; border-radius:7px; flex:0 0 auto; object-fit:cover;}
+  .a-src .s-ph{
+    background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-family:"NanumSquareNeo",sans-serif; font-size:20px; font-weight:800;
+  }
+  .a-src .s-txt{flex:1 1 auto; min-width:0; font-family:"NanumSquareNeo",sans-serif; line-height:1.5;}
+  .a-src .s-lab{font-size:11.5px; font-weight:700; color:var(--text-3); letter-spacing:0.01em;}
+  .a-src .s-t{font-size:16px; font-weight:800; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .a-src .s-s{font-size:12.5px; color:var(--text-2); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .a-src .s-go{color:var(--accent); font-size:16px; font-weight:700; flex:0 0 auto;}
   .a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
   .a-end a{font-size:13.5px; font-weight:600;}
   footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
@@ -218,6 +235,7 @@
     <h1 class="a-title" id="aTitle"></h1>
     <div class="a-meta" id="aMeta"></div>
     <div class="a-body" id="aBody"></div>
+    <div id="aSource"></div>
     <div class="a-end">
       <a href="#" onclick="closePost(event)">← 목록으로</a>
       <a href="./index.html">서재로 가기 →</a>
@@ -232,6 +250,7 @@
 
 <script>
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -253,6 +272,25 @@ function render(md){
   return md.split(/\n\n+/).filter(p=>p.trim()).map(p=>
     p.trim().startsWith("<aside") ? p.trim() : `<p>${esc(p).replace(/\n/g,"<br>")}</p>`
   ).join("");
+}
+
+/* 글에 연결된 책 — 서재 정보를 찾아 글 끝에 출처 카드로 */
+function sourceCard(title){
+  if(!title) return "";
+  const b = (typeof BOOKS !== "undefined" ? BOOKS : []).find(x => x.title === title) || { title };
+  const sub = [b.author, b.publisher, b.published].filter(Boolean).join(" · ");
+  const cover = b.cover
+    ? `<img src="${esc(b.cover).replace(/"/g,"&quot;")}" alt="" loading="lazy" />`
+    : `<div class="s-ph">${esc(title.slice(0,1))}</div>`;
+  return `<a class="a-src" href="./index.html#book/${encodeURIComponent(title)}">
+    ${cover}
+    <div class="s-txt">
+      <div class="s-lab">이 글은 이 책을 읽고 썼습니다</div>
+      <div class="s-t">${esc(title)}</div>
+      ${sub ? `<div class="s-s">${esc(sub)}</div>` : ""}
+    </div>
+    <span class="s-go">→</span>
+  </a>`;
 }
 
 let activeCat = "전체", page = 1;
@@ -296,7 +334,7 @@ function renderList(){
   document.getElementById("plist").innerHTML = list.length ? list.map(p => `
     <a class="prow" href="#${encodeURIComponent(p.id)}">
       <div class="pt">${esc(p.title)}</div>
-      <div class="pm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분</div>
+      <div class="pm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분${p.book ? ` · 『${esc(p.book)}』` : ""}</div>
       <div class="px">${esc(p.body.replace(/[#>*\-`\/]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
     </a>`).join("")
     : `<div class="empty">아직 글이 없어요. 서재 주인의 방에서 첫 글을 발행해 보세요.</div>`;
@@ -317,6 +355,7 @@ function openPost(p){
   document.getElementById("aTitle").textContent = p.title;
   document.getElementById("aMeta").textContent = `${p.d || ""} · 읽는 시간 약 ${readMin(p.body)}분`;
   document.getElementById("aBody").innerHTML = render(p.body);
+  document.getElementById("aSource").innerHTML = sourceCard(p.book);
   document.getElementById("article").classList.add("show");
   document.title = p.title + " — 생각 노트";
   window.scrollTo(0, 0);

@@ -75,6 +75,8 @@
     max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .chips button.on, .chips button:hover{border-color:var(--accent); color:var(--accent);}
+  .chips button.on{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .picklab{font-size:12.5px; color:var(--text-3); font-weight:600; margin:2px 0 8px;}
 
   .tagpick{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
   .tagpick button{
@@ -268,6 +270,8 @@
   <div class="panel hidden" id="paneP">
     <input id="pTitle" placeholder="글 제목" />
     <input id="pCat" placeholder="분류 (기본: 작법)" />
+    <div class="picklab">이 글의 출처 책 (누르면 글 끝에 자동으로 붙어요)</div>
+    <div class="chips" id="pBookChips"></div>
     <textarea id="pBody" style="min-height:320px; line-height:1.8;" placeholder="본문을 적어주세요.
 
 ## 소제목    **강조**    - 목록    > 인용
@@ -329,6 +333,8 @@
       <button class="plain" onclick="backToList()">← 목록으로</button>
       <input id="epTitle" placeholder="글 제목" style="margin-top:8px;" />
       <input id="epCat" placeholder="분류" />
+      <div class="picklab">이 글의 출처 책</div>
+      <div class="chips" id="epBookChips"></div>
       <textarea id="epBody" style="min-height:300px; line-height:1.8;"></textarea>
       <div class="row-btns">
         <button class="btn" id="epSave" onclick="savePostEdit()">저장</button>
@@ -404,6 +410,24 @@ document.querySelectorAll("#recentChips button").forEach(el => el.onclick = () =
   document.querySelectorAll("#recentChips button").forEach(x=>x.classList.toggle("on", x===el));
   document.getElementById("qText").focus();
 });
+
+/* ---------- 글 ↔ 책 연결: 최근 등록한 책 5권을 눌러서 출처 지정 ---------- */
+const chipEsc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+function renderBookChips(boxId, selected){
+  const box = document.getElementById(boxId);
+  const recent = BOOKS.slice(-5).reverse().map(b => b.title);
+  const list = selected && !recent.includes(selected) ? [selected, ...recent] : recent;
+  box.dataset.sel = selected || "";
+  box.innerHTML =
+    `<button type="button" data-t=""${selected ? "" : ' class="on"'}>출처 없음</button>` +
+    list.map(t => `<button type="button" data-t="${chipEsc(t)}"${t===selected?' class="on"':''}>${chipEsc(t)}</button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => {
+    box.dataset.sel = el.dataset.t;
+    box.querySelectorAll("button").forEach(x => x.classList.toggle("on", x===el));
+  });
+}
+const pickedBook = boxId => document.getElementById(boxId).dataset.sel || "";
+renderBookChips("pBookChips", "");
 
 /* ---------- 분류 · 별점 ---------- */
 let qTag = "문학";
@@ -920,10 +944,13 @@ async function savePost(){
     const d = new Date(), ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
     const post = { id: Date.now().toString(36), title,
       category: document.getElementById("pCat").value.trim() || "작법", d: ds, body };
+    const bk = pickedBook("pBookChips");
+    if(bk) post.book = bk;
     const marker = "const POSTS = [";
     if(!src.includes(marker)) throw new Error("posts.js 형식을 인식하지 못했어요.");
     await ghPut("posts.js", src.replace(marker, marker + "\n" + postLine(post)), sha, `글 발행: ${title}`);
     document.getElementById("pTitle").value = ""; document.getElementById("pBody").value = "";
+    renderBookChips("pBookChips", "");
     msg("pMsg","ok",`발행 완료 — 1~2분 뒤 <a href="https://hellmeone.com/notes.html" target="_blank">작법 노트</a>에 올라갑니다 ✍️`);
   }catch(e){ msg("pMsg","err",authFail(e)); }
   btn.disabled = false; btn.textContent = "발행";
@@ -936,6 +963,7 @@ function openPostEditor(p){
   document.getElementById("epTitle").value = p.title;
   document.getElementById("epCat").value = p.category || "";
   document.getElementById("epBody").value = p.body;
+  renderBookChips("epBookChips", p.book || "");
   document.getElementById("epForm").classList.remove("hidden");
 }
 async function savePostEdit(){
@@ -951,7 +979,10 @@ async function savePostEdit(){
     if(!pos) throw new Error("이 글을 파일에서 찾지 못했어요. 방금 발행했다면 1~2분 뒤 다시 시도해 주세요.");
     const updated = { id: editPost.id, title,
       category: document.getElementById("epCat").value.trim() || "작법", d: editPost.d, body };
+    const bk = pickedBook("epBookChips");
+    if(bk) updated.book = bk;
     await ghPut("posts.js", src.slice(0,pos.start) + postLine(updated) + src.slice(pos.end), sha, `글 수정: ${title}`);
+    delete editPost.book;
     Object.assign(editPost, updated);
     msg("eMsg","ok",`수정 완료 — 1~2분 뒤 반영돼요.`);
   }catch(e){ msg("eMsg","err",authFail(e)); }

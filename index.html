@@ -1205,6 +1205,18 @@ function refresh(){
   collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); renderNotes(); renderIdeas(); rebuildGraph(); snapshotLook();
 }
 refresh();
+
+/* 생각 노트의 출처 카드에서 #book/책제목 으로 들어오면 그 책을 펼쳐 준다 */
+function routeBook(){
+  const m = /^#book\/(.+)$/.exec(location.hash || "");
+  if(!m) return;
+  let t; try{ t = decodeURIComponent(m[1]); }catch(e){ return; }
+  const i = titleIndex[t];
+  if(i !== undefined) selectBook(i, true);
+}
+routeBook();
+window.addEventListener("hashchange", routeBook);
+
 injectJsonLd();
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>network.redraw());
 </script>
