@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Wed, 12 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Thu, 13 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>절벽이라는 렌즈로 삶을 바라보기</title>
+    <link>https://hellmeone.com/p/%EC%A0%88%EB%B2%BD%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%A0%8C%EC%A6%88%EB%A1%9C-%EC%82%B6%EC%9D%84-%EB%B0%94%EB%9D%BC%EB%B3%B4%EA%B8%B0.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%A0%88%EB%B2%BD%EC%9D%B4%EB%9D%BC%EB%8A%94-%EB%A0%8C%EC%A6%88%EB%A1%9C-%EC%82%B6%EC%9D%84-%EB%B0%94%EB%9D%BC%EB%B3%B4%EA%B8%B0.html</guid>
+    <category>삶</category>
+    <pubDate>Thu, 13 Aug 2026 09:00:00 +0900</pubDate>
+    <description>&#x27;절벽&#x27;이란 삶의 궤도를 바꿔버리고, 이후 무엇을 선택해야 할지 강요하는 중대한 사건을 뜻한다. 거대한 절벽은 삶을 완전히 뒤흔들고, 사람들을 혼란스러운 안개 속으로 밀어 넣는다. 그 안개 속에서 사람들은 삶을 재구성하고 미래를 새롭게 그리려 애쓴다. 절벽은 &#x27;삶을 어떻게 살아낼 것인가&#x27;라는 질문을 훨씬 선명하게 비춰주는 강력한 렌즈가 된다. 삶을 뒤흔드는 절벽은 사람들에게 그 질문을 처음부터 다시 던지게 만들기 때문이다. 절벽은 그 시기를 살아내는 동안에는 끔찍한 경험일 수 있다. 하지만 동시에 자신도 몰랐던 인코딩을 드러나게 해…</description>
+  </item>
   <item>
     <title>내면의 불꽃에 집중하라</title>
     <link>https://hellmeone.com/p/%EB%82%B4%EB%A9%B4%EC%9D%98-%EB%B6%88%EA%BD%83%EC%97%90-%EC%A7%91%EC%A4%91%ED%95%98%EB%9D%BC.html</link>
@@ -238,14 +246,6 @@
     <category>인생</category>
     <pubDate>Fri, 31 Jul 2026 09:00:00 +0900</pubDate>
     <description>5년 전부터 마음속에서 아주 이상한 일이 일어나기 시작했다. 어떻게 살아야 하고 무엇을 해야 하는지를 전혀 알 수 없는 회의의 순간들, 삶이 멈춰 버린 듯한 순간들이 찾아왔고, 그럴 때면 당혹감을 느끼며 절망에 빠져들었다. 하지만 그런 혼란스러운 순간들은 늘 같은 모습으로 점점 더 자주 찾아왔다. 그럴 때는 또 다시 삶이 멈춘 듯 느껴졌고, &quot;삶은 무엇이고, 어디로 향하는 것인가?&quot; 라는 똑같은 의문이 고개를 들었다. 첫째로는 그 질문들이 어리석고 유치한 것이 아니라 삶에서 가장 중요하고 심오한 문제라는 사실이었고, 둘째로는 풀려고…</description>
-  </item>
-  <item>
-    <title>편집증은 직업적 필수 요건</title>
-    <link>https://hellmeone.com/p/%ED%8E%B8%EC%A7%91%EC%A6%9D%EC%9D%80-%EC%A7%81%EC%97%85%EC%A0%81-%ED%95%84%EC%88%98-%EC%9A%94%EA%B1%B4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%ED%8E%B8%EC%A7%91%EC%A6%9D%EC%9D%80-%EC%A7%81%EC%97%85%EC%A0%81-%ED%95%84%EC%88%98-%EC%9A%94%EA%B1%B4.html</guid>
-    <category>일</category>
-    <pubDate>Wed, 29 Jul 2026 09:00:00 +0900</pubDate>
-    <description>모든 일이 순조롭게 돌아갈 때만큼 나를 불안하게 만드는 것도 없다. 우리가 고객과 유사한 방식으로 거래에 직접 참여했기 때문에 시장에 대한 우리의 이해는 훨씬 더 깊고 정확해졌다. 그것은 고객과의 관계를 단순한 서비스 제공자에서 동료에 가까운 위치로 바꾸어 놓았다. 나는 준비에 병적으로 집착하는 편이라 고객 미팅을 앞두고 온갖 질문과 걱정거리로 그를 들볶았다. 나는 맥스웰 사건을 통해 혹독한 교육을 받았다. 거의 치명적이라 할 만한 수업료를 치른 셈이었다. 문제는 어디서든, 혹은 아무 전조 없이도 닥칠 수 있으며, 무엇이 잘못될 수…</description>
   </item>
 </channel>
 </rss>
