@@ -15,7 +15,7 @@
   --accent:#294AFF; --accent-hover:#1E3AE0;
   --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
   --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
-  --note-bg:#F8FBFD; --src-bg:#F5F8FF;
+  --note-bg:#F8FBFD;
   --note-text:#3A4560; --note-lab:#0E2049; --note-strong:#0E2049;
 }
 @media (prefers-color-scheme: dark){
@@ -25,7 +25,7 @@
     --accent:#5E78FF; --accent-hover:#7B90FF;
     --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
     --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
-    --note-bg:#141A28; --src-bg:#121D3A;
+    --note-bg:#141A28;
     --note-text:#C3CBDB; --note-lab:#DCE6F7; --note-strong:#EAF0FA;
   }
 }
@@ -140,38 +140,75 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
 .a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
 
-/* 글 끝 출처 카드 — 이 글이 어느 책에서 나왔는지 */
+/* 글 끝 Reference — 상자가 아니라 얇은 선 위에 얹은 카드.
+   색을 따로 쓰지 않고 기존 글자색·선색만으로 낸다. 누르면 책 소개 모달. */
 .a-src{
-  display:flex; align-items:center; gap:16px; margin-top:46px;
-  padding:16px 18px; border:1px solid var(--line); border-radius:16px;
-  background:var(--src-bg); text-decoration:none; color:inherit;
+  display:block; width:100%; text-align:left; margin-top:54px; padding:22px 0 0;
+  border:none; border-top:1px solid var(--line); border-radius:0;
+  background:none; color:inherit; font-family:inherit; cursor:pointer;
 }
-.a-src:hover{border-color:var(--accent);}
-.a-src img, .a-src .s-ph{width:46px; height:66px; border-radius:7px; flex:0 0 auto; object-fit:cover;}
-.a-src .s-ph{
-  background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center;
-  font-family:"NanumSquareNeo",sans-serif; font-size:20px; font-weight:800;
+.a-src .s-lab{
+  display:block; font-family:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:11.5px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:16px;
+}
+.a-src .s-row{display:flex; align-items:center; gap:18px;}
+.a-src .s-cover{
+  width:58px; height:84px; border-radius:4px; flex:0 0 auto; object-fit:cover;
+  background:var(--bg);
+}
+.a-src .s-cover.ph{
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); color:var(--text-3); font-size:24px; font-weight:800;
 }
 .a-src .s-txt{flex:1 1 auto; min-width:0; font-family:"NanumSquareNeo",sans-serif; line-height:1.5;}
-.a-src .s-lab{font-size:11.5px; font-weight:700; color:var(--text-3); letter-spacing:0.01em;}
-.a-src .s-t{font-size:16px; font-weight:800; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.a-src .s-s{font-size:12.5px; color:var(--text-2); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.a-src .s-go{color:var(--accent); font-size:16px; font-weight:700; flex:0 0 auto;}
+.a-src .s-t{
+  display:block; font-size:18px; font-weight:700; color:var(--text);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.a-src .s-s{
+  display:block; font-size:14px; color:var(--text-3); margin-top:5px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.a-src:hover .s-t{text-decoration:underline; text-underline-offset:3px;}
 
-/* ---------- 앞뒤 글 · 같은 분류의 글 (읽는 사람도, 크롤러도 다음 글로 넘어가는 길) ---------- */
-.a-nx{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:44px;}
-.a-nx a{
-  display:block; padding:16px 18px; border:1px solid var(--line); border-radius:14px;
-  color:var(--text); background:var(--bg);
+/* 책 소개 모달 */
+.bm{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:24px;}
+.bm[hidden]{display:none;}
+.bm-back{position:absolute; inset:0; background:rgba(8,16,36,.42);}
+.bm-sheet{
+  position:relative; width:100%; max-width:480px; max-height:86vh; overflow-y:auto;
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  padding:30px 28px 26px; font-family:"NanumSquareNeo",sans-serif;
 }
-.a-nx a:hover{border-color:var(--accent);}
-.a-nx .nx-next{text-align:right;}
-.a-nx .nx-lab{display:block; font-size:11.5px; font-weight:700; color:var(--text-3); letter-spacing:0.02em;}
-.a-nx .nx-t{
-  display:block; font-size:14.5px; font-weight:700; margin-top:6px; line-height:1.5;
-  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+.bm-x{
+  position:absolute; top:12px; right:14px; border:none; background:none;
+  font-size:22px; line-height:1; color:var(--text-3); padding:4px 6px;
 }
-@media (max-width:520px){ .a-nx{grid-template-columns:1fr;} .a-nx .nx-next{text-align:left;} }
+.bm-x:hover{color:var(--text);}
+.bm-head{display:flex; gap:22px; align-items:flex-start;}
+.bm-cover{width:120px; height:172px; border-radius:5px; flex:0 0 auto; object-fit:cover; background:var(--bg);}
+.bm-cover.ph{
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); color:var(--text-3); font-size:40px; font-weight:800;
+}
+.bm-meta{flex:1 1 auto; min-width:0; padding-top:2px;}
+.bm-t{font-size:21px; font-weight:800; line-height:1.4; letter-spacing:-0.02em;}
+.bm-s{font-size:14px; color:var(--text-2); margin-top:9px; line-height:1.6;}
+.bm-rate{font-size:15px; color:var(--text-3); margin-top:11px; letter-spacing:0.08em;}
+.bm-sec{margin-top:22px;}
+.bm-lab{
+  font-size:12px; font-weight:700; color:var(--text-3); letter-spacing:0.03em; margin-bottom:8px;
+}
+.bm-sec p{font-size:15px; line-height:1.85; color:var(--text-2);}
+.bm-go{
+  display:inline-block; margin-top:26px; font-size:14.5px; font-weight:700; color:var(--accent);
+}
+@media (max-width:520px){
+  .bm{padding:16px;}
+  .bm-sheet{padding:26px 20px 22px;}
+  .bm-cover{width:92px; height:132px;}
+}
 
 .a-rel{margin-top:46px; padding-top:26px; border-top:1px solid var(--line);}
 .a-rel h2{font-size:14px; font-weight:800; letter-spacing:-0.01em;}

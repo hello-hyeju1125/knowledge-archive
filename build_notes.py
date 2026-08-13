@@ -65,12 +65,17 @@ def load_books():
             return json.loads('"%s"' % f.group(1)) if f else ""
 
         year = re.search(r"\bpublished:\s*(\d{4})", blob)
+        rating = re.search(r"\brating:\s*(\d)", blob)
         books[title] = {
             "title": title,
             "author": field("author"),
             "publisher": field("publisher"),
             "published": year.group(1) if year else "",
             "cover": field("cover"),
+            # 아래 셋은 Reference 모달에서만 쓴다
+            "summary": field("summary"),
+            "review": field("review"),
+            "rating": int(rating.group(1)) if rating else 0,
         }
     return books
 
@@ -203,26 +208,72 @@ def cat_class(cat, order):
 
 
 def source_card(book, books):
+    """글 끝의 Reference 카드 + 눌렀을 때 뜨는 책 소개 모달.
+
+    글 페이지는 정적이라 books.js를 불러오지 않는다. 그래서 이 책의 정보만
+    모달 안에 미리 심어 둔다 — 요청이 한 번도 늘지 않고 오프라인에서도 뜬다."""
     if not book:
         return ""
     b = books.get(book, {"title": book})
-    sub = " · ".join(x for x in (b.get("author"), b.get("publisher"), b.get("published")) if x)
-    cover = ('<img src="%s" alt="%s 표지" loading="lazy" width="46" height="66">'
-             % (escape(b.get("cover", "")), escape(book))) if b.get("cover") \
-        else '<div class="s-ph">%s</div>' % escape(book[:1])
-    return """<a class="a-src" href="../index.html#book/%s">
-  %s
-  <div class="s-txt">
-    <div class="s-lab">이 글은 이 책을 읽고 썼습니다</div>
-    <div class="s-t">%s</div>
+    sub = " · ".join(str(x) for x in (b.get("author"), b.get("publisher"), b.get("published")) if x)
+
+    def thumb(cls, w, h):
+        if b.get("cover"):
+            return ('<img class="%s" src="%s" alt="%s 표지" loading="lazy" width="%d" height="%d">'
+                    % (cls, escape(b.get("cover", "")), escape(book), w, h))
+        return '<span class="%s ph">%s</span>' % (cls, escape(book[:1]))
+
+    rating = b.get("rating")
+    stars = ('<div class="bm-rate">%s</div>'
+             % ("★" * int(rating) + "☆" * (5 - int(rating)))) if rating else ""
+
+    def block(label, text):
+        return ('<div class="bm-sec"><div class="bm-lab">%s</div><p>%s</p></div>'
+                % (label, escape(str(text)))) if text else ""
+
+    return """<button class="a-src" type="button" data-book-open>
+  <span class="s-lab">Reference</span>
+  <span class="s-row">
     %s
+    <span class="s-txt">
+      <span class="s-t">%s</span>
+      %s
+    </span>
+  </span>
+</button>
+
+<div class="bm" data-book-modal hidden>
+  <div class="bm-back" data-book-close></div>
+  <div class="bm-sheet" role="dialog" aria-modal="true" aria-label="%s 소개">
+    <button class="bm-x" type="button" data-book-close aria-label="닫기">×</button>
+    <div class="bm-head">
+      %s
+      <div class="bm-meta">
+        <div class="bm-t">%s</div>
+        %s
+        %s
+      </div>
+    </div>
+    %s
+    %s
+    <a class="bm-go" href="../index.html#book/%s">서재에서 보기 →</a>
   </div>
-  <span class="s-go">→</span>
-</a>""" % (quote(book, safe=""), cover, escape(book),
-           '<div class="s-s">%s</div>' % escape(sub) if sub else "")
+</div>""" % (
+        thumb("s-cover", 58, 84),
+        escape(book),
+        '<span class="s-s">%s</span>' % escape(sub) if sub else "",
+        escape(book, quote=True),
+        thumb("bm-cover", 120, 172),
+        escape(book),
+        '<div class="bm-s">%s</div>' % escape(sub) if sub else "",
+        stars,
+        block("줄거리", b.get("summary")),
+        block("내 리뷰", b.get("review")),
+        quote(book, safe=""),
+    )
 
 
-def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
+def page_html(post, slug, books, order, related, slugs):
     url = post_url(slug)
     desc = plain(post["body"])
     title = post["title"]
@@ -247,13 +298,6 @@ def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
         ld["image"] = cover
     if post.get("book"):
         ld["about"] = {"@type": "Book", "name": post["book"]}
-
-    def nav_link(p, label, cls):
-        if not p:
-            return '<span class="nx-empty"></span>'
-        return ('<a class="%s" href="./%s.html"><span class="nx-lab">%s</span>'
-                '<span class="nx-t">%s</span></a>'
-                % (cls, quote(slugs[p["id"]]), label, escape(p["title"])))
 
     rel_html = ""
     if related:
@@ -310,10 +354,6 @@ def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
 {body}
     </div>
     {source}
-    <nav class="a-nx">
-      {prev}
-      {next}
-    </nav>
     {related}
     <div class="a-end">
       <a href="../notes.html">← 생각 노트 전체 보기</a>
@@ -333,6 +373,22 @@ def page_html(post, slug, books, order, prev_p, next_p, related, slugs):
   const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
   ["copy","cut","dragstart","contextmenu"].forEach(ev =>
     document.addEventListener(ev, e => {{ if(!exempt(e)) e.preventDefault(); }}));
+}})();
+
+/* Reference 카드 → 책 소개 모달 */
+(function(){{
+  const modal = document.querySelector("[data-book-modal]");
+  if(!modal) return;
+  const opener = document.querySelector("[data-book-open]");
+  const show = on => {{
+    modal.hidden = !on;
+    document.body.style.overflow = on ? "hidden" : "";
+    if(on) modal.querySelector(".bm-x").focus();
+    else if(opener) opener.focus();
+  }};
+  if(opener) opener.onclick = () => show(true);
+  modal.querySelectorAll("[data-book-close]").forEach(el => el.onclick = () => show(false));
+  document.addEventListener("keydown", e => {{ if(e.key === "Escape" && !modal.hidden) show(false); }});
 }})();
 </script>
 <!-- 네이버 애널리틱스 — 방문자 수·유입 검색어·인기 페이지.
@@ -357,8 +413,6 @@ if(window.wcs) {{ wcs_do(); }}
         mins=read_min(post["body"]),
         body=render(post["body"]),
         source=source_card(post.get("book"), books),
-        prev=nav_link(prev_p, "이전 글", "nx-prev"),
-        next=nav_link(next_p, "다음 글", "nx-next"),
         related=rel_html,
     )
 
@@ -435,14 +489,11 @@ def main():
     shutil.copyfile(os.path.join(ROOT, "notes-post.css"), os.path.join(OUT_DIR, "style.css"))
 
     keep = {"style.css"}
-    for i, p in enumerate(posts):
+    for p in posts:
         slug = slugs[p["id"]]
         keep.add(slug + ".html")
         same_cat = [q for q in posts if q is not p and q.get("category") == p.get("category")][:4]
-        html = page_html(p, slug, books, order,
-                         prev_p=posts[i + 1] if i + 1 < len(posts) else None,   # 목록은 최신순
-                         next_p=posts[i - 1] if i > 0 else None,
-                         related=same_cat, slugs=slugs)
+        html = page_html(p, slug, books, order, related=same_cat, slugs=slugs)
         open(os.path.join(OUT_DIR, slug + ".html"), "w", encoding="utf-8").write(html)
 
     removed = [f for f in os.listdir(OUT_DIR) if f not in keep]
