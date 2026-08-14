@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Thu, 13 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 14 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>단계적 발걸음으로 나아가기</title>
+    <link>https://hellmeone.com/p/%EB%8B%A8%EA%B3%84%EC%A0%81-%EB%B0%9C%EA%B1%B8%EC%9D%8C%EC%9C%BC%EB%A1%9C-%EB%82%98%EC%95%84%EA%B0%80%EA%B8%B0.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%8B%A8%EA%B3%84%EC%A0%81-%EB%B0%9C%EA%B1%B8%EC%9D%8C%EC%9C%BC%EB%A1%9C-%EB%82%98%EC%95%84%EA%B0%80%EA%B8%B0.html</guid>
+    <category>삶</category>
+    <pubDate>Fri, 14 Aug 2026 09:00:00 +0900</pubDate>
+    <description>안개 속에서는 멀리 볼 수 없다. 목적지도 흐릿하고, 어디가 맞는 방향인지 확신할 수 없다. 그렇다면 이 연구의 사람들은 그런 안개를 어떻게 지나갔을까? 그 답을 심플렉스 스테핑 Simplex Stepping, 즉 &#x27;단계적 발걸음&#x27;이라고 부른다. 안개를 빠져나가는 길은 결국 &#x27;최선의 다음 한 걸음&#x27;을 계속 내딛는 데 있었다. 안개 속에서 길을 잃었을 때, 그들이 작은 걸음을 반복하며 앞으로 나아가는 공통된 패턴을 보였기 때문이다. 사람들은 안개 위로 올라가 멀리 내려다보며 최적의 경로를 미리 그려볼 수 없었다. 결국 그들은 안개 속…</description>
+  </item>
   <item>
     <title>안개</title>
     <link>https://hellmeone.com/p/%EC%95%88%EA%B0%9C.html</link>
@@ -238,14 +246,6 @@
     <category>인생</category>
     <pubDate>Fri, 31 Jul 2026 09:00:00 +0900</pubDate>
     <description>방앗간 주인의 이런 생각을 논리적으로 반박하기는 쉬운 일이 아니다. 그의 생각을 바로 잡을 방법은 한 가지 뿐이다. 어떤 일을 생각할 때 중요한 것은 생각 자체가 아니라 생각하는 순서라는 사실을 그에게 가르쳐 주는 것이다. 즉 효과적인 사고를 하기 위해서는 먼저 무엇을 생각하고 그 다음에는 무엇을 생각해야 하는지 알아야 한다. 또한 합리적인 활동은 비합리적인 활동과 어떻게 구분되는 것인지도 알려줘야 한다. 인생이란 방앗간 주인이 연구하려고 했던 물레방아다. 물레방아는 곡물을 잘 빻기 위해 필요하고, 인생은 사람이 행복하기 위해 필요…</description>
-  </item>
-  <item>
-    <title>똑똑한 자의 절망보다 평범한 이의 삶이 더 깊다</title>
-    <link>https://hellmeone.com/p/%EB%98%91%EB%98%91%ED%95%9C-%EC%9E%90%EC%9D%98-%EC%A0%88%EB%A7%9D%EB%B3%B4%EB%8B%A4-%ED%8F%89%EB%B2%94%ED%95%9C-%EC%9D%B4%EC%9D%98-%EC%82%B6%EC%9D%B4-%EB%8D%94-%EA%B9%8A%EB%8B%A4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%98%91%EB%98%91%ED%95%9C-%EC%9E%90%EC%9D%98-%EC%A0%88%EB%A7%9D%EB%B3%B4%EB%8B%A4-%ED%8F%89%EB%B2%94%ED%95%9C-%EC%9D%B4%EC%9D%98-%EC%82%B6%EC%9D%B4-%EB%8D%94-%EA%B9%8A%EB%8B%A4.html</guid>
-    <category>인생</category>
-    <pubDate>Fri, 31 Jul 2026 09:00:00 +0900</pubDate>
-    <description>삶이라는 것이 존재하기 시작한 저 아득히 멀고 먼 옛날부터 사람들은 삶의 덧없음을 알고 있으면서도 삶에 나름대로 의미를 부여하며 살아왔다. 인간 생활이라고 할 수 있는 삶이 시작되었을 때부터 사람들은 그런 식으로 삶에 의미를 부여하며 삶을 영위해 왔고, 그런 삶을 내게까지 물려주었다. 진리를 오직 삶에서만 찾아낼 수 있다고 확신하자, 지금까지 살아온 삶의 방식이 과연 올바른가 하는 의문이 생겨났다. 나는 내가 누른 특권적인 환경에서 벗어나 땀 흘려 일하는 평범한 사람들의 참된 삶을 발견했고, 그런 삶만이 진정한 삶이라는 것을 깨달았…</description>
   </item>
 </channel>
 </rss>
