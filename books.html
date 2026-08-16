@@ -4,10 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>읽은 책 전체 — 헬로의 서재</title>
-<meta name="description" content="헬로가 지금까지 읽은 책 전체 목록. 최신순·별점순으로 볼 수 있습니다." />
+<meta name="description" content="헬로가 지금까지 읽은 책 전체 목록. 출간년도순·별점순으로 정렬하고 종류·장르·별점·출간년도로 걸러 볼 수 있습니다." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="읽은 책 전체 — 헬로의 서재" />
-<meta property="og:description" content="지금까지 읽은 책을 한 번에. 최신순·별점순으로 볼 수 있습니다." />
+<meta property="og:description" content="지금까지 읽은 책을 한 번에. 정렬하고, 걸러 보고, 눌러서 자세히." />
 <meta property="og:url" content="https://hellmeone.com/books.html" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="robots" content="index, follow, max-snippet:-1" />
@@ -24,7 +24,8 @@
     --bg:#ECFCFF; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
     --line:#CBE9F2; --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
-    --star:#294AFF; --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
+    --star:#294AFF; --card:#ffffff; --soft:#F5F8FF;
+    --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 8px 26px rgba(41,74,255,.13);
     --ph1:#E2F4FF; --ph2:#E7F0FF; --ph3:#DFFBEF; --ph4:#EAF6F1; --ph5:#E4EDFF;
   }
   @media (prefers-color-scheme: dark){
@@ -32,14 +33,15 @@
       --bg:#050B1D; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
       --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
-      --star:#37FFA9; --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
+      --star:#37FFA9; --card:#0D1730; --soft:#121D3A;
+      --shadow:0 2px 14px rgba(0,0,0,.5); --shadow-lg:0 8px 26px rgba(0,0,0,.6);
       --ph1:#12203E; --ph2:#101E3B; --ph3:#0E2635; --ph4:#132239; --ph5:#111F42;
     }
   }
   *{box-sizing:border-box; margin:0;}
   /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
   body{-webkit-user-select:none; -moz-user-select:none; user-select:none;}
-  input, textarea{-webkit-user-select:text; -moz-user-select:text; user-select:text;}
+  input, textarea, select{-webkit-user-select:text; -moz-user-select:text; user-select:text;}
   img{-webkit-user-drag:none; user-drag:none;}
 
   body{
@@ -75,47 +77,123 @@
     nav .add-mini{display:none;}
   }
 
-  /* ---------- 목록 ---------- */
-  .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
+  .wrap{max-width:720px; margin:0 auto; padding:44px 20px 100px;}
   .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
   .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
-  .sorts{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px;}
-  .sorts button{
-    border:1px solid var(--line); background:var(--card); color:var(--text-2);
-    font-size:13px; font-weight:600; padding:7px 16px; border-radius:980px;
-  }
-  .sorts button:hover{border-color:var(--accent); color:var(--accent);}
-  .sorts button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
 
-  .blist{margin-top:26px;}
+  /* ---------- 정렬·필터 ---------- */
+  .tools{margin-top:24px; border:1px solid var(--line); border-radius:16px; background:var(--card); padding:14px 16px;}
+  .trow{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .trow + .trow{margin-top:11px; padding-top:11px; border-top:1px dashed var(--line);}
+  .tlab{
+    flex:0 0 64px; font-size:11.5px; font-weight:700; color:var(--text-3);
+    letter-spacing:.04em; white-space:nowrap;
+  }
+  .chips{display:flex; gap:6px; flex-wrap:wrap; flex:1; min-width:0;}
+  .chips button{
+    border:1px solid var(--line); background:var(--bg); color:var(--text-2);
+    font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:980px;
+  }
+  .chips button:hover{border-color:var(--accent); color:var(--accent);}
+  .chips button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .chips button .n{opacity:.55; margin-left:4px; font-weight:600;}
+  select{
+    font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-2);
+    background:var(--bg); border:1px solid var(--line); border-radius:980px;
+    padding:6px 12px; max-width:100%; cursor:pointer;
+  }
+  select:focus{outline:none; border-color:var(--accent); color:var(--accent);}
+  .tsum{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-top:14px; font-size:13px; color:var(--text-2);
+  }
+  .tsum b{color:var(--text); font-weight:800;}
+  .reset{
+    border:none; background:none; color:var(--accent); font-size:12.5px;
+    font-weight:700; padding:0; text-decoration:underline;
+  }
+
+  /* ---------- 목록 ---------- */
+  .blist{margin-top:8px;}
+  .bitem{border-bottom:1px solid var(--line);}
   .brow{
-    display:flex; gap:16px; align-items:flex-start;
-    padding:18px 4px; border-bottom:1px solid var(--line); color:var(--text);
+    display:flex; gap:15px; align-items:center; width:100%; text-align:left;
+    padding:15px 4px; background:none; border:none; color:var(--text);
   }
   .brow:hover .bt{color:var(--accent);}
-  .brow .cover{
-    flex:0 0 58px; width:58px; height:84px; border-radius:8px; overflow:hidden;
-    background:var(--card); box-shadow:var(--shadow); position:relative;
+  .cover{
+    display:block; flex:0 0 60px; width:60px; height:87px; border-radius:8px; overflow:hidden;
+    background:var(--soft); box-shadow:var(--shadow); position:relative;
   }
-  .brow .cover img{width:100%; height:100%; object-fit:cover; display:block;}
-  .brow .ph{width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; padding:6px;}
-  .brow .ph-title{font-size:9.5px; font-weight:800; line-height:1.3; color:var(--text-2);
-    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;}
-  .brow .wbadge{
+  .cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .cover .ph{width:100%; height:100%; display:flex; align-items:center; padding:6px;}
+  .cover .ph span{
+    font-size:9.5px; font-weight:800; line-height:1.35; color:var(--text-2);
+    display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .wbadge{
     position:absolute; top:4px; left:4px; background:var(--mint); color:#063a26;
     font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:980px;
   }
-  .brow .info{min-width:0; flex:1;}
-  .brow .bt{font-size:16.5px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
-  .brow .ba{font-size:13px; color:var(--text-2); margin-top:4px;}
-  .brow .bs{font-size:13px; color:var(--star); letter-spacing:1px; margin-top:6px;}
-  .brow .bs small{color:var(--text-3); font-size:11.5px; letter-spacing:0; margin-left:7px;}
-  .brow .bx{font-size:12px; color:var(--text-3); margin-top:6px;}
-  .brow .bx b{color:var(--text-2); font-weight:700;}
-  .brow .br{
-    font-size:13.5px; color:var(--text-2); margin-top:9px; line-height:1.65;
+  .binfo{display:block; flex:1; min-width:0;}
+  .bt{
+    font-size:16.5px; font-weight:800; letter-spacing:-0.022em; line-height:1.35;
+    transition:color .15s;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
+  .bmeta{display:block; font-size:13px; color:var(--text-2); margin-top:5px; line-height:1.5;}
+  .bmeta .sep{color:var(--text-3); margin:0 5px;}
+  .brate{display:flex; align-items:center; gap:7px; margin-top:7px;}
+  .brate .st{color:var(--star); font-size:13.5px; letter-spacing:1.5px;}
+  .brate .rv{font-size:12px; color:var(--text-3); font-weight:700;}
+  .brate .no{font-size:12px; color:var(--text-3);}
+  .caret{
+    flex:0 0 auto; color:var(--text-3); font-size:12px; align-self:center;
+    transition:transform .18s;
+  }
+  .bitem.open .caret{transform:rotate(180deg); color:var(--accent);}
+  .bitem.open .bt{color:var(--accent);}
+
+  /* ---------- 펼친 상세 ---------- */
+  .bdetail{padding:2px 4px 22px;}
+  .dcard{background:var(--soft); border-radius:16px; padding:18px 18px 20px;}
+  .dchips{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  .dchips span{
+    font-size:11.5px; font-weight:700; color:var(--mint-text); background:var(--mint-soft);
+    padding:3px 10px; border-radius:980px;
+  }
+  .dfield + .dfield{margin-top:16px;}
+  .dfield .k{
+    font-size:11px; font-weight:700; letter-spacing:.09em; color:var(--text-3);
+    text-transform:uppercase; margin-bottom:6px;
+  }
+  .dfield .v{font-size:14.5px; line-height:1.75; color:var(--text);}
+  .dfield .v.dim{color:var(--text-3); font-style:italic;}
+  .dquote{
+    background:var(--card); border-radius:12px; padding:12px 15px; margin-bottom:8px;
+    font-size:14px; line-height:1.7;
+  }
+  .dquote::before{content:"“"; color:var(--accent); font-weight:800; margin-right:2px;}
+  .dquote .qm{display:block; margin-top:5px; font-size:11px; color:var(--text-3);}
+  .dnote{
+    display:block; background:var(--card); border-radius:12px; padding:11px 15px;
+    margin-bottom:8px; color:var(--text);
+  }
+  .dnote:hover{background:var(--mint-soft);}
+  .dnote .t{font-size:14px; font-weight:700; line-height:1.45;}
+  .dnote .m{font-size:11.5px; color:var(--text-3); margin-top:3px;}
+  .more{
+    background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
+    font-size:12.5px; font-weight:600; padding:6px 15px; margin-top:2px;
+  }
+  .more:hover{border-color:var(--accent);}
+  .dbuy{margin-top:18px;}
+  .dbuy a{
+    display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:600;
+    padding:9px 18px; border-radius:980px;
+  }
+  .dbuy a:hover{background:var(--accent-hover);}
+
   .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
 
   .pager{display:flex; gap:6px; justify-content:center; margin-top:30px; flex-wrap:wrap; align-items:center;}
@@ -129,6 +207,13 @@
   footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:800;}
   footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+
+  @media (max-width:560px){
+    .tlab{flex-basis:100%;}
+    .cover{flex-basis:54px; width:54px; height:78px;}
+    .bt{font-size:15.5px;}
+    .bmeta{font-size:12.5px;}
+  }
 </style>
 </head>
 <body>
@@ -148,9 +233,23 @@
   <div id="listView">
     <div class="head">
       <h1><span class="marker">읽은 책 전체</span></h1>
-      <p id="headSub">제목을 누르면 서재에서 리뷰와 수집한 문장이 열립니다.</p>
+      <p id="headSub"></p>
     </div>
-    <div class="sorts" id="sorts"></div>
+
+    <div class="tools">
+      <div class="trow"><span class="tlab">정렬</span><div class="chips" id="sortChips"></div></div>
+      <div class="trow"><span class="tlab">종류</span><div class="chips" id="typeChips"></div></div>
+      <div class="trow"><span class="tlab">별점</span><div class="chips" id="rateChips"></div></div>
+      <div class="trow">
+        <span class="tlab">장르 · 출간</span>
+        <div class="chips">
+          <select id="genreSel" aria-label="장르로 거르기"></select>
+          <select id="yearSel" aria-label="출간년도로 거르기"></select>
+        </div>
+      </div>
+      <div class="tsum" id="tsum"></div>
+    </div>
+
     <div class="blist" id="blist"></div>
     <div class="pager" id="pager"></div>
   </div>
@@ -166,6 +265,7 @@
 document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="slugs.js?v=' + Date.now() + '"><\/script>');
 </script>
 <script>
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
@@ -176,44 +276,121 @@ const phColor = t => PH[[...t].reduce((a,c)=>a+c.charCodeAt(0),0) % PH.length];
 /* 화면에서 추가한 책(브라우저 저장분)도 index.html과 똑같이 함께 보여준다 */
 const LS_KEY = "myBooks_v1";
 const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || "[]"); } catch(e){ return []; } };
-const ALL = [
-  ...loadLocal().reverse(),
-  ...BOOKS.slice().reverse(),
+const ALL = [...loadLocal().reverse(), ...BOOKS.slice().reverse()];
+
+const quotesFor = b => [
+  ...QUOTES.filter(q => q.b === b.title),
+  ...(b.quotes || []).map(t => ({ t, tag:"", d:"" })),
 ];
 
-const quoteCount = b =>
-  QUOTES.filter(q => q.b === b.title).length + (b.quotes ? b.quotes.length : 0);
-
-/* 이 책을 출처로 쓴 생각 노트 수 (띄어쓰기 차이는 무시) */
+/* 이 책을 출처로 쓴 생각 노트 (띄어쓰기 차이는 무시) */
 const bkey = s => String(s||"").trim().toLowerCase().replace(/\s+/g,"");
-const noteCount = b => (typeof POSTS === "undefined") ? 0
-  : POSTS.filter(p => p.book && bkey(p.book) === bkey(b.title)).length;
+const postsFor = b => (typeof POSTS === "undefined") ? []
+  : POSTS.filter(p => p.book && bkey(p.book) === bkey(b.title));
+const postHref = p => "./p/" + encodeURIComponent((typeof SLUGS !== "undefined" && SLUGS[p.id]) || p.id) + ".html";
 
-/* 책 상세는 서재(index.html)에서 열린다 — #book/책제목으로 넘기면 그 책이 펼쳐진다 */
-const bookHref = b => "./index.html#book/" + encodeURIComponent(b.title);
+const buyHref = b => b.type === "webtoon"
+  ? (b.link || "https://comic.naver.com")
+  : "https://search.kyobobook.co.kr/search?keyword=" + encodeURIComponent(b.isbn || b.title);
 
-/* ---------- 정렬 ---------- */
-const SORTS = [
-  { k:"recent", label:"최신순", fn:null },   // ALL이 이미 최신순
-  { k:"rating", label:"별점순", fn:(a,b) => (b.rating||0) - (a.rating||0) },
-];
-let activeSort = "recent", page = 1;
+/* ================= 정렬·필터 상태 ================= */
 const PER_PAGE = 15;
+let sortKey = "year";      // year | rating
+let fType = "all";         // all | book | webtoon
+let fRate = "all";         // all | 5 4 3 2 1 | none
+let fGenre = "all";
+let fYear = "all";
+let page = 1;
+let openKey = null;        // 펼쳐 둔 책 (제목 기준 — 페이지를 넘겨도 헷갈리지 않게)
+let openQuotesAll = false; // 그 책의 문장을 다 펼쳤는지
 
-function sorted(){
-  const s = SORTS.find(x => x.k === activeSort);
-  // 같은 별점끼리는 원래 순서(최신순)를 지킨다 — sort가 안정 정렬이므로 그대로 둔다
-  return s && s.fn ? ALL.slice().sort(s.fn) : ALL;
+const typeOf = b => b.type === "webtoon" ? "webtoon" : "book";
+
+function passes(b, skip){
+  if(skip !== "type"  && fType  !== "all" && typeOf(b) !== fType) return false;
+  if(skip !== "rate"  && fRate  !== "all"){
+    if(fRate === "none"){ if(b.rating) return false; }
+    else if(String(b.rating || "") !== fRate) return false;
+  }
+  if(skip !== "genre" && fGenre !== "all" && !(b.genres || []).includes(fGenre)) return false;
+  if(skip !== "year"  && fYear  !== "all"){
+    if(fYear === "none"){ if(b.published) return false; }
+    else if(String(b.published || "") !== fYear) return false;
+  }
+  return true;
+}
+/* 어떤 칸의 개수는 '그 칸을 뺀 나머지 필터'로 센다 — 눌러도 0건이 되는 칩이 없도록 */
+const countBy = (skip, fn) => ALL.filter(b => passes(b, skip)).filter(fn).length;
+
+function filtered(){
+  const list = ALL.filter(b => passes(b));
+  // sort는 안정 정렬 — 같은 값이면 원래 순서(최근 등록순)를 지킨다
+  if(sortKey === "year")   return list.slice().sort((a,b) => (b.published||0) - (a.published||0));
+  if(sortKey === "rating") return list.slice().sort((a,b) => (b.rating||0) - (a.rating||0));
+  return list;
 }
 
-function renderSorts(){
-  document.getElementById("sorts").innerHTML = SORTS.map(s =>
-    `<button class="${s.k===activeSort?"on":""}" data-k="${s.k}">${s.label}</button>`).join("");
-  document.querySelectorAll("#sorts button").forEach(el => el.onclick = () => {
-    activeSort = el.dataset.k; page = 1; renderSorts(); renderList();
+/* ================= 도구 모음 그리기 ================= */
+function chipHTML(list, active){
+  return list.map(o =>
+    `<button class="${o.k===active?"on":""}" data-k="${esc(o.k)}">${esc(o.label)}${
+      o.n === undefined ? "" : `<span class="n">${o.n}</span>`}</button>`).join("");
+}
+function wire(boxId, set){
+  document.querySelectorAll("#"+boxId+" button").forEach(el => el.onclick = () => {
+    set(el.dataset.k); page = 1; renderTools(); renderList();
   });
 }
 
+function renderTools(){
+  document.getElementById("sortChips").innerHTML = chipHTML(
+    [{k:"year", label:"출간년도순"}, {k:"rating", label:"별점순"}], sortKey);
+
+  document.getElementById("typeChips").innerHTML = chipHTML([
+    {k:"all",     label:"전체", n:countBy("type", ()=>true)},
+    {k:"book",    label:"책",   n:countBy("type", b=>typeOf(b)==="book")},
+    {k:"webtoon", label:"웹툰", n:countBy("type", b=>typeOf(b)==="webtoon")},
+  ], fType);
+
+  document.getElementById("rateChips").innerHTML = chipHTML([
+    {k:"all", label:"전체", n:countBy("rate", ()=>true)},
+    ...[5,4,3,2,1].map(r => ({k:String(r), label:"★"+r, n:countBy("rate", b=>b.rating===r)})),
+    {k:"none", label:"미평가", n:countBy("rate", b=>!b.rating)},
+  ], fRate);
+
+  // 장르: 남은 책이 많은 순. 지금 걸러진 결과에 없는 장르는 빼서 헛클릭을 막는다
+  const gc = {};
+  ALL.filter(b => passes(b, "genre")).forEach(b => (b.genres||[]).forEach(g => gc[g] = (gc[g]||0)+1));
+  const genres = Object.entries(gc).sort((a,b) => b[1]-a[1] || a[0].localeCompare(b[0]));
+  document.getElementById("genreSel").innerHTML =
+    `<option value="all">장르 전체</option>` +
+    genres.map(([g,n]) => `<option value="${esc(g)}"${g===fGenre?" selected":""}>${esc(g)} (${n})</option>`).join("") +
+    (fGenre !== "all" && !gc[fGenre] ? `<option value="${esc(fGenre)}" selected>${esc(fGenre)} (0)</option>` : "");
+
+  const yc = {};
+  ALL.filter(b => passes(b, "year")).forEach(b => {
+    const y = b.published ? String(b.published) : "none";
+    yc[y] = (yc[y]||0)+1;
+  });
+  const years = Object.keys(yc).filter(y => y !== "none").sort((a,b) => b.localeCompare(a));
+  document.getElementById("yearSel").innerHTML =
+    `<option value="all">출간년도 전체</option>` +
+    years.map(y => `<option value="${y}"${y===fYear?" selected":""}>${y}년 (${yc[y]})</option>`).join("") +
+    (yc["none"] ? `<option value="none"${fYear==="none"?" selected":""}>출간년도 미상 (${yc["none"]})</option>` : "");
+
+  wire("sortChips", k => sortKey = k);
+  wire("typeChips", k => fType = k);
+  wire("rateChips", k => fRate = k);
+  document.getElementById("genreSel").onchange = e => { fGenre = e.target.value; page = 1; renderTools(); renderList(); };
+  document.getElementById("yearSel").onchange  = e => { fYear  = e.target.value; page = 1; renderTools(); renderList(); };
+}
+
+function resetFilters(){
+  fType = fRate = fGenre = fYear = "all"; page = 1;
+  renderTools(); renderList();
+}
+
+/* ================= 목록 ================= */
 function pageWin(cur, total){
   if(total <= 7) return Array.from({length:total},(_,k)=>k+1);
   const set = new Set([1,total,cur-1,cur,cur+1]);
@@ -223,51 +400,108 @@ function pageWin(cur, total){
   return out;
 }
 
-function row(b){
-  const qn = quoteCount(b), nn = noteCount(b);
+const QUOTE_PREVIEW = 5;
+
+/* 접힌 줄 — 표지·제목·저자·출판사·출간년도·별점만. 나머지는 눌러야 나온다 */
+function rowHTML(b, key, open){
   const cover = b.cover
     ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" loading="lazy" />`
-    : `<div class="ph" style="background:${phColor(b.title)}"><div class="ph-title">${esc(b.title)}</div></div>`;
-  const sub = [b.author || "저자 미상", b.platform || b.publisher, b.published ? b.published + "년 출간" : ""]
-    .filter(Boolean).join(" · ");
-  const extra = [qn ? `문장 <b>${qn}</b>개` : "", nn ? `생각 노트 <b>${nn}</b>편` : ""].filter(Boolean).join(" · ");
+    : `<div class="ph" style="background:${phColor(b.title)}"><span>${esc(b.title)}</span></div>`;
+  const meta = [b.author || "저자 미상", b.platform || b.publisher, b.published ? b.published + "년" : ""]
+    .filter(Boolean).map(esc).join('<span class="sep">·</span>');
+  const rate = b.rating
+    ? `<span class="st">${stars(b.rating)}</span><span class="rv">${b.rating}.0</span>`
+    : `<span class="no">별점 없음</span>`;
   return `
-    <a class="brow" href="${bookHref(b)}">
-      <div class="cover">${cover}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
-      <div class="info">
-        <div class="bt">${esc(b.title)}</div>
-        <div class="ba">${esc(sub)}</div>
-        ${b.rating ? `<div class="bs">${stars(b.rating)}<small>${b.rating} / 5${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</small></div>`
-                   : (b.readYear ? `<div class="bx">${b.readYear}년에 읽음</div>` : "")}
-        ${extra ? `<div class="bx">${extra}</div>` : ""}
-        ${b.review ? `<div class="br">${esc(b.review)}</div>` : ""}
-      </div>
-    </a>`;
+    <button class="brow" aria-expanded="${open}" data-k="${esc(key)}">
+      <span class="cover">${cover}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</span>
+      <span class="binfo">
+        <span class="bt">${esc(b.title)}</span>
+        <span class="bmeta">${meta}</span>
+        <span class="brate">${rate}</span>
+      </span>
+      <span class="caret">▾</span>
+    </button>`;
+}
+
+/* 펼친 상세 — 장르·읽은 해·줄거리·리뷰·문장·생각 노트·구매 링크 */
+function detailHTML(b){
+  const qs = quotesFor(b), ps = postsFor(b);
+  const shown = openQuotesAll ? qs : qs.slice(0, QUOTE_PREVIEW);
+  const dim = t => t ? `<div class="v">${esc(t)}</div>` : `<div class="v dim">아직 기록하지 않았어요.</div>`;
+  const chips = [...(b.genres || []), b.readYear ? b.readYear + "년에 읽음" : ""].filter(Boolean);
+  return `
+  <div class="bdetail"><div class="dcard">
+    ${chips.length ? `<div class="dchips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div>` : ""}
+    <div class="dfield"><div class="k">줄거리</div>${dim(b.summary)}</div>
+    <div class="dfield"><div class="k">내 리뷰</div>${dim(b.review)}</div>
+    <div class="dfield"><div class="k">수집한 문장${qs.length ? " · "+qs.length+"개" : ""}</div>
+      ${qs.length ? shown.map(q => `<div class="dquote">${esc(q.t)}${
+          (q.tag||q.d) ? `<span class="qm">${esc(q.tag||"")}${q.tag&&q.d?" · ":""}${esc(q.d||"")}</span>` : ""}</div>`).join("")
+        : `<div class="v dim">아직 수집한 문장이 없어요.</div>`}
+      ${qs.length > QUOTE_PREVIEW
+        ? `<button class="more" data-more="q">${openQuotesAll ? "접기" : `문장 ${qs.length - QUOTE_PREVIEW}개 더 보기`}</button>` : ""}
+    </div>
+    ${ps.length ? `<div class="dfield"><div class="k">이 책에서 쓴 생각 노트 · ${ps.length}편</div>
+      ${ps.map(p => `<a class="dnote" href="${postHref(p)}">
+        <span class="t">${esc(p.title)}</span>
+        <span class="m">${esc(p.category||"노트")}${p.d ? " · " + esc(p.d) : ""}</span></a>`).join("")}
+    </div>` : ""}
+    <div class="dbuy"><a href="${esc(buyHref(b))}" target="_blank" rel="noopener">${
+      b.type==="webtoon" ? "네이버웹툰에서 보기" : "교보문고에서 보기"} →</a></div>
+  </div></div>`;
 }
 
 function renderList(){
-  const all = sorted();
+  const all = filtered();
   const total = Math.max(1, Math.ceil(all.length / PER_PAGE));
   page = Math.min(Math.max(1, page), total);
   const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
 
-  // 히어로 통계와 셈을 맞춘다 — '권의 책'은 웹툰을 빼고 센다
-  const toonN = all.filter(b => b.type === "webtoon").length;
-  document.getElementById("headSub").innerHTML =
-    `지금까지 책 <b>${all.length - toonN}권</b>${toonN ? ` · 웹툰 <b>${toonN}편</b>` : ""}. `
-    + `제목을 누르면 서재에서 리뷰와 수집한 문장이 열립니다.`;
+  document.getElementById("blist").innerHTML = list.length ? list.map(b => {
+    const key = b.title, open = openKey === key;
+    return `<div class="bitem${open?" open":""}">${rowHTML(b, key, open)}${open ? detailHTML(b) : ""}</div>`;
+  }).join("") : `<div class="empty">조건에 맞는 책이 없어요. 필터를 조금 풀어 보세요.</div>`;
 
-  document.getElementById("blist").innerHTML = list.length ? list.map(row).join("")
-    : `<div class="empty">아직 책이 없어요.</div>`;
+  document.querySelectorAll("#blist .brow").forEach(el => el.onclick = () => {
+    const k = el.dataset.k;
+    openKey = (openKey === k) ? null : k;
+    openQuotesAll = false;
+    renderList();
+    if(openKey === k){
+      const row = document.querySelector(`#blist .brow[data-k="${CSS.escape(k)}"]`);
+      const y = row.getBoundingClientRect().top + window.scrollY - 70;
+      if(row.getBoundingClientRect().top < 60) window.scrollTo({top:y, behavior:"smooth"});
+    }
+  });
+  document.querySelectorAll('#blist [data-more="q"]').forEach(el => el.onclick = () => {
+    openQuotesAll = !openQuotesAll; renderList();
+  });
+
+  // 요약줄 — 지금 몇 권을 보고 있는지, 필터가 걸려 있는지
+  const on = fType!=="all" || fRate!=="all" || fGenre!=="all" || fYear!=="all";
+  document.getElementById("tsum").innerHTML =
+    `<span><b>${all.length}권</b>${on ? " (전체 "+ALL.length+"권 중)" : ""} · ${page} / ${total} 페이지</span>`
+    + (on ? `<button class="reset" id="resetBtn">필터 초기화</button>` : "");
+  const rb = document.getElementById("resetBtn");
+  if(rb) rb.onclick = resetFilters;
 
   document.getElementById("pager").innerHTML = total > 1 ? `
     <button onclick="goPage(${page-1})" ${page===1?"disabled":""}>‹</button>
     ${pageWin(page,total).map(p=>p==="…"?`<span class="ell">…</span>`:`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
     <button onclick="goPage(${page+1})" ${page===total?"disabled":""}>›</button>` : "";
 }
-function goPage(p){ page = p; renderList(); document.getElementById("listView").scrollIntoView({behavior:"smooth", block:"start"}); }
+function goPage(p){
+  page = p; openKey = null; renderList();
+  document.getElementById("listView").scrollIntoView({behavior:"smooth", block:"start"});
+}
 
-renderSorts(); renderList();
+/* 히어로 통계와 셈을 맞춘다 — '권의 책'은 웹툰을 빼고 센다 */
+const toonN = ALL.filter(b => typeOf(b) === "webtoon").length;
+document.getElementById("headSub").innerHTML =
+  `지금까지 책 <b>${ALL.length - toonN}권</b>${toonN ? ` · 웹툰 <b>${toonN}편</b>` : ""}. 제목을 누르면 줄거리·리뷰·문장·생각 노트가 펼쳐집니다.`;
+
+renderTools(); renderList();
 </script>
 <script>
 /* ---------- 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) ---------- */
