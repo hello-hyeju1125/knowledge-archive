@@ -77,6 +77,8 @@
   .chips button.on, .chips button:hover{border-color:var(--accent); color:var(--accent);}
   .chips button.on{background:var(--accent); color:#fff; border-color:var(--accent);}
   .picklab{font-size:12.5px; color:var(--text-3); font-weight:600; margin:2px 0 8px;}
+  input.booksearch{font-size:14px; padding:9px 13px; margin-bottom:8px;}
+  .chips .chiphint{font-size:12px; color:var(--text-3); align-self:center; padding:2px 0;}
 
   .tagpick{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;}
   .tagpick button{
@@ -270,6 +272,7 @@
     <input id="pTitle" placeholder="글 제목" />
     <input id="pCat" placeholder="분류 (기본: 작법)" />
     <div class="picklab">이 글의 출처 책 (누르면 글 끝에 자동으로 붙어요)</div>
+    <input class="booksearch" id="pBookSearch" placeholder="예전에 등록한 책 찾기 — 제목·저자 입력" autocomplete="off" />
     <div class="chips" id="pBookChips"></div>
     <textarea id="pBody" style="min-height:320px; line-height:1.8;" placeholder="본문을 적어주세요.
 
@@ -325,6 +328,7 @@
       <input id="epTitle" placeholder="글 제목" style="margin-top:8px;" />
       <input id="epCat" placeholder="분류" />
       <div class="picklab">이 글의 출처 책</div>
+      <input class="booksearch" id="epBookSearch" placeholder="예전에 등록한 책 찾기 — 제목·저자 입력" autocomplete="off" />
       <div class="chips" id="epBookChips"></div>
       <textarea id="epBody" style="min-height:300px; line-height:1.8;"></textarea>
       <div class="row-btns">
@@ -392,20 +396,62 @@ document.querySelectorAll("#recentChips button").forEach(el => el.onclick = () =
   document.getElementById("qText").focus();
 });
 
-/* ---------- 글 ↔ 책 연결: 최근 등록한 책 5권을 눌러서 출처 지정 ---------- */
+/* ---------- 글 ↔ 책 연결 ----------
+   기본은 최근 등록한 책 5권. 검색창에 제목·저자를 적으면
+   예전에 등록해 둔 책도 전부 찾아서 출처로 고를 수 있어요.          */
 const chipEsc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
-function renderBookChips(boxId, selected){
+const BOOK_CHIP_MAX = 24;              // 검색 결과는 최신순 24권까지만 칩으로
+const searchIdOf = boxId => boxId.replace(/Chips$/, "Search");
+
+// 검색어(제목·저자, 공백 무시)와 맞는 책 제목을 최신 등록순으로
+function findBookTitles(q){
+  const norm = s => String(s||"").toLowerCase().replace(/\s+/g,"");
+  const k = norm(q);
+  const out = [];
+  for(let i=BOOKS.length-1; i>=0; i--){
+    const b = BOOKS[i];
+    if(!norm(b.title + " " + (b.author||"")).includes(k)) continue;
+    if(!out.includes(b.title)) out.push(b.title);
+  }
+  return out;
+}
+
+function paintBookChips(boxId){
   const box = document.getElementById(boxId);
-  const recent = BOOKS.slice(-5).reverse().map(b => b.title);
-  const list = selected && !recent.includes(selected) ? [selected, ...recent] : recent;
-  box.dataset.sel = selected || "";
+  const selected = box.dataset.sel || "";
+  const q = (document.getElementById(searchIdOf(boxId))?.value || "").trim();
+
+  const hits = q ? findBookTitles(q) : null;
+  let list = hits ? hits.slice(0, BOOK_CHIP_MAX) : BOOKS.slice(-5).reverse().map(b => b.title);
+  if(selected && !list.includes(selected)) list = [selected, ...list];
+
+  let hint = "";
+  if(hits && hits.length === 0) hint = `<span class="chiphint">찾는 책이 없어요 — ‘책 추가’ 탭에서 먼저 등록해 주세요.</span>`;
+  else if(hits && hits.length > BOOK_CHIP_MAX) hint = `<span class="chiphint">외 ${hits.length - BOOK_CHIP_MAX}권 — 검색어를 더 적어보세요</span>`;
+
   box.innerHTML =
     `<button type="button" data-t=""${selected ? "" : ' class="on"'}>출처 없음</button>` +
-    list.map(t => `<button type="button" data-t="${chipEsc(t)}"${t===selected?' class="on"':''}>${chipEsc(t)}</button>`).join("");
+    list.map(t => `<button type="button" data-t="${chipEsc(t)}"${t===selected?' class="on"':''}>${chipEsc(t)}</button>`).join("") +
+    hint;
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
     box.dataset.sel = el.dataset.t;
     box.querySelectorAll("button").forEach(x => x.classList.toggle("on", x===el));
   });
+}
+
+function renderBookChips(boxId, selected){
+  const box = document.getElementById(boxId);
+  box.dataset.sel = selected || "";
+  const input = document.getElementById(searchIdOf(boxId));
+  if(input){
+    input.value = "";
+    if(!input.dataset.wired){
+      input.dataset.wired = "1";
+      input.addEventListener("input", () => paintBookChips(boxId));
+      input.addEventListener("keydown", e => { if(e.key === "Enter") e.preventDefault(); });
+    }
+  }
+  paintBookChips(boxId);
 }
 const pickedBook = boxId => document.getElementById(boxId).dataset.sel || "";
 renderBookChips("pBookChips", "");
