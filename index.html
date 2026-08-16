@@ -221,6 +221,14 @@
   }
   blockquote::before{content:"“"; color:var(--accent); font-weight:700; margin-right:2px;}
   blockquote .qmeta{display:block; margin-top:6px; font-size:11.5px; color:var(--text-3);}
+  .d-notes{display:flex; flex-direction:column; gap:8px;}
+  .d-note{
+    display:block; padding:12px 16px; border-radius:14px; background:var(--bg);
+    color:var(--text); transition:background .15s;
+  }
+  .d-note:hover{background:var(--mint);}
+  .d-note .dn-t{display:block; font-size:14.5px; font-weight:700; letter-spacing:-0.01em; line-height:1.5;}
+  .d-note .dn-m{display:block; margin-top:4px; font-size:11.5px; color:var(--text-3);}
   .show-more{
     background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
     font-size:13px; padding:8px 18px; margin-top:4px;
@@ -396,8 +404,8 @@
 <nav>
   <span class="brand">헬로의 서재</span>
   <div class="links">
-    <a href="#quotes">문장</a>
     <a href="#books">책</a>
+    <a href="#quotes">문장</a>
     <a href="#graph-sec">지도</a>
     <a href="./notes.html">노트</a>
     <button class="add-mini" id="addBtn">서재 주인 접근</button>
@@ -415,20 +423,7 @@
   <div class="stats" id="heroStats"></div>
 </header>
 
-<section id="quotes" style="padding-top:16px;">
-  <div class="sec-head">
-    <h2><span class="marker-thin">수집한 문장</span></h2>
-    <p>문장을 누르면 문장 카드가 크게 열립니다.</p>
-  </div>
-  <div class="tagbar" id="tagbar"></div>
-  <div class="rail-wrap">
-    <button class="rail-nav prev" id="qPrev" aria-label="이전">‹</button>
-    <div class="rail" id="qrail"></div>
-    <button class="rail-nav next" id="qNext" aria-label="다음">›</button>
-  </div>
-</section>
-
-<section id="books" style="padding-top:24px;">
+<section id="books" style="padding-top:16px;">
   <div class="sec-head">
     <h2><span class="marker-thin">최근 읽은 것들</span></h2>
     <p>카드를 누르면 바로 아래에 리뷰와 수집한 문장이 열립니다.</p>
@@ -439,6 +434,19 @@
     <button class="rail-nav next" id="railNext" aria-label="다음">›</button>
   </div>
   <div id="detail"></div>
+</section>
+
+<section id="quotes" style="padding-top:24px;">
+  <div class="sec-head">
+    <h2><span class="marker-thin">수집한 문장</span></h2>
+    <p>문장을 누르면 문장 카드가 크게 열립니다.</p>
+  </div>
+  <div class="tagbar" id="tagbar"></div>
+  <div class="rail-wrap">
+    <button class="rail-nav prev" id="qPrev" aria-label="이전">‹</button>
+    <div class="rail" id="qrail"></div>
+    <button class="rail-nav next" id="qNext" aria-label="다음">›</button>
+  </div>
 </section>
 
 <section id="graph-sec">
@@ -709,6 +717,30 @@ function quoteBlock(q){
   const meta = (q.tag||q.d) ? `<span class="qmeta">${esc(q.tag||"")}${q.tag&&q.d?" · ":""}${esc(q.d||"")}</span>` : "";
   return `<blockquote>${esc(q.t)}${meta}</blockquote>`;
 }
+/* 이 책을 출처로 쓴 생각 노트 (posts.js의 book 필드로 연결) */
+const postUrl = p => `./p/${encodeURIComponent((typeof SLUGS !== "undefined" && SLUGS[p.id]) || p.id)}.html`;
+function postsFor(b){
+  if(typeof POSTS === "undefined") return [];
+  const key = s => String(s||"").trim().toLowerCase().replace(/\s+/g,"");
+  const k = key(b.title);
+  return POSTS.filter(p => p.book && key(p.book) === k);
+}
+const NOTE_PREVIEW = 5;
+function noteRows(b){
+  const ps = postsFor(b);
+  if(!ps.length) return "";
+  const row = p => `<a class="d-note" href="${postUrl(p)}">
+      <span class="dn-t">${esc(p.title)}</span>
+      <span class="dn-m">${esc(p.category||"노트")}${p.d ? " · " + esc(p.d) : ""}</span>
+    </a>`;
+  const rest = ps.slice(NOTE_PREVIEW);
+  return `<div class="d-field"><div class="k">이 책에서 쓴 생각 노트 · ${ps.length}개</div>
+    <div class="d-notes">${ps.slice(0, NOTE_PREVIEW).map(row).join("")}</div>
+    ${rest.length ? `<div class="d-notes" id="restNotes" style="display:none; margin-top:8px">${rest.map(row).join("")}</div>
+      <button class="show-more" id="moreNotesBtn" style="margin-top:10px">노트 ${rest.length}개 더 보기</button>` : ""}
+  </div>`;
+}
+
 function selectBook(i, scroll){
   selKey = i;
   const b = ALL[i];
@@ -733,11 +765,11 @@ function selectBook(i, scroll){
           ${rest ? `<div id="restQuotes" style="display:none">${rest}</div>
                     <button class="show-more" id="showMoreBtn">문장 ${qs.length - QUOTE_PREVIEW}개 더 보기</button>` : ""}
         </div>
+        ${noteRows(b)}
         <div class="buyrow">
           ${b.type==="webtoon"
             ? `<a class="buy primary" href="${esc(b.link||"https://comic.naver.com")}" target="_blank" rel="noopener">네이버웹툰에서 보기</a>`
-            : `<a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>
-               <a class="buy" href="${links.amazon}" target="_blank" rel="noopener">Amazon에서 보기</a>`}
+            : `<a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>`}
         </div>
         ${b._src==="local" ? `<button class="del-link" onclick="deleteLocal('${b._id}')">이 책 삭제</button>` : ""}
       </div>
@@ -748,6 +780,13 @@ function selectBook(i, scroll){
     const open = r.style.display !== "none";
     r.style.display = open ? "none" : "block";
     more.textContent = open ? `문장 ${qs.length - QUOTE_PREVIEW}개 더 보기` : "접기";
+  };
+  const moreN = document.getElementById("moreNotesBtn");
+  if(moreN) moreN.onclick = () => {
+    const r = document.getElementById("restNotes");
+    const open = r.style.display !== "none";
+    r.style.display = open ? "none" : "flex";
+    moreN.textContent = open ? `노트 ${postsFor(b).length - NOTE_PREVIEW}개 더 보기` : "접기";
   };
   d.classList.add("show");
   renderRail();
