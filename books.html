@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>읽은 책 전체 — 헬로의 서재</title>
+<meta name="description" content="헬로가 지금까지 읽은 책 전체 목록. 최신순·별점순으로 볼 수 있습니다." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="읽은 책 전체 — 헬로의 서재" />
+<meta property="og:description" content="지금까지 읽은 책을 한 번에. 최신순·별점순으로 볼 수 있습니다." />
+<meta property="og:url" content="https://hellmeone.com/books.html" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index, follow, max-snippet:-1" />
+<link rel="canonical" href="https://hellmeone.com/books.html" />
+<style>
+@font-face{
+  font-family:"NanumSquareNeo";
+  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2") format("woff2");
+  font-weight:300 900; font-display:swap;
+}
+</style>
+<style>
+  :root{
+    --bg:#ECFCFF; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
+    --line:#CBE9F2; --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --star:#294AFF; --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07);
+    --ph1:#E2F4FF; --ph2:#E7F0FF; --ph3:#DFFBEF; --ph4:#EAF6F1; --ph5:#E4EDFF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#050B1D; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
+      --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
+      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
+      --star:#37FFA9; --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5);
+      --ph1:#12203E; --ph2:#101E3B; --ph3:#0E2635; --ph4:#132239; --ph5:#111F42;
+    }
+  }
+  *{box-sizing:border-box; margin:0;}
+  /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
+  body{-webkit-user-select:none; -moz-user-select:none; user-select:none;}
+  input, textarea{-webkit-user-select:text; -moz-user-select:text; user-select:text;}
+  img{-webkit-user-drag:none; user-drag:none;}
+
+  body{
+    font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+
+  nav{
+    position:sticky; top:0; z-index:50; height:52px;
+    display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
+    background:color-mix(in srgb, var(--bg) 75%, transparent);
+    backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .brand{font-size:15px; font-weight:800; color:var(--text);}
+  nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
+  nav .links a{color:var(--text-2); font-size:13px;}
+  nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
+  nav .add-mini{
+    background:var(--accent); color:#fff !important; border:none; border-radius:980px;
+    font-size:12.5px; padding:6px 14px; font-weight:600;
+  }
+  nav .add-mini:hover{background:var(--accent-hover) !important;}
+  @media (max-width:640px){
+    nav{gap:12px; padding:0 16px;}
+    nav .brand{font-size:14px; white-space:nowrap;}
+    nav .links{gap:13px;}
+    nav .links a{font-size:12.5px; white-space:nowrap;}
+    nav .add-mini{display:none;}
+  }
+
+  /* ---------- 목록 ---------- */
+  .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
+  .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
+  .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
+  .sorts{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px;}
+  .sorts button{
+    border:1px solid var(--line); background:var(--card); color:var(--text-2);
+    font-size:13px; font-weight:600; padding:7px 16px; border-radius:980px;
+  }
+  .sorts button:hover{border-color:var(--accent); color:var(--accent);}
+  .sorts button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+
+  .blist{margin-top:26px;}
+  .brow{
+    display:flex; gap:16px; align-items:flex-start;
+    padding:18px 4px; border-bottom:1px solid var(--line); color:var(--text);
+  }
+  .brow:hover .bt{color:var(--accent);}
+  .brow .cover{
+    flex:0 0 58px; width:58px; height:84px; border-radius:8px; overflow:hidden;
+    background:var(--card); box-shadow:var(--shadow); position:relative;
+  }
+  .brow .cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .brow .ph{width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; padding:6px;}
+  .brow .ph-title{font-size:9.5px; font-weight:800; line-height:1.3; color:var(--text-2);
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;}
+  .brow .wbadge{
+    position:absolute; top:4px; left:4px; background:var(--mint); color:#063a26;
+    font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:980px;
+  }
+  .brow .info{min-width:0; flex:1;}
+  .brow .bt{font-size:16.5px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
+  .brow .ba{font-size:13px; color:var(--text-2); margin-top:4px;}
+  .brow .bs{font-size:13px; color:var(--star); letter-spacing:1px; margin-top:6px;}
+  .brow .bs small{color:var(--text-3); font-size:11.5px; letter-spacing:0; margin-left:7px;}
+  .brow .bx{font-size:12px; color:var(--text-3); margin-top:6px;}
+  .brow .bx b{color:var(--text-2); font-weight:700;}
+  .brow .br{
+    font-size:13.5px; color:var(--text-2); margin-top:9px; line-height:1.65;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  }
+  .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
+
+  .pager{display:flex; gap:6px; justify-content:center; margin-top:30px; flex-wrap:wrap; align-items:center;}
+  .pager button{min-width:34px; height:34px; border-radius:10px; border:1px solid var(--line);
+    background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
+  .pager button:hover{border-color:var(--accent); color:var(--accent);}
+  .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .pager button:disabled{opacity:.35;}
+  .pager .ell{color:var(--text-3); font-size:12px;}
+
+  footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
+  footer .f-brand{font-size:14px; font-weight:800;}
+  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="./index.html">헬로의 서재</a>
+  <div class="links">
+    <a href="./books.html" style="color:var(--text); font-weight:700;">책</a>
+    <a href="./index.html#quotes">문장</a>
+    <a href="./index.html#graph-sec">지도</a>
+    <a href="./notes.html">노트</a>
+    <a class="add-mini" href="./admin.html">서재 주인 접근</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div id="listView">
+    <div class="head">
+      <h1><span class="marker">읽은 책 전체</span></h1>
+      <p id="headSub">제목을 누르면 서재에서 리뷰와 수집한 문장이 열립니다.</p>
+    </div>
+    <div class="sorts" id="sorts"></div>
+    <div class="blist" id="blist"></div>
+    <div class="pager" id="pager"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="f-brand">헬로의 서재</div>
+  <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+</footer>
+
+<script>
+// 데이터 파일은 항상 최신으로 (GitHub Pages 캐시 우회)
+document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="posts.js?v=' + Date.now() + '"><\/script>');
+</script>
+<script>
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const stars = n => "★★★★★☆☆☆☆☆".slice(5-(n||0), 10-(n||0));
+const PH = ["var(--ph1)","var(--ph2)","var(--ph3)","var(--ph4)","var(--ph5)"];
+const phColor = t => PH[[...t].reduce((a,c)=>a+c.charCodeAt(0),0) % PH.length];
+
+/* 화면에서 추가한 책(브라우저 저장분)도 index.html과 똑같이 함께 보여준다 */
+const LS_KEY = "myBooks_v1";
+const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY) || "[]"); } catch(e){ return []; } };
+const ALL = [
+  ...loadLocal().reverse(),
+  ...BOOKS.slice().reverse(),
+];
+
+const quoteCount = b =>
+  QUOTES.filter(q => q.b === b.title).length + (b.quotes ? b.quotes.length : 0);
+
+/* 이 책을 출처로 쓴 생각 노트 수 (띄어쓰기 차이는 무시) */
+const bkey = s => String(s||"").trim().toLowerCase().replace(/\s+/g,"");
+const noteCount = b => (typeof POSTS === "undefined") ? 0
+  : POSTS.filter(p => p.book && bkey(p.book) === bkey(b.title)).length;
+
+/* 책 상세는 서재(index.html)에서 열린다 — #book/책제목으로 넘기면 그 책이 펼쳐진다 */
+const bookHref = b => "./index.html#book/" + encodeURIComponent(b.title);
+
+/* ---------- 정렬 ---------- */
+const SORTS = [
+  { k:"recent", label:"최신순", fn:null },   // ALL이 이미 최신순
+  { k:"rating", label:"별점순", fn:(a,b) => (b.rating||0) - (a.rating||0) },
+];
+let activeSort = "recent", page = 1;
+const PER_PAGE = 15;
+
+function sorted(){
+  const s = SORTS.find(x => x.k === activeSort);
+  // 같은 별점끼리는 원래 순서(최신순)를 지킨다 — sort가 안정 정렬이므로 그대로 둔다
+  return s && s.fn ? ALL.slice().sort(s.fn) : ALL;
+}
+
+function renderSorts(){
+  document.getElementById("sorts").innerHTML = SORTS.map(s =>
+    `<button class="${s.k===activeSort?"on":""}" data-k="${s.k}">${s.label}</button>`).join("");
+  document.querySelectorAll("#sorts button").forEach(el => el.onclick = () => {
+    activeSort = el.dataset.k; page = 1; renderSorts(); renderList();
+  });
+}
+
+function pageWin(cur, total){
+  if(total <= 7) return Array.from({length:total},(_,k)=>k+1);
+  const set = new Set([1,total,cur-1,cur,cur+1]);
+  const list = [...set].filter(p=>p>=1&&p<=total).sort((a,b)=>a-b);
+  const out = [];
+  list.forEach((p,i)=>{ if(i && p-list[i-1]>1) out.push("…"); out.push(p); });
+  return out;
+}
+
+function row(b){
+  const qn = quoteCount(b), nn = noteCount(b);
+  const cover = b.cover
+    ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" loading="lazy" />`
+    : `<div class="ph" style="background:${phColor(b.title)}"><div class="ph-title">${esc(b.title)}</div></div>`;
+  const sub = [b.author || "저자 미상", b.platform || b.publisher, b.published ? b.published + "년 출간" : ""]
+    .filter(Boolean).join(" · ");
+  const extra = [qn ? `문장 <b>${qn}</b>개` : "", nn ? `생각 노트 <b>${nn}</b>편` : ""].filter(Boolean).join(" · ");
+  return `
+    <a class="brow" href="${bookHref(b)}">
+      <div class="cover">${cover}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
+      <div class="info">
+        <div class="bt">${esc(b.title)}</div>
+        <div class="ba">${esc(sub)}</div>
+        ${b.rating ? `<div class="bs">${stars(b.rating)}<small>${b.rating} / 5${b.readYear ? " · " + b.readYear + "년에 읽음" : ""}</small></div>`
+                   : (b.readYear ? `<div class="bx">${b.readYear}년에 읽음</div>` : "")}
+        ${extra ? `<div class="bx">${extra}</div>` : ""}
+        ${b.review ? `<div class="br">${esc(b.review)}</div>` : ""}
+      </div>
+    </a>`;
+}
+
+function renderList(){
+  const all = sorted();
+  const total = Math.max(1, Math.ceil(all.length / PER_PAGE));
+  page = Math.min(Math.max(1, page), total);
+  const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
+
+  // 히어로 통계와 셈을 맞춘다 — '권의 책'은 웹툰을 빼고 센다
+  const toonN = all.filter(b => b.type === "webtoon").length;
+  document.getElementById("headSub").innerHTML =
+    `지금까지 책 <b>${all.length - toonN}권</b>${toonN ? ` · 웹툰 <b>${toonN}편</b>` : ""}. `
+    + `제목을 누르면 서재에서 리뷰와 수집한 문장이 열립니다.`;
+
+  document.getElementById("blist").innerHTML = list.length ? list.map(row).join("")
+    : `<div class="empty">아직 책이 없어요.</div>`;
+
+  document.getElementById("pager").innerHTML = total > 1 ? `
+    <button onclick="goPage(${page-1})" ${page===1?"disabled":""}>‹</button>
+    ${pageWin(page,total).map(p=>p==="…"?`<span class="ell">…</span>`:`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
+    <button onclick="goPage(${page+1})" ${page===total?"disabled":""}>›</button>` : "";
+}
+function goPage(p){ page = p; renderList(); document.getElementById("listView").scrollIntoView({behavior:"smooth", block:"start"}); }
+
+renderSorts(); renderList();
+</script>
+<script>
+/* ---------- 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) ---------- */
+(function(){
+  const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
+  ["copy","cut","dragstart","contextmenu"].forEach(ev =>
+    document.addEventListener(ev, e => { if(!exempt(e)) e.preventDefault(); }));
+})();
+</script>
+<!-- 네이버 애널리틱스 — index.html·notes.html과 같은 ID (한 사이트로 집계) -->
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "995a28458386";
+if(window.wcs) { wcs_do(); }
+</script>
+</body>
+</html>

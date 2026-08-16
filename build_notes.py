@@ -423,7 +423,8 @@ def write_sitemap(posts, slugs):
     # 내용이 그대로여도 자동 빌드가 매번 빈 커밋을 남긴다.
     latest = max(p["d"] for p in posts) if posts else "2026-01-01"
     urls = [("%s/" % SITE, latest, "daily", "1.0"),
-            ("%s/notes.html" % SITE, latest, "daily", "0.9")]
+            ("%s/notes.html" % SITE, latest, "daily", "0.9"),
+            ("%s/books.html" % SITE, latest, "daily", "0.9")]
     urls += [(post_url(slugs[p["id"]]), p["d"], "monthly", "0.8") for p in posts]
     body = "\n".join(
         "  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n"
