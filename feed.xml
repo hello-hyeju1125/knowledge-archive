@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Fri, 14 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 17 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>문제별 맞춤 처방: 글쓰기의 연금술</title>
+    <link>https://hellmeone.com/p/%EB%AC%B8%EC%A0%9C%EB%B3%84-%EB%A7%9E%EC%B6%A4-%EC%B2%98%EB%B0%A9-%EA%B8%80%EC%93%B0%EA%B8%B0%EC%9D%98-%EC%97%B0%EA%B8%88%EC%88%A0.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%AC%B8%EC%A0%9C%EB%B3%84-%EB%A7%9E%EC%B6%A4-%EC%B2%98%EB%B0%A9-%EA%B8%80%EC%93%B0%EA%B8%B0%EC%9D%98-%EC%97%B0%EA%B8%88%EC%88%A0.html</guid>
+    <category>작법</category>
+    <pubDate>Mon, 17 Aug 2026 09:00:00 +0900</pubDate>
+    <description>작가가 좋은 점은 마음대로 작품을 손볼 수 있다는 것이다. 그렇지만 작품을 제대로 손보려면 작품의 문제를 정확히 진단해야 한다. 문제 1: 재미없는 장면 어떤 장면이든 장면에는 긴장이 흘러야 한다. 그게 나쁜 일이 벌어진 탓에 생기는 육체적 긴장감이든 인물이 무엇인가를 걱정해 생기는 내적 긴장감이든 상관 없이 말이다. 강조점 (Hot Spot) 어떤 장면은 너무 길어서 이야기의 &#x27;속도감&#x27;을 떨어뜨린다. 모든 장면은 중심 또는 핵심이 되는 순간이나 전환을 맞는 부분이 있어야 한다. 만일 장면에서 이렇게 두드러지게 부분이 없다면 그 장…</description>
+  </item>
   <item>
     <title>질문이 답보다 낫다</title>
     <link>https://hellmeone.com/p/%EC%A7%88%EB%AC%B8%EC%9D%B4-%EB%8B%B5%EB%B3%B4%EB%8B%A4-%EB%82%AB%EB%8B%A4.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Sun, 02 Aug 2026 09:00:00 +0900</pubDate>
     <description>지금 쓰고 있는 소설의 첫 번째 장을 살펴보자. 첫 문단부터 독자를 사로 잡기 위해 어떤 기술을 쓰면 좋을까? 앞으로 나아간다는 느낌이 드는가? 그렇지 않다면 이 장에서 배운 기술들을 활용해 다시 쓰자. 소설 속 세계가 어떤가? 그 세계에 대해서 얼마나 잘 알고 있는가? 그 세계를 묘사 말고 어떻게 독자에게 전달할 수 있을까? 어떻게 주인공을 등장시킬까? 주인공이 독자의 기억에 남게하려면 어떻게 해야할까? 다음 다섯 가지 항목에 따라 주인공을 살펴보자. 동일시: 주인공은 &#x27;보통 사람들&#x27;과 어떤 점에서 비슷한가? 공감: 위험(육체적…</description>
-  </item>
-  <item>
-    <title>소설의 시작: 강렬한 인상을 심자</title>
-    <link>https://hellmeone.com/p/%EC%86%8C%EC%84%A4%EC%9D%98-%EC%8B%9C%EC%9E%91-%EA%B0%95%EB%A0%AC%ED%95%9C-%EC%9D%B8%EC%83%81%EC%9D%84-%EC%8B%AC%EC%9E%90.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%86%8C%EC%84%A4%EC%9D%98-%EC%8B%9C%EC%9E%91-%EA%B0%95%EB%A0%AC%ED%95%9C-%EC%9D%B8%EC%83%81%EC%9D%84-%EC%8B%AC%EC%9E%90.html</guid>
-    <category>작법</category>
-    <pubDate>Sat, 01 Aug 2026 09:00:00 +0900</pubDate>
-    <description>소설의 시작 부분인 1막에서는 다음 과제들을 해결해야 한다. 독자를 사로잡는다. 독자와 주인공 사이에 유대감을 형성한다. 장소, 시간, 맥락 등 소설의 배경을 제시한다. 소설의 전체 분위기를 결정한다. 전개가 빠른지, 익살스러운지, 역동적인지, 인물의 변화에 초점을 맞추는지, 속도감이 있는지, 느긋하게 흘러가는지. 독자를 중간 부분으로 넘어가게 만든다. 계속 책을 읽어야 할 이유를 만든다. 적대자를 등장시킨다. 누가 또는 무엇이 주인공의 길을 가로막는지 알린다. 이 과제들을 잘 해결하면 플롯의 기초가 튼튼해진다. 독자는 유능한 이야…</description>
   </item>
 </channel>
 </rss>

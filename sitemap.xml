@@ -2,15 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://hellmeone.com/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://hellmeone.com/notes.html</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hellmeone.com/p/%EB%AC%B8%EC%A0%9C%EB%B3%84-%EB%A7%9E%EC%B6%A4-%EC%B2%98%EB%B0%A9-%EA%B8%80%EC%93%B0%EA%B8%B0%EC%9D%98-%EC%97%B0%EA%B8%88%EC%88%A0.html</loc>
+    <lastmod>2026-08-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://hellmeone.com/p/%EC%A7%88%EB%AC%B8%EC%9D%B4-%EB%8B%B5%EB%B3%B4%EB%8B%A4-%EB%82%AB%EB%8B%A4.html</loc>
