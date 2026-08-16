@@ -16,6 +16,9 @@
 <meta name="google-site-verification" content="eXUWHms_f5PaUu66rephC9LpoIIBwqu6hhJhbPxl5KQ" />
 <meta name="naver-site-verification" content="1a08a95edd219c3b2337076840079c8a917ea817" />
 <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+<!-- 문장 모달의 인용문에 쓰는 명조 (생각 노트 글 페이지와 같은 서체) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
 <style>
 @font-face{
   font-family:"NanumSquareNeo";
@@ -188,13 +191,31 @@
   .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
   .bcard .meta .qn{font-size:11px; color:var(--text-3); margin-top:2px;}
 
-  /* ---------- 상세 ---------- */
-  #detail{
-    max-width:1200px; margin:8px auto 0; background:var(--card); border:1px solid var(--line); border-radius:24px;
-    padding:clamp(24px,4vw,44px); display:none; scroll-margin-top:76px;
+  /* ---------- 상세: 책 모달 ---------- */
+  /* 상세는 길어서(문장 많은 책은 2,000px가 넘는다) 페이지에 펼치면
+     아래 섹션이 통째로 밀린다. 문장 카드와 같은 방식으로 모달에 띄운다. */
+  .bm-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.45); display:none;
+    align-items:flex-start; justify-content:center; padding:4vh 20px; z-index:120;
   }
-  #detail.show{display:block; animation:fadeUp .35s ease;}
+  .bm-overlay.show{display:flex; animation:fadeIn .18s ease;}
+  @keyframes fadeIn{from{opacity:0;} to{opacity:1;}}
+  #detail{
+    position:relative; width:100%; max-width:880px; max-height:92vh; overflow-y:auto;
+    background:var(--card); border:1px solid var(--line); border-radius:24px;
+    padding:clamp(24px,4vw,44px); animation:fadeUp .28s ease;
+  }
   @keyframes fadeUp{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .bm-close{
+    position:sticky; top:0; float:right; margin:-8px -8px 0 0; z-index:2;
+    width:36px; height:36px; border-radius:50%; border:1px solid var(--line);
+    background:var(--bg); color:var(--text-2); font-size:17px; line-height:1;
+  }
+  .bm-close:hover{border-color:var(--accent); color:var(--accent);}
+  @media (max-width:720px){
+    .bm-overlay{padding:0;}
+    #detail{max-height:100vh; border-radius:0; border:none; padding:22px 18px 40px;}
+  }
   .d-grid{display:grid; grid-template-columns:210px 1fr; gap:clamp(24px,4vw,48px);}
   @media (max-width:720px){ .d-grid{grid-template-columns:1fr;} .d-cover{margin:0 auto;} }
   .d-cover{width:210px; height:308px; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-lg); background:var(--card); flex:none;}
@@ -362,15 +383,70 @@
   details.keybox .inner{margin-top:10px; font-size:12.5px; color:var(--text-2); line-height:1.6;}
   #exportArea{min-height:200px; font-family:ui-monospace,Menlo,monospace; font-size:12px;}
 
-  /* ---------- 문장 모달 ---------- */
-  .qm-mark{font-size:44px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
-  .qm-text{font-size:19px; line-height:1.8; font-weight:500; letter-spacing:-0.012em; margin:6px 0 26px; word-break:keep-all;}
-  .qm-book{display:flex; align-items:baseline; gap:10px; padding-top:18px; border-top:1px solid var(--line); flex-wrap:wrap;}
-  .qm-book .t{font-size:15.5px; font-weight:700;}
-  .qm-book .a{font-size:13px; color:var(--text-2);}
-  .htags{display:flex; flex-wrap:wrap; gap:6px 12px; margin-top:14px;}
-  .htag{color:var(--accent); font-size:13.5px; font-weight:500;}
-  .qm-summary{margin-top:14px; font-size:13px; color:var(--text-2); line-height:1.7;}
+  /* ---------- 문장 모달 ----------
+     수집해 둔 인용문 한 장처럼 보이게: 명조 본문, 큰 따옴표 워터마크,
+     아래에 출처(표지·책·저자)를 적은 카드. */
+  .qm-overlay{align-items:center; padding:4vh 20px;}
+  .qmodal{
+    position:relative; width:100%; max-width:600px; max-height:90vh; overflow-y:auto;
+    background:var(--card); border:1px solid var(--line); border-radius:26px;
+    padding:44px 42px 34px; box-shadow:var(--shadow-lg);
+    animation:fadeUp .28s ease;
+  }
+  .qmodal::before{   /* 카드 위쪽 민트 띠 — 서재의 형광펜 표시와 같은 언어 */
+    content:""; position:absolute; top:0; left:42px; right:42px; height:4px;
+    background:var(--mint); border-radius:0 0 4px 4px;
+  }
+  .qm-x{
+    position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--line); background:var(--bg); color:var(--text-3); font-size:15px; line-height:1;
+  }
+  .qm-x:hover{border-color:var(--accent); color:var(--accent);}
+  .qm-mark{
+    font-family:Georgia,"Times New Roman",serif; font-size:76px; line-height:.7;
+    color:var(--mint); opacity:.85; display:block; margin-bottom:6px; user-select:none;
+  }
+  /* blockquote 공통 스타일(회색 상자·따옴표)을 여기서는 걷어낸다 */
+  blockquote.qm-text{
+    margin:0; padding:0; background:none; border-radius:0;
+    font-family:"Noto Serif KR",Georgia,serif; font-weight:400;
+    font-size:clamp(17px,2.1vw,19.5px); line-height:2.05; letter-spacing:-0.008em;
+    color:var(--text); word-break:keep-all; white-space:pre-wrap;
+  }
+  blockquote.qm-text::before{content:none;}
+  .qm-from{
+    display:flex; align-items:center; gap:14px;
+    margin-top:30px; padding-top:22px; border-top:1px solid var(--line);
+  }
+  .qm-cover{
+    flex:0 0 44px; width:44px; height:64px; border-radius:6px; overflow:hidden;
+    background:var(--bg); box-shadow:var(--shadow);
+  }
+  .qm-cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .qm-cover .ph{width:100%; height:100%; display:flex; align-items:center; padding:5px;}
+  .qm-cover .ph span{font-size:8.5px; font-weight:700; line-height:1.3; color:var(--text-2);
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden;}
+  .qm-fromtxt{flex:1; min-width:0;}
+  .qm-fromtxt .t{font-size:15px; font-weight:800; letter-spacing:-0.02em; line-height:1.4;}
+  .qm-fromtxt .a{font-size:12.5px; color:var(--text-3); margin-top:3px;}
+  .qm-go{
+    flex:0 0 auto; font-size:12.5px; font-weight:700; color:var(--accent);
+    border:1px solid var(--line); background:var(--bg); border-radius:980px; padding:7px 14px;
+  }
+  .qm-go:hover{border-color:var(--accent);}
+  .htags{display:flex; flex-wrap:wrap; gap:6px; margin-top:18px;}
+  .htag{
+    font-size:11.5px; font-weight:700; color:var(--text-2);
+    background:var(--bg); border-radius:980px; padding:4px 11px;
+  }
+  @media (max-width:560px){
+    /* 화면을 꽉 채우기보다 카드 한 장으로 보이게 — 아래 빈 공간이 생기지 않는다 */
+    .qm-overlay{padding:16px; align-items:center;}
+    .qmodal{max-height:88vh; border-radius:22px; padding:34px 24px 26px;}
+    .qmodal::before{left:24px; right:24px;}
+    .qm-mark{font-size:60px;}
+    .qm-go{display:none;}
+  }
 
   /* ---------- 그래프 패널 상세 ---------- */
   #gpanel .gp-field{margin-top:16px;}
@@ -434,8 +510,12 @@
     <button class="rail-nav next" id="railNext" aria-label="다음">›</button>
   </div>
   <div class="notes-cta"><a class="hero-cta" style="margin-top:0;" href="./books.html">읽은 책 전체 보기 →</a></div>
-  <div id="detail"></div>
 </section>
+
+<!-- 책 상세 모달 — 카드를 누르면 열리고, ✕ · 바깥 클릭 · ESC로 닫힌다 -->
+<div class="bm-overlay" id="bookOverlay">
+  <div id="detail" role="dialog" aria-modal="true" aria-label="책 상세"></div>
+</div>
 
 <section id="quotes" style="padding-top:24px;">
   <div class="sec-head">
@@ -551,14 +631,20 @@
 </div>
 
 <!-- ===== 문장 모달 ===== -->
-<div class="overlay" id="quoteOverlay">
-  <div class="modal" id="quoteModal" style="max-width:560px;">
-    <span class="qm-mark">“</span>
-    <div class="qm-text" id="qmText"></div>
-    <div class="qm-book"><span class="t" id="qmTitle"></span><span class="a" id="qmAuthor"></span></div>
+<div class="overlay qm-overlay" id="quoteOverlay">
+  <div class="qmodal" id="quoteModal" role="dialog" aria-modal="true" aria-label="수집한 문장">
+    <button class="qm-x" id="qmClose" aria-label="닫기">✕</button>
+    <span class="qm-mark" aria-hidden="true">“</span>
+    <blockquote class="qm-text" id="qmText"></blockquote>
+    <div class="qm-from">
+      <div class="qm-cover" id="qmCover"></div>
+      <div class="qm-fromtxt">
+        <div class="t" id="qmTitle"></div>
+        <div class="a" id="qmAuthor"></div>
+      </div>
+      <button class="qm-go" id="qmGo">책 정보 →</button>
+    </div>
     <div class="htags" id="qmTags"></div>
-    <div class="qm-summary" id="qmSummary"></div>
-    <div class="modal-actions"><button class="btn" id="qmClose">닫기</button></div>
   </div>
 </div>
 
@@ -669,27 +755,43 @@ function renderQuotes(){
 
 /* ---- 문장 모달: 문장 + 책 정보 + 해시태그 설명 ---- */
 const quoteOverlay = document.getElementById("quoteOverlay");
+let qmBookIndex = null;   // 지금 띄운 문장이 나온 책 (「책 정보 →」가 쓴다)
 function openQuoteModal(q){
   const i = titleIndex[q.b];
+  qmBookIndex = i != null ? i : null;
   const b = i != null ? ALL[i] : { title:q.b, genres:[] };
   document.getElementById("qmText").textContent = q.t;
   document.getElementById("qmTitle").textContent = b.title;
-  document.getElementById("qmAuthor").textContent = b.author || "";
+  document.getElementById("qmAuthor").textContent =
+    [b.author, b.platform || b.publisher].filter(Boolean).join(" · ");
+  document.getElementById("qmCover").innerHTML = b.cover
+    ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" />`
+    : `<div class="ph" style="background:${phColor(b.title)}"><span>${esc(b.title)}</span></div>`;
+  document.getElementById("qmGo").style.display = qmBookIndex == null ? "none" : "";
   const tags = [
     ...(b.genres||[]),
     ...(b.published ? [b.published+"년출간"] : []),
-    ...(b.readYear ? [b.readYear+"년에읽음"] : []),
     ...(b.platform ? [b.platform] : []),
     ...(b.rating ? ["별점"+"★".repeat(b.rating)] : []),
     ...(q.tag ? [q.tag+"_문장"] : []),
   ];
   document.getElementById("qmTags").innerHTML =
     tags.map(t=>`<span class="htag">#${esc(String(t).replace(/\s+/g,""))}</span>`).join("");
-  document.getElementById("qmSummary").textContent = b.summary || "";
   quoteOverlay.classList.add("show");
+  document.body.style.overflow = "hidden";
+  document.getElementById("quoteModal").scrollTop = 0;
 }
-document.getElementById("qmClose").onclick = () => quoteOverlay.classList.remove("show");
-quoteOverlay.onclick = e => { if(e.target === quoteOverlay) quoteOverlay.classList.remove("show"); };
+function closeQuote(){
+  quoteOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+}
+document.getElementById("qmClose").onclick = closeQuote;
+quoteOverlay.onclick = e => { if(e.target === quoteOverlay) closeQuote(); };
+document.getElementById("qmGo").onclick = () => {
+  const i = qmBookIndex;
+  closeQuote();
+  if(i != null) selectBook(i);
+};
 document.getElementById("qPrev").onclick = () => document.getElementById("qrail").scrollBy({left:-640, behavior:"smooth"});
 document.getElementById("qNext").onclick = () => document.getElementById("qrail").scrollBy({left:640, behavior:"smooth"});
 
@@ -707,7 +809,7 @@ function renderRail(){
         ${qn ? `<div class="qn">문장 ${qn}개</div>` : ""}
       </div>
     </button>`;}).join("");
-  document.querySelectorAll("#rail .bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i, true));
+  document.querySelectorAll("#rail .bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i));
 }
 document.getElementById("railPrev").onclick = () => document.getElementById("rail").scrollBy({left:-560, behavior:"smooth"});
 document.getElementById("railNext").onclick = () => document.getElementById("rail").scrollBy({left:560, behavior:"smooth"});
@@ -742,7 +844,7 @@ function noteRows(b){
   </div>`;
 }
 
-function selectBook(i, scroll){
+function selectBook(i){
   selKey = i;
   const b = ALL[i];
   const links = buyLinks(b);
@@ -752,6 +854,7 @@ function selectBook(i, scroll){
   const rest = qs.slice(QUOTE_PREVIEW).map(quoteBlock).join("");
   const d = document.getElementById("detail");
   d.innerHTML = `
+    <button class="bm-close" id="bmClose" aria-label="닫기">✕</button>
     <div class="d-grid">
       <div class="d-cover">${coverHTML(b)}</div>
       <div class="d-body">
@@ -789,16 +892,37 @@ function selectBook(i, scroll){
     r.style.display = open ? "none" : "flex";
     moreN.textContent = open ? `노트 ${postsFor(b).length - NOTE_PREVIEW}개 더 보기` : "접기";
   };
-  d.classList.add("show");
+  document.getElementById("bmClose").onclick = closeBook;
+  openBookModal();
   renderRail();
-  if(scroll) d.scrollIntoView({behavior:"smooth", block:"nearest"});
 }
+
+/* ---------- 책 모달 열고 닫기 ---------- */
+const bookOverlay = document.getElementById("bookOverlay");
+function openBookModal(){
+  bookOverlay.classList.add("show");
+  document.body.style.overflow = "hidden";       // 뒤 페이지가 같이 스크롤되지 않게
+  document.getElementById("detail").scrollTop = 0;
+}
+function closeBook(){
+  bookOverlay.classList.remove("show");
+  document.body.style.overflow = "";
+  selKey = null;
+  renderRail();
+  // 딥링크(#book/제목)로 들어왔다면 주소도 비워야 같은 책을 다시 열 수 있다
+  if(/^#book\//.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
+}
+bookOverlay.onclick = e => { if(e.target === bookOverlay) closeBook(); };
+document.addEventListener("keydown", e => {
+  if(e.key !== "Escape") return;
+  if(bookOverlay.classList.contains("show")) closeBook();
+  else if(quoteOverlay.classList.contains("show")) closeQuote();
+});
 
 window.deleteLocal = id => {
   if(!confirm("이 책을 삭제할까요?")) return;
   saveLocal(loadLocal().filter(b => b._id !== id));
-  selKey = null;
-  document.getElementById("detail").classList.remove("show");
+  closeBook();
   refresh();
 };
 
@@ -1092,7 +1216,7 @@ document.getElementById("saveBtn").onclick = () => {
   const list = loadLocal(); list.push(book); saveLocal(list);
   addOverlay.classList.remove("show");
   refresh();
-  selectBook(0, true);
+  selectBook(0);
 };
 
 /* ================= 내보내기 ================= */
@@ -1168,7 +1292,7 @@ function routeBook(){
   if(!m) return;
   let t; try{ t = decodeURIComponent(m[1]); }catch(e){ return; }
   const i = titleIndex[t];
-  if(i !== undefined) selectBook(i, true);
+  if(i !== undefined) selectBook(i);
 }
 routeBook();
 window.addEventListener("hashchange", routeBook);
