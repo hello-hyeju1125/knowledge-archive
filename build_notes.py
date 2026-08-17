@@ -241,8 +241,6 @@ def source_card(book, books):
     </span>
   </span>
 </button>
-<p class="a-note">이 책을 읽고 정리한 노트입니다. 요약과 인용은 원저작자에게,
-정리와 해석은 헬로에게 권리가 있습니다.</p>
 
 <div class="bm" data-book-modal hidden>
   <div class="bm-back" data-book-close></div>
@@ -275,7 +273,7 @@ def source_card(book, books):
     )
 
 
-def page_html(post, slug, books, order, related, slugs):
+def page_html(post, slug, books, order, related, rel_by_book, slugs):
     url = post_url(slug)
     desc = plain(post["body"])
     title = post["title"]
@@ -311,8 +309,10 @@ def page_html(post, slug, books, order, related, slugs):
             else:
                 items.append('<li><a href="./%s.html">%s</a><span>%s</span></li>'
                              % (quote(slugs[r["id"]]), escape(r["title"]), r.get("d", "")))
-        rel_html = ('<section class="a-rel"><h2>「%s」 분류의 글</h2><ul>%s</ul></section>'
-                    % (escape(cat), "".join(items)))
+        head = ('『%s』에서 쓴 노트' % escape(post["book"])) if rel_by_book \
+               else ('「%s」 분류의 글' % escape(cat))
+        rel_html = ('<section class="a-rel"><h2>%s</h2><ul>%s</ul></section>'
+                    % (head, "".join(items)))
 
     return """<!DOCTYPE html>
 <html lang="ko">
@@ -502,12 +502,16 @@ def main():
     for p in posts:
         slug = slugs[p["id"]]
         keep.add(slug + ".html")
-        # 같은 분류의 글 다섯 편 — 지금 읽는 글이 그 안에 들어가도록 앞뒤로 잡는다
-        cat_posts = [q for q in posts if q.get("category") == p.get("category")]
-        me = cat_posts.index(p)
-        start = max(0, min(me - 2, len(cat_posts) - 5))
-        same_cat = cat_posts[start:start + 5]
-        html = page_html(p, slug, books, order, related=same_cat, slugs=slugs)
+        # 같은 책에서 쓴 노트 다섯 편 — 한 권을 읽어나간 순서라 분류보다 촘촘하다.
+        # 그 책 노트가 이 글 하나뿐이면 같은 분류로 대신한다.
+        group = [q for q in posts if p.get("book") and q.get("book") == p.get("book")]
+        by_book = len(group) > 1
+        if not by_book:
+            group = [q for q in posts if q.get("category") == p.get("category")]
+        me = group.index(p)
+        start = max(0, min(me - 2, len(group) - 5))
+        html = page_html(p, slug, books, order, related=group[start:start + 5],
+                         rel_by_book=by_book, slugs=slugs)
         open(os.path.join(OUT_DIR, slug + ".html"), "w", encoding="utf-8").write(html)
 
     removed = [f for f in os.listdir(OUT_DIR) if f not in keep]
