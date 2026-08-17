@@ -28,26 +28,59 @@
 </style>
 <style>
   :root{
-    --bg:#E4F6FD; --bg-soft:#ffffff; --text:#0E2049; --text-2:#4A5C82; --text-3:#596D8A;
-    --line:#AED7E7; --accent:#294AFF; --accent-hover:#1E3AE0;
-    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00734D;
-    --card-line:rgba(41,74,255,.4);
-    --star:#294AFF; --danger:#d70015;
-    --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 10px 34px rgba(41,74,255,.14);
-    --node-book:#294AFF; --node-author:#0DDF85; --node-genre:#294AFF;
-    --ph1:#E2F4FF; --ph2:#E7F0FF; --ph3:#DFFBEF; --ph4:#EAF6F1; --ph5:#E4EDFF;
+    --bg:#F6F7F9;
+    --bg-soft:#ffffff;
+    --text:#15171C;
+    --text-2:#565A63;
+    --text-3:#6E727B;
+    --line:#E4E6EA;
+    --accent:#1B49E5;
+    --accent-hover:#1439BE;
+    --mint:#5BF5BB;
+    --mint-soft:#E3FBF1;
+    --mint-text:#00805A;
+    --card-line:#E4E6EA;
+    --star:#00805A;
+    --danger:#d70015;
+    --card:#ffffff;
+    --shadow:0 1px 2px rgba(16,18,22,.05), 0 6px 20px rgba(16,18,22,.06);
+    --shadow-lg:0 10px 34px rgba(16,18,22,.14);
+    --node-book:#1B49E5;
+    --node-author:#00805A;
+    --node-genre:#9AA0AA;
+    --ph1:#F1F2F4;
+    --ph2:#EEF0F3;
+    --ph3:#EDF3F0;
+    --ph4:#F0F1F3;
+    --ph5:#EFF1F4;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#050B1D; --bg-soft:#0D1730; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#7488AC;
-      --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
-      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
-      --card-line:rgba(94,120,255,.5);
-      --star:#37FFA9;
-      --card:#0D1730; --shadow:0 2px 14px rgba(0,0,0,.5); --shadow-lg:0 10px 34px rgba(0,0,0,.65);
-      --node-book:#5E78FF; --node-author:#37FFA9; --node-genre:#5E78FF;
-      --ph1:#12203E; --ph2:#101E3B; --ph3:#0E2635; --ph4:#132239; --ph5:#111F42;
-    }
+    --bg:#0B0C10;
+    --bg-soft:#15171D;
+    --text:#F2F3F5;
+    --text-2:#A9AEB8;
+    --text-3:#8A8F99;
+    --line:#25272E;
+    --accent:#7B95FF;
+    --accent-hover:#9AAEFF;
+    --mint:#3FE0A6;
+    --mint-soft:#0E2E23;
+    --mint-text:#3FE0A6;
+    --card-line:#25272E;
+    --star:#3FE0A6;
+    --card:#15171D;
+    --shadow:0 2px 14px rgba(0,0,0,.5);
+    --shadow-lg:0 10px 34px rgba(0,0,0,.65);
+    --node-book:#7B95FF;
+    --node-author:#3FE0A6;
+    --node-genre:#6E727B;
+    --ph1:#1A1D24;
+    --ph2:#181B21;
+    --ph3:#152019;
+    --ph4:#191C22;
+    --ph5:#171A20;
+  }
   }
   *{box-sizing:border-box; margin:0;}
   /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
@@ -149,7 +182,7 @@
     transition:transform .22s ease, box-shadow .22s ease;
   }
   .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);}
-  .qcard .qmark{font-size:30px; line-height:1; color:var(--accent); font-weight:700; font-family:Georgia,serif;}
+  .qcard .qmark{font-size:30px; line-height:1; color:var(--mint-text); font-weight:700; font-family:Georgia,serif;}
   .qcard .qtext{
     font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
@@ -237,7 +270,7 @@
     margin:0 0 10px; padding:14px 18px; background:var(--bg); border-radius:14px;
     font-size:14.5px; line-height:1.7;
   }
-  blockquote::before{content:"“"; color:var(--accent); font-weight:700; margin-right:2px;}
+  blockquote::before{content:"“"; color:var(--mint-text); font-weight:700; margin-right:2px;}
   blockquote .qmeta{display:block; margin-top:6px; font-size:11.5px; color:var(--text-3);}
   .d-notes{display:flex; flex-direction:column; gap:8px;}
   /* 제목은 왼쪽, 분류·날짜는 오른쪽 — 줄마다 오른쪽 끝이 맞아 훑기 쉽다 */
@@ -398,7 +431,7 @@
   .qm-x:hover{border-color:var(--accent); color:var(--accent);}
   .qm-mark{
     font-family:Georgia,"Times New Roman",serif; font-size:76px; line-height:.7;
-    color:var(--mint); opacity:.85; display:block; margin-bottom:6px; user-select:none;
+    color:var(--mint-text); opacity:.9; display:block; margin-bottom:6px; user-select:none;
   }
   /* blockquote 공통 스타일(회색 상자·따옴표)을 여기서는 걷어낸다 */
   blockquote.qm-text{

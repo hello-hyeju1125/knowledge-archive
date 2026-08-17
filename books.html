@@ -21,22 +21,50 @@
 </style>
 <style>
   :root{
-    --bg:#E4F6FD; --text:#0E2049; --text-2:#4A5C82; --text-3:#596D8A;
-    --line:#AED7E7; --accent:#294AFF; --accent-hover:#1E3AE0;
-    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00734D;
-    --star:#294AFF; --card:#ffffff; --soft:#F5F8FF;
-    --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 8px 26px rgba(41,74,255,.13);
-    --ph1:#E2F4FF; --ph2:#E7F0FF; --ph3:#DFFBEF; --ph4:#EAF6F1; --ph5:#E4EDFF;
+    --bg:#F6F7F9;
+    --text:#15171C;
+    --text-2:#565A63;
+    --text-3:#6E727B;
+    --line:#E4E6EA;
+    --accent:#1B49E5;
+    --accent-hover:#1439BE;
+    --mint:#5BF5BB;
+    --mint-soft:#E3FBF1;
+    --mint-text:#00805A;
+    --star:#00805A;
+    --card:#ffffff;
+    --soft:#F6F7F9;
+    --shadow:0 1px 2px rgba(16,18,22,.05), 0 6px 20px rgba(16,18,22,.06);
+    --shadow-lg:0 10px 34px rgba(16,18,22,.14);
+    --ph1:#F1F2F4;
+    --ph2:#EEF0F3;
+    --ph3:#EDF3F0;
+    --ph4:#F0F1F3;
+    --ph5:#EFF1F4;
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#050B1D; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#7488AC;
-      --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
-      --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
-      --star:#37FFA9; --card:#0D1730; --soft:#121D3A;
-      --shadow:0 2px 14px rgba(0,0,0,.5); --shadow-lg:0 8px 26px rgba(0,0,0,.6);
-      --ph1:#12203E; --ph2:#101E3B; --ph3:#0E2635; --ph4:#132239; --ph5:#111F42;
-    }
+    --bg:#0B0C10;
+    --text:#F2F3F5;
+    --text-2:#A9AEB8;
+    --text-3:#8A8F99;
+    --line:#25272E;
+    --accent:#7B95FF;
+    --accent-hover:#9AAEFF;
+    --mint:#3FE0A6;
+    --mint-soft:#0E2E23;
+    --mint-text:#3FE0A6;
+    --star:#3FE0A6;
+    --card:#15171D;
+    --soft:#15171D;
+    --shadow:0 2px 14px rgba(0,0,0,.5);
+    --shadow-lg:0 10px 34px rgba(0,0,0,.65);
+    --ph1:#1A1D24;
+    --ph2:#181B21;
+    --ph3:#152019;
+    --ph4:#191C22;
+    --ph5:#171A20;
+  }
   }
   *{box-sizing:border-box; margin:0;}
   /* ---------- 콘텐츠 보호: 드래그·복사 방지 (입력칸 제외) ---------- */
@@ -174,7 +202,7 @@
     background:var(--card); border-radius:12px; padding:12px 15px; margin-bottom:8px;
     font-size:14px; line-height:1.7;
   }
-  .dquote::before{content:"“"; color:var(--accent); font-weight:800; margin-right:2px;}
+  .dquote::before{content:"“"; color:var(--mint-text); font-weight:800; margin-right:2px;}
   .dquote .qm{display:block; margin-top:5px; font-size:11px; color:var(--text-3);}
   /* 제목은 왼쪽, 분류·날짜는 오른쪽 — 줄마다 오른쪽 끝이 맞아 훑기 쉽다 */
   .dnote{
