@@ -28,9 +28,9 @@
 </style>
 <style>
   :root{
-    --bg:#ECFCFF; --bg-soft:#ffffff; --text:#0E2049; --text-2:#4A5C82; --text-3:#8CA0BF;
-    --line:#CBE9F2; --accent:#294AFF; --accent-hover:#1E3AE0;
-    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00875A;
+    --bg:#E4F6FD; --bg-soft:#ffffff; --text:#0E2049; --text-2:#4A5C82; --text-3:#596D8A;
+    --line:#AED7E7; --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#D9FFEF; --mint-text:#00734D;
     --card-line:rgba(41,74,255,.4);
     --star:#294AFF; --danger:#d70015;
     --card:#ffffff; --shadow:0 2px 14px rgba(41,74,255,.07); --shadow-lg:0 10px 34px rgba(41,74,255,.14);
@@ -39,7 +39,7 @@
   }
   @media (prefers-color-scheme: dark){
     :root{
-      --bg:#050B1D; --bg-soft:#0D1730; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#5F7396;
+      --bg:#050B1D; --bg-soft:#0D1730; --text:#EAF4FF; --text-2:#9FB3D9; --text-3:#7488AC;
       --line:#1B2A4E; --accent:#5E78FF; --accent-hover:#7B90FF;
       --mint:#37FFA9; --mint-soft:#0C3A2B; --mint-text:#37FFA9;
       --card-line:rgba(94,120,255,.5);
@@ -92,11 +92,10 @@
 
   /* ---------- hero ---------- */
   .hero{text-align:center; padding:84px 24px 56px;}
-  .hero .eyebrow{font-size:14px; font-weight:700; letter-spacing:.06em; color:var(--accent); margin-bottom:12px;}
   .hero h1{font-size:clamp(38px,6vw,56px); font-weight:900; letter-spacing:-0.03em; line-height:1.12;}
   .hero p.tag{font-size:clamp(17px,2.4vw,22px); color:var(--text-2); margin-top:14px; font-weight:400;}
   .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
-  .hero .stat b{display:block; font-size:28px; font-weight:800; letter-spacing:-0.02em;}
+  .hero .stat b{display:block; font-size:23px; font-weight:800; letter-spacing:-0.02em;}
   .hero .stat span{font-size:13px; color:var(--text-2);}
   /* 모바일에서는 넷이 3+1로 갈라져 보였다. 칸을 4등분해 한 줄에 고정하고
      글자만 줄인다 — 폭에 따라 줄어들게 해서 좁은 화면에서도 넘치지 않는다. */
@@ -117,14 +116,14 @@
   .hero-quote .hq-by{display:block; margin-top:7px; font-size:12.5px; color:var(--text-3);}
 
   /* ---------- sections ---------- */
-  section{padding:52px max(22px,4vw);}
+  section{padding:56px max(22px,4vw);}
   .sec-head{max-width:1200px; margin:0 auto 22px;}
   .sec-head h2{font-size:clamp(24px,3.4vw,32px); font-weight:800; letter-spacing:-0.025em;}
 
   /* ---------- 공용 레일 ---------- */
   .rail-wrap{position:relative; max-width:1200px; margin:0 auto;}
   .rail{
-    display:flex; gap:16px; overflow-x:auto; padding:8px 4px 22px;
+    display:flex; align-items:flex-start; gap:16px; overflow-x:auto; padding:8px 4px 22px;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   .rail::-webkit-scrollbar{display:none;}
@@ -184,11 +183,10 @@
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
   .cover .ph .ph-author{margin-top:auto; font-size:11px; color:var(--text-2);}
   .bcard .meta{padding:10px 2px 0;}
-  .bcard .meta .t{font-size:13px; font-weight:600; letter-spacing:-0.01em; line-height:1.35;
+  .bcard .meta .t{font-size:13px; font-weight:600; letter-spacing:-0.01em; line-height:1.35; min-height:2.7em;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
   .bcard .meta .s{font-size:11.5px; color:var(--star); margin-top:3px; letter-spacing:1px;}
   .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
-  .bcard .meta .qn{font-size:11px; color:var(--text-3); margin-top:2px;}
 
   /* ---------- 상세: 책 모달 ---------- */
   /* 상세는 길어서(문장 많은 책은 2,000px가 넘는다) 페이지에 펼치면
@@ -267,7 +265,6 @@
   .del-link{background:none; border:none; color:var(--danger); font-size:13px; padding:0; margin-top:20px; text-decoration:underline;}
 
   /* ---------- graph ---------- */
-  #graph-sec{background:var(--bg-soft);}
   .graph-shell{
     position:relative;
     max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 330px;
@@ -303,14 +300,15 @@
   .legend i{width:9px; height:9px; border-radius:50%; display:inline-block;}
 
   /* ---------- 작법 노트 섹션 ---------- */
-  .nwrap{max-width:760px; margin:0 auto;}
-  .nrow{display:block; padding:18px 4px; border-bottom:1px solid var(--line); color:var(--text);}
+  .nwrap{max-width:1200px; margin:0 auto;}
+  /* 줄은 왼쪽 기준선에서 시작하되, 읽기 좋은 폭까지만 늘린다 */
+  .nrow{display:block; max-width:860px; padding:18px 4px; border-bottom:1px solid var(--line); color:var(--text);}
   .nrow:hover .nt{color:var(--accent);}
   .nrow .nt{font-size:17.5px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
   .nrow .nm{font-size:12.5px; color:var(--text-3); margin-top:6px;}
   .nrow .nm .cat{padding:2px 9px; border-radius:980px; font-weight:700; margin-right:8px; display:inline-block;}
   /* 분류별 색상 (노트 페이지와 동일 팔레트) */
-  .cat.c0{color:#00875A; background:#D9FFEF;}
+  .cat.c0{color:#00734D; background:#D9FFEF;}
   .cat.c1{color:#1E3AE0; background:#E1E8FF;}
   .cat.c2{color:#9A5B00; background:#FFF0D6;}
   .cat.c3{color:#8A2BC4; background:#F4E6FF;}
@@ -324,7 +322,7 @@
     .cat.c4{color:#8FE2F5; background:#0F2E38;}
     .cat.c5{color:#FFA8C8; background:#3A1626;}
   }
-  .notes-cta{text-align:center; margin-top:28px;}
+  .notes-cta{max-width:1200px; margin:28px auto 0;}
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line); padding:36px 24px 60px; text-align:center;}
@@ -484,7 +482,6 @@
 </nav>
 
 <header class="hero">
-  <div class="eyebrow">hello's library</div>
   <h1><span class="marker">읽고, 잇다</span>.</h1>
   <p class="tag hero-quote" id="heroTag">
     <em>“A book must be the axe for the frozen sea within us.”</em>
@@ -494,7 +491,7 @@
   <div class="stats" id="heroStats"></div>
 </header>
 
-<section id="books" style="padding-top:16px;">
+<section id="books">
   <div class="sec-head">
     <h2><span class="marker-thin">최근 읽은 것들</span></h2>
   </div>
@@ -511,7 +508,7 @@
   <div id="detail" role="dialog" aria-modal="true" aria-label="책 상세"></div>
 </div>
 
-<section id="quotes" style="padding-top:24px;">
+<section id="quotes">
   <div class="sec-head">
     <h2><span class="marker-thin">수집한 문장</span></h2>
   </div>
@@ -550,7 +547,7 @@
 </section>
 
 <section id="notes-sec">
-  <div class="sec-head" style="max-width:760px;">
+  <div class="sec-head">
     <h2><span class="marker-thin">생각 노트</span></h2>
   </div>
   <div class="nwrap" id="noteList"></div>
@@ -789,17 +786,16 @@ document.getElementById("qNext").onclick = () => document.getElementById("qrail"
 /* ================= 책 레일 ================= */
 let selKey = null;
 function renderRail(){
-  document.getElementById("rail").innerHTML = ALL.map((b,i) => {
-    const qn = quotesFor(b).length;
-    return `
+  /* 카드에는 제목과 별점만 — 문장 수는 눌러서 여는 상세에 있다.
+     줄 수가 카드마다 달라지면 표지 높이까지 흔들려서 목록이 톱니처럼 보인다. */
+  document.getElementById("rail").innerHTML = ALL.map((b,i) => `
     <button class="bcard ${selKey===i?"sel":""}" data-i="${i}" aria-label="${esc(b.title)} 상세 보기">
       <div class="cover">${coverHTML(b)}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
       <div class="meta">
         <div class="t">${esc(b.title)}</div>
         <div class="s">${b.rating ? stars(b.rating) : ""}<small>${b.readYear ?? ""}</small></div>
-        ${qn ? `<div class="qn">문장 ${qn}개</div>` : ""}
       </div>
-    </button>`;}).join("");
+    </button>`).join("");
   document.querySelectorAll("#rail .bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i));
 }
 document.getElementById("railPrev").onclick = () => document.getElementById("rail").scrollBy({left:-560, behavior:"smooth"});
