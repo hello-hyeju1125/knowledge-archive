@@ -216,7 +216,7 @@
   .bcard{
     flex:0 0 calc((100% - 4 * var(--rail-gap)) / 5);   /* 화면당 5권 */
     scroll-snap-align:start; border:none; background:none; padding:0;
-    text-align:left; transition:transform .25s ease; color:var(--text);
+    text-align:center; transition:transform .25s ease; color:var(--text);
   }
   @media (max-width:1024px){ .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);} }
   @media (max-width:640px){  .bcard{flex-basis:calc((100% - 1 * var(--rail-gap)) / 2);} }
@@ -235,10 +235,12 @@
   .cover .ph .ph-title{font-size:16px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
   .cover .ph .ph-author{margin-top:auto; font-size:12.5px; color:var(--text-2);}
-  .bcard .meta{padding:12px 2px 0;}
-  .bcard .meta .t{font-size:17px; font-weight:600; letter-spacing:-0.01em; line-height:1.35; min-height:2.7em;
+  .bcard .meta{padding:20px 2px 0;}
+  .bcard .meta .t{font-size:17px; font-weight:700; letter-spacing:-0.015em; line-height:1.4; min-height:2.8em;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .bcard .meta .s{font-size:17px; color:var(--star); margin-top:5px; letter-spacing:2.5px; line-height:1.2;}
+  .bcard .meta .a{font-size:13px; color:var(--text-3); margin-top:5px; line-height:1.4;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .bcard .meta .s{font-size:14px; color:var(--star); margin-top:9px; letter-spacing:2px; line-height:1.2;}
 
   /* ---------- 상세: 책 모달 ---------- */
   /* 상세는 길어서(문장 많은 책은 2,000px가 넘는다) 페이지에 펼치면
@@ -857,6 +859,7 @@ function renderRail(){
       <div class="cover">${coverHTML(b)}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
       <div class="meta">
         <div class="t">${esc(b.title)}</div>
+        <div class="a">${esc(b.author || "저자 미상")}</div>
         <div class="s">${b.rating ? stars(b.rating) : ""}</div>
       </div>
     </button>`).join("");
