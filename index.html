@@ -794,10 +794,17 @@ function renderStats(){
 
 /* ================= 문장 레일 ================= */
 let activeTag = "전체";
+/* 문장의 분류는 그 문장이 나온 책의 장르다 (books.js가 단 하나의 출처) */
+function genresOf(title){
+  const i = titleIndex[title];
+  const g = (i != null && ALL[i].genres) ? ALL[i].genres.filter(Boolean) : [];
+  return g.length ? g : ["기타"];
+}
 function renderTagbar(){
-  const tags = ["전체", ...new Set(QUOTES.map(q=>q.tag).filter(Boolean))];
-  const counts = { "전체": QUOTES.length };
-  QUOTES.forEach(q => counts[q.tag] = (counts[q.tag]||0)+1);
+  const counts = {};
+  QUOTES.forEach(q => genresOf(q.b).forEach(g => counts[g] = (counts[g]||0)+1));
+  const tags = ["전체", ...Object.keys(counts).sort((a,b)=>counts[b]-counts[a] || a.localeCompare(b))];
+  counts["전체"] = QUOTES.length;
   document.getElementById("tagbar").innerHTML = tags.map(t =>
     `<button class="tagbtn ${t===activeTag?"on":""}" data-t="${esc(t)}">${esc(t)} <span style="opacity:.55">${counts[t]||0}</span></button>`).join("");
   document.querySelectorAll(".tagbtn").forEach(el => el.onclick = () => { activeTag = el.dataset.t; renderTagbar(); renderQuotes(); });
@@ -807,7 +814,7 @@ function authorOf(title){ const i = titleIndex[title]; return i!=null ? (ALL[i].
 
 let currentQuoteList = [];
 function renderQuotes(){
-  currentQuoteList = activeTag==="전체" ? QUOTES : QUOTES.filter(q=>q.tag===activeTag);
+  currentQuoteList = activeTag==="전체" ? QUOTES : QUOTES.filter(q=>genresOf(q.b).includes(activeTag));
   document.getElementById("qrail").innerHTML = currentQuoteList.map((q,n) => `
     <button class="qcard" data-n="${n}" aria-label="문장 크게 보기">
       <span class="qmark">“</span>
@@ -815,7 +822,7 @@ function renderQuotes(){
       <div class="qfoot">
         <span class="qbook">${esc(q.b)}</span>
         <span class="qauthor">${esc(authorOf(q.b))}</span>
-        <span class="qtag">${esc(q.tag||"메모")}</span>
+        <span class="qtag">${esc(activeTag!=="전체" && genresOf(q.b).includes(activeTag) ? activeTag : genresOf(q.b)[0])}</span>
       </div>
     </button>`).join("");
   document.querySelectorAll("#qrail .qcard").forEach(el => el.onclick = () => openQuoteModal(currentQuoteList[+el.dataset.n]));
@@ -841,7 +848,6 @@ function openQuoteModal(q){
     ...(b.published ? [b.published+"년출간"] : []),
     ...(b.platform ? [b.platform] : []),
     ...(b.rating ? ["별점"+"★".repeat(b.rating)] : []),
-    ...(q.tag ? [q.tag+"_문장"] : []),
   ];
   document.getElementById("qmTags").innerHTML =
     tags.map(t=>`<span class="htag">#${esc(String(t).replace(/\s+/g,""))}</span>`).join("");

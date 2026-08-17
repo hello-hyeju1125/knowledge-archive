@@ -31,9 +31,9 @@
     --mint:#37FFA9; --mint-soft:#E1FBF0; --mint-text:#00805A; --mint-vivid:#294AFF;
     --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
     --nav-bg:#0D1526; --nav-text:#FFFFFF; --nav-text-2:#AEB8CC; --nav-line:#0D1526; --nav-btn:#4E6FFF;
-    /* 포스트잇 색 — 분류마다 한 가지씩 (색이 곧 분류가 되게) */
-    --p-작법:#FFF6D9; --p-문학:#E4EEFF; --p-경영:#DFF9EE;
-    --p-웹툰:#FFE7F0; --p-기타:#EFEAFF;
+    /* 포스트잇 색 — 장르마다 하나씩 돌아가며 (색이 곧 분류가 되게) */
+    --p1:#FFF6D9; --p2:#E4EEFF; --p3:#DFF9EE; --p4:#FFE7F0;
+    --p5:#EFEAFF; --p6:#FFEEDD; --p7:#E6F6FF; --p8:#F1F5DC;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -44,8 +44,8 @@
       --mint:#37FFA9; --mint-soft:#0B3228; --mint-text:#37FFA9; --mint-vivid:#7B95FF;
       --shadow:0 2px 14px rgba(0,0,0,.5);
       --nav-bg:#101726; --nav-text:#EEF2F8; --nav-text-2:#A3AFC2; --nav-line:#1E2739; --nav-btn:#7B95FF;
-      --p-작법:#2C2716; --p-문학:#161F35; --p-경영:#0E2B22;
-      --p-웹툰:#2E1723; --p-기타:#1F1A33;
+      --p1:#2C2716; --p2:#161F35; --p3:#0E2B22; --p4:#2E1723;
+      --p5:#1F1A33; --p6:#2C2119; --p7:#132430; --p8:#22261A;
     }
   }
   *{box-sizing:border-box; margin:0;}
@@ -107,7 +107,7 @@
     background:none; border:none; text-align:left; color:var(--text);
   }
   .note .inner{
-    display:block; background:var(--p-기타);
+    display:block; background:var(--p5);
     border-radius:var(--r-card); padding:20px 19px 16px;
     box-shadow:var(--shadow);
     transition:transform .2s ease, box-shadow .2s ease;
@@ -287,7 +287,6 @@
 <div class="wrap">
   <div class="head">
     <h1><span class="marker">수집한 문장</span></h1>
-    <p id="headSub"></p>
   </div>
   <div class="tags" id="tags"></div>
   <div class="wall" id="wall"></div>
@@ -346,16 +345,25 @@ const BOOK = (() => {
 })();
 const authorOf = t => (BOOK(t)?.author) || "";
 
-const TAGS = [...new Set(QUOTES.map(q => q.tag).filter(Boolean))];
+/* 문장의 분류는 그 문장이 나온 책의 장르다 — 책이 하나의 출처이므로
+   따로 적어 두지 않고 books.js에서 끌어온다. 장르가 여럿이면 모두 해당된다. */
+const genresOf = t => {
+  const b = BOOK(t);
+  const g = (b && b.genres) ? b.genres.filter(Boolean) : [];
+  return g.length ? g : ["기타"];
+};
 const counts = {};
-QUOTES.forEach(q => counts[q.tag || "기타"] = (counts[q.tag || "기타"] || 0) + 1);
+QUOTES.forEach(q => genresOf(q.b).forEach(g => counts[g] = (counts[g] || 0) + 1));
+// 문장이 많은 장르부터
+const TAGS = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+
+/* 쪽지 색 — 장르마다 하나씩 돌아가며 (색이 곧 분류) */
+const PALETTE = 8;
+const tone = g => (Math.abs([...g].reduce((a, c) => a * 31 + c.charCodeAt(0), 7)) % PALETTE) + 1;
 const PER_PAGE = 30;
 let active = "전체", page = 1;
 
-document.getElementById("headSub").innerHTML =
-  `책에서 옮겨 적은 <b>${QUOTES.length}개</b>의 문장. 쪽지를 누르면 크게 열립니다.`;
-
-const filtered = () => active === "전체" ? QUOTES : QUOTES.filter(q => (q.tag||"기타") === active);
+const filtered = () => active === "전체" ? QUOTES : QUOTES.filter(q => genresOf(q.b).includes(active));
 
 function renderTags(){
   const box = document.getElementById("tags");
@@ -393,7 +401,8 @@ function renderWall(){
       const d = document.createElement("div"); d.className = "col"; wall.appendChild(d); return d;
     });
     list.forEach((q, i) => {
-      const tag = q.tag || "기타";
+      const gs = genresOf(q.b);
+      const tag = active !== "전체" && gs.includes(active) ? active : gs[0];
       const a = authorOf(q.b);
       // 아주 살짝 기울여 손으로 붙인 느낌만 낸다 (읽기를 방해하지 않는 범위)
       const tilt = [-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6];
@@ -401,7 +410,7 @@ function renderWall(){
       el.className = "note";
       el.setAttribute("aria-label", "문장 크게 보기");
       el.innerHTML = `
-        <span class="inner" style="background:var(--p-${esc(tag)}, var(--p-기타)); transform:rotate(${tilt}deg);">
+        <span class="inner" style="background:var(--p${tone(tag)}); transform:rotate(${tilt}deg);">
           <span class="qt">${esc(q.t)}</span>
           <span class="qf">
             <span class="qb">${esc(q.b || "")}</span>
