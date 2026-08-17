@@ -30,7 +30,7 @@
     --accent:#294AFF; --accent-hover:#1E3AE0;
     --mint:#37FFA9; --mint-soft:#E1FBF0; --mint-text:#00805A; --mint-vivid:#294AFF;
     --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
-    --nav-bg:#0D1526; --nav-text:#FFFFFF; --nav-text-2:#AEB8CC; --nav-line:#0D1526; --nav-btn:#4E6FFF;
+    --nav-bg:#0D1526; --nav-text:#FFFFFF; --nav-text-2:#AEB8CC; --nav-line:#0D1526;
     /* 포스트잇 색 — 장르마다 하나씩 돌아가며 (색이 곧 분류가 되게) */
     --p1:#FFF6D9; --p2:#E4EEFF; --p3:#DFF9EE; --p4:#FFE7F0;
     --p5:#EFEAFF; --p6:#FFEEDD; --p7:#E6F6FF; --p8:#F1F5DC;
@@ -43,7 +43,7 @@
       --accent:#7B95FF; --accent-hover:#9AAEFF;
       --mint:#37FFA9; --mint-soft:#0B3228; --mint-text:#37FFA9; --mint-vivid:#7B95FF;
       --shadow:0 2px 14px rgba(0,0,0,.5);
-      --nav-bg:#101726; --nav-text:#EEF2F8; --nav-text-2:#A3AFC2; --nav-line:#1E2739; --nav-btn:#7B95FF;
+      --nav-bg:#101726; --nav-text:#EEF2F8; --nav-text-2:#A3AFC2; --nav-line:#1E2739;
       --p1:#2C2716; --p2:#161F35; --p3:#0E2B22; --p4:#2E1723;
       --p5:#1F1A33; --p6:#2C2119; --p7:#132430; --p8:#22261A;
     }
@@ -72,10 +72,6 @@
   nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
   nav .links a{color:var(--nav-text); font-size:15px; font-weight:700; transition:opacity .15s;}
   nav .links a:hover{opacity:.7;}
-  nav .add-mini{
-    background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
-    font-size:12.5px; padding:6px 14px; font-weight:600;
-  }
   @media (max-width:640px){
     nav{gap:12px; padding:0 16px;}
     nav .brand{font-size:15.5px; white-space:nowrap;}
@@ -279,7 +275,6 @@
     <a href="./books.html">책</a>
     <a href="./quotes.html" style="text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;">문장</a>
     <a href="./notes.html">노트</a>
-    <a class="add-mini" href="./admin.html">서재 주인</a>
   </div>
 </nav>
 

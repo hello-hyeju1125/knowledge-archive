@@ -35,7 +35,6 @@
     --nav-text:#FFFFFF;
     --nav-text-2:#AEB8CC;
     --nav-line:#0D1526;
-    --nav-btn:#4E6FFF;
   
     --mint-vivid:#294AFF;
   }
@@ -63,7 +62,6 @@
     --nav-text:#EEF2F8;
     --nav-text-2:#A3AFC2;
     --nav-line:#1E2739;
-    --nav-btn:#7B95FF;
   
     --mint-vivid:#7B95FF;
   }
@@ -93,11 +91,6 @@ body > nav .brand{font-size:17.5px; font-weight:900; color:var(--nav-text); lett
 body > nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
 body > nav .links a{color:var(--nav-text); font-size:15px; font-weight:700; transition:opacity .15s;}
 body > nav .links a:hover{opacity:.7;}
-body > nav .add-mini{
-  background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
-  font-size:12.5px; padding:6px 14px; font-weight:600;
-}
-body > nav .add-mini:hover{opacity:1; background:var(--accent-hover) !important;}
 @media (max-width:640px){
   body > nav{gap:12px; padding:0 16px;}
   body > nav .brand{font-size:15.5px; white-space:nowrap;}
