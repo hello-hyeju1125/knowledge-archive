@@ -338,7 +338,7 @@ def page_html(post, slug, books, order, related, slugs):
   <a class="brand" href="../index.html">헬로의 서재</a>
   <div class="links">
     <a href="../index.html#quotes">문장</a>
-    <a href="../index.html#books">책</a>
+    <a href="../books.html">책</a>
     <a href="../index.html#graph-sec">지도</a>
     <a href="../notes.html" style="color:var(--text); font-weight:700;">노트</a>
   </div>

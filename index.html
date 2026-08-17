@@ -393,10 +393,6 @@
     padding:44px 42px 34px; box-shadow:var(--shadow-lg);
     animation:fadeUp .28s ease;
   }
-  .qmodal::before{   /* 카드 위쪽 민트 띠 — 서재의 형광펜 표시와 같은 언어 */
-    content:""; position:absolute; top:0; left:42px; right:42px; height:4px;
-    background:var(--mint); border-radius:0 0 4px 4px;
-  }
   .qm-x{
     position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
     border:1px solid var(--line); background:var(--bg); color:var(--text-3); font-size:15px; line-height:1;
@@ -443,7 +439,6 @@
     /* 화면을 꽉 채우기보다 카드 한 장으로 보이게 — 아래 빈 공간이 생기지 않는다 */
     .qm-overlay{padding:16px; align-items:center;}
     .qmodal{max-height:88vh; border-radius:22px; padding:34px 24px 26px;}
-    .qmodal::before{left:24px; right:24px;}
     .qm-mark{font-size:60px;}
     .qm-go{display:none;}
   }
@@ -480,7 +475,7 @@
 <nav>
   <span class="brand">헬로의 서재</span>
   <div class="links">
-    <a href="#books">책</a>
+    <a href="./books.html">책</a>
     <a href="#quotes">문장</a>
     <a href="#graph-sec">지도</a>
     <a href="./notes.html">노트</a>
