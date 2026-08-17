@@ -99,16 +99,16 @@
   .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
 
   nav{
-    position:sticky; top:0; z-index:50; height:52px;
+    position:sticky; top:0; z-index:50; height:58px;
     display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
     background:color-mix(in srgb, var(--nav-bg) 92%, transparent);
     backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
     border-bottom:1px solid var(--nav-line);
   }
-  nav .brand{font-size:15px; font-weight:800; color:var(--nav-text);}
+  nav .brand{font-size:17.5px; font-weight:900; color:var(--nav-text); letter-spacing:-0.03em;}
   nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
-  nav .links a{color:var(--nav-text-2); font-size:13px;}
-  nav .links a:hover{color:var(--nav-text);}
+  nav .links a{color:var(--nav-text); font-size:15px; font-weight:700; transition:opacity .15s;}
+  nav .links a:hover{opacity:.7;}
   nav .add-mini{
     background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
     font-size:12.5px; padding:6px 14px; font-weight:600;
@@ -116,9 +116,9 @@
   nav .add-mini:hover{background:var(--accent-hover) !important;}
   @media (max-width:640px){
     nav{gap:12px; padding:0 16px;}
-    nav .brand{font-size:14px; white-space:nowrap;}
+    nav .brand{font-size:15.5px; white-space:nowrap;}
     nav .links{gap:13px;}
-    nav .links a{font-size:12.5px; white-space:nowrap;}
+    nav .links a{font-size:13.5px; white-space:nowrap;}
     nav .add-mini{display:none;}
   }
 
@@ -286,6 +286,11 @@
   }
   footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
   footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
+  footer .f-copy{font-size:12px; margin-top:18px; opacity:.75;}
+  footer .f-mail{font-size:12px; margin-top:6px;}
+  footer .f-mail a{text-decoration:underline;}
+  footer .f-links{margin-top:16px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+  footer .f-links a{font-size:12px; text-decoration:underline;}
   footer a{color:var(--nav-text-2) !important;}
   footer a:hover{color:var(--nav-text) !important;}
 
@@ -309,7 +314,7 @@
 <nav>
   <a class="brand" href="./index.html">헬로의 서재</a>
   <div class="links">
-    <a href="./books.html" style="color:var(--nav-text); font-weight:700;">책</a>
+    <a href="./books.html" style="text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;">책</a>
     <a href="./quotes.html">문장</a>
     <a href="./notes.html">노트</a>
     <a class="add-mini" href="./admin.html">서재 주인 접근</a>
@@ -345,6 +350,8 @@
 <footer>
   <div class="f-brand">헬로의 서재</div>
   <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+  <p class="f-copy">© 2026 헬로. 이 사이트의 글·리뷰·수집한 문장에 대한 저작권은 헬로에게 있습니다.</p>
+  <p class="f-mail">문의·정정 요청은 <a href="mailto:hello_kitten@naver.com">hello_kitten@naver.com</a></p>
 </footer>
 
 <script>

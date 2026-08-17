@@ -81,21 +81,21 @@ body{
 a{color:var(--accent); text-decoration:none;}
 
 body > nav{
-  position:sticky; top:0; z-index:50; height:52px;
+  position:sticky; top:0; z-index:50; height:58px;
   display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
   background:color-mix(in srgb, var(--nav-bg) 92%, transparent);
   backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid var(--nav-line);
 }
-body > nav .brand{font-size:15px; font-weight:800; color:var(--nav-text);}
+body > nav .brand{font-size:17.5px; font-weight:900; color:var(--nav-text); letter-spacing:-0.03em;}
 body > nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
-body > nav .links a{color:var(--nav-text-2); font-size:13px;}
-body > nav .links a:hover{color:var(--nav-text);}
+body > nav .links a{color:var(--nav-text); font-size:15px; font-weight:700; transition:opacity .15s;}
+body > nav .links a:hover{opacity:.7;}
 @media (max-width:640px){
   body > nav{gap:12px; padding:0 16px;}
-  body > nav .brand{font-size:14px; white-space:nowrap;}
+  body > nav .brand{font-size:15.5px; white-space:nowrap;}
   body > nav .links{gap:13px;}
-  body > nav .links a{font-size:12.5px; white-space:nowrap;}
+  body > nav .links a{font-size:13.5px; white-space:nowrap;}
 }
 
 .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
@@ -263,5 +263,10 @@ footer{
 }
 footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
 footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
+footer .f-copy{font-size:12px; margin-top:18px; opacity:.75;}
+footer .f-mail{font-size:12px; margin-top:6px;}
+footer .f-mail a{text-decoration:underline;}
+footer .f-links{margin-top:16px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+footer .f-links a{font-size:12px; text-decoration:underline;}
 footer a{color:var(--nav-text-2) !important;}
 footer a:hover{color:var(--nav-text) !important;}
