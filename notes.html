@@ -181,17 +181,28 @@
   .cats button.on.c4{background:#0E7490; border-color:#0E7490; color:#fff;}
   .cats button.on.c5{background:#B03060; border-color:#B03060; color:#fff;}
 
-  .pager{display:flex; gap:6px; justify-content:center; margin-top:30px; flex-wrap:wrap; align-items:center;}
-  .pager button{min-width:34px; height:34px; border-radius:var(--r-card); border:1px solid var(--line);
-    background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
-  .pager button:hover{border-color:var(--accent); color:var(--accent);}
-  .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .pager button:disabled{opacity:.35;}
-  .pager .ell{color:var(--text-3); font-size:12px;}
+  /* 상자 없이 숫자만 — 목록을 훑는 흐름을 끊지 않게 */
+  .pager{display:flex; gap:16px; justify-content:center; margin-top:36px; flex-wrap:wrap; align-items:center;}
+  .pager button{
+    border:none; background:none; padding:2px 0;
+    color:var(--text-3); font-size:14px; font-weight:600;
+  }
+  .pager button:hover{color:var(--accent);}
+  .pager button.cur{
+    color:var(--text); font-weight:800;
+    text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;
+  }
+  .pager button:disabled{opacity:.3;}
+  .pager button:disabled:hover{color:var(--text-3);}
 
-  footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
-  footer .f-brand{font-size:14px; font-weight:800;}
-  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+  footer{
+    background:var(--nav-bg); border-top:none; color:var(--nav-text-2);
+    padding:44px 24px 52px; text-align:center;
+  }
+  footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
+  footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
+  footer a{color:var(--nav-text-2) !important;}
+  footer a:hover{color:var(--nav-text) !important;}
 </style>
 </head>
 <body>
@@ -268,12 +279,11 @@ function renderCats(){
 }
 
 function pageWin(cur, total){
-  if(total <= 7) return Array.from({length:total},(_,k)=>k+1);
-  const set = new Set([1,total,cur-1,cur,cur+1]);
-  const list = [...set].filter(p=>p>=1&&p<=total).sort((a,b)=>a-b);
-  const out = [];
-  list.forEach((p,i)=>{ if(i && p-list[i-1]>1) out.push("…"); out.push(p); });
-  return out;
+  // 한 번에 열 쪽까지 보여 주고, 그 너머는 화살표로 넘어간다
+  const N = 10;
+  const start = Math.max(1, Math.min(cur - 4, total - N + 1));
+  const end = Math.min(total, start + N - 1);
+  return Array.from({length: end - start + 1}, (_, k) => start + k);
 }
 
 function renderList(){
@@ -292,7 +302,7 @@ function renderList(){
 
   document.getElementById("pager").innerHTML = total > 1 ? `
     <button onclick="goPage(${page-1})" ${page===1?"disabled":""}>‹</button>
-    ${pageWin(page,total).map(p=>p==="…"?`<span class="ell">…</span>`:`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
+    ${pageWin(page,total).map(p=>`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
     <button onclick="goPage(${page+1})" ${page===total?"disabled":""}>›</button>` : "";
 }
 function goPage(p){ page = p; renderList(); document.getElementById("listView").scrollIntoView({behavior:"smooth", block:"start"}); }

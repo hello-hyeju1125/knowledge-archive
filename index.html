@@ -393,9 +393,14 @@
   }
 
   /* ---------- footer ---------- */
-  footer{border-top:1px solid var(--line); padding:36px 24px 60px; text-align:center;}
-  footer .f-brand{font-size:14px; font-weight:700;}
-  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+  footer{
+    background:var(--nav-bg); border-top:none; color:var(--nav-text-2);
+    padding:44px 24px 52px; text-align:center;
+  }
+  footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
+  footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
+  footer a{color:var(--nav-text-2) !important;}
+  footer a:hover{color:var(--nav-text) !important;}
 
   /* ---------- modal ---------- */
   .overlay{position:fixed; inset:0; background:rgba(0,0,0,.45); display:none;
@@ -578,6 +583,7 @@
 <section id="quotes">
   <div class="sec-head">
     <h2><span class="marker-thin">문장 수집</span></h2>
+    <a class="sec-more" href="./quotes.html">더보기</a>
   </div>
   <div class="tagbar" id="tagbar"></div>
   <div class="rail-wrap">
@@ -625,9 +631,9 @@
   <div class="f-brand">헬로의 서재</div>
   <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
   <p style="margin-top:14px;">
-    <a href="./notes.html" style="color:var(--text-3); font-size:12px; text-decoration:underline; margin-right:14px;">생각 노트</a>
-    <a href="./admin.html" style="color:var(--text-3); font-size:12px; text-decoration:underline; margin-right:14px;">서재 관리</a>
-    <a href="#" id="exportBtn" style="color:var(--text-3); font-size:12px; text-decoration:underline;" title="화면에서 추가한 책을 books.js 코드로 내보내기">기록 내보내기</a>
+    <a href="./notes.html" style="font-size:12px; text-decoration:underline; margin-right:14px;">생각 노트</a>
+    <a href="./admin.html" style="font-size:12px; text-decoration:underline; margin-right:14px;">서재 관리</a>
+    <a href="#" id="exportBtn" style="font-size:12px; text-decoration:underline;" title="화면에서 추가한 책을 books.js 코드로 내보내기">기록 내보내기</a>
   </p>
 </footer>
 

@@ -97,16 +97,12 @@
   .tags button .n{opacity:.55; margin-left:5px;}
 
   /* ---------- 문장 벽 ----------
-     칼럼 레이아웃이라 카드가 제 높이대로 흘러내린다 — 붙여 둔 쪽지들처럼. */
-  .wall{columns:4; column-gap:18px;}
-  @media (max-width:1080px){ .wall{columns:3;} }
-  @media (max-width:760px){  .wall{columns:2;} }
-  @media (max-width:480px){  .wall{columns:1;} }
-
-  /* 칼럼 안의 조각에 직접 transform을 걸면 브라우저가 그 조각을 잘못 그려서
-     쪽지가 깜빡이거나 사라진다. 바깥은 자리만 잡고, 움직임은 안쪽에서 준다. */
+     쪽지 높이가 제각각이라 CSS columns로는 칸마다 끝나는 높이가 크게 어긋난다
+     (오른쪽 아래가 텅 빈 것처럼 보였다). 칸을 직접 만들고 가장 짧은 칸에
+     하나씩 붙여서 바닥을 맞춘다. */
+  .wall{display:flex; align-items:flex-start; gap:18px;}
+  .wall .col{flex:1 1 0; min-width:0;}
   .note{
-    break-inside:avoid; -webkit-column-break-inside:avoid;
     display:block; width:100%; margin:0 0 18px; padding:0;
     background:none; border:none; text-align:left; color:var(--text);
   }
@@ -139,13 +135,19 @@
   .note .qd{margin-left:auto; font-size:11px; color:var(--text-2); opacity:.75;}
   .empty{text-align:center; color:var(--text-3); padding:70px 0; font-size:14px;}
 
-  .pager{display:flex; gap:6px; justify-content:center; margin-top:34px; flex-wrap:wrap; align-items:center;}
-  .pager button{min-width:34px; height:34px; border-radius:var(--r-ctl); border:1px solid var(--line);
-    background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
-  .pager button:hover{border-color:var(--accent); color:var(--accent);}
-  .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .pager button:disabled{opacity:.35;}
-  .pager .ell{color:var(--text-3); font-size:12px;}
+  /* 상자 없이 숫자만 — 목록을 훑는 흐름을 끊지 않게 */
+  .pager{display:flex; gap:16px; justify-content:center; margin-top:36px; flex-wrap:wrap; align-items:center;}
+  .pager button{
+    border:none; background:none; padding:2px 0;
+    color:var(--text-3); font-size:14px; font-weight:600;
+  }
+  .pager button:hover{color:var(--accent);}
+  .pager button.cur{
+    color:var(--text); font-weight:800;
+    text-decoration:underline; text-underline-offset:6px; text-decoration-thickness:2px;
+  }
+  .pager button:disabled{opacity:.3;}
+  .pager button:disabled:hover{color:var(--text-3);}
 
   /* ---------- 문장 모달 ---------- */
   .overlay{
@@ -197,9 +199,14 @@
     .qm-mark{font-size:56px;}
   }
 
-  footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
-  footer .f-brand{font-size:14px; font-weight:800;}
-  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+  footer{
+    background:var(--nav-bg); border-top:none; color:var(--nav-text-2);
+    padding:44px 24px 52px; text-align:center;
+  }
+  footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
+  footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
+  footer a{color:var(--nav-text-2) !important;}
+  footer a:hover{color:var(--nav-text) !important;}
 </style>
 </head>
 <body>
@@ -283,12 +290,11 @@ function renderTags(){
 }
 
 function pageWin(cur, total){
-  if(total <= 7) return Array.from({length:total},(_,k)=>k+1);
-  const set = new Set([1,total,cur-1,cur,cur+1]);
-  const list = [...set].filter(p=>p>=1&&p<=total).sort((a,b)=>a-b);
-  const out = [];
-  list.forEach((p,i)=>{ if(i && p-list[i-1]>1) out.push("…"); out.push(p); });
-  return out;
+  // 한 번에 열 쪽까지 보여 주고, 그 너머는 화살표로 넘어간다
+  const N = 10;
+  const start = Math.max(1, Math.min(cur - 4, total - N + 1));
+  const end = Math.min(total, start + N - 1);
+  return Array.from({length: end - start + 1}, (_, k) => start + k);
 }
 
 function renderWall(){
@@ -297,13 +303,26 @@ function renderWall(){
   page = Math.min(Math.max(1, page), total);
   const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
 
-  document.getElementById("wall").innerHTML = list.length ? list.map((q, i) => {
-    const tag = q.tag || "기타";
-    const a = authorOf(q.b);
-    // 아주 살짝 기울여 손으로 붙인 느낌만 낸다 (읽기를 방해하지 않는 범위)
-    const tilt = [-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6];
-    return `
-      <button class="note" data-i="${(page-1)*PER_PAGE + i}" aria-label="문장 크게 보기">
+  const wall = document.getElementById("wall");
+  wall.innerHTML = "";
+  if(!list.length){
+    wall.innerHTML = `<div class="empty">이 분류에는 아직 문장이 없어요.</div>`;
+  } else {
+    // 화면 폭에 맞춘 칸 수
+    const w = window.innerWidth;
+    const nCol = w <= 480 ? 1 : w <= 760 ? 2 : w <= 1080 ? 3 : 4;
+    const cols = Array.from({length:nCol}, () => {
+      const d = document.createElement("div"); d.className = "col"; wall.appendChild(d); return d;
+    });
+    list.forEach((q, i) => {
+      const tag = q.tag || "기타";
+      const a = authorOf(q.b);
+      // 아주 살짝 기울여 손으로 붙인 느낌만 낸다 (읽기를 방해하지 않는 범위)
+      const tilt = [-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6];
+      const el = document.createElement("button");
+      el.className = "note";
+      el.setAttribute("aria-label", "문장 크게 보기");
+      el.innerHTML = `
         <span class="inner" style="background:var(--p-${esc(tag)}, var(--p-기타)); transform:rotate(${tilt}deg);">
           <span class="qt">${esc(q.t)}</span>
           <span class="qf">
@@ -311,17 +330,16 @@ function renderWall(){
             ${a ? `<span class="qa">${esc(a)}</span>` : ""}
             ${q.d ? `<span class="qd">${esc(q.d)}</span>` : ""}
           </span>
-        </span>
-      </button>`;
-  }).join("") : `<div class="empty">이 분류에는 아직 문장이 없어요.</div>`;
-
-  document.querySelectorAll("#wall .note").forEach(el =>
-    el.onclick = () => openQuote(all[+el.dataset.i]));
+        </span>`;
+      el.onclick = () => openQuote(q);
+      // 지금 가장 짧은 칸에 붙인다 — 붙일 때마다 재보므로 바닥이 고르게 맞는다
+      cols.reduce((a, b) => a.offsetHeight <= b.offsetHeight ? a : b).appendChild(el);
+    });
+  }
 
   document.getElementById("pager").innerHTML = total > 1 ? `
     <button onclick="goPage(${page-1})" ${page===1?"disabled":""}>‹</button>
-    ${pageWin(page,total).map(p=>p==="…"?`<span class="ell">…</span>`
-      :`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
+    ${pageWin(page,total).map(p=>`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
     <button onclick="goPage(${page+1})" ${page===total?"disabled":""}>›</button>` : "";
 }
 function goPage(p){
@@ -359,6 +377,9 @@ document.addEventListener("keydown", e => {
 });
 
 renderTags(); renderWall();
+
+let resizeT;
+addEventListener("resize", () => { clearTimeout(resizeT); resizeT = setTimeout(renderWall, 150); });
 </script>
 <script>
 /* ---------- 콘텐츠 보호 ---------- */
