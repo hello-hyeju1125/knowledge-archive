@@ -103,15 +103,27 @@
   @media (max-width:760px){  .wall{columns:2;} }
   @media (max-width:480px){  .wall{columns:1;} }
 
+  /* 칼럼 안의 조각에 직접 transform을 걸면 브라우저가 그 조각을 잘못 그려서
+     쪽지가 깜빡이거나 사라진다. 바깥은 자리만 잡고, 움직임은 안쪽에서 준다. */
   .note{
     break-inside:avoid; -webkit-column-break-inside:avoid;
-    display:block; width:100%; margin:0 0 18px; text-align:left;
-    background:var(--p-기타); color:var(--text);
-    border:none; border-radius:var(--r-card); padding:20px 19px 16px;
-    box-shadow:var(--shadow);
-    transition:transform .18s ease, box-shadow .18s ease;
+    display:block; width:100%; margin:0 0 18px; padding:0;
+    background:none; border:none; text-align:left; color:var(--text);
   }
-  .note:hover{transform:translateY(-3px) rotate(0deg) !important; box-shadow:0 10px 28px rgba(13,21,38,.16);}
+  .note .inner{
+    display:block; background:var(--p-기타);
+    border-radius:var(--r-card); padding:20px 19px 16px;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease, box-shadow .2s ease;
+    will-change:transform;
+  }
+  /* 누를 수 있다는 신호 — 쪽지를 바로 세우면서 살짝 들어 올린다 */
+  .note:hover .inner, .note:focus-visible .inner{
+    transform:rotate(0deg) translateY(-4px) scale(1.015);
+    box-shadow:0 12px 30px rgba(13,21,38,.18);
+  }
+  .note:focus{outline:none;}
+  .note:focus-visible .inner{outline:2px solid var(--accent); outline-offset:3px;}
   .note .qt{
     font-family:"Noto Serif KR",Georgia,serif; font-weight:400;
     font-size:14.5px; line-height:1.95; letter-spacing:-0.008em;
@@ -126,6 +138,62 @@
   .note .qa{font-size:11.5px; color:var(--text-2);}
   .note .qd{margin-left:auto; font-size:11px; color:var(--text-2); opacity:.75;}
   .empty{text-align:center; color:var(--text-3); padding:70px 0; font-size:14px;}
+
+  .pager{display:flex; gap:6px; justify-content:center; margin-top:34px; flex-wrap:wrap; align-items:center;}
+  .pager button{min-width:34px; height:34px; border-radius:var(--r-ctl); border:1px solid var(--line);
+    background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
+  .pager button:hover{border-color:var(--accent); color:var(--accent);}
+  .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .pager button:disabled{opacity:.35;}
+  .pager .ell{color:var(--text-3); font-size:12px;}
+
+  /* ---------- 문장 모달 ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(13,21,38,.5); display:none;
+    align-items:center; justify-content:center; padding:4vh 20px; z-index:120;
+  }
+  .overlay.show{display:flex;}
+  .qmodal{
+    position:relative; width:100%; max-width:600px; max-height:90vh; overflow-y:auto;
+    background:var(--card); border:1px solid var(--line); border-radius:var(--r-card);
+    padding:44px 42px 32px; box-shadow:0 20px 60px rgba(13,21,38,.28);
+  }
+  .qm-x{
+    position:absolute; top:16px; right:16px; width:34px; height:34px; border-radius:50%;
+    border:1px solid var(--line); background:var(--bg); color:var(--text-3); font-size:15px; line-height:1;
+  }
+  .qm-x:hover{border-color:var(--accent); color:var(--accent);}
+  .qm-mark{
+    font-family:Georgia,"Times New Roman",serif; font-size:70px; line-height:.7;
+    color:var(--accent); display:block; margin-bottom:8px; user-select:none;
+  }
+  .qm-text{
+    font-family:"Noto Serif KR",Georgia,serif; font-weight:400;
+    font-size:clamp(16px,2vw,18.5px); line-height:2.05; letter-spacing:-0.008em;
+    word-break:keep-all; white-space:pre-wrap;
+  }
+  .qm-from{
+    display:flex; align-items:center; gap:14px;
+    margin-top:28px; padding-top:20px; border-top:1px solid var(--line);
+  }
+  .qm-cover{
+    flex:0 0 44px; width:44px; height:64px; border-radius:var(--r-img); overflow:hidden;
+    background:var(--bg); box-shadow:var(--shadow);
+  }
+  .qm-cover img{width:100%; height:100%; object-fit:cover; display:block;}
+  .qm-fromtxt{flex:1; min-width:0;}
+  .qm-fromtxt .t{font-size:15px; font-weight:800; letter-spacing:-0.02em; line-height:1.4;}
+  .qm-fromtxt .a{font-size:12.5px; color:var(--text-3); margin-top:3px;}
+  .qm-go{
+    display:inline-block; margin-top:20px; background:var(--accent); color:#fff;
+    font-size:13.5px; font-weight:700; padding:10px 20px; border-radius:var(--r-ctl);
+  }
+  .qm-go:hover{background:var(--accent-hover); color:#fff;}
+  @media (max-width:560px){
+    .overlay{padding:16px;}
+    .qmodal{max-height:88vh; padding:36px 22px 26px;}
+    .qm-mark{font-size:56px;}
+  }
 
   footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
   footer .f-brand{font-size:14px; font-weight:800;}
@@ -151,6 +219,24 @@
   </div>
   <div class="tags" id="tags"></div>
   <div class="wall" id="wall"></div>
+  <div class="pager" id="pager"></div>
+</div>
+
+<!-- 쪽지를 누르면 뜨는 인용구 카드 -->
+<div class="overlay" id="qOverlay">
+  <div class="qmodal" role="dialog" aria-modal="true" aria-label="수집한 문장">
+    <button class="qm-x" id="qmClose" aria-label="닫기">✕</button>
+    <span class="qm-mark" aria-hidden="true">“</span>
+    <blockquote class="qm-text" id="qmText"></blockquote>
+    <div class="qm-from">
+      <div class="qm-cover" id="qmCover"></div>
+      <div class="qm-fromtxt">
+        <div class="t" id="qmTitle"></div>
+        <div class="a" id="qmAuthor"></div>
+      </div>
+    </div>
+    <a class="qm-go" id="qmGo">이 책 보러 가기 →</a>
+  </div>
 </div>
 
 <footer>
@@ -165,20 +251,24 @@ document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
 <script>
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 
-/* 책 제목 → 저자 */
-const authorOf = (() => {
+/* 책 제목 → 책 (표지·저자를 모달에서 쓴다) */
+const BOOK = (() => {
   const m = {};
-  BOOKS.forEach(b => { if(!(b.title in m)) m[b.title] = b.author || ""; });
-  return t => m[t] || "";
+  BOOKS.forEach(b => { if(!(b.title in m)) m[b.title] = b; });
+  return t => m[t] || null;
 })();
+const authorOf = t => (BOOK(t)?.author) || "";
 
 const TAGS = [...new Set(QUOTES.map(q => q.tag).filter(Boolean))];
 const counts = {};
 QUOTES.forEach(q => counts[q.tag || "기타"] = (counts[q.tag || "기타"] || 0) + 1);
-let active = "전체";
+const PER_PAGE = 30;
+let active = "전체", page = 1;
 
 document.getElementById("headSub").innerHTML =
-  `책에서 옮겨 적은 <b>${QUOTES.length}개</b>의 문장. 분류를 누르면 그 색 쪽지만 남습니다.`;
+  `책에서 옮겨 적은 <b>${QUOTES.length}개</b>의 문장. 쪽지를 누르면 크게 열립니다.`;
+
+const filtered = () => active === "전체" ? QUOTES : QUOTES.filter(q => (q.tag||"기타") === active);
 
 function renderTags(){
   const box = document.getElementById("tags");
@@ -186,28 +276,85 @@ function renderTags(){
     `<button class="${t===active?"on":""}" data-t="${esc(t)}">${esc(t)}<span class="n">${
       t==="전체" ? QUOTES.length : (counts[t]||0)}</span></button>`).join("");
   box.querySelectorAll("button").forEach(el => el.onclick = () => {
-    active = el.dataset.t; renderTags(); renderWall();
+    active = el.dataset.t; page = 1; renderTags(); renderWall();
   });
 }
 
+function pageWin(cur, total){
+  if(total <= 7) return Array.from({length:total},(_,k)=>k+1);
+  const set = new Set([1,total,cur-1,cur,cur+1]);
+  const list = [...set].filter(p=>p>=1&&p<=total).sort((a,b)=>a-b);
+  const out = [];
+  list.forEach((p,i)=>{ if(i && p-list[i-1]>1) out.push("…"); out.push(p); });
+  return out;
+}
+
 function renderWall(){
-  const list = active === "전체" ? QUOTES : QUOTES.filter(q => (q.tag||"기타") === active);
+  const all = filtered();
+  const total = Math.max(1, Math.ceil(all.length / PER_PAGE));
+  page = Math.min(Math.max(1, page), total);
+  const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
+
   document.getElementById("wall").innerHTML = list.length ? list.map((q, i) => {
     const tag = q.tag || "기타";
     const a = authorOf(q.b);
     // 아주 살짝 기울여 손으로 붙인 느낌만 낸다 (읽기를 방해하지 않는 범위)
     const tilt = [-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6];
     return `
-      <div class="note" style="background:var(--p-${esc(tag)}, var(--p-기타)); transform:rotate(${tilt}deg);">
-        <div class="qt">${esc(q.t)}</div>
-        <div class="qf">
-          <span class="qb">${esc(q.b || "")}</span>
-          ${a ? `<span class="qa">${esc(a)}</span>` : ""}
-          ${q.d ? `<span class="qd">${esc(q.d)}</span>` : ""}
-        </div>
-      </div>`;
+      <button class="note" data-i="${(page-1)*PER_PAGE + i}" aria-label="문장 크게 보기">
+        <span class="inner" style="background:var(--p-${esc(tag)}, var(--p-기타)); transform:rotate(${tilt}deg);">
+          <span class="qt">${esc(q.t)}</span>
+          <span class="qf">
+            <span class="qb">${esc(q.b || "")}</span>
+            ${a ? `<span class="qa">${esc(a)}</span>` : ""}
+            ${q.d ? `<span class="qd">${esc(q.d)}</span>` : ""}
+          </span>
+        </span>
+      </button>`;
   }).join("") : `<div class="empty">이 분류에는 아직 문장이 없어요.</div>`;
+
+  document.querySelectorAll("#wall .note").forEach(el =>
+    el.onclick = () => openQuote(all[+el.dataset.i]));
+
+  document.getElementById("pager").innerHTML = total > 1 ? `
+    <button onclick="goPage(${page-1})" ${page===1?"disabled":""}>‹</button>
+    ${pageWin(page,total).map(p=>p==="…"?`<span class="ell">…</span>`
+      :`<button class="${p===page?"cur":""}" onclick="goPage(${p})">${p}</button>`).join("")}
+    <button onclick="goPage(${page+1})" ${page===total?"disabled":""}>›</button>` : "";
 }
+function goPage(p){
+  page = p; renderWall();
+  document.querySelector(".wrap").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+/* ---------- 인용구 모달 ---------- */
+const overlay = document.getElementById("qOverlay");
+function openQuote(q){
+  if(!q) return;
+  const b = BOOK(q.b);
+  document.getElementById("qmText").textContent = q.t;
+  document.getElementById("qmTitle").textContent = q.b || "";
+  document.getElementById("qmAuthor").textContent =
+    [b?.author, b?.platform || b?.publisher].filter(Boolean).join(" · ");
+  document.getElementById("qmCover").innerHTML = b?.cover
+    ? `<img src="${esc(b.cover)}" alt="${esc(q.b)} 표지" />` : "";
+  const go = document.getElementById("qmGo");
+  // 서재에서 그 책의 상세가 열리도록 넘긴다
+  go.href = "./index.html#book/" + encodeURIComponent(q.b || "");
+  go.style.display = q.b ? "" : "none";
+  overlay.classList.add("show");
+  document.body.style.overflow = "hidden";
+  document.querySelector(".qmodal").scrollTop = 0;
+}
+function closeQuote(){
+  overlay.classList.remove("show");
+  document.body.style.overflow = "";
+}
+document.getElementById("qmClose").onclick = closeQuote;
+overlay.onclick = e => { if(e.target === overlay) closeQuote(); };
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && overlay.classList.contains("show")) closeQuote();
+});
 
 renderTags(); renderWall();
 </script>
