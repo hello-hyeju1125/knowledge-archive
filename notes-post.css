@@ -259,8 +259,15 @@ body > nav .links a:hover{opacity:.7;}
 .a-rel li a{flex:1 1 auto; font-size:14.5px; font-weight:600; color:var(--text);}
 .a-rel li a:hover{color:var(--accent);}
 .a-rel li span{flex:0 0 auto; font-size:12px; color:var(--text-3);}
+/* 지금 읽는 글 — 목록 안에서 내가 어디쯤인지 보이게 */
+.a-rel li.cur{border-left:3px solid var(--accent); margin-left:-14px; padding-left:11px;}
+.a-rel li.cur .t{flex:1 1 auto; font-size:14.5px; font-weight:800; color:var(--text);}
+.a-rel li.cur .now{
+  flex:0 0 auto; font-size:11px; font-weight:700; color:var(--accent);
+  background:var(--mint-soft); border-radius:var(--r-ctl); padding:2px 8px;
+}
 
-.a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; gap:14px;}
+.a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:flex-end;}
 .a-end a{font-size:13.5px; font-weight:600;}
 footer{
   background:var(--nav-bg); border-top:none; color:var(--nav-text-2);

@@ -302,12 +302,17 @@ def page_html(post, slug, books, order, related, slugs):
         ld["about"] = {"@type": "Book", "name": post["book"]}
 
     rel_html = ""
-    if related:
-        rel_html = ('<section class="a-rel"><h2>「%s」 분류의 다른 글</h2><ul>%s</ul></section>'
-                    % (escape(cat), "".join(
-                        '<li><a href="./%s.html">%s</a><span>%s</span></li>'
-                        % (quote(slugs[r["id"]]), escape(r["title"]), r.get("d", ""))
-                        for r in related)))
+    if len(related) > 1:
+        items = []
+        for r in related:
+            if r["id"] == post["id"]:      # 지금 읽는 글 — 링크가 아니라 현재 위치 표시
+                items.append('<li class="cur"><span class="t">%s</span>'
+                             '<span class="now">지금 읽는 글</span></li>' % escape(r["title"]))
+            else:
+                items.append('<li><a href="./%s.html">%s</a><span>%s</span></li>'
+                             % (quote(slugs[r["id"]]), escape(r["title"]), r.get("d", "")))
+        rel_html = ('<section class="a-rel"><h2>「%s」 분류의 글</h2><ul>%s</ul></section>'
+                    % (escape(cat), "".join(items)))
 
     return """<!DOCTYPE html>
 <html lang="ko">
@@ -357,8 +362,7 @@ def page_html(post, slug, books, order, related, slugs):
     {source}
     {related}
     <div class="a-end">
-      <a href="../notes.html">← 생각 노트 전체 보기</a>
-      <a href="../index.html">서재로 가기 →</a>
+      <a href="../notes.html">생각 노트 전체 보기 →</a>
     </div>
   </article>
 </div>
@@ -498,7 +502,11 @@ def main():
     for p in posts:
         slug = slugs[p["id"]]
         keep.add(slug + ".html")
-        same_cat = [q for q in posts if q is not p and q.get("category") == p.get("category")][:4]
+        # 같은 분류의 글 다섯 편 — 지금 읽는 글이 그 안에 들어가도록 앞뒤로 잡는다
+        cat_posts = [q for q in posts if q.get("category") == p.get("category")]
+        me = cat_posts.index(p)
+        start = max(0, min(me - 2, len(cat_posts) - 5))
+        same_cat = cat_posts[start:start + 5]
         html = page_html(p, slug, books, order, related=same_cat, slugs=slugs)
         open(os.path.join(OUT_DIR, slug + ".html"), "w", encoding="utf-8").write(html)
 
