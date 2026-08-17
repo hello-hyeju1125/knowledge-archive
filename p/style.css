@@ -36,7 +36,7 @@
     --nav-text-2:#AEB8CC;
     --nav-line:#0D1526;
   
-    --mint-vivid:#00C88A;
+    --mint-vivid:#294AFF;
   }
 @media (prefers-color-scheme: dark){
   :root{
@@ -63,7 +63,7 @@
     --nav-text-2:#A3AFC2;
     --nav-line:#1E2739;
   
-    --mint-vivid:#37FFA9;
+    --mint-vivid:#7B95FF;
   }
 }
 *{box-sizing:border-box; margin:0;}
