@@ -135,11 +135,12 @@
   .plist{margin-top:26px;}
   /* 한 줄에 [분류] [제목] ······ [출처] [날짜] — 훑어 내려가며 고르는 화면 */
   .prow{
-    display:flex; align-items:center; gap:18px; padding:16px 4px;
+    display:flex; align-items:center; gap:24px; padding:16px 4px;
     border-bottom:1px solid var(--line); color:var(--text); cursor:pointer;
   }
   .prow:hover .pt{color:var(--accent);}
-  .prow .cat{flex:0 0 auto;}
+  /* 분류 이름 길이와 무관하게 제목이 같은 세로선에서 시작하도록 칩 너비를 고정 */
+  .prow .cat{flex:0 0 48px; text-align:center; padding:2px 6px;}
   .prow .pt{
     flex:1; min-width:0; font-size:18px; font-weight:800; letter-spacing:-0.02em;
     line-height:1.4; transition:color .15s;
@@ -151,7 +152,7 @@
   }
   .prow .pd{flex:0 0 auto; font-size:12.5px; color:var(--text-3); white-space:nowrap;}
   @media (max-width:640px){
-    .prow{gap:13px;}
+    .prow{gap:16px;}
     .prow .pt{font-size:15px;}
     .prow .pb{display:none;}
     .prow .pd{font-size:11.5px;}

@@ -219,7 +219,13 @@
     text-align:center; transition:transform .25s ease; color:var(--text);
   }
   @media (max-width:1024px){ .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);} }
-  @media (max-width:640px){  .bcard{flex-basis:calc((100% - 1 * var(--rail-gap)) / 2);} }
+  @media (max-width:640px){
+    /* 좁은 화면에서도 세 권 — 간격을 줄여 폭을 벌어준다 */
+    .rail{--rail-gap:12px;}
+    .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);}
+    /* 카드가 좁아지면서 좌우 화살표가 제목을 덮는다. 손가락으로 넘기면 되니 숨긴다 */
+    .rail-nav{display:none;}
+  }
   .bcard:hover{transform:translateY(-5px);}
   .bcard .cover{
     width:100%; aspect-ratio:150 / 220; border-radius:var(--r-img); overflow:hidden; position:relative;
@@ -243,6 +249,13 @@
   .bcard .meta .a{font-size:13px; color:var(--text-3); margin-top:3px; line-height:1.4;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .bcard .meta .s{font-size:14px; color:var(--star); margin-top:7px; letter-spacing:2px; line-height:1.2;}
+  @media (max-width:640px){
+    /* 카드가 좁아진 만큼 글자도 함께 줄인다 */
+    .bcard .meta{padding:12px 0 0;}
+    .bcard .meta .t{font-size:13px; line-height:1.35;}
+    .bcard .meta .a{font-size:11px; margin-top:2px;}
+    .bcard .meta .s{font-size:11.5px; letter-spacing:1px; margin-top:5px;}
+  }
 
   /* ---------- 상세: 책 모달 ---------- */
   /* 상세는 길어서(문장 많은 책은 2,000px가 넘는다) 페이지에 펼치면
@@ -360,20 +373,27 @@
   /* 한 줄에 [분류] [제목] ······ [날짜].
      줄의 양 끝을 섹션 제목·「더보기」와 같은 기준선에 맞춘다 */
   .nrow{
-    display:flex; align-items:center; gap:18px;
+    display:flex; align-items:center; gap:24px;
     padding:15px 4px; border-bottom:1px solid var(--line); color:var(--text);
   }
   .nrow:hover .nt{color:var(--accent);}
-  .nrow .cat{flex:0 0 auto; padding:2px 9px; border-radius:var(--r-ctl); font-weight:700; font-size:12px;}
+  /* 분류 이름 길이와 무관하게 제목이 같은 세로선에서 시작하도록 칩 너비를 고정 */
+  .nrow .cat{flex:0 0 48px; text-align:center; padding:2px 6px;
+    border-radius:var(--r-ctl); font-weight:700; font-size:12px;}
   .nrow .nt{
     flex:1; min-width:0; font-size:16px; font-weight:800; letter-spacing:-0.02em;
     line-height:1.4; transition:color .15s;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
+  .nrow .nb{
+    flex:0 0 auto; max-width:230px; font-size:12.5px; color:var(--text-3);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
   .nrow .nd{flex:0 0 auto; font-size:12.5px; color:var(--text-3); white-space:nowrap;}
   @media (max-width:560px){
-    .nrow{gap:13px;}
+    .nrow{gap:16px;}
     .nrow .nt{font-size:14.5px;}
+    .nrow .nb{display:none;}
     .nrow .nd{font-size:11.5px;}
   }
   /* 분류별 색상 (노트 페이지와 동일 팔레트) */
@@ -1300,6 +1320,7 @@ function renderNotes(){
     <a class="nrow" href="./p/${encodeURIComponent((typeof SLUGS !== "undefined" && SLUGS[p.id]) || p.id)}.html">
       <span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>
       <span class="nt">${esc(p.title)}</span>
+      ${p.book ? `<span class="nb">『${esc(p.book)}』</span>` : ""}
       <span class="nd">${p.d||""}</span>
     </a>`).join("");
 }
