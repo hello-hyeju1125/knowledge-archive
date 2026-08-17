@@ -262,7 +262,7 @@ body > nav .links a:hover{opacity:.7;}
   background:var(--mint-soft); border-radius:var(--r-ctl); padding:2px 8px;
 }
 
-.a-end{margin-top:60px; padding-top:24px; border-top:1px solid var(--line); display:flex; justify-content:flex-end;}
+.a-end{margin-top:40px; display:flex; justify-content:flex-end;}
 .a-end a{font-size:13.5px; font-weight:600;}
 footer{
   background:var(--nav-bg); border-top:none; color:var(--nav-text-2);
