@@ -33,8 +33,8 @@
     --accent-hover:#1E3AE0;
     --mint:#37FFA9;
     --mint-soft:#E1FBF0;
-    --mint-text:#00A67A;
-    --star:#00A67A;
+    --mint-text:#00805A;
+    --star:#00C88A;
     --card:#ffffff;
     --soft:#F4F7FB;
     --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
@@ -49,6 +49,8 @@
     --nav-text-2:#AEB8CC;
     --nav-line:#0D1526;
     --nav-btn:#4E6FFF;
+  
+    --mint-vivid:#00C88A;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -77,6 +79,8 @@
     --nav-text-2:#A3AFC2;
     --nav-line:#1E2739;
     --nav-btn:#7B95FF;
+  
+    --mint-vivid:#37FFA9;
   }
   }
   *{box-sizing:border-box; margin:0;}
@@ -215,7 +219,7 @@
     background:var(--card); border-radius:var(--r-card); padding:12px 15px; margin-bottom:8px;
     font-size:14px; line-height:1.7;
   }
-  .dquote::before{content:"“"; color:var(--mint-text); font-weight:800; margin-right:2px;}
+  .dquote::before{content:"“"; color:var(--mint-vivid); font-weight:800; margin-right:2px;}
   .dquote .qm{display:block; margin-top:5px; font-size:11px; color:var(--text-3);}
   /* 제목은 왼쪽, 분류·날짜는 오른쪽 — 줄마다 오른쪽 끝이 맞아 훑기 쉽다 */
   .dnote{
@@ -269,8 +273,7 @@
   <a class="brand" href="./index.html">헬로의 서재</a>
   <div class="links">
     <a href="./books.html" style="color:var(--nav-text); font-weight:700;">책</a>
-    <a href="./index.html#quotes">문장</a>
-    <a href="./index.html#graph-sec">지도</a>
+    <a href="./quotes.html">문장</a>
     <a href="./notes.html">노트</a>
     <a class="add-mini" href="./admin.html">서재 주인 접근</a>
   </div>

@@ -41,15 +41,15 @@
     --accent-hover:#1E3AE0;
     --mint:#37FFA9;
     --mint-soft:#E1FBF0;
-    --mint-text:#00A67A;
+    --mint-text:#00805A;
     --card-line:#DFE5EF;
-    --star:#00A67A;
+    --star:#00C88A;
     --danger:#d70015;
     --card:#ffffff;
     --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
     --shadow-lg:0 10px 34px rgba(13,21,38,.15);
     --node-book:#294AFF;
-    --node-author:#00A67A;
+    --node-author:#00C88A;
     --node-genre:#96A0B4;
     --ph1:#EEF2F8;
     --ph2:#EBF0F8;
@@ -61,6 +61,8 @@
     --nav-text-2:#AEB8CC;
     --nav-line:#0D1526;
     --nav-btn:#4E6FFF;
+  
+    --mint-vivid:#00C88A;
   }
   @media (prefers-color-scheme: dark){
     :root{
@@ -93,6 +95,8 @@
     --nav-text-2:#A3AFC2;
     --nav-line:#1E2739;
     --nav-btn:#7B95FF;
+  
+    --mint-vivid:#37FFA9;
   }
   }
   *{box-sizing:border-box; margin:0;}
@@ -168,7 +172,8 @@
   /* ---------- 공용 레일 ---------- */
   .rail-wrap{position:relative; max-width:1200px; margin:0 auto;}
   .rail{
-    display:flex; align-items:flex-start; gap:16px; overflow-x:auto; padding:8px 4px 22px;
+    --rail-gap:20px;
+    display:flex; align-items:flex-start; gap:var(--rail-gap); overflow-x:auto; padding:8px 4px 22px;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:none;
   }
   .rail::-webkit-scrollbar{display:none;}
@@ -190,11 +195,11 @@
   .qcard{
     flex:0 0 300px; scroll-snap-align:start; text-align:left; color:var(--text);
     background:var(--card); border:1px solid var(--card-line); border-radius:var(--r-card); padding:22px 22px 18px;
-    display:flex; flex-direction:column; min-height:210px;
+    display:flex; flex-direction:column; height:238px;   /* 길이와 무관하게 같은 높이 */
     transition:transform .22s ease, box-shadow .22s ease;
   }
   .qcard:hover{transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--accent);}
-  .qcard .qmark{font-size:30px; line-height:1; color:var(--mint-text); font-weight:700; font-family:Georgia,serif;}
+  .qcard .qmark{font-size:30px; line-height:1; color:var(--mint-vivid); font-weight:700; font-family:Georgia,serif;}
   .qcard .qtext{
     font-size:14.5px; line-height:1.65; margin-top:6px; letter-spacing:-0.005em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;
@@ -209,12 +214,15 @@
 
   /* ---------- 책 카드 ---------- */
   .bcard{
-    flex:0 0 150px; scroll-snap-align:start; border:none; background:none; padding:0;
+    flex:0 0 calc((100% - 4 * var(--rail-gap)) / 5);   /* 화면당 5권 */
+    scroll-snap-align:start; border:none; background:none; padding:0;
     text-align:left; transition:transform .25s ease; color:var(--text);
   }
+  @media (max-width:1024px){ .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);} }
+  @media (max-width:640px){  .bcard{flex-basis:calc((100% - 1 * var(--rail-gap)) / 2);} }
   .bcard:hover{transform:translateY(-5px);}
   .bcard .cover{
-    width:150px; height:220px; border-radius:var(--r-img); overflow:hidden; position:relative;
+    width:100%; aspect-ratio:150 / 220; border-radius:var(--r-img); overflow:hidden; position:relative;
     box-shadow:var(--shadow); background:var(--bg-soft);
     outline:2.5px solid transparent; outline-offset:3px; transition:outline-color .2s, box-shadow .25s;
   }
@@ -224,14 +232,13 @@
   .wbadge{position:absolute; top:8px; left:8px; background:var(--mint); color:#063a26;
     font-size:10px; font-weight:800; padding:2px 8px; border-radius:var(--r-ctl); z-index:2;}
   .cover .ph{width:100%; height:100%; padding:16px 14px; display:flex; flex-direction:column;}
-  .cover .ph .ph-title{font-size:14px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
+  .cover .ph .ph-title{font-size:16px; font-weight:700; line-height:1.35; letter-spacing:-0.02em;
     display:-webkit-box; -webkit-line-clamp:5; -webkit-box-orient:vertical; overflow:hidden;}
-  .cover .ph .ph-author{margin-top:auto; font-size:11px; color:var(--text-2);}
-  .bcard .meta{padding:10px 2px 0;}
-  .bcard .meta .t{font-size:13px; font-weight:600; letter-spacing:-0.01em; line-height:1.35; min-height:2.7em;
+  .cover .ph .ph-author{margin-top:auto; font-size:12.5px; color:var(--text-2);}
+  .bcard .meta{padding:12px 2px 0;}
+  .bcard .meta .t{font-size:17px; font-weight:600; letter-spacing:-0.01em; line-height:1.35; min-height:2.7em;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;}
-  .bcard .meta .s{font-size:11.5px; color:var(--star); margin-top:3px; letter-spacing:1px;}
-  .bcard .meta .s small{color:var(--text-3); letter-spacing:0; margin-left:5px;}
+  .bcard .meta .s{font-size:17px; color:var(--star); margin-top:5px; letter-spacing:2.5px; line-height:1.2;}
 
   /* ---------- 상세: 책 모달 ---------- */
   /* 상세는 길어서(문장 많은 책은 2,000px가 넘는다) 페이지에 펼치면
@@ -282,7 +289,7 @@
     margin:0 0 10px; padding:14px 18px; background:var(--bg); border-radius:var(--r-card);
     font-size:14.5px; line-height:1.7;
   }
-  blockquote::before{content:"“"; color:var(--mint-text); font-weight:700; margin-right:2px;}
+  blockquote::before{content:"“"; color:var(--mint-vivid); font-weight:700; margin-right:2px;}
   blockquote .qmeta{display:block; margin-top:6px; font-size:11.5px; color:var(--text-3);}
   .d-notes{display:flex; flex-direction:column; gap:8px;}
   /* 제목은 왼쪽, 분류·날짜는 오른쪽 — 줄마다 오른쪽 끝이 맞아 훑기 쉽다 */
@@ -347,9 +354,10 @@
   /* ---------- 작법 노트 섹션 ---------- */
   .nwrap{max-width:1200px; margin:0 auto;}
   /* 줄은 왼쪽 기준선에서 시작하되, 읽기 좋은 폭까지만 늘린다 */
-  /* 한 줄에 [분류] [제목] ······ [날짜] — 날짜는 오른쪽 끝에 맞춰 훑기 쉽게 */
+  /* 한 줄에 [분류] [제목] ······ [날짜].
+     줄의 양 끝을 섹션 제목·「더보기」와 같은 기준선에 맞춘다 */
   .nrow{
-    display:flex; align-items:center; gap:12px; max-width:860px;
+    display:flex; align-items:center; gap:12px;
     padding:15px 4px; border-bottom:1px solid var(--line); color:var(--text);
   }
   .nrow:hover .nt{color:var(--accent);}
@@ -455,7 +463,7 @@
   .qm-x:hover{border-color:var(--accent); color:var(--accent);}
   .qm-mark{
     font-family:Georgia,"Times New Roman",serif; font-size:76px; line-height:.7;
-    color:var(--mint-text); opacity:.9; display:block; margin-bottom:6px; user-select:none;
+    color:var(--mint-vivid); opacity:1; display:block; margin-bottom:6px; user-select:none;
   }
   /* blockquote 공통 스타일(회색 상자·따옴표)을 여기서는 걷어낸다 */
   blockquote.qm-text{
@@ -531,8 +539,7 @@
   <span class="brand">헬로의 서재</span>
   <div class="links">
     <a href="./books.html">책</a>
-    <a href="#quotes">문장</a>
-    <a href="#graph-sec">지도</a>
+    <a href="./quotes.html">문장</a>
     <a href="./notes.html">노트</a>
     <button class="add-mini" id="addBtn">서재 주인 접근</button>
   </div>
@@ -550,7 +557,7 @@
 
 <section id="books">
   <div class="sec-head">
-    <h2><span class="marker-thin">최근 읽은 것들</span></h2>
+    <h2><span class="marker-thin">독서 기록</span></h2>
     <a class="sec-more" href="./books.html">더보기</a>
   </div>
   <div class="rail-wrap">
@@ -567,7 +574,7 @@
 
 <section id="quotes">
   <div class="sec-head">
-    <h2><span class="marker-thin">수집한 문장</span></h2>
+    <h2><span class="marker-thin">문장 수집</span></h2>
   </div>
   <div class="tagbar" id="tagbar"></div>
   <div class="rail-wrap">
@@ -850,7 +857,7 @@ function renderRail(){
       <div class="cover">${coverHTML(b)}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</div>
       <div class="meta">
         <div class="t">${esc(b.title)}</div>
-        <div class="s">${b.rating ? stars(b.rating) : ""}<small>${b.readYear ?? ""}</small></div>
+        <div class="s">${b.rating ? stars(b.rating) : ""}</div>
       </div>
     </button>`).join("");
   document.querySelectorAll("#rail .bcard").forEach(el => el.onclick = () => selectBook(+el.dataset.i));

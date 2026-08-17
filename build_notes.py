@@ -337,9 +337,8 @@ def page_html(post, slug, books, order, related, slugs):
 <nav>
   <a class="brand" href="../index.html">헬로의 서재</a>
   <div class="links">
-    <a href="../index.html#quotes">문장</a>
     <a href="../books.html">책</a>
-    <a href="../index.html#graph-sec">지도</a>
+    <a href="../quotes.html">문장</a>
     <a href="../notes.html" style="color:var(--nav-text); font-weight:700;">노트</a>
   </div>
 </nav>
@@ -424,7 +423,8 @@ def write_sitemap(posts, slugs):
     latest = max(p["d"] for p in posts) if posts else "2026-01-01"
     urls = [("%s/" % SITE, latest, "daily", "1.0"),
             ("%s/notes.html" % SITE, latest, "daily", "0.9"),
-            ("%s/books.html" % SITE, latest, "daily", "0.9")]
+            ("%s/books.html" % SITE, latest, "daily", "0.9"),
+            ("%s/quotes.html" % SITE, latest, "daily", "0.9")]
     urls += [(post_url(slugs[p["id"]]), p["d"], "monthly", "0.8") for p in posts]
     body = "\n".join(
         "  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n"

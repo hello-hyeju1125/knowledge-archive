@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>수집한 문장 — 헬로의 서재</title>
+<meta name="description" content="헬로가 책에서 옮겨 적은 문장들. 분류별로 모아 한눈에 볼 수 있습니다." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="수집한 문장 — 헬로의 서재" />
+<meta property="og:description" content="책에서 옮겨 적은 문장들을 한 벽에 붙여 두었습니다." />
+<meta property="og:url" content="https://hellmeone.com/quotes.html" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index, follow, max-snippet:-1" />
+<link rel="canonical" href="https://hellmeone.com/quotes.html" />
+<style>
+@font-face{
+  font-family:"NanumSquareNeo";
+  src:url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2") format("woff2");
+  font-weight:300 900; font-display:swap;
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --r-img:3px; --r-card:8px; --r-ctl:6px;
+    --bg:#F4F7FB; --card:#ffffff;
+    --text:#0D1526; --text-2:#4B5568; --text-3:#666F84;
+    --line:#DFE5EF;
+    --accent:#294AFF; --accent-hover:#1E3AE0;
+    --mint:#37FFA9; --mint-soft:#E1FBF0; --mint-text:#00805A; --mint-vivid:#00C88A;
+    --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
+    --nav-bg:#0D1526; --nav-text:#FFFFFF; --nav-text-2:#AEB8CC; --nav-line:#0D1526; --nav-btn:#4E6FFF;
+    /* 포스트잇 색 — 분류마다 한 가지씩 (색이 곧 분류가 되게) */
+    --p-작법:#FFF6D9; --p-문학:#E4EEFF; --p-경영:#DFF9EE;
+    --p-웹툰:#FFE7F0; --p-기타:#EFEAFF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#070B14; --card:#101726;
+      --text:#EEF2F8; --text-2:#A3AFC2; --text-3:#7F8B9F;
+      --line:#1E2739;
+      --accent:#7B95FF; --accent-hover:#9AAEFF;
+      --mint:#37FFA9; --mint-soft:#0B3228; --mint-text:#37FFA9; --mint-vivid:#37FFA9;
+      --shadow:0 2px 14px rgba(0,0,0,.5);
+      --nav-bg:#101726; --nav-text:#EEF2F8; --nav-text-2:#A3AFC2; --nav-line:#1E2739; --nav-btn:#7B95FF;
+      --p-작법:#2C2716; --p-문학:#161F35; --p-경영:#0E2B22;
+      --p-웹툰:#2E1723; --p-기타:#1F1A33;
+    }
+  }
+  *{box-sizing:border-box; margin:0;}
+  body{-webkit-user-select:none; -moz-user-select:none; user-select:none;}
+  input{-webkit-user-select:text; -moz-user-select:text; user-select:text;}
+
+  body{
+    font-family:"NanumSquareNeo","Apple SD Gothic Neo",-apple-system,sans-serif;
+    background:var(--bg); color:var(--text); line-height:1.6; letter-spacing:-0.01em;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+  .marker{background:linear-gradient(transparent 62%, var(--mint) 62%, var(--mint) 92%, transparent 92%); padding:0 3px;}
+
+  nav{
+    position:sticky; top:0; z-index:50; height:52px;
+    display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
+    background:color-mix(in srgb, var(--nav-bg) 92%, transparent);
+    backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
+    border-bottom:1px solid var(--nav-line);
+  }
+  nav .brand{font-size:15px; font-weight:800; color:var(--nav-text);}
+  nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
+  nav .links a{color:var(--nav-text-2); font-size:13px;}
+  nav .links a:hover{color:var(--nav-text);}
+  nav .add-mini{
+    background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
+    font-size:12.5px; padding:6px 14px; font-weight:600;
+  }
+  @media (max-width:640px){
+    nav{gap:12px; padding:0 16px;}
+    nav .brand{font-size:14px; white-space:nowrap;}
+    nav .links{gap:13px;}
+    nav .links a{font-size:12.5px; white-space:nowrap;}
+    nav .add-mini{display:none;}
+  }
+
+  .wrap{max-width:1180px; margin:0 auto; padding:44px 20px 100px;}
+  .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
+  .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
+  .tags{display:flex; gap:7px; flex-wrap:wrap; margin:24px 0 26px;}
+  .tags button{
+    border:1px solid var(--line); background:var(--card); color:var(--text-2);
+    font-size:13px; font-weight:600; padding:7px 15px; border-radius:var(--r-ctl);
+  }
+  .tags button:hover{border-color:var(--accent); color:var(--accent);}
+  .tags button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .tags button .n{opacity:.55; margin-left:5px;}
+
+  /* ---------- 문장 벽 ----------
+     칼럼 레이아웃이라 카드가 제 높이대로 흘러내린다 — 붙여 둔 쪽지들처럼. */
+  .wall{columns:4; column-gap:18px;}
+  @media (max-width:1080px){ .wall{columns:3;} }
+  @media (max-width:760px){  .wall{columns:2;} }
+  @media (max-width:480px){  .wall{columns:1;} }
+
+  .note{
+    break-inside:avoid; -webkit-column-break-inside:avoid;
+    display:block; width:100%; margin:0 0 18px; text-align:left;
+    background:var(--p-기타); color:var(--text);
+    border:none; border-radius:var(--r-card); padding:20px 19px 16px;
+    box-shadow:var(--shadow);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .note:hover{transform:translateY(-3px) rotate(0deg) !important; box-shadow:0 10px 28px rgba(13,21,38,.16);}
+  .note .qt{
+    font-family:"Noto Serif KR",Georgia,serif; font-weight:400;
+    font-size:14.5px; line-height:1.95; letter-spacing:-0.008em;
+    word-break:keep-all; white-space:pre-wrap;
+  }
+  .note .qf{
+    display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;
+    margin-top:16px; padding-top:12px; border-top:1px solid rgba(13,21,38,.10);
+  }
+  @media (prefers-color-scheme: dark){ .note .qf{border-top-color:rgba(255,255,255,.12);} }
+  .note .qb{font-size:12.5px; font-weight:800; letter-spacing:-0.02em;}
+  .note .qa{font-size:11.5px; color:var(--text-2);}
+  .note .qd{margin-left:auto; font-size:11px; color:var(--text-2); opacity:.75;}
+  .empty{text-align:center; color:var(--text-3); padding:70px 0; font-size:14px;}
+
+  footer{border-top:1px solid var(--line); padding:32px 20px 56px; text-align:center;}
+  footer .f-brand{font-size:14px; font-weight:800;}
+  footer p{color:var(--text-3); font-size:12.5px; margin-top:8px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="./index.html">헬로의 서재</a>
+  <div class="links">
+    <a href="./books.html">책</a>
+    <a href="./quotes.html" style="color:var(--nav-text); font-weight:700;">문장</a>
+    <a href="./notes.html">노트</a>
+    <a class="add-mini" href="./admin.html">서재 주인 접근</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="head">
+    <h1><span class="marker">수집한 문장</span></h1>
+    <p id="headSub"></p>
+  </div>
+  <div class="tags" id="tags"></div>
+  <div class="wall" id="wall"></div>
+</div>
+
+<footer>
+  <div class="f-brand">헬로의 서재</div>
+  <p>읽는 사람, 헬로. 책과 문장을 수집합니다.</p>
+</footer>
+
+<script>
+document.write('<script src="books.js?v=' + Date.now() + '"><\/script>');
+document.write('<script src="quotes.js?v=' + Date.now() + '"><\/script>');
+</script>
+<script>
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+/* 책 제목 → 저자 */
+const authorOf = (() => {
+  const m = {};
+  BOOKS.forEach(b => { if(!(b.title in m)) m[b.title] = b.author || ""; });
+  return t => m[t] || "";
+})();
+
+const TAGS = [...new Set(QUOTES.map(q => q.tag).filter(Boolean))];
+const counts = {};
+QUOTES.forEach(q => counts[q.tag || "기타"] = (counts[q.tag || "기타"] || 0) + 1);
+let active = "전체";
+
+document.getElementById("headSub").innerHTML =
+  `책에서 옮겨 적은 <b>${QUOTES.length}개</b>의 문장. 분류를 누르면 그 색 쪽지만 남습니다.`;
+
+function renderTags(){
+  const box = document.getElementById("tags");
+  box.innerHTML = ["전체", ...TAGS].map(t =>
+    `<button class="${t===active?"on":""}" data-t="${esc(t)}">${esc(t)}<span class="n">${
+      t==="전체" ? QUOTES.length : (counts[t]||0)}</span></button>`).join("");
+  box.querySelectorAll("button").forEach(el => el.onclick = () => {
+    active = el.dataset.t; renderTags(); renderWall();
+  });
+}
+
+function renderWall(){
+  const list = active === "전체" ? QUOTES : QUOTES.filter(q => (q.tag||"기타") === active);
+  document.getElementById("wall").innerHTML = list.length ? list.map((q, i) => {
+    const tag = q.tag || "기타";
+    const a = authorOf(q.b);
+    // 아주 살짝 기울여 손으로 붙인 느낌만 낸다 (읽기를 방해하지 않는 범위)
+    const tilt = [-0.6, 0.5, -0.3, 0.7, -0.5, 0.4][i % 6];
+    return `
+      <div class="note" style="background:var(--p-${esc(tag)}, var(--p-기타)); transform:rotate(${tilt}deg);">
+        <div class="qt">${esc(q.t)}</div>
+        <div class="qf">
+          <span class="qb">${esc(q.b || "")}</span>
+          ${a ? `<span class="qa">${esc(a)}</span>` : ""}
+          ${q.d ? `<span class="qd">${esc(q.d)}</span>` : ""}
+        </div>
+      </div>`;
+  }).join("") : `<div class="empty">이 분류에는 아직 문장이 없어요.</div>`;
+}
+
+renderTags(); renderWall();
+</script>
+<script>
+/* ---------- 콘텐츠 보호 ---------- */
+(function(){
+  const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
+  ["copy","cut","dragstart","contextmenu"].forEach(ev =>
+    document.addEventListener(ev, e => { if(!exempt(e)) e.preventDefault(); }));
+})();
+</script>
+<script type="text/javascript" src="//wcs.pstatic.net/wcslog.js"></script>
+<script type="text/javascript">
+if(!wcs_add) var wcs_add = {};
+wcs_add["wa"] = "995a28458386";
+if(window.wcs) { wcs_do(); }
+</script>
+</body>
+</html>
