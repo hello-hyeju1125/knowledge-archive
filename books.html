@@ -161,9 +161,18 @@
   /* ---------- 목록 ---------- */
   .blist{margin-top:8px;}
   .bitem{border-bottom:1px solid var(--line);}
+  /* 모든 줄이 같은 칸 규격을 쓴다 — 눈이 세로로 훑어 내려갈 수 있게 */
+  .bhead, .brow{
+    display:grid; width:100%; align-items:center; gap:16px;
+    grid-template-columns:60px minmax(0,1fr) 200px 62px 118px;
+  }
+  .bhead{
+    padding:0 4px 9px; border-bottom:1px solid var(--line);
+    font-size:11.5px; font-weight:700; color:var(--text-3); letter-spacing:.02em;
+  }
+  .bhead .r{text-align:right;}
   .brow{
-    display:flex; gap:15px; align-items:center; width:100%; text-align:left;
-    padding:15px 4px; background:none; border:none; color:var(--text);
+    text-align:left; padding:14px 4px; background:none; border:none; color:var(--text);
   }
   .brow:hover .bt{color:var(--accent);}
   .cover{
@@ -180,41 +189,61 @@
     position:absolute; top:4px; left:4px; background:var(--mint); color:#063a26;
     font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:var(--r-ctl);
   }
-  .binfo{display:block; flex:1; min-width:0;}
   .bt{
-    font-size:18.5px; font-weight:800; letter-spacing:-0.022em; line-height:1.35;
+    min-width:0; font-size:17.5px; font-weight:800; letter-spacing:-0.022em; line-height:1.35;
     transition:color .15s;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
-  .bmeta{display:block; font-size:13px; color:var(--text-2); margin-top:5px; line-height:1.5;}
-  .bmeta .sep{color:var(--text-3); margin:0 5px;}
-  /* 별점은 오른쪽 고정 폭 칸에 — 줄마다 같은 자리에 서서 위아래로 훑어진다 */
-  .brate{display:block; flex:0 0 84px; text-align:right; align-self:center;}
-  .brate .st{display:block; color:var(--star); font-size:13.5px; letter-spacing:1.5px; white-space:nowrap;}
-  .brate .rv{display:block; font-size:11px; color:var(--text-3); font-weight:700; margin-top:3px;}
-  .brate .no{display:block; font-size:11.5px; color:var(--text-3);}
-  .caret{
-    flex:0 0 auto; color:var(--text-3); font-size:12px; align-self:center;
-    transition:transform .18s;
+  .bwho{
+    min-width:0; font-size:13px; color:var(--text-2); line-height:1.5;
+    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
-  .bitem.open .caret{transform:rotate(180deg); color:var(--accent);}
+  .bwho .sep{color:var(--text-3); margin:0 5px;}
+  .byear{font-size:13px; color:var(--text-2); text-align:right; white-space:nowrap;}
+  .brate{text-align:right; white-space:nowrap;}
+  .brate .st{color:var(--star); font-size:18px; letter-spacing:2px;}
+  .brate .rv{font-size:12px; color:var(--text-3); font-weight:700; margin-left:6px;}
+  .brate .no{font-size:12px; color:var(--text-3);}
   .bitem.open .bt{color:var(--accent);}
 
   /* ---------- 펼친 상세 ---------- */
-  .bdetail{padding:2px 4px 22px;}
-  .dcard{background:var(--soft); border-radius:var(--r-img); padding:18px 18px 20px;}
-  .dchips{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
+  /* ---------- 펼친 상세 ----------
+     위계: ① 내 리뷰 ② 내가 모은 것(문장·노트) ③ 참고(책 소개).
+     예전에는 넷이 같은 크기·같은 회색이라 무엇부터 봐야 할지 알 수 없었다. */
+  .bdetail{padding:4px 4px 26px;}
+  .dcard{background:var(--soft); border-radius:var(--r-card); padding:22px 22px 24px;}
+  .dchips{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:18px;}
   .dchips span{
     font-size:11.5px; font-weight:700; color:var(--mint-text); background:var(--mint-soft);
     padding:3px 10px; border-radius:var(--r-ctl);
   }
-  .dfield + .dfield{margin-top:16px;}
-  .dfield .k{
-    font-size:11px; font-weight:700; letter-spacing:.09em; color:var(--text-3);
-    text-transform:uppercase; margin-bottom:6px;
+  .dsec + .dsec{margin-top:24px;}
+  .dlab{display:flex; align-items:baseline; gap:7px; margin-bottom:10px;}
+  .dlab b{font-size:13.5px; font-weight:800; letter-spacing:-0.015em; color:var(--text);}
+  .dlab span{font-size:12px; font-weight:700; color:var(--text-3);}
+
+  /* ① 내 리뷰 — 이 화면에서 가장 큰 글자 */
+  .dreview{
+    background:var(--card); border-left:3px solid var(--accent);
+    border-radius:0 var(--r-card) var(--r-card) 0; padding:16px 20px;
+    font-size:16.5px; line-height:1.85; color:var(--text);
   }
-  .dfield .v{font-size:14.5px; line-height:1.75; color:var(--text);}
-  .dfield .v.dim{color:var(--text-3); font-style:italic;}
+  .dreview.dim{
+    font-size:14px; font-style:italic; color:var(--text-3);
+    border-left-color:var(--line); background:none; padding:2px 0;
+  }
+
+  /* ③ 책 소개 — 남이 쓴 글이라 접어 둔다 */
+  .dsum{margin-top:24px; border-top:1px solid var(--line); padding-top:16px;}
+  .dsum summary{
+    font-size:12.5px; font-weight:700; color:var(--text-3); cursor:pointer;
+    list-style:none; display:inline-flex; align-items:center; gap:5px;
+  }
+  .dsum summary::-webkit-details-marker{display:none;}
+  .dsum summary::after{content:"▾"; font-size:10px;}
+  .dsum[open] summary::after{content:"▴";}
+  .dsum summary:hover{color:var(--accent);}
+  .dsum .body{margin-top:11px; font-size:13.5px; line-height:1.8; color:var(--text-2);}
   .dquote{
     background:var(--card); border-radius:var(--r-card); padding:12px 15px; margin-bottom:8px;
     font-size:14px; line-height:1.7;
@@ -234,12 +263,14 @@
     font-size:12.5px; font-weight:600; padding:6px 15px; margin-top:2px;
   }
   .more:hover{border-color:var(--accent);}
-  .dbuy{margin-top:18px;}
-  .dbuy a{
-    display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:600;
-    padding:9px 18px; border-radius:var(--r-ctl);
+  .dbuy{margin-top:20px; text-align:right;}
+  /* 바깥으로 나가는 링크는 조용한 글자로 — 여기서 할 주요 행동이 아니다 */
+  .golink{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:13px; font-weight:700; color:var(--accent);
+    border-bottom:1px solid transparent; padding-bottom:1px;
   }
-  .dbuy a:hover{background:var(--accent-hover);}
+  .golink:hover{border-bottom-color:currentColor;}
 
   .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
 
@@ -260,10 +291,14 @@
     .cover{flex-basis:54px; width:54px; height:78px;}
     .bt{font-size:15.5px;}
     .bmeta{font-size:12.5px;}
-    .brow{gap:12px;}
-    .brate{flex-basis:66px;}
-    .brate .st{font-size:11.5px; letter-spacing:1px;}
-    .caret{display:none;}
+    .bhead{display:none;}
+    .brow{grid-template-columns:54px minmax(0,1fr) auto; gap:12px; row-gap:2px;}
+    .bt{font-size:15.5px;}
+    .brow .cover{grid-row:span 2;}
+    .bwho{grid-column:2; font-size:12.5px;}
+    .byear{display:none;}
+    .brate{grid-column:3; grid-row:1 / span 2;}
+    .brate .st{font-size:14px; letter-spacing:1px;}
   }
 </style>
 </head>
@@ -300,6 +335,7 @@
       <div class="tsum" id="tsum"></div>
     </div>
 
+    <div class="bhead" id="bhead"><span></span><span>제목</span><span>저자 · 출판사</span><span class="r">출간</span><span class="r">별점</span></div>
     <div class="blist" id="blist"></div>
     <div class="pager" id="pager"></div>
   </div>
@@ -457,7 +493,7 @@ function rowHTML(b, key, open){
   const cover = b.cover
     ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} 표지" loading="lazy" />`
     : `<div class="ph" style="background:${phColor(b.title)}"><span>${esc(b.title)}</span></div>`;
-  const meta = [b.author || "저자 미상", b.platform || b.publisher, b.published ? b.published + "년" : ""]
+  const who = [b.author || "저자 미상", b.platform || b.publisher]
     .filter(Boolean).map(esc).join('<span class="sep">·</span>');
   const rate = b.rating
     ? `<span class="st">${stars(b.rating)}</span><span class="rv">${b.rating}.0</span>`
@@ -465,12 +501,10 @@ function rowHTML(b, key, open){
   return `
     <button class="brow" aria-expanded="${open}" data-k="${esc(key)}">
       <span class="cover">${cover}${b.type==="webtoon"?'<span class="wbadge">웹툰</span>':""}</span>
-      <span class="binfo">
-        <span class="bt">${esc(b.title)}</span>
-        <span class="bmeta">${meta}</span>
-      </span>
+      <span class="bt">${esc(b.title)}</span>
+      <span class="bwho">${who}</span>
+      <span class="byear">${b.published ? b.published + "년" : ""}</span>
       <span class="brate">${rate}</span>
-      <span class="caret">▾</span>
     </button>`;
 }
 
@@ -478,26 +512,34 @@ function rowHTML(b, key, open){
 function detailHTML(b){
   const qs = quotesFor(b), ps = postsFor(b);
   const shown = openQuotesAll ? qs : qs.slice(0, QUOTE_PREVIEW);
-  const dim = t => t ? `<div class="v">${esc(t)}</div>` : `<div class="v dim">아직 기록하지 않았어요.</div>`;
   const chips = [...(b.genres || []), b.readYear ? b.readYear + "년에 읽음" : ""].filter(Boolean);
+  const lab = (t, n) => `<div class="dlab"><b>${t}</b>${n ? `<span>${n}</span>` : ""}</div>`;
   return `
   <div class="bdetail"><div class="dcard">
     ${chips.length ? `<div class="dchips">${chips.map(c=>`<span>${esc(c)}</span>`).join("")}</div>` : ""}
-    <div class="dfield"><div class="k">줄거리</div>${dim(b.summary)}</div>
-    <div class="dfield"><div class="k">내 리뷰</div>${dim(b.review)}</div>
-    <div class="dfield"><div class="k">수집한 문장${qs.length ? " · "+qs.length+"개" : ""}</div>
-      ${qs.length ? shown.map(q => `<div class="dquote">${esc(q.t)}${
-          (q.tag||q.d) ? `<span class="qm">${esc(q.tag||"")}${q.tag&&q.d?" · ":""}${esc(q.d||"")}</span>` : ""}</div>`).join("")
-        : `<div class="v dim">아직 수집한 문장이 없어요.</div>`}
+
+    <div class="dsec">${lab("내 리뷰")}
+      ${b.review ? `<div class="dreview">${esc(b.review)}</div>`
+                 : `<div class="dreview dim">아직 리뷰를 쓰지 않았어요.</div>`}
+    </div>
+
+    ${qs.length ? `<div class="dsec">${lab("수집한 문장", qs.length + "개")}
+      ${shown.map(q => `<div class="dquote">${esc(q.t)}${
+          (q.tag||q.d) ? `<span class="qm">${esc(q.tag||"")}${q.tag&&q.d?" · ":""}${esc(q.d||"")}</span>` : ""}</div>`).join("")}
       ${qs.length > QUOTE_PREVIEW
         ? `<button class="more" data-more="q">${openQuotesAll ? "접기" : `문장 ${qs.length - QUOTE_PREVIEW}개 더 보기`}</button>` : ""}
-    </div>
-    ${ps.length ? `<div class="dfield"><div class="k">이 책에서 쓴 생각 노트 · ${ps.length}편</div>
+    </div>` : ""}
+
+    ${ps.length ? `<div class="dsec">${lab("이 책에서 쓴 생각 노트", ps.length + "편")}
       ${ps.map(p => `<a class="dnote" href="${postHref(p)}">
         <span class="t">${esc(p.title)}</span>
         <span class="m">${esc(p.category||"노트")}${p.d ? " · " + esc(p.d) : ""}</span></a>`).join("")}
     </div>` : ""}
-    <div class="dbuy"><a href="${esc(buyHref(b))}" target="_blank" rel="noopener">${
+
+    ${b.summary ? `<details class="dsum"><summary>책 소개 보기</summary>
+      <div class="body">${esc(b.summary)}</div></details>` : ""}
+
+    <div class="dbuy"><a class="golink" href="${esc(buyHref(b))}" target="_blank" rel="noopener">${
       b.type==="webtoon" ? "네이버웹툰에서 보기" : "교보문고에서 보기"} →</a></div>
   </div></div>`;
 }

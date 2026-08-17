@@ -185,10 +185,12 @@
   .qm-fromtxt .t{font-size:15px; font-weight:800; letter-spacing:-0.02em; line-height:1.4;}
   .qm-fromtxt .a{font-size:12.5px; color:var(--text-3); margin-top:3px;}
   .qm-go{
-    display:inline-block; margin-top:20px; background:var(--accent); color:#fff;
-    font-size:13.5px; font-weight:700; padding:10px 20px; border-radius:var(--r-ctl);
+    flex:0 0 auto; display:inline-flex; align-items:center; gap:5px;
+    font-size:13px; font-weight:700; color:var(--accent);
+    border-bottom:1px solid transparent; padding-bottom:1px;
   }
-  .qm-go:hover{background:var(--accent-hover); color:#fff;}
+  .qm-go:hover{border-bottom-color:currentColor;}
+  @media (max-width:480px){ .qm-go{display:none;} }
   @media (max-width:560px){
     .overlay{padding:16px;}
     .qmodal{max-height:88vh; padding:36px 22px 26px;}
@@ -234,8 +236,8 @@
         <div class="t" id="qmTitle"></div>
         <div class="a" id="qmAuthor"></div>
       </div>
+      <a class="qm-go" id="qmGo">책 보기 →</a>
     </div>
-    <a class="qm-go" id="qmGo">이 책 보러 가기 →</a>
   </div>
 </div>
 

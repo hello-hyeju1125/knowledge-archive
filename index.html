@@ -309,15 +309,14 @@
     font-size:13px; padding:8px 18px; margin-top:4px;
   }
   .show-more:hover{border-color:var(--accent);}
-  .buyrow{display:flex; gap:10px; margin-top:26px; flex-wrap:wrap;}
-  .buy{
-    display:inline-flex; align-items:center; gap:6px; font-size:13.5px; font-weight:500;
-    padding:9px 18px; border-radius:var(--r-ctl); border:1px solid var(--line);
-    background:var(--card); color:var(--text); transition:border-color .15s;
+  .buyrow{margin-top:26px; text-align:right;}
+  /* 바깥으로 나가는 링크는 조용한 글자로 — 여기서 할 주요 행동이 아니다 */
+  .golink{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:13px; font-weight:700; color:var(--accent);
+    border-bottom:1px solid transparent; padding-bottom:1px;
   }
-  .buy:hover{border-color:var(--accent); color:var(--accent);}
-  .buy.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .buy.primary:hover{background:var(--accent-hover); color:#fff;}
+  .golink:hover{border-bottom-color:currentColor;}
   .del-link{background:none; border:none; color:var(--danger); font-size:13px; padding:0; margin-top:20px; text-decoration:underline;}
 
   /* ---------- graph ---------- */
@@ -928,8 +927,8 @@ function selectBook(i){
         ${noteRows(b)}
         <div class="buyrow">
           ${b.type==="webtoon"
-            ? `<a class="buy primary" href="${esc(b.link||"https://comic.naver.com")}" target="_blank" rel="noopener">네이버웹툰에서 보기</a>`
-            : `<a class="buy primary" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>`}
+            ? `<a class="golink" href="${esc(b.link||"https://comic.naver.com")}" target="_blank" rel="noopener">네이버웹툰에서 보기</a>`
+            : `<a class="golink" href="${links.kyobo}" target="_blank" rel="noopener">교보문고에서 보기</a>`}
         </div>
         ${b._src==="local" ? `<button class="del-link" onclick="deleteLocal('${b._id}')">이 책 삭제</button>` : ""}
       </div>
