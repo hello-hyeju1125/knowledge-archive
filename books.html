@@ -21,50 +21,62 @@
 </style>
 <style>
   :root{
-    --r-img:3px; --r-card:8px; --r-ctl:6px;
-    --bg:#F6F7F9;
-    --text:#15171C;
-    --text-2:#565A63;
-    --text-3:#6E727B;
-    --line:#E4E6EA;
-    --accent:#1B49E5;
-    --accent-hover:#1439BE;
-    --mint:#5BF5BB;
-    --mint-soft:#E3FBF1;
-    --mint-text:#00805A;
-    --star:#00805A;
+    --r-img:3px;
+    --r-card:8px;
+    --r-ctl:6px;
+    --bg:#F4F7FB;
+    --text:#0D1526;
+    --text-2:#4B5568;
+    --text-3:#666F84;
+    --line:#DFE5EF;
+    --accent:#294AFF;
+    --accent-hover:#1E3AE0;
+    --mint:#37FFA9;
+    --mint-soft:#E1FBF0;
+    --mint-text:#00A67A;
+    --star:#00A67A;
     --card:#ffffff;
-    --soft:#F6F7F9;
-    --shadow:0 1px 2px rgba(16,18,22,.05), 0 6px 20px rgba(16,18,22,.06);
-    --shadow-lg:0 10px 34px rgba(16,18,22,.14);
-    --ph1:#F1F2F4;
-    --ph2:#EEF0F3;
-    --ph3:#EDF3F0;
-    --ph4:#F0F1F3;
-    --ph5:#EFF1F4;
+    --soft:#F4F7FB;
+    --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
+    --shadow-lg:0 10px 34px rgba(13,21,38,.15);
+    --ph1:#EEF2F8;
+    --ph2:#EBF0F8;
+    --ph3:#EAF6F1;
+    --ph4:#EDF1F7;
+    --ph5:#ECF0F8;
+    --nav-bg:#0D1526;
+    --nav-text:#FFFFFF;
+    --nav-text-2:#AEB8CC;
+    --nav-line:#0D1526;
+    --nav-btn:#4E6FFF;
   }
   @media (prefers-color-scheme: dark){
     :root{
-    --bg:#0B0C10;
-    --text:#F2F3F5;
-    --text-2:#A9AEB8;
-    --text-3:#8A8F99;
-    --line:#25272E;
+    --bg:#070B14;
+    --text:#EEF2F8;
+    --text-2:#A3AFC2;
+    --text-3:#7F8B9F;
+    --line:#1E2739;
     --accent:#7B95FF;
     --accent-hover:#9AAEFF;
-    --mint:#3FE0A6;
-    --mint-soft:#0E2E23;
-    --mint-text:#3FE0A6;
-    --star:#3FE0A6;
-    --card:#15171D;
-    --soft:#15171D;
+    --mint:#37FFA9;
+    --mint-soft:#0B3228;
+    --mint-text:#37FFA9;
+    --star:#37FFA9;
+    --card:#101726;
+    --soft:#101726;
     --shadow:0 2px 14px rgba(0,0,0,.5);
     --shadow-lg:0 10px 34px rgba(0,0,0,.65);
-    --ph1:#1A1D24;
-    --ph2:#181B21;
-    --ph3:#152019;
-    --ph4:#191C22;
-    --ph5:#171A20;
+    --ph1:#161E2E;
+    --ph2:#141C2B;
+    --ph3:#122420;
+    --ph4:#151D2C;
+    --ph5:#131B2A;
+    --nav-bg:#101726;
+    --nav-text:#EEF2F8;
+    --nav-text-2:#A3AFC2;
+    --nav-line:#1E2739;
+    --nav-btn:#7B95FF;
   }
   }
   *{box-sizing:border-box; margin:0;}
@@ -85,16 +97,16 @@
   nav{
     position:sticky; top:0; z-index:50; height:52px;
     display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
-    background:color-mix(in srgb, var(--bg) 75%, transparent);
+    background:color-mix(in srgb, var(--nav-bg) 92%, transparent);
     backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--nav-line);
   }
-  nav .brand{font-size:15px; font-weight:800; color:var(--text);}
+  nav .brand{font-size:15px; font-weight:800; color:var(--nav-text);}
   nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
-  nav .links a{color:var(--text-2); font-size:13px;}
-  nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
+  nav .links a{color:var(--nav-text-2); font-size:13px;}
+  nav .links a:hover{color:var(--nav-text);}
   nav .add-mini{
-    background:var(--accent); color:#fff !important; border:none; border-radius:var(--r-ctl);
+    background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
     font-size:12.5px; padding:6px 14px; font-weight:600;
   }
   nav .add-mini:hover{background:var(--accent-hover) !important;}
@@ -256,7 +268,7 @@
 <nav>
   <a class="brand" href="./index.html">헬로의 서재</a>
   <div class="links">
-    <a href="./books.html" style="color:var(--text); font-weight:700;">책</a>
+    <a href="./books.html" style="color:var(--nav-text); font-weight:700;">책</a>
     <a href="./index.html#quotes">문장</a>
     <a href="./index.html#graph-sec">지도</a>
     <a href="./notes.html">노트</a>

@@ -24,46 +24,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --r-img:3px; --r-card:8px; --r-ctl:6px;
-    --bg:#F6F7F9;
-    --text:#15171C;
-    --text-2:#565A63;
-    --text-3:#6E727B;
-    --line:#E4E6EA;
-    --card-line:#E4E6EA;
-    --accent:#1B49E5;
-    --accent-hover:#1439BE;
-    --mint:#5BF5BB;
-    --mint-soft:#E3FBF1;
-    --mint-text:#00805A;
+    --r-img:3px;
+    --r-card:8px;
+    --r-ctl:6px;
+    --bg:#F4F7FB;
+    --text:#0D1526;
+    --text-2:#4B5568;
+    --text-3:#666F84;
+    --line:#DFE5EF;
+    --card-line:#DFE5EF;
+    --accent:#294AFF;
+    --accent-hover:#1E3AE0;
+    --mint:#37FFA9;
+    --mint-soft:#E1FBF0;
+    --mint-text:#00A67A;
     --card:#ffffff;
-    --shadow:0 1px 2px rgba(16,18,22,.05), 0 6px 20px rgba(16,18,22,.06);
-    --note-bg:#F6F7F9;
-    --src-bg:#F6F7F9;
-    --note-text:#4A4E57;
-    --note-lab:#15171C;
-    --note-strong:#15171C;
+    --shadow:0 1px 2px rgba(13,21,38,.05), 0 6px 20px rgba(13,21,38,.07);
+    --note-bg:#F4F7FB;
+    --src-bg:#F4F7FB;
+    --note-text:#464F63;
+    --note-lab:#0D1526;
+    --note-strong:#0D1526;
+    --nav-bg:#0D1526;
+    --nav-text:#FFFFFF;
+    --nav-text-2:#AEB8CC;
+    --nav-line:#0D1526;
+    --nav-btn:#4E6FFF;
   }
   @media (prefers-color-scheme: dark){
     :root{
-    --bg:#0B0C10;
-    --text:#F2F3F5;
-    --text-2:#A9AEB8;
-    --text-3:#8A8F99;
-    --line:#25272E;
-    --card-line:#25272E;
+    --bg:#070B14;
+    --text:#EEF2F8;
+    --text-2:#A3AFC2;
+    --text-3:#7F8B9F;
+    --line:#1E2739;
+    --card-line:#1E2739;
     --accent:#7B95FF;
     --accent-hover:#9AAEFF;
-    --mint:#3FE0A6;
-    --mint-soft:#0E2E23;
-    --mint-text:#3FE0A6;
-    --card:#15171D;
+    --mint:#37FFA9;
+    --mint-soft:#0B3228;
+    --mint-text:#37FFA9;
+    --card:#101726;
     --shadow:0 2px 14px rgba(0,0,0,.5);
-    --note-bg:#15171D;
-    --src-bg:#15171D;
-    --note-text:#B9BEC7;
-    --note-lab:#E7E9EC;
-    --note-strong:#F2F3F5;
+    --note-bg:#101726;
+    --src-bg:#101726;
+    --note-text:#B6BECD;
+    --note-lab:#E4E9F2;
+    --note-strong:#EEF2F8;
+    --nav-bg:#101726;
+    --nav-text:#EEF2F8;
+    --nav-text-2:#A3AFC2;
+    --nav-line:#1E2739;
+    --nav-btn:#7B95FF;
   }
   }
   *{box-sizing:border-box; margin:0;}
@@ -84,16 +96,16 @@
   nav{
     position:sticky; top:0; z-index:50; height:52px;
     display:flex; align-items:center; gap:22px; padding:0 max(22px,4vw);
-    background:color-mix(in srgb, var(--bg) 75%, transparent);
+    background:color-mix(in srgb, var(--nav-bg) 92%, transparent);
     backdrop-filter:saturate(180%) blur(20px); -webkit-backdrop-filter:saturate(180%) blur(20px);
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid var(--nav-line);
   }
-  nav .brand{font-size:15px; font-weight:800; color:var(--text);}
+  nav .brand{font-size:15px; font-weight:800; color:var(--nav-text);}
   nav .links{margin-left:auto; display:flex; gap:20px; align-items:center;}
-  nav .links a{color:var(--text-2); font-size:13px;}
-  nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
+  nav .links a{color:var(--nav-text-2); font-size:13px;}
+  nav .links a:hover{color:var(--nav-text);}
   nav .add-mini{
-    background:var(--accent); color:#fff !important; border:none; border-radius:var(--r-ctl);
+    background:var(--nav-btn); color:#fff !important; border:none; border-radius:var(--r-ctl);
     font-size:12.5px; padding:6px 14px; font-weight:600;
   }
   nav .add-mini:hover{background:var(--accent-hover) !important;}
@@ -186,7 +198,7 @@
     <a href="./index.html#quotes">문장</a>
     <a href="./books.html">책</a>
     <a href="./index.html#graph-sec">지도</a>
-    <a href="./notes.html" style="color:var(--text); font-weight:700;">노트</a>
+    <a href="./notes.html" style="color:var(--nav-text); font-weight:700;">노트</a>
     <a class="add-mini" href="./admin.html">서재 주인 접근</a>
   </div>
 </nav>
