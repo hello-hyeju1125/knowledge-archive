@@ -142,6 +142,7 @@
 
   /* ---------- hero ---------- */
   .hero{text-align:center; padding:84px 24px 56px;}
+  @media (max-width:640px){ .hero{padding:52px 20px 26px;} }
   .hero h1{font-size:clamp(38px,6vw,56px); font-weight:900; letter-spacing:-0.03em; line-height:1.12;}
   .hero p.tag{font-size:clamp(17px,2.4vw,22px); color:var(--text-2); margin-top:14px; font-weight:400;}
   .hero .stats{display:flex; gap:40px; justify-content:center; margin-top:38px; flex-wrap:wrap;}
@@ -162,6 +163,8 @@
 
   /* ---------- sections ---------- */
   section{padding:56px max(22px,4vw);}
+  /* 좁은 화면에서는 56+56이 한 화면을 다 먹는다 — 절반으로 */
+  @media (max-width:640px){ section{padding:30px max(18px,4vw);} }
   .sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px;
     max-width:1200px; margin:0 auto 22px;}
   /* 목록 옆에 붙는 '더보기' — 버튼이 아니라 글자로 조용히 둔다 */
@@ -221,7 +224,7 @@
   @media (max-width:1024px){ .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);} }
   @media (max-width:640px){
     /* 좁은 화면에서도 세 권 — 간격을 줄여 폭을 벌어준다 */
-    .rail{--rail-gap:12px;}
+    .rail{--rail-gap:12px; padding-bottom:8px;}
     .bcard{flex-basis:calc((100% - 2 * var(--rail-gap)) / 3);}
     /* 카드가 좁아지면서 좌우 화살표가 제목을 덮는다. 손가락으로 넘기면 되니 숨긴다 */
     .rail-nav{display:none;}
