@@ -21,6 +21,7 @@
 </style>
 <style>
   :root{
+    --r-img:3px; --r-card:8px; --r-ctl:6px;
     --bg:#F6F7F9;
     --text:#15171C;
     --text-2:#565A63;
@@ -93,7 +94,7 @@
   nav .links a{color:var(--text-2); font-size:13px;}
   nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
   nav .add-mini{
-    background:var(--accent); color:#fff !important; border:none; border-radius:980px;
+    background:var(--accent); color:#fff !important; border:none; border-radius:var(--r-ctl);
     font-size:12.5px; padding:6px 14px; font-weight:600;
   }
   nav .add-mini:hover{background:var(--accent-hover) !important;}
@@ -105,12 +106,12 @@
     nav .add-mini{display:none;}
   }
 
-  .wrap{max-width:720px; margin:0 auto; padding:44px 20px 100px;}
+  .wrap{max-width:1080px; margin:0 auto; padding:44px 20px 100px;}
   .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
   .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
 
   /* ---------- 정렬·필터 ---------- */
-  .tools{margin-top:24px; border:1px solid var(--line); border-radius:16px; background:var(--card); padding:14px 16px;}
+  .tools{margin-top:24px; border:1px solid var(--line); border-radius:var(--r-img); background:var(--card); padding:14px 16px;}
   .trow{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
   .trow + .trow{margin-top:11px; padding-top:11px; border-top:1px dashed var(--line);}
   .tlab{
@@ -120,14 +121,14 @@
   .chips{display:flex; gap:6px; flex-wrap:wrap; flex:1; min-width:0;}
   .chips button{
     border:1px solid var(--line); background:var(--bg); color:var(--text-2);
-    font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:980px;
+    font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:var(--r-ctl);
   }
   .chips button:hover{border-color:var(--accent); color:var(--accent);}
   .chips button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
   .chips button .n{opacity:.55; margin-left:4px; font-weight:600;}
   select{
     font-family:inherit; font-size:12.5px; font-weight:600; color:var(--text-2);
-    background:var(--bg); border:1px solid var(--line); border-radius:980px;
+    background:var(--bg); border:1px solid var(--line); border-radius:var(--r-ctl);
     padding:6px 12px; max-width:100%; cursor:pointer;
   }
   select:focus{outline:none; border-color:var(--accent); color:var(--accent);}
@@ -150,7 +151,7 @@
   }
   .brow:hover .bt{color:var(--accent);}
   .cover{
-    display:block; flex:0 0 60px; width:60px; height:87px; border-radius:8px; overflow:hidden;
+    display:block; flex:0 0 60px; width:60px; height:87px; border-radius:var(--r-img); overflow:hidden;
     background:var(--soft); box-shadow:var(--shadow); position:relative;
   }
   .cover img{width:100%; height:100%; object-fit:cover; display:block;}
@@ -161,11 +162,11 @@
   }
   .wbadge{
     position:absolute; top:4px; left:4px; background:var(--mint); color:#063a26;
-    font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:980px;
+    font-size:8.5px; font-weight:800; padding:1px 5px; border-radius:var(--r-ctl);
   }
   .binfo{display:block; flex:1; min-width:0;}
   .bt{
-    font-size:16.5px; font-weight:800; letter-spacing:-0.022em; line-height:1.35;
+    font-size:18.5px; font-weight:800; letter-spacing:-0.022em; line-height:1.35;
     transition:color .15s;
     display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
   }
@@ -185,11 +186,11 @@
 
   /* ---------- 펼친 상세 ---------- */
   .bdetail{padding:2px 4px 22px;}
-  .dcard{background:var(--soft); border-radius:16px; padding:18px 18px 20px;}
+  .dcard{background:var(--soft); border-radius:var(--r-img); padding:18px 18px 20px;}
   .dchips{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;}
   .dchips span{
     font-size:11.5px; font-weight:700; color:var(--mint-text); background:var(--mint-soft);
-    padding:3px 10px; border-radius:980px;
+    padding:3px 10px; border-radius:var(--r-ctl);
   }
   .dfield + .dfield{margin-top:16px;}
   .dfield .k{
@@ -199,35 +200,35 @@
   .dfield .v{font-size:14.5px; line-height:1.75; color:var(--text);}
   .dfield .v.dim{color:var(--text-3); font-style:italic;}
   .dquote{
-    background:var(--card); border-radius:12px; padding:12px 15px; margin-bottom:8px;
+    background:var(--card); border-radius:var(--r-card); padding:12px 15px; margin-bottom:8px;
     font-size:14px; line-height:1.7;
   }
   .dquote::before{content:"“"; color:var(--mint-text); font-weight:800; margin-right:2px;}
   .dquote .qm{display:block; margin-top:5px; font-size:11px; color:var(--text-3);}
   /* 제목은 왼쪽, 분류·날짜는 오른쪽 — 줄마다 오른쪽 끝이 맞아 훑기 쉽다 */
   .dnote{
-    display:flex; align-items:center; gap:12px; background:var(--card); border-radius:12px;
+    display:flex; align-items:center; gap:12px; background:var(--card); border-radius:var(--r-card);
     padding:11px 15px; margin-bottom:8px; color:var(--text);
   }
   .dnote:hover{background:var(--mint-soft);}
   .dnote .t{flex:1; min-width:0; font-size:14px; font-weight:700; line-height:1.45;}
   .dnote .m{flex:0 0 auto; font-size:11.5px; color:var(--text-3); text-align:right; white-space:nowrap;}
   .more{
-    background:none; border:1px solid var(--line); border-radius:980px; color:var(--accent);
+    background:none; border:1px solid var(--line); border-radius:var(--r-ctl); color:var(--accent);
     font-size:12.5px; font-weight:600; padding:6px 15px; margin-top:2px;
   }
   .more:hover{border-color:var(--accent);}
   .dbuy{margin-top:18px;}
   .dbuy a{
     display:inline-block; background:var(--accent); color:#fff; font-size:13px; font-weight:600;
-    padding:9px 18px; border-radius:980px;
+    padding:9px 18px; border-radius:var(--r-ctl);
   }
   .dbuy a:hover{background:var(--accent-hover);}
 
   .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
 
   .pager{display:flex; gap:6px; justify-content:center; margin-top:30px; flex-wrap:wrap; align-items:center;}
-  .pager button{min-width:34px; height:34px; border-radius:10px; border:1px solid var(--line);
+  .pager button{min-width:34px; height:34px; border-radius:var(--r-card); border:1px solid var(--line);
     background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
   .pager button:hover{border-color:var(--accent); color:var(--accent);}
   .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}

@@ -10,6 +10,7 @@
 }
 
 :root{
+    --r-img:3px; --r-card:8px; --r-ctl:6px;
     --bg:#F6F7F9;
     --text:#15171C;
     --text-2:#565A63;
@@ -84,7 +85,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
 
 /* 분류별 색상 (notes.html과 같은 규칙) */
-.cat{display:inline-block; padding:2px 9px; border-radius:980px; font-weight:700; font-size:12px;}
+.cat{display:inline-block; padding:2px 9px; border-radius:var(--r-ctl); font-weight:700; font-size:12px;}
 .cat.c0{color:#00734D; background:#D9FFEF;}
 .cat.c1{color:#1E3AE0; background:#E1E8FF;}
 .cat.c2{color:#9A5B00; background:#FFF0D6;}
@@ -103,7 +104,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 /* ---------- 본문 (가독성 최우선) ---------- */
 .a-back{font-size:13px; color:var(--text-2); font-weight:600;}
 .a-back:hover{color:var(--accent);}
-.a-cat{display:inline-block; font-size:12px; font-weight:700; padding:3px 12px; border-radius:980px; margin-top:30px;}
+.a-cat{display:inline-block; font-size:12px; font-weight:700; padding:3px 12px; border-radius:var(--r-ctl); margin-top:30px;}
 .a-title{font-size:clamp(26px,4.6vw,36px); font-weight:900; letter-spacing:-0.025em; line-height:1.35; margin-top:14px;}
 .a-meta{font-size:13px; color:var(--text-3); margin-top:14px; padding-bottom:26px; border-bottom:1px solid var(--line);}
 .a-body{
@@ -126,7 +127,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 }
 .a-body blockquote p{margin-bottom:0.4em;}
 .a-body strong{
-  font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:5px;
+  font-weight:700; background:var(--mint-soft); padding:2px 5px; border-radius:var(--r-img);
   -webkit-box-decoration-break:clone; box-decoration-break:clone;
 }
 /* 내 생각 첨언 — 본문(명조 필사) 옆에 덧붙인 여백 메모.
@@ -158,7 +159,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 }
 .a-body a{text-decoration:underline; text-underline-offset:3px;}
 .a-body hr{border:none; border-top:1px solid var(--line); margin:2.4em auto; width:120px;}
-.a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:1px 6px;}
+.a-body code{font-family:ui-monospace,Menlo,monospace; font-size:0.88em; background:var(--bg); border:1px solid var(--line); border-radius:var(--r-img); padding:1px 6px;}
 
 /* 글 끝 Reference — 상자가 아니라 얇은 선 위에 얹은 카드.
    색을 따로 쓰지 않고 기존 글자색·선색만으로 낸다. 누르면 책 소개 모달. */
@@ -174,7 +175,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 }
 .a-src .s-row{display:flex; align-items:center; gap:18px;}
 .a-src .s-cover{
-  width:58px; height:84px; border-radius:4px; flex:0 0 auto; object-fit:cover;
+  width:58px; height:84px; border-radius:var(--r-img); flex:0 0 auto; object-fit:cover;
   background:var(--bg);
 }
 .a-src .s-cover.ph{
@@ -198,7 +199,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 .bm-back{position:absolute; inset:0; background:rgba(8,16,36,.42);}
 .bm-sheet{
   position:relative; width:100%; max-width:480px; max-height:86vh; overflow-y:auto;
-  background:var(--card); border:1px solid var(--line); border-radius:14px;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-card);
   padding:30px 28px 26px; font-family:"NanumSquareNeo",sans-serif;
 }
 .bm-x{
@@ -207,7 +208,7 @@ body > nav .links a:hover{color:var(--text); background:linear-gradient(transpar
 }
 .bm-x:hover{color:var(--text);}
 .bm-head{display:flex; gap:22px; align-items:flex-start;}
-.bm-cover{width:120px; height:172px; border-radius:5px; flex:0 0 auto; object-fit:cover; background:var(--bg);}
+.bm-cover{width:120px; height:172px; border-radius:var(--r-img); flex:0 0 auto; object-fit:cover; background:var(--bg);}
 .bm-cover.ph{
   display:flex; align-items:center; justify-content:center;
   border:1px solid var(--line); color:var(--text-3); font-size:40px; font-weight:800;

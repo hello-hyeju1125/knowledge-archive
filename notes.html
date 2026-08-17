@@ -24,6 +24,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root{
+    --r-img:3px; --r-card:8px; --r-ctl:6px;
     --bg:#F6F7F9;
     --text:#15171C;
     --text-2:#565A63;
@@ -92,7 +93,7 @@
   nav .links a{color:var(--text-2); font-size:13px;}
   nav .links a:hover{color:var(--text); background:linear-gradient(transparent 76%, var(--mint) 76%, var(--mint) 96%, transparent 96%);}
   nav .add-mini{
-    background:var(--accent); color:#fff !important; border:none; border-radius:980px;
+    background:var(--accent); color:#fff !important; border:none; border-radius:var(--r-ctl);
     font-size:12.5px; padding:6px 14px; font-weight:600;
   }
   nav .add-mini:hover{background:var(--accent-hover) !important;}
@@ -106,32 +107,43 @@
   }
 
   /* ---------- 목록 ---------- */
-  .wrap{max-width:680px; margin:0 auto; padding:48px 20px 100px;}
+  .wrap{max-width:1080px; margin:0 auto; padding:48px 20px 100px;}
   .head h1{font-size:clamp(26px,4.5vw,34px); font-weight:900; letter-spacing:-0.025em;}
   .head p{color:var(--text-2); font-size:14.5px; margin-top:10px;}
   .cats{display:flex; gap:8px; flex-wrap:wrap; margin-top:22px;}
   .cats button{
     border:1px solid var(--line); background:var(--card); color:var(--text-2);
-    font-size:13px; font-weight:600; padding:7px 16px; border-radius:980px;
+    font-size:13px; font-weight:600; padding:7px 16px; border-radius:var(--r-ctl);
   }
   .cats button.on{background:var(--accent); border-color:var(--accent); color:#fff;}
   .plist{margin-top:26px;}
+  /* 한 줄에 [분류] [제목] ······ [출처] [날짜] — 훑어 내려가며 고르는 화면 */
   .prow{
-    display:block; padding:22px 4px; border-bottom:1px solid var(--line);
-    color:var(--text); cursor:pointer;
+    display:flex; align-items:center; gap:14px; padding:16px 4px;
+    border-bottom:1px solid var(--line); color:var(--text); cursor:pointer;
   }
   .prow:hover .pt{color:var(--accent);}
-  .prow .pt{font-size:19px; font-weight:800; letter-spacing:-0.02em; line-height:1.4; transition:color .15s;}
-  .prow .pm{font-size:12.5px; color:var(--text-3); margin-top:7px;}
-  .prow .pm .cat{margin-right:8px;}
-  .prow .px{
-    font-size:14px; color:var(--text-2); margin-top:10px; line-height:1.7;
-    display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
+  .prow .cat{flex:0 0 auto;}
+  .prow .pt{
+    flex:1; min-width:0; font-size:18px; font-weight:800; letter-spacing:-0.02em;
+    line-height:1.4; transition:color .15s;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .prow .pb{
+    flex:0 0 auto; max-width:230px; font-size:12.5px; color:var(--text-3);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .prow .pd{flex:0 0 auto; font-size:12.5px; color:var(--text-3); white-space:nowrap;}
+  @media (max-width:640px){
+    .prow{gap:10px;}
+    .prow .pt{font-size:15px;}
+    .prow .pb{display:none;}
+    .prow .pd{font-size:11.5px;}
   }
   .empty{text-align:center; color:var(--text-3); padding:60px 0; font-size:14px;}
 
   /* 분류별 색상 (c0~c5 순환) */
-  .cat{display:inline-block; padding:2px 9px; border-radius:980px; font-weight:700; font-size:12px;}
+  .cat{display:inline-block; padding:2px 9px; border-radius:var(--r-ctl); font-weight:700; font-size:12px;}
   .cat.c0{color:#00734D; background:#D9FFEF;}
   .cat.c1{color:#1E3AE0; background:#E1E8FF;}
   .cat.c2{color:#9A5B00; background:#FFF0D6;}
@@ -154,7 +166,7 @@
   .cats button.on.c5{background:#B03060; border-color:#B03060; color:#fff;}
 
   .pager{display:flex; gap:6px; justify-content:center; margin-top:30px; flex-wrap:wrap; align-items:center;}
-  .pager button{min-width:34px; height:34px; border-radius:10px; border:1px solid var(--line);
+  .pager button{min-width:34px; height:34px; border-radius:var(--r-card); border:1px solid var(--line);
     background:var(--card); color:var(--text-2); font-size:13.5px; font-weight:600; padding:0 9px;}
   .pager button:hover{border-color:var(--accent); color:var(--accent);}
   .pager button.cur{background:var(--accent); border-color:var(--accent); color:#fff;}
@@ -256,9 +268,10 @@ function renderList(){
   const list = all.slice((page-1)*PER_PAGE, page*PER_PAGE);
   document.getElementById("plist").innerHTML = list.length ? list.map(p => `
     <a class="prow" href="${postHref(p.id)}">
-      <div class="pt">${esc(p.title)}</div>
-      <div class="pm"><span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>${p.d||""} · 약 ${readMin(p.body)}분${p.book ? ` · 『${esc(p.book)}』` : ""}</div>
-      <div class="px">${esc(p.body.replace(/[#>*\-`\/]/g," ").replace(/\s+/g," ").trim().slice(0,140))}</div>
+      <span class="cat ${catClass(p.category)}">${esc(p.category||"노트")}</span>
+      <span class="pt">${esc(p.title)}</span>
+      ${p.book ? `<span class="pb">『${esc(p.book)}』</span>` : ""}
+      <span class="pd">${p.d||""}</span>
     </a>`).join("")
     : `<div class="empty">아직 글이 없어요. 서재 주인의 방에서 첫 글을 발행해 보세요.</div>`;
 
