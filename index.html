@@ -164,7 +164,7 @@
   /* ---------- sections ---------- */
   section{padding:56px max(22px,4vw);}
   /* 좁은 화면에서는 56+56이 한 화면을 다 먹는다 — 절반으로 */
-  @media (max-width:640px){ section{padding:30px max(18px,4vw);} }
+  @media (max-width:640px){ section{padding:20px max(18px,4vw);} }
   .sec-head{display:flex; align-items:baseline; justify-content:space-between; gap:16px;
     max-width:1200px; margin:0 auto 22px;}
   /* 목록 옆에 붙는 '더보기' — 버튼이 아니라 글자로 조용히 둔다 */
@@ -210,6 +210,10 @@
   /* ---------- 책 카드 ---------- */
   .bcard{
     flex:0 0 calc((100% - 4 * var(--rail-gap)) / 5);   /* 화면당 5권 */
+    /* min-width:auto가 기본이라, 줄바꿈 없는 저자 이름이 길면 카드가 그만큼
+       넓어졌다. 그러면 표지 높이까지 달라져 레일이 가장 큰 카드에 맞춰
+       늘어나고, 짧은 카드 아래에 빈 자리가 생긴다. */
+    min-width:0;
     scroll-snap-align:start; border:none; background:none; padding:0;
     text-align:center; transition:transform .25s ease; color:var(--text);
   }
