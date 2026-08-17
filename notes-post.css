@@ -190,6 +190,11 @@ body > nav .links a:hover{opacity:.7;}
   color:var(--text-3); margin-bottom:16px;
 }
 .a-src .s-row{display:flex; align-items:center; gap:18px;}
+/* 이 글이 원저작물과 어떤 관계인지 — 글마다 정확히 밝힌다 */
+.a-note{
+  font-family:"NanumSquareNeo",sans-serif; font-size:12px; line-height:1.7;
+  color:var(--text-3); margin-top:16px;
+}
 .a-src .s-cover{
   width:58px; height:84px; border-radius:var(--r-img); flex:0 0 auto; object-fit:cover;
   background:var(--bg);
@@ -263,10 +268,8 @@ footer{
 }
 footer .f-brand{font-size:14px; font-weight:800; color:var(--nav-text);}
 footer p{color:var(--nav-text-2); font-size:12.5px; margin-top:8px;}
-footer .f-copy{font-size:12px; margin-top:18px; opacity:.75;}
+footer .f-copy{font-size:12px; margin-top:18px; opacity:.75; line-height:1.75;}
 footer .f-mail{font-size:12px; margin-top:6px;}
 footer .f-mail a{text-decoration:underline;}
-footer .f-links{margin-top:16px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
-footer .f-links a{font-size:12px; text-decoration:underline;}
 footer a{color:var(--nav-text-2) !important;}
 footer a:hover{color:var(--nav-text) !important;}
