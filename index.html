@@ -189,12 +189,6 @@
   .rail-nav.prev{left:-14px;} .rail-nav.next{right:-14px;}
 
   /* ---------- 문장 카드 ---------- */
-  .tagbar{max-width:1200px; margin:0 auto 6px; display:flex; gap:8px; flex-wrap:wrap;}
-  .tagbtn{
-    border:1px solid var(--line); background:var(--bg); color:var(--text-2);
-    font-size:13px; padding:7px 16px; border-radius:var(--r-ctl); font-weight:500;
-  }
-  .tagbtn.on{background:var(--accent); color:#fff; border-color:var(--accent); font-weight:700;}
   .qcard{
     flex:0 0 300px; scroll-snap-align:start; text-align:left; color:var(--text);
     background:var(--card); border:1px solid var(--card-line); border-radius:var(--r-card); padding:22px 22px 18px;
@@ -211,8 +205,6 @@
   .qcard .qbook{font-size:12.5px; font-weight:600; color:var(--text);
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
   .qcard .qauthor{font-size:11.5px; color:var(--text-3); white-space:nowrap;}
-  .qcard .qtag{margin-left:auto; font-size:10.5px; font-weight:700; color:var(--mint-text); background:var(--mint-soft); border:none;
-    padding:2px 8px; border-radius:var(--r-ctl); flex:none;}
   .more-note{max-width:1200px; margin:0 auto; font-size:13px; color:var(--text-3);}
 
   /* ---------- 책 카드 ---------- */
@@ -376,7 +368,7 @@
   /* 한 줄에 [분류] [제목] ······ [날짜].
      줄의 양 끝을 섹션 제목·「더보기」와 같은 기준선에 맞춘다 */
   .nrow{
-    display:flex; align-items:center; gap:24px;
+    display:flex; align-items:center; gap:34px;
     padding:15px 4px; border-bottom:1px solid var(--line); color:var(--text);
   }
   .nrow:hover .nt{color:var(--accent);}
@@ -394,7 +386,7 @@
   }
   .nrow .nd{flex:0 0 auto; font-size:12.5px; color:var(--text-3); white-space:nowrap;}
   @media (max-width:560px){
-    .nrow{gap:16px;}
+    .nrow{gap:20px;}
     .nrow .nt{font-size:14.5px;}
     .nrow .nb{display:none;}
     .nrow .nd{font-size:11.5px;}
@@ -610,7 +602,6 @@
     <h2><span class="marker-thin">문장 수집</span></h2>
     <a class="sec-more" href="./quotes.html">더보기</a>
   </div>
-  <div class="tagbar" id="tagbar"></div>
   <div class="rail-wrap">
     <button class="rail-nav prev" id="qPrev" aria-label="이전">‹</button>
     <div class="rail" id="qrail"></div>
@@ -796,28 +787,17 @@ function renderStats(){
 }
 
 /* ================= 문장 레일 ================= */
-let activeTag = "전체";
 /* 문장의 분류는 그 문장이 나온 책의 장르다 (books.js가 단 하나의 출처) */
 function genresOf(title){
   const i = titleIndex[title];
   const g = (i != null && ALL[i].genres) ? ALL[i].genres.filter(Boolean) : [];
   return g.length ? g : ["기타"];
 }
-function renderTagbar(){
-  const counts = {};
-  QUOTES.forEach(q => genresOf(q.b).forEach(g => counts[g] = (counts[g]||0)+1));
-  const tags = ["전체", ...Object.keys(counts).sort((a,b)=>counts[b]-counts[a] || a.localeCompare(b))];
-  counts["전체"] = QUOTES.length;
-  document.getElementById("tagbar").innerHTML = tags.map(t =>
-    `<button class="tagbtn ${t===activeTag?"on":""}" data-t="${esc(t)}">${esc(t)} <span style="opacity:.55">${counts[t]||0}</span></button>`).join("");
-  document.querySelectorAll(".tagbtn").forEach(el => el.onclick = () => { activeTag = el.dataset.t; renderTagbar(); renderQuotes(); });
-}
-
 function authorOf(title){ const i = titleIndex[title]; return i!=null ? (ALL[i].author||"") : ""; }
 
 let currentQuoteList = [];
 function renderQuotes(){
-  currentQuoteList = activeTag==="전체" ? QUOTES : QUOTES.filter(q=>genresOf(q.b).includes(activeTag));
+  currentQuoteList = QUOTES;
   document.getElementById("qrail").innerHTML = currentQuoteList.map((q,n) => `
     <button class="qcard" data-n="${n}" aria-label="문장 크게 보기">
       <span class="qmark">“</span>
@@ -825,7 +805,6 @@ function renderQuotes(){
       <div class="qfoot">
         <span class="qbook">${esc(q.b)}</span>
         <span class="qauthor">${esc(authorOf(q.b))}</span>
-        <span class="qtag">${esc(activeTag!=="전체" && genresOf(q.b).includes(activeTag) ? activeTag : genresOf(q.b)[0])}</span>
       </div>
     </button>`).join("");
   document.querySelectorAll("#qrail .qcard").forEach(el => el.onclick = () => openQuoteModal(currentQuoteList[+el.dataset.n]));
@@ -1337,7 +1316,7 @@ function renderNotes(){
 
 /* ================= 초기화 ================= */
 function refresh(){
-  collect(); renderStats(); renderTagbar(); renderQuotes(); renderRail(); renderNotes(); rebuildGraph(); snapshotLook();
+  collect(); renderStats(); renderQuotes(); renderRail(); renderNotes(); rebuildGraph(); snapshotLook();
 }
 refresh();
 
