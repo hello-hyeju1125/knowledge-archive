@@ -698,4 +698,7 @@ const BOOKS = [
   { title: "태양 아래 올리브", author: "김초엽", publisher: "자이언트북스", genres: ["소설"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791191824582.jpg", isbn: "9791191824582",
     summary: "『지구 끝의 온실』과 『파견자들』에서 낯선 세계를 열고 인간과 비인간의 경계를 탐색해온 김초엽이 세 번째 장편소설 『태양 아래 올리브』로 돌아왔다. 장편으로는 『파견자들』 이후 3년 만이다. 이번에 작가의 시선은 신앙과 과학, 믿음과 의심이 맞부딪치는 자리로 향한다. 그 길 위에 수녀와 과학 유튜버라는, 좀처럼 한 팀이 될 것 같지 않은 두 사람을 세운다. 기후 재난 현장을 누비는 수녀 이레는 처음 만난 사람의 사정에도 금세 귀를 기울이고, 도움이", review: "", rating: null, quotes: [] },
+  { title: "소설쓰기의 모든 것 5: 고쳐쓰기", author: "제임스 스콧 벨", publisher: "다른", genres: ["글쓰기"], published: 2018, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791156332176.jpg", isbn: "9791156332176",
+    summary: "", review: "", rating: null, quotes: [] },
 ];
