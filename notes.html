@@ -253,7 +253,7 @@ const postHref = id => "./p/" + encodeURIComponent((typeof SLUGS !== "undefined"
 })();
 
 let activeCat = "전체", page = 1;
-const PER_PAGE = 8;
+const PER_PAGE = 25;
 
 /* 분류별 고정 색상 (분류명 기준 — 어느 페이지에서나 같은 색) */
 const catOrder = [...new Set(POSTS.map(p=>p.category).filter(Boolean))];
