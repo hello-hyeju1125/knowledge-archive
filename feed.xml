@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Wed, 19 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Thu, 20 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>시점: 누구의 머릿속에 들어갔는가?</title>
+    <link>https://hellmeone.com/p/%EC%8B%9C%EC%A0%90-%EB%88%84%EA%B5%AC%EC%9D%98-%EB%A8%B8%EB%A6%BF%EC%86%8D%EC%97%90-%EB%93%A4%EC%96%B4%EA%B0%94%EB%8A%94%EA%B0%80.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%8B%9C%EC%A0%90-%EB%88%84%EA%B5%AC%EC%9D%98-%EB%A8%B8%EB%A6%BF%EC%86%8D%EC%97%90-%EB%93%A4%EC%96%B4%EA%B0%94%EB%8A%94%EA%B0%80.html</guid>
+    <category>작법</category>
+    <pubDate>Thu, 20 Aug 2026 09:00:00 +0900</pubDate>
+    <description>시점을 정확히 처리하지 않으면 미묘하면서도 거의 무의식적으로, 이야기의 영향력이 흐려진다. 전지적인 작가가 이야기 속을 마음껏 돌아다니며 상황을 묘사하고, 때와 인물에 상관없이 인물의 머릿속이나 마음속에서 무슨 일이 벌어지고 있는지 들려줄 수 있다. 가장 중요한 점은 &#x27;태도&#x27;다. 화자의 목소리에는 들을 가치가 있다고 느껴지는 뭔가가 있어야 한다. 세계관이나 견해, 또는 사실을 무미건조하게 늘어놓은 정도를 넘어선 그 무엇이 필요하다. 1인칭 시점의 화자는 과거에 일어난 모든 일을 알기 때문에 대개 &#x27;과거 시제&#x27;로 이야기를 전한다. 그…</description>
+  </item>
   <item>
     <title>금기의 아이</title>
     <link>https://hellmeone.com/p/%EA%B8%88%EA%B8%B0%EC%9D%98-%EC%95%84%EC%9D%B4.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Fri, 07 Aug 2026 09:00:00 +0900</pubDate>
     <description>종이 위에 세 칸을 그리자. 첫 칸에는 주요 장면을 채울 세부 사항을 적는다. 가운데 칸에는 주요 인물을 적는다. 마지막 칸에는 주요 배경을 적는다. 그리고 세 칸 사이의 연결고리를 찾는다. 세부 사항을 인물과 장소에 연결하자. 또는 반대로 장소에서 인물로, 그리고 세부사항을 연결해본다. 가장 잘 연결되는 두세 가지 연결고리를 선택해 모티프와 상징으로서 플롯 안에서 엮을 수 있는지 알아본다. 쓰고 싶은 소설의 의의를 생각해 이를 한 문장으로 써보자. 플롯을 짜는 동안 언제든지 할 수 있는 일이다. 초기 단계에서 하려거든 장면을 어떻…</description>
-  </item>
-  <item>
-    <title>복합 플롯: 복잡함 속에서 단순한 아름다움을</title>
-    <link>https://hellmeone.com/p/%EB%B3%B5%ED%95%A9-%ED%94%8C%EB%A1%AF-%EB%B3%B5%EC%9E%A1%ED%95%A8-%EC%86%8D%EC%97%90%EC%84%9C-%EB%8B%A8%EC%88%9C%ED%95%9C-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9B%80%EC%9D%84.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%B3%B5%ED%95%A9-%ED%94%8C%EB%A1%AF-%EB%B3%B5%EC%9E%A1%ED%95%A8-%EC%86%8D%EC%97%90%EC%84%9C-%EB%8B%A8%EC%88%9C%ED%95%9C-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9B%80%EC%9D%84.html</guid>
-    <category>작법</category>
-    <pubDate>Thu, 06 Aug 2026 09:00:00 +0900</pubDate>
-    <description>글쓰기는 벽돌 쌓기와 매우 비슷하다. 벽돌 위에 다른 벽돌을 올리고 모르타르를 두껍게 바르는 법을 배워야 한다. 플롯을 짤 때 한편으로 과연 이 소설이 추구하는 가치가 무엇인지 스스로에게 물어보자. 이 소설을 통해 독자가 얻기를 원하는 교훈 또는 통찰 (사물을 보는 새로운 방식)이 있다면 그게 무엇인가? 이를 한 줄로 요약해보자. 이게 바로 이 소설의 주제다. 주제는 숨은 메세지 (숨겨진 의미)로서 소설이 전달하고자 하는 세상에 대한 인식이다. 소설에 여러 작은 메세지 (서브 메세지)를 담을 수도 있지만 숨겨진 주제는 단 하나여야…</description>
   </item>
 </channel>
 </rss>
