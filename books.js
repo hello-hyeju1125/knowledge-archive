@@ -701,4 +701,7 @@ const BOOKS = [
   { title: "소설쓰기의 모든 것 5: 고쳐쓰기", author: "제임스 스콧 벨", publisher: "다른", genres: ["글쓰기"], published: 2018, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791156332176.jpg", isbn: "9791156332176",
     summary: "", review: "", rating: null, quotes: [] },
+  { title: "더 코워커", author: "프리다 맥파든", publisher: "해피북스투유", genres: ["소설", "스릴러"], published: 2025, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791170964469.jpg", isbn: "9791170964469",
+    summary: "출간하는 책마다 아마존 베스트셀러에 오르는 경이로운 기록을 써나가고 있는 프리다 맥파든의 신작 《더 코워커》가 출간되었다. 프리다 맥파든은 2023 국제 스릴러 작가상과 굿리즈 선정 ‘미스터리&amp;스릴러 부문’을 수상했으며, 전작인 《하우스메이드》는 전 세계 1,700만 독자들의 선택을 받았다. 이번에 출간된 《더 코워커》는 《뉴욕타임스》, 《USA 투데이》, 《퍼블리셔스 위클리》에서 베스트셀러로 선정되며 프리다 맥파든 역대 출간작 중 단연 압권", review: "", rating: null, quotes: [] },
 ];
