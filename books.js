@@ -704,4 +704,7 @@ const BOOKS = [
   { title: "더 코워커", author: "프리다 맥파든", publisher: "해피북스투유", genres: ["소설", "스릴러"], published: 2025, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791170964469.jpg", isbn: "9791170964469",
     summary: "출간하는 책마다 아마존 베스트셀러에 오르는 경이로운 기록을 써나가고 있는 프리다 맥파든의 신작 《더 코워커》가 출간되었다. 프리다 맥파든은 2023 국제 스릴러 작가상과 굿리즈 선정 ‘미스터리&amp;스릴러 부문’을 수상했으며, 전작인 《하우스메이드》는 전 세계 1,700만 독자들의 선택을 받았다. 이번에 출간된 《더 코워커》는 《뉴욕타임스》, 《USA 투데이》, 《퍼블리셔스 위클리》에서 베스트셀러로 선정되며 프리다 맥파든 역대 출간작 중 단연 압권", review: "", rating: null, quotes: [] },
+  { title: "이세계 캠핑으로 힐링 라이프", author: "일인분·맹깐·금의행", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=823971", status: "연재중", genres: ["판타지", "감성적인", "일상"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/823971/thumbnail/thumbnail_IMAG21_ec848365-0106-4bf2-8c5d-3c0b1723f8b2.jpg", isbn: "",
+    summary: "미각을 잃은 스타 셰프 강현은 사람들의 눈을 피해 한적한 시골로 숨는다. 시골 할아버지 집에서 발견한 이세계로 이어진 통로, 기왕 도망 온 김에 이세계에서 유유자적 캠핑 라이프를 즐기려고 하는데… 자꾸만 강현에게 관심을 가지는 이세계 사람들. 과연 강현은 진짜 힐링을 찾을 수 있을 것인가?", review: "잔잔하니 진짜 힐링이다.", rating: 4, quotes: [] },
 ];
