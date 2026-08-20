@@ -146,11 +146,13 @@ def render(md):
         if not buf:
             mode = None
             return
+        # 한 번 누른 엔터도 줄바꿈으로 살린다. 그냥 줄만 바꿔 두면 HTML이
+        # 그 줄바꿈을 공백 하나로 뭉개서, 쓴 대로 보이지 않는다.
         if mode == "p":
-            html.append("<p>%s</p>" % "\n".join(inline(l) for l in buf))
+            html.append("<p>%s</p>" % "<br>".join(inline(l) for l in buf))
         elif mode == "quote":
             html.append("<blockquote><p>%s</p></blockquote>"
-                        % "\n".join(inline(re.sub(r"^>\s?", "", l)) for l in buf))
+                        % "<br>".join(inline(re.sub(r"^>\s?", "", l)) for l in buf))
         elif mode in ("ul", "ol"):
             items = "".join("<li>%s</li>" % inline(re.sub(r"^(?:[-*+]|\d+\.)\s+", "", l)) for l in buf)
             html.append("<%s>%s</%s>" % (mode, items, mode))
