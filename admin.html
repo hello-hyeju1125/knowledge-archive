@@ -367,6 +367,7 @@ async function saveToken(){
       : "저장소에 접근하지 못했어요 (HTTP "+r.status+"). 발급 단계 3·4번을 확인해 주세요.");
     localStorage.setItem("ghToken", t);
     applyState();
+    if(typeof routeEdit === "function") routeEdit();   // 글 편집으로 들어오던 길이면 이어서
   }catch(e){ msg("tokenMsg","err","⚠️ "+e.message); }
 }
 function reconnect(){ localStorage.removeItem("ghToken"); applyState(); window.scrollTo(0,0); }
@@ -1018,6 +1019,25 @@ async function deletePost(){
   }catch(e){ msg("eMsg","err",authFail(e)); }
   if(btn){ btn.disabled = false; btn.textContent = "글 삭제"; }
 }
+
+/* ---------- 글 페이지의 「편집」에서 바로 들어오는 길 ----------
+   admin.html#edit/<글 id> 로 오면 그 글의 수정 화면을 곧장 연다.
+   목록에서 다시 찾아 들어갈 필요가 없다. */
+function routeEdit(){
+  const m = /^#edit\/(.+)$/.exec(location.hash || "");
+  if(!m) return;
+  if(!localStorage.getItem("ghToken")) return;          // 열쇠를 연결한 뒤에 다시 부른다
+  let id; try{ id = decodeURIComponent(m[1]); }catch(e){ return; }
+  const p = POSTS.find(x => x.id === id);
+  if(!p) return;
+  showTab("e");
+  eKind = "p"; ePage = 1;
+  document.querySelectorAll("#eKind button").forEach(x => x.classList.toggle("on", x.dataset.k === "p"));
+  renderEList();
+  openPostEditor(p);
+  history.replaceState(null, "", location.pathname);    // 새로고침하면 목록으로
+}
+routeEdit();
 
 </script>
 </body>

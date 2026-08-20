@@ -37,7 +37,10 @@
 
 <div class="wrap">
   <article class="article">
-    <a class="a-back" href="../notes.html">← 생각 노트</a>
+    <div class="a-top">
+      <a class="a-back" href="../notes.html">← 생각 노트</a>
+      <a class="a-edit" id="editLink" href="../admin.html#edit/mss74m6j" hidden>편집</a>
+    </div>
     <div><span class="a-cat cat c0">삶</span></div>
     <h1 class="a-title">단계적 발걸음으로 나아가기</h1>
     <div class="a-meta"><time datetime="2026-08-14">2026-08-14</time> · 읽는 시간 약 8분</div>
@@ -115,6 +118,11 @@
 </footer>
 
 <script>
+/* 「편집」은 서재 주인에게만 — 이 브라우저에 열쇠가 저장돼 있을 때만 보인다 */
+(function(){
+  try{ if(localStorage.getItem("ghToken")) document.getElementById("editLink").hidden = false; }catch(e){}
+})();
+
 /* 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) */
 (function(){
   const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");

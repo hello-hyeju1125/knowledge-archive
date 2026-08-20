@@ -354,7 +354,10 @@ def page_html(post, slug, books, order, related, rel_by_book, slugs):
 
 <div class="wrap">
   <article class="article">
-    <a class="a-back" href="../notes.html">← 생각 노트</a>
+    <div class="a-top">
+      <a class="a-back" href="../notes.html">← 생각 노트</a>
+      <a class="a-edit" id="editLink" href="../admin.html#edit/{pid}" hidden>편집</a>
+    </div>
     <div><span class="a-cat cat {catcls}">{cat}</span></div>
     <h1 class="a-title">{title}</h1>
     <div class="a-meta"><time datetime="{date}">{date}</time> · 읽는 시간 약 {mins}분</div>
@@ -378,6 +381,11 @@ def page_html(post, slug, books, order, related, rel_by_book, slugs):
 </footer>
 
 <script>
+/* 「편집」은 서재 주인에게만 — 이 브라우저에 열쇠가 저장돼 있을 때만 보인다 */
+(function(){{
+  try{{ if(localStorage.getItem("ghToken")) document.getElementById("editLink").hidden = false; }}catch(e){{}}
+}})();
+
 /* 콘텐츠 보호: 복사·잘라내기·드래그·우클릭 차단 (입력칸 제외) */
 (function(){{
   const exempt = e => e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA");
@@ -421,6 +429,7 @@ if(window.wcs) {{ wcs_do(); }}
         catcls=cat_class(cat, order),
         ld=json.dumps(ld, ensure_ascii=False),
         mins=read_min(post["body"]),
+        pid=escape(post["id"], quote=True),
         body=render(post["body"]),
         source=source_card(post.get("book"), books),
         related=rel_html,
