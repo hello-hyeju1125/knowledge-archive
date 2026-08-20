@@ -707,4 +707,7 @@ const BOOKS = [
   { title: "이세계 캠핑으로 힐링 라이프", author: "일인분·맹깐·금의행", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=823971", status: "연재중", genres: ["판타지", "감성적인", "일상"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/823971/thumbnail/thumbnail_IMAG21_ec848365-0106-4bf2-8c5d-3c0b1723f8b2.jpg", isbn: "",
     summary: "미각을 잃은 스타 셰프 강현은 사람들의 눈을 피해 한적한 시골로 숨는다. 시골 할아버지 집에서 발견한 이세계로 이어진 통로, 기왕 도망 온 김에 이세계에서 유유자적 캠핑 라이프를 즐기려고 하는데… 자꾸만 강현에게 관심을 가지는 이세계 사람들. 과연 강현은 진짜 힐링을 찾을 수 있을 것인가?", review: "잔잔하니 진짜 힐링이다.", rating: 4, quotes: [] },
+  { title: "소설의 기술", author: "존 채플린 가드너 주니어", publisher: "교유서가", genres: ["글쓰기"], published: 2025, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791194523185.jpg", isbn: "9791194523185",
+    summary: "“위대한 작가가 되고자 하는 젊은 작가들에게는 어떤 고정된 법칙도, 한계도, 제약도 있을 수 없다.”  존 가드너는 소설가로 유명했던 것만큼이나 문예창작론 강사로도 유명했다. 자신이 했던 수업과 세미나에 기초한 이 실용적이고 유익한 안내서에서 그는 훌륭한 글의 원리와 테크닉을 간단하고도 설득력 있게 설명한다.", review: "", rating: null, quotes: [] },
 ];
