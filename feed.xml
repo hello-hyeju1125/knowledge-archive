@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Fri, 21 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Sat, 22 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>네버 라이</title>
+    <link>https://hellmeone.com/p/%EB%84%A4%EB%B2%84-%EB%9D%BC%EC%9D%B4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%84%A4%EB%B2%84-%EB%9D%BC%EC%9D%B4.html</guid>
+    <category>후기</category>
+    <pubDate>Sat, 22 Aug 2026 09:00:00 +0900</pubDate>
+    <description>프리다 맥파슨의 책을 몇 권째 읽는지 기억도 나지 않는다. 그럼에도 이 작가의 글은 흡입력이 있어, 책장을 계속 넘기게 만든다. 네버라이 역시 아마존 베스트셀러에 등극하기도 했고, 프리다 맥파슨의 책 중 가장 잘 쓰여진 책이라고 정평이 나 있었다. 그래서 의심의 여지도 없이 즐겁고 재미있게 읽었다. 프리다 맥파슨의 책을 엄청 보면서 나름 대로 반전에 대한 예측을 할 수 있다고 생각했다. 나의 오만이었다. 결말에 다다를 때 나만의 예측 시나리오를 생각해봤지만 뭐 하나 맞는 것이 없었다. 나의 예상은... (스포주의) 트리샤의 남편인…</description>
+  </item>
   <item>
     <title>비밀의 비밀</title>
     <link>https://hellmeone.com/p/%EB%B9%84%EB%B0%80%EC%9D%98-%EB%B9%84%EB%B0%80.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Sat, 08 Aug 2026 09:00:00 +0900</pubDate>
     <description>작가 한 명에게서 훔치면 표절이지만, 작가 여러 명에게서 훔치면 연구다. 윌슨 미즈너 자주 쓰는 플롯 유형은 탐색, 복수, 사랑, 추적, 저항, 외톨이, 권력, 알레고리 등이다. 탐색 이야기는 가장 오래된 플롯 유형이다. 영웅이 무언가를 구하러 어두운 세계로 간다. 지적 탐험 또는 내적 평화를 위한 여행 또한 이 유형에 속한다. 탐색 플롯의 기초 주인공은 일상 세계에서 불완전한 존재다. 탐색 대상은 매우 중요한 것이어야 한다. 주인공의 탐색을 가로막는 요소가 있어야 한다. 탐색이 끝난 후 주인공은 딴사람 (대개 더 나은 사람)이 되…</description>
-  </item>
-  <item>
-    <title>수정: 글쓰기는 결국 고쳐쓰기다</title>
-    <link>https://hellmeone.com/p/%EC%88%98%EC%A0%95-%EA%B8%80%EC%93%B0%EA%B8%B0%EB%8A%94-%EA%B2%B0%EA%B5%AD-%EA%B3%A0%EC%B3%90%EC%93%B0%EA%B8%B0%EB%8B%A4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%88%98%EC%A0%95-%EA%B8%80%EC%93%B0%EA%B8%B0%EB%8A%94-%EA%B2%B0%EA%B5%AD-%EA%B3%A0%EC%B3%90%EC%93%B0%EA%B8%B0%EB%8B%A4.html</guid>
-    <category>작법</category>
-    <pubDate>Sat, 08 Aug 2026 09:00:00 +0900</pubDate>
-    <description>인물은 자유로워야 한다. 장면은 살아 있어야 한다. 그리고 몇 주, 몇 달, 또는 몇 년이고 뜸을 들여야 한다. 다시 쓰지 말고, 다시 살려야 한다 레이 브래드버리 초고는 다시 쓰기 위해 존재한다. 고쳐쓰기를 위해 가장 먼저 해야 할 일은 초고를 완성하는 것이다. 초고 완성에 가장 좋은 방법은 무엇일까? 가능한 한 가장 빨리 초고를 끝내는 게 좋다. 적절한 형식을 찾느라 약간 지체할 수는 있지만 그래도 일단 앞으로 나가야 한다. 매일 일정 분량의 글을 쓰고 이를 끝까지 밀어붙이자. 이렇게 만들어진 게 &#x27;무슨 일이 생기는지&#x27; 보여주는…</description>
   </item>
 </channel>
 </rss>
