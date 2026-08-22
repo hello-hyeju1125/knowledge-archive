@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sat, 22 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Sun, 23 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>재미와 진실</title>
+    <link>https://hellmeone.com/p/%EC%9E%AC%EB%AF%B8%EC%99%80-%EC%A7%84%EC%8B%A4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%9E%AC%EB%AF%B8%EC%99%80-%EC%A7%84%EC%8B%A4.html</guid>
+    <category>작법</category>
+    <pubDate>Sun, 23 Aug 2026 09:00:00 +0900</pubDate>
+    <description>재미 삼아 무언가를 읽는다는 말은, 그것이 호기심을 자극한다는 것을 의미한다. 사정이 이러하기에, 사람들은 모든 젊은 작가들이 무엇을 쓸지 정하려 할 때 스스로에게 가장 먼저 던지는 질문이 &quot;재미있는 게 뭐가 있을까?&quot;라고 생각할 것이다. 그런데 이상하게도, 그것이 가장 먼저 던지는 흔한 질문은 아니다. 그리하여 책이 기쁨, 즉 우리가 모든 진정한 예술에 요구하고 기대하는 비할 데 없이 풍부한 경험을 주기 때문에 가르쳐지는 대신, 다른 목적을 위해 가르쳐지는 일이 발생한다. 지난 수년 동안 장편소설과 단편소설, 시는 단지 고등학교에…</description>
+  </item>
   <item>
     <title>네버 라이</title>
     <link>https://hellmeone.com/p/%EB%84%A4%EB%B2%84-%EB%9D%BC%EC%9D%B4.html</link>
@@ -238,14 +246,6 @@
     <category>삶</category>
     <pubDate>Wed, 12 Aug 2026 09:00:00 +0900</pubDate>
     <description>이 혼란스러운 청춘을 어떻게 지나야 하는가. 길은 어떻게 찾는가. 어떻게 어른이 되는가. 단 한 번 뿐인 이 삶을 어떻게 써야 하는가. 나는 알지 못했고, 어떻게 알아야 하는지조차 몰랐다. &quot;삶을 어떻게 살아낼 것인가.&quot; 이것이 우리가 던져야 할 질문이다. 이 질문은 삶이라는 긴 궤적을 따라 여러 번 되돌아온다. 처음 세상에서 길을 찾으려 할 때, 우리는 이 질문과 마주한다. 삶이 무너지고 답을 바꿔야 한다는 걸 깨달을 때, 이 질문은 다시 찾아온다. 그리고 인생의 중반을 훌쩍 지나 어떻게 자신을 새롭게 하고 내면의 불꽃을 오래도록…</description>
-  </item>
-  <item>
-    <title>플롯 유형: 아홉가지</title>
-    <link>https://hellmeone.com/p/%ED%94%8C%EB%A1%AF-%EC%9C%A0%ED%98%95-%EC%95%84%ED%99%89%EA%B0%80%EC%A7%80.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%ED%94%8C%EB%A1%AF-%EC%9C%A0%ED%98%95-%EC%95%84%ED%99%89%EA%B0%80%EC%A7%80.html</guid>
-    <category>작법</category>
-    <pubDate>Sat, 08 Aug 2026 09:00:00 +0900</pubDate>
-    <description>작가 한 명에게서 훔치면 표절이지만, 작가 여러 명에게서 훔치면 연구다. 윌슨 미즈너 자주 쓰는 플롯 유형은 탐색, 복수, 사랑, 추적, 저항, 외톨이, 권력, 알레고리 등이다. 탐색 이야기는 가장 오래된 플롯 유형이다. 영웅이 무언가를 구하러 어두운 세계로 간다. 지적 탐험 또는 내적 평화를 위한 여행 또한 이 유형에 속한다. 탐색 플롯의 기초 주인공은 일상 세계에서 불완전한 존재다. 탐색 대상은 매우 중요한 것이어야 한다. 주인공의 탐색을 가로막는 요소가 있어야 한다. 탐색이 끝난 후 주인공은 딴사람 (대개 더 나은 사람)이 되…</description>
   </item>
 </channel>
 </rss>
