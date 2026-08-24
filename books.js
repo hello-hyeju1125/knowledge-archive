@@ -722,4 +722,7 @@ const BOOKS = [
   { title: "보이 프럼 더 우즈", author: "할런 코벤", publisher: "문학수첩", genres: ["스릴러"], published: 2023, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192776606.jpg", isbn: "9791192776606",
     summary: "미국 3대 미스터리 문학상인 〈에드거상〉, 〈셰이머스상〉, 〈앤서니상〉을 모두 수상한 최초의 작가이자 미스터리 스릴러의 거장 할런 코벤의 소설 《보이 프럼 더 우즈(The Boy From The Woods)》가 문학수첩에서 출간되었다. 《스트레인저》, 《비밀의 비밀》 등 하나같이 베스트셀러에 오른 전작들에서 거듭되는 반전과 정교하게 짜인 미스터리로 미국 중산층의 위선과 인간의 복잡함을 그려냈던 할런 코벤은 이 새로운 시리즈에서 더욱 특별하고 미스터리한", review: "왜 많은 사람들에게 사랑받는지 이유를 알 것 같은 책. 한장 한장 넘기기 너무 아쉬웠다.", rating: 5, quotes: [] },
+  { title: "보이 인 더 하우스", author: "할런 코벤", publisher: "문학수첩", genres: ["스릴러"], published: 2023, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192776729.jpg", isbn: "9791192776729",
+    summary: "미국 3대 미스터리 문학상인 〈에드거상〉, 〈셰이머스상〉, 〈앤서니상〉을 모두 수상한 최초의 작가이자 미스터리 스릴러의 거장 할런 코벤의 새 시리즈 《보이 프럼 더 우즈(The Boy From The Woods)》가 지난 5월 출간된 데 이어, 그 후속편에 해당하는 《보이 인 더 하우스(원제: The Match)》가 문학수첩에서 출간되었다. 더욱 미스터리하고 더욱 매력적인 새로운 히어로 와일드의 출생의 비밀이 밝혀지는 이번 책에서는 원제 ‘match(일치", review: "", rating: null, quotes: [] },
 ];
