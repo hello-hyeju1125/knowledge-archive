@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sun, 23 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 24 Aug 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>보이 프럼 더 우즈 (the boy from the woods)</title>
+    <link>https://hellmeone.com/p/%EB%B3%B4%EC%9D%B4-%ED%94%84%EB%9F%BC-%EB%8D%94-%EC%9A%B0%EC%A6%88-the-boy-from-the-woods.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%B3%B4%EC%9D%B4-%ED%94%84%EB%9F%BC-%EB%8D%94-%EC%9A%B0%EC%A6%88-the-boy-from-the-woods.html</guid>
+    <category>후기</category>
+    <pubDate>Mon, 24 Aug 2026 09:00:00 +0900</pubDate>
+    <description>정말 최고의 책이었다. 어떤 말로도 이 소설을 읽으면서 설레고 흥분했던 내 감정을 표현할 수 없으리라! 책장을 넘기는 것이 너무 아쉬웠지만, 후속작도 아직 남아있고 할런 코벤이 다작한 작가였기에 마음을 달랠 수 있었다. 여러 개의 플롯이 하나로 엮여서 물 흐르듯 흘러갔기 때문이다. 작가는 진짜 천재인듯 했다. 이걸 모두 구상한 뒤 글을 쓰는 작업에 돌입했을까? 아니면 쓰다보니 이렇게 써진 걸까? 너무도 궁금하다. 이 책에는 크고 작은 플롯이 서로가 얽혀있다. 먼저 헤스터와 그의 가족들 (데이비드, 라일라, 매튜)에 대한 이야기, 숲…</description>
+  </item>
   <item>
     <title>재미와 진실</title>
     <link>https://hellmeone.com/p/%EC%9E%AC%EB%AF%B8%EC%99%80-%EC%A7%84%EC%8B%A4.html</link>
@@ -238,14 +246,6 @@
     <category>삶</category>
     <pubDate>Wed, 12 Aug 2026 09:00:00 +0900</pubDate>
     <description>바버라 매클린톡은 젊은 시절, 자신이 훈날 유전학자가 되어 혁신적인 통찰을 내놓고, 그로 인해 과학계에서 한동안 외면받다가 결국 노벨상을 받게 되리라는 사실을 전혀 알지 못했다. 다만 한 가지는 알고 있었다. 자신이 생각에 깊이 잠기는 것을 좋아한다는 사실이었다. 그 몰입이 너무 깊어지면 자기 자신조차 잊어버릴 정도였다. 처음부터 뚜렷한 계획이 있었던 것은 아니었다. 그저 한 걸음씩 나아갔다. 그녀는 교수라는 길 자체를 내려놓기로 결심했다. 그래서 무급 휴직을 신청한 뒤, 연구를 계속 할 수 있는 새로운 기반을 찾기 시작했다. 많은…</description>
-  </item>
-  <item>
-    <title>삶의 절벽을 마주한 순간</title>
-    <link>https://hellmeone.com/p/%EC%82%B6%EC%9D%98-%EC%A0%88%EB%B2%BD%EC%9D%84-%EB%A7%88%EC%A3%BC%ED%95%9C-%EC%88%9C%EA%B0%84.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%82%B6%EC%9D%98-%EC%A0%88%EB%B2%BD%EC%9D%84-%EB%A7%88%EC%A3%BC%ED%95%9C-%EC%88%9C%EA%B0%84.html</guid>
-    <category>삶</category>
-    <pubDate>Wed, 12 Aug 2026 09:00:00 +0900</pubDate>
-    <description>이 혼란스러운 청춘을 어떻게 지나야 하는가. 길은 어떻게 찾는가. 어떻게 어른이 되는가. 단 한 번 뿐인 이 삶을 어떻게 써야 하는가. 나는 알지 못했고, 어떻게 알아야 하는지조차 몰랐다. &quot;삶을 어떻게 살아낼 것인가.&quot; 이것이 우리가 던져야 할 질문이다. 이 질문은 삶이라는 긴 궤적을 따라 여러 번 되돌아온다. 처음 세상에서 길을 찾으려 할 때, 우리는 이 질문과 마주한다. 삶이 무너지고 답을 바꿔야 한다는 걸 깨달을 때, 이 질문은 다시 찾아온다. 그리고 인생의 중반을 훌쩍 지나 어떻게 자신을 새롭게 하고 내면의 불꽃을 오래도록…</description>
   </item>
 </channel>
 </rss>
