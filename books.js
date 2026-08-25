@@ -728,4 +728,7 @@ const BOOKS = [
   { title: "새동네", author: "림스", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=817752", status: "연재중", genres: ["스릴러", "고자극스릴러", "액션"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/817752/thumbnail/thumbnail_IMAG21_48c1011d-58ce-415f-b012-1a7bb020a5a3.jpg", isbn: "",
     summary: "오갈 데 없는 노인들이 산간벽지를 개간해 작은 마을 공동체를 이루며 살기 시작하였으니, 이름하여 새동네! 어느 날, 새동네 일대가 신도시 재개발에 휩싸이고 부정한 세력들이 들어오자 마을의 평화와 존립을 위해 결국 노인들이 나서며 경고하는데…... “잠 자는 사자의 코털은 건드는 게 아녀~!”", review: "은퇴한 킬러들의 동네 지키기. 판에 박힌 인물을 비트는 작품.", rating: 4, quotes: [] },
+  { title: "시월드가 내게 집착한다", author: "승우·한윤설", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=785251", status: "연재중", genres: ["로맨스", "서양", "결혼생활"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/785251/thumbnail/thumbnail_IMAG21_c71f43a5-e252-4466-93af-ff7a606b271f.jpg", isbn: "",
+    summary: "사랑했던 가족들이 나를 죽였다. 과거로 돌아온 나는 내 목숨과 유산을 지키기로 결심하고 라피레온 대공을 찾아갔다. 그런데 이 대공가, 심상치 않다. 무사히 복수를 마치고, 이혼할 수 있을까?", review: "제목이 읭스럽지만 플롯과 등장인물은 매우 탄탄한 로판", rating: 4, quotes: [] },
 ];
