@@ -737,4 +737,7 @@ const BOOKS = [
   { title: "운명을 보는 회사원", author: "영완(映完)·임성욱", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=797443", status: "연재중", genres: ["판타지", "현대판타지", "현대"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/797443/thumbnail/thumbnail_IMAG21_f1856c97-c511-4147-a438-a26aab98ef8a.jpg", isbn: "",
     summary: "무당이 되어 세상을 어지럽힐 팔자를 타고난 아이. 욕심을 버리고 신을 받지 않기 위해 평범한 회사원이 되려 한다. 관상과 사주로 운명을 꿰뚫어 보는 최영훈. 과연 평범한 회사원이 될 수 있을까?", review: "관상과 사주 관련 웹툰 중 제일 탄탄함", rating: 4, quotes: [] },
+  { title: "마흔 즈음에", author: "서쿤스", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=836052", status: "연재중", genres: ["드라마", "2024 연재직행열차", "고자극드라마"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/836052/thumbnail/thumbnail_IMAG21_b475b1ef-5d2a-4afe-a1b4-5b3c6cc577f7.jpg", isbn: "",
+    summary: "어느 덧 마흔살이 된 현성민은 주변을 돌아보니 혼자가 되었다는 현실을 절실히 깨닫게 된다. 자신의 인생 뿐 아니라 직장에서도 위기를 맞게 된 현성민은 진정한 행복을 찾기 위해 고군분투 하기로 결심한다. 불혹의 나이, 아직 늦지 않았다!", review: "하이퍼리얼리즘. 빨리 결혼을 하든 더 화려한 싱글로 남든.", rating: 4, quotes: [] },
 ];
