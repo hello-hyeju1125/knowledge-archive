@@ -734,4 +734,7 @@ const BOOKS = [
   { title: "재혼 황후", author: "히어리·숨풀·알파타르트", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=735661", status: "완결", genres: ["로맨스", "사연녀", "다정남"], published: null, readYear: 2026,
     cover: "https://image-comic.pstatic.net/webtoon/735661/thumbnail/thumbnail_IMAG21_2e35b4aa-4459-42fd-84a8-eae732910422.jpg", isbn: "",
     summary: "동대제국의 완벽한 황후였던 나비에. ​황제인 남편이 정부를 황후로 만들려는 것을 알고 이혼을 택한다. 그리고 결심한다. 이곳에서 황후가 될 수 없다면 다른 곳에서 황후가 되겠다고. 인기 웹소설 '재혼 황후'가 웹툰화되다!", review: "이혼할 때까지 가는 과정만 재밌음. 그 뒤로는 딱히.", rating: 2, quotes: [] },
+  { title: "운명을 보는 회사원", author: "영완(映完)·임성욱", publisher: "네이버웹툰", type: "webtoon", platform: "네이버웹툰", link: "https://comic.naver.com/webtoon/list?titleId=797443", status: "연재중", genres: ["판타지", "현대판타지", "현대"], published: null, readYear: 2026,
+    cover: "https://image-comic.pstatic.net/webtoon/797443/thumbnail/thumbnail_IMAG21_f1856c97-c511-4147-a438-a26aab98ef8a.jpg", isbn: "",
+    summary: "무당이 되어 세상을 어지럽힐 팔자를 타고난 아이. 욕심을 버리고 신을 받지 않기 위해 평범한 회사원이 되려 한다. 관상과 사주로 운명을 꿰뚫어 보는 최영훈. 과연 평범한 회사원이 될 수 있을까?", review: "관상과 사주 관련 웹툰 중 제일 탄탄함", rating: 4, quotes: [] },
 ];
