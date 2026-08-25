@@ -780,14 +780,14 @@ function totalQuoteCount(){
 }
 function renderStats(){
   const yr = new Date().getFullYear();
-  const authors = new Set(ALL.map(b=>b.author).filter(Boolean));
-  const thisYear = ALL.filter(b=>b.readYear===yr).length;
-  const toonN = ALL.filter(b=>b.type==="webtoon").length;
+  const books = ALL.filter(b=>b.type!=="webtoon");   /* 올해 읽음은 웹툰 제외 */
+  const thisYear = books.filter(b=>b.readYear===yr).length;
+  const postN = (typeof POSTS === "undefined") ? 0 : POSTS.length;
   document.getElementById("heroStats").innerHTML = `
-    <div class="stat"><b>${totalQuoteCount()}</b><span>수집한 문장</span></div>
-    <div class="stat"><b>${ALL.length - toonN}</b><span>권의 책</span></div>
-    <div class="stat"><b>${authors.size}</b><span>명의 저자</span></div>
-    <div class="stat"><b>${thisYear}</b><span>올해 읽음</span></div>`;
+    <div class="stat"><b>${thisYear}</b><span>올해 읽은 책</span></div>
+    <div class="stat"><b>${ALL.length}</b><span>전체 책</span></div>
+    <div class="stat"><b>${totalQuoteCount()}</b><span>모은 문장</span></div>
+    <div class="stat"><b>${postN}</b><span>쓴 글</span></div>`;
 }
 
 /* ================= 문장 레일 ================= */
