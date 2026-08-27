@@ -743,4 +743,7 @@ const BOOKS = [
   { title: "인 더 메가처치", author: "아사이 료", publisher: "은행나무", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791167376749.jpg", isbn: "9791167376749",
     summary: "", review: "", rating: null, quotes: [] },
+  { title: "날마다 이기는 게임", author: "", publisher: "김영사", genres: ["자기계발"], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173326462.jpg", isbn: "9791173326462",
+    summary: "지루함, 외로움, 슬픔, 화 등 부정적인 감정에 사로잡힐 때 그 상황을 작은 게임이라고 상상하며 그 게임에서 이기기 위해 긍정적인 마음으로 바꾸는 법을 알려 주는 책. 흰 줄만 밟고 건널목 건너기, 기분 나쁜 일을 떠올리지 않고 무사히 하루 보내기 등 소소한 ‘그런 게임’들에 승리하며 꽤 괜찮은 하루를 만들게 한다.", review: "", rating: null, quotes: [] },
 ];
