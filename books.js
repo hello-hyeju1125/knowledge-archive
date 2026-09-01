@@ -742,7 +742,7 @@ const BOOKS = [
     summary: "어느 덧 마흔살이 된 현성민은 주변을 돌아보니 혼자가 되었다는 현실을 절실히 깨닫게 된다. 자신의 인생 뿐 아니라 직장에서도 위기를 맞게 된 현성민은 진정한 행복을 찾기 위해 고군분투 하기로 결심한다. 불혹의 나이, 아직 늦지 않았다!", review: "하이퍼리얼리즘. 빨리 결혼을 하든 더 화려한 싱글로 남든.", rating: 4, quotes: [] },
   { title: "인 더 메가처치", author: "아사이 료", publisher: "은행나무", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791167376749.jpg", isbn: "9791167376749",
-    summary: "", review: "", rating: null, quotes: [] },
+    summary: "", review: "하. 관심을 끌기 위해 노력했으나 관심이 가지 않아 중도 하차함.", rating: 2, quotes: [] },
   { title: "날마다 이기는 게임", author: "", publisher: "김영사", genres: ["자기계발"], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791173326462.jpg", isbn: "9791173326462",
     summary: "지루함, 외로움, 슬픔, 화 등 부정적인 감정에 사로잡힐 때 그 상황을 작은 게임이라고 상상하며 그 게임에서 이기기 위해 긍정적인 마음으로 바꾸는 법을 알려 주는 책. 흰 줄만 밟고 건널목 건너기, 기분 나쁜 일을 떠올리지 않고 무사히 하루 보내기 등 소소한 ‘그런 게임’들에 승리하며 꽤 괜찮은 하루를 만들게 한다.", review: "내 돈 주고 사서 보기는 아깝다. 그림 반, 문장 반.", rating: 2, quotes: [] },
