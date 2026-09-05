@@ -752,4 +752,7 @@ const BOOKS = [
   { title: "방해 금지", author: "프리다 맥파든", publisher: "북플라자", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791193324806.jpg", isbn: "9791193324806",
     summary: "퀸 알렉산더는 남편을 살해한 뒤 도주 중이다. 국경을 넘으려다 기록적인 폭설에 발이 묶였다. 오늘 밤만 넘기기로 하고 눈에 띄지 않는 허름한 모텔에 들어섰다. 그런데 이 모텔, 심상치 않다. 손님이라곤 그녀와 점쟁이 노파뿐이고, 부부가 운영하는 모텔이라지만 보이는 건 남편뿐이다. 게다가 노파는 이곳에서 한 여자가 칼에 찔려 죽었다고 말한다. 하지만 퀸은 지쳐 있었고, 친절한 모텔 주인에게 조금씩 마음을 연다. 그리고 그에게 키스하는 순간, 창밖", review: "", rating: null, quotes: [] },
+  { title: "링컨 차를 타는 변호사", author: "마이클 코넬리", publisher: "알에이치코리아", genres: ["소설", "스릴러"], published: 2015, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925555935.jpg", isbn: "9788925555935",
+    summary: "", review: "", rating: null, quotes: [] },
 ];
