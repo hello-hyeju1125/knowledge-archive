@@ -755,4 +755,7 @@ const BOOKS = [
   { title: "링컨 차를 타는 변호사", author: "마이클 코넬리", publisher: "알에이치코리아", genres: ["소설", "스릴러"], published: 2015, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925555935.jpg", isbn: "9788925555935",
     summary: "", review: "", rating: null, quotes: [] },
+  { title: "글을 쓰고 싶다면", author: "브렌다 유랜드", publisher: "엑스북스(xbooks)", genres: ["글쓰기"], published: 2016, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791186846087.jpg", isbn: "9791186846087",
+    summary: "1938년 최초 출간된 글쓰기책으로서 1987년 재출간된 이래 곧바로 베스트셀러가 된 후 박물관 서점에서 계속 팔려나가며 ‘창조적 영감’이 필요한 모든 종류의 아티스트에게 고전이 된 『글을 쓰고 싶다면』은, 2008년 『참을 수 없는 글쓰기의 유혹』으로 국내 번역소개된 후 절판되었다가 2016년 ‘글쓰기로 우리의 삶을 바꿀 수 있다’고 믿는 출판문화공간에서 『글을 쓰고 싶다면(If you want to write)』이라는 원서의 이름으로 새롭게 선보인다", review: "", rating: null, quotes: [] },
 ];
