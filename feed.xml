@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Tue, 08 Sep 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 09 Sep 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>예술은 감염이다</title>
+    <link>https://hellmeone.com/p/%EC%98%88%EC%88%A0%EC%9D%80-%EA%B0%90%EC%97%BC%EC%9D%B4%EB%8B%A4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%98%88%EC%88%A0%EC%9D%80-%EA%B0%90%EC%97%BC%EC%9D%B4%EB%8B%A4.html</guid>
+    <category>작법</category>
+    <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
+    <description>나는 톨스토이, 체호프, 도스토옙스키 같은 러시아 작가들을 제일 좋아한다. 그들이 멋지고 세련된 표현이나 아름다운 단어보다는 진실을 훨씬 중요하게 생각했기 때문인 것 같다. 그 작가들은 스스로 느끼고 보고 생각한 것을 중요하게 여겼기 때문일 것이다. 그들에게는 문학보다는 삶이 더 중요했다. 그렇다. 글을 쓸 때 당신은 꼭 자유롭게 느껴야만 한다. 모든 의무조항들을 벗어던져야 한다. 그게 무엇이든 당신이 원하는 것을 써야 한다. 그래야만 정직하고 기쁘게 쓸 것이고 애써 타인들에게 실제의 자기보다 더 똑똑해 보이려고 애쓰지 않을 것이다…</description>
+  </item>
   <item>
     <title>미세한 진실</title>
     <link>https://hellmeone.com/p/%EB%AF%B8%EC%84%B8%ED%95%9C-%EC%A7%84%EC%8B%A4.html</link>
@@ -238,14 +246,6 @@
     <category>삶</category>
     <pubDate>Fri, 14 Aug 2026 09:00:00 +0900</pubDate>
     <description>연구 대상자들의 대부분은 실제로 자기 갱신 을 이루어냈다. 나이를 뛰어넘는 열정을 유지했고, 역량을 계속 키워나갔으며, 의미있는 몰입을 멈추지 않았다. 하지만 그것은 그들의 직접적인 목표가 아니었다. 오히려 살아간 결과에 가까웠다. 질문은 발견의 씨앗이다. 그리고 발견하려는 태도야 말로 이 작업 전체의 핵심이다. 발견을 우리 자신의 삶과 연결해야 한다. 다음 문장의 X 자리에 한 단어를 넣어보자. &quot;나는 무엇보다 X한 삶을 원한다.&quot; 당신 안에는 어떤 인코딩이 숨어 있는가? 당신을 잘 아는 사람들은 무엇을 당신의 인코딩이라고 생각하…</description>
-  </item>
-  <item>
-    <title>바깥으로 확장하고 다시 돌아오기</title>
-    <link>https://hellmeone.com/p/%EB%B0%94%EA%B9%A5%EC%9C%BC%EB%A1%9C-%ED%99%95%EC%9E%A5%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%8B%9C-%EB%8F%8C%EC%95%84%EC%98%A4%EA%B8%B0.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%B0%94%EA%B9%A5%EC%9C%BC%EB%A1%9C-%ED%99%95%EC%9E%A5%ED%95%98%EA%B3%A0-%EB%8B%A4%EC%8B%9C-%EB%8F%8C%EC%95%84%EC%98%A4%EA%B8%B0.html</guid>
-    <category>삶</category>
-    <pubDate>Fri, 14 Aug 2026 09:00:00 +0900</pubDate>
-    <description>이 과정의 핵심은 순환에 있다. 한편으로는 계속해서 경계를 넓히며 새로운 영역으로 나아간다. 배우고, 성장하고, 탐험하고, 도전하며 이전에는 보지 못했던 자기 안의 가능성을 발견한다. 또 다른 한편으로는 자신의 본질로 다시 돌아온다. 즉, 이미 오래전에 발견했던 자신의 핵심 인코딩으로 돌아와 그것을 다시 꺼내 쓴다. 우리는 &#x27;확장&#x27;을 통해 성장과 배움, 발견과 도전을 향한 욕구에 다시 불을 붙인다. 새로운 출발이 주는 활력을 느끼고, 이전에는 미처 드러나지 않았던 자기 안의 인코딩을 발견한다. 끊임없는 발견은 내면의 불꽃을 다시 타…</description>
   </item>
 </channel>
 </rss>
