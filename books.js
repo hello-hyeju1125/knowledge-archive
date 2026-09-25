@@ -797,4 +797,7 @@ const BOOKS = [
   { title: "나를 우습게 봤겠지만", author: "베라 쿠리안", publisher: "문학동네", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791141617509.jpg", isbn: "9791141617509",
     summary: "베라 쿠리안의 첫 장편소설 『나를 우습게 봤겠지만』은 에드거상 최우수 데뷔 장편 부문 후보에 오르고 〈뉴욕 타임스〉 스릴러 베스트, 아마존 에디터스 픽에 선정되며 문단과 대중의 사랑을 받았다. 〈굿리즈〉 〈뉴스위크〉 〈팝 슈거〉 〈크라임 리즈〉 등 유수 매체에서 ‘가장 기대되는 소설’로 꼽히며 스릴러 장르에 돌풍을 일으킨 베라 쿠리안은 독자들이 신뢰하는 작가로 단번에 발돋움했다. 『나를 우습게 봤겠지만』은 자신을 강간했던 윌 바크먼을 죽이기 위해 사이코패스", review: "", rating: null, quotes: [] },
+  { title: "예측의 기술", author: "이대진", publisher: "반니출판", genres: [], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124654309.jpg", isbn: "9791124654309",
+    summary: "", review: "AI 관련 책이라기 보다, 원자재 애널리스트의 압축적인 경험과 인사이트가 담긴 책. 어느 한 분야의 전문가가 쓴 글들이 주는 흥미로움이 있음.", rating: 2, quotes: [] },
 ];
