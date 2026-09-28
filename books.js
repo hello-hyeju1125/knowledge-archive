@@ -800,4 +800,7 @@ const BOOKS = [
   { title: "예측의 기술", author: "이대진", publisher: "반니출판", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124654309.jpg", isbn: "9791124654309",
     summary: "", review: "AI 관련 책이라기 보다, 원자재 애널리스트의 압축적인 경험과 인사이트가 담긴 책. 어느 한 분야의 전문가가 쓴 글들이 주는 흥미로움이 있음.", rating: 2, quotes: [] },
+  { title: "부자의 영수증", author: "모리타 다카코", publisher: "비즈니스북스", genres: [], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791162544990.jpg", isbn: "9791162544990",
+    summary: "무엇을 준비해왔는지는 장부에 고스란히 남는다. 일본의 베테랑 세무사 모리타 다카코 역시 유명 기업과 억만장자들의 세무 및 자산 관리 업무를 맡으며 수많은 자산가들의 ‘수입’과 ‘지출’을 지켜봤다. 그리고 무려 1,000만 장의 영수증​을 분석하는 과정에서 성공한 자산가들에게 공통적으로 나타나는 행동과 사고방식을 발견했다. 돈을 어디에 어떻게 쓰는지는 그 사람의 삶의 우선순위와 미래를 향한 투자를 가장 정직하게 보여준다. 이 책은 바로 영수증이라는 삶의 기록", review: "", rating: null, quotes: [] },
 ];
