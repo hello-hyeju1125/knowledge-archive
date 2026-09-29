@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Tue, 29 Sep 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Wed, 30 Sep 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>노력의 역사</title>
+    <link>https://hellmeone.com/p/%EB%85%B8%EB%A0%A5%EC%9D%98-%EC%97%AD%EC%82%AC.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%85%B8%EB%A0%A5%EC%9D%98-%EC%97%AD%EC%82%AC.html</guid>
+    <category>자기경영</category>
+    <pubDate>Wed, 30 Sep 2026 09:00:00 +0900</pubDate>
+    <description>노력은 본질적으로 어떤 목적을 위해 수행되는 활동이다. 즉, 동기가 필요하다. 조르주 바타유는 &#x27;저주 받은 몫&#x27;에서 잉여 에너지의 소모, 즉 무의미한 낭비가 사회를 움직이는 숨은 원동력 중 하나라고 주장했다. 이 잉여 에너지는 반드시 다 타서 없어져야만 한다. 우리는 결핍보다는 과잉을 경계하고 통제해야 한다. 다시 말해 생명의 에너지 순환 원리 안에서는 에너지를 축적하기보다 소모하는 편이 훨씬 더 자연스럽다.</description>
+  </item>
   <item>
     <title>노력의 위기</title>
     <link>https://hellmeone.com/p/%EB%85%B8%EB%A0%A5%EC%9D%98-%EC%9C%84%EA%B8%B0.html</link>
@@ -238,14 +246,6 @@
     <category>후기</category>
     <pubDate>Thu, 20 Aug 2026 09:00:00 +0900</pubDate>
     <description>프리다 맥파슨의 소설을 많이 좋아하는 독자 입장에서 이번 책은 상당히 아쉬웠다. 매력적인 캐릭터들이 있었지만, 반전이 주는 묘미가 그리 크지 않았다. 처음 맥파슨의 소설을 읽었을 때는 충격, 충격, 반전 그리고 충격적인 느낌이 강했는데, 여러 권을 읽다보니 이제는 좀 시시해졌다. 두 여자의 관점에서 장들이 구성되어 있다. 주인공인 내털리, 그녀와 지독히도 얽혀있는 돈. 1인칭 시점의 완전한 모습을 보여주는 글들로 구성되어 있다. 나도 언젠가는 이렇게 쓸 수 있을까? 여성이 주인공으로 등장하는 몇 안되는 소설이라 더 흥미롭니다. 보통…</description>
-  </item>
-  <item>
-    <title>장면: 견고한 소설을 위해</title>
-    <link>https://hellmeone.com/p/%EC%9E%A5%EB%A9%B4-%EA%B2%AC%EA%B3%A0%ED%95%9C-%EC%86%8C%EC%84%A4%EC%9D%84-%EC%9C%84%ED%95%B4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%9E%A5%EB%A9%B4-%EA%B2%AC%EA%B3%A0%ED%95%9C-%EC%86%8C%EC%84%A4%EC%9D%84-%EC%9C%84%ED%95%B4.html</guid>
-    <category>작법</category>
-    <pubDate>Thu, 20 Aug 2026 09:00:00 +0900</pubDate>
-    <description>장면의 기능 행동을 통해 이야기를 전개한다. 인물의 반응을 통해 그의 특성을 나타낸다. 뒤에 나올 주요 장면을 위해 기초를 마련한다. 이야기에 묘미 (양념)을 더한다. 장면에는 위기가 있어야 한다. 중요한 문제가 있어야 한다. 인물이 숨을 돌리거나 생각에 잠기거나 마음을 가다듬는 중이더라도 그 아래에 깔린 이야기 속에서는 문제가 소용돌이쳐야 한다. 행동 장면: 목표와 결과가 있다 인물이 어딘가에 도달하고, 문제를 해결하고, 이야기를 전개하려고 노력하는 장면. 모든 행동 장면에는 &#x27;장면의 목표&#x27;가 있어야 한다. 즉 시점에 상관없이 사…</description>
   </item>
 </channel>
 </rss>
