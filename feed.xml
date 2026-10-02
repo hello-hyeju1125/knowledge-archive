@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Wed, 30 Sep 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Fri, 02 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>노력의 종말</title>
+    <link>https://hellmeone.com/p/%EB%85%B8%EB%A0%A5%EC%9D%98-%EC%A2%85%EB%A7%90.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%85%B8%EB%A0%A5%EC%9D%98-%EC%A2%85%EB%A7%90.html</guid>
+    <category>자기경영</category>
+    <pubDate>Fri, 02 Oct 2026 09:00:00 +0900</pubDate>
+    <description>본질은 그대로다. 노력 없이는 그 무엇도 손에 넣을 수 없다. 노력의 성격만 달라졌을 뿐이다. 예전에는 자기 운명조차 좌우할 수 없는 가혹한 삶 속에서, 수많은 제약을 하나하나 뛰어 넘어야 했다. 오늘날에는 제약이 없는 상태를 견뎌내야 한다. 예전에는 시련이 먼저 눈앞에 들이닥쳤고, 맞서기만 하면 됐다. 이제는 스스로 시련을 향해 나아가야 한다. 심지어 시련을 직접 만들어내고, 더 짧은 길이 아니라 더 먼 길을, 평탄한 길이 아니라 가파른 비탈을 택해야 한다. 노력 없이 해방은 없다. 노력은 바로, 지금의 능력을 넘어선 목표를 달성…</description>
+  </item>
   <item>
     <title>아등바등에서 빈둥빈둥으로</title>
     <link>https://hellmeone.com/p/%EC%95%84%EB%93%B1%EB%B0%94%EB%93%B1%EC%97%90%EC%84%9C-%EB%B9%88%EB%91%A5%EB%B9%88%EB%91%A5%EC%9C%BC%EB%A1%9C.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Fri, 21 Aug 2026 09:00:00 +0900</pubDate>
     <description>기초 사항들, 즉 문법과 구문론, 구두법, 화법, 문장의 다양성, 문단 구조 등등을 마스터 - 그것도 완벽히 마스터 - 하지 않고서도 잘 쓰려는 생각은 버리는 게 좋다. 제대로 된 도움과 제대로 된 책만 있다면 훌륭한 학생들은 누구나 두 주 만에 기본 원칙들을 완전히 학습할 수 있다. 견습 작가가 기본 원칙들을 마스터했다고 치자. 그는 어떻게 소설을 시작해야 할까? 그는 무엇에 관해 써야 하며, 자신이 잘 썼다는 걸 어떻게 알 수 있는 걸까? 이에 대한 흔한 대답, 그리고 대개 유감스러운 대답은 &quot;당신이 아는 것에 대해 쓰라&quot;는 것…</description>
-  </item>
-  <item>
-    <title>미학 법칙과 예술의 비밀</title>
-    <link>https://hellmeone.com/p/%EB%AF%B8%ED%95%99-%EB%B2%95%EC%B9%99%EA%B3%BC-%EC%98%88%EC%88%A0%EC%9D%98-%EB%B9%84%EB%B0%80.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%AF%B8%ED%95%99-%EB%B2%95%EC%B9%99%EA%B3%BC-%EC%98%88%EC%88%A0%EC%9D%98-%EB%B9%84%EB%B0%80.html</guid>
-    <category>작법</category>
-    <pubDate>Thu, 20 Aug 2026 09:00:00 +0900</pubDate>
-    <description>필요한 것이라고는 작가 지망생 자신이 무엇이 되고 싶어하는지, 그리고 그것을 위해서는 무엇을 해야만 하는지를 명확히 아는 게 전부다. 만일 어떤 이가 각고의 노력을 기울였음에도 불구하고 자신이 반드시 해야만 하는 일을 도저히 해낼 수 없다면 이 책은 그가 작가가 되기 위해 세상에 태어난 게 아니라 다른 어떤 고귀한 목적을 위해 태어났음을 깨닫게 해주는데 도움이 될 것이다. 비록 글을 잘 쓰는 능력이 주식 시장을 예측한다거나 농구를 잘하는 능력과 마찬가지로 부분적으로는 타고나는 것이긴 하지만, 글쓰기 능력이란 대개 진심에서 우러나온…</description>
   </item>
 </channel>
 </rss>
