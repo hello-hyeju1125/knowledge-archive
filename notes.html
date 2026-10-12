@@ -131,8 +131,9 @@
     border-bottom:1px solid var(--line); color:var(--text); cursor:pointer;
   }
   .prow:hover .pt{color:var(--accent);}
-  /* 분류 이름 길이와 무관하게 제목이 같은 세로선에서 시작하도록 칩 너비를 고정 */
-  .prow .cat{flex:0 0 48px; text-align:center; padding:2px 6px;}
+  /* 분류 이름 길이와 무관하게 제목이 같은 세로선에서 시작하도록 칩 너비를 고정.
+     네 글자(자기경영·마인드셋)까지 한 줄에 들어가는 너비, 줄바꿈 금지 */
+  .prow .cat{flex:0 0 calc(4em + 12px); text-align:center; padding:2px 6px; white-space:nowrap;}
   .prow .pt{
     flex:1; min-width:0; font-size:18px; font-weight:800; letter-spacing:-0.02em;
     line-height:1.4; transition:color .15s;
