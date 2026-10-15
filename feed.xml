@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Wed, 14 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Thu, 15 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>나는 왜 이렇게 살고 있을까?</title>
+    <link>https://hellmeone.com/p/%EB%82%98%EB%8A%94-%EC%99%9C-%EC%9D%B4%EB%A0%87%EA%B2%8C-%EC%82%B4%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EB%82%98%EB%8A%94-%EC%99%9C-%EC%9D%B4%EB%A0%87%EA%B2%8C-%EC%82%B4%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C.html</guid>
+    <category>인생</category>
+    <pubDate>Thu, 15 Oct 2026 09:00:00 +0900</pubDate>
+    <description>사람들은 미래를 알고 싶어 찾아오지만, 미래보다는 자기 자신을 더 알고 싶어 한다는 사실이다. 운명은 어느 날 갑자기 하늘에서 떨어지는 결과물이 아니다. 지금 하고 있는 생각, 반복되는 말투, 습관적인 행동, 사람을 대하는 태도, 분노하는 방식, 사랑하는 방식과 포기하는 방식이 쌓여 만들어지는 삶의 흐름이다. 적선지가 필유여경, 적불선지가 필유여앙, 선을 쌓은 집안에는 반드시 경사가 남고, 선하지 못한 것을 쌓은 집안에는 반드시 재앙이 남는다. 주역 오늘의 생각 하나가 내일의 선택이 되고, 오늘의 선택 하나가 몇 년 뒤 인생의 방향…</description>
+  </item>
   <item>
     <title>부의 영혼 The Soul of Wealth (2)</title>
     <link>https://hellmeone.com/p/%EB%B6%80%EC%9D%98-%EC%98%81%ED%98%BC-the-soul-of-wealth-2.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
     <description>가장 중요한 사실은 누구에게나 재능, 독창성, 이야깃거리가 있다는 것이다. 정말 무재능이라고 여겨지던 사람들이 실은 가장 쉽게, 아무런 압박감이나 고통 없이 입심 좋게 술술 써내려가서 한 일주일 정도면 소설 한 권을 거뜬히 써낼 수 있다는 사실을 알게 되면, 여러분은 위안을 받을지도 모른다. 하지만 그들에게도 저 깊은 밑바닥에는 그들만의 재능이 숨어 있다고 나는 믿는다. 다만 그들은 손쉬운 달변의 단단한 외피를 뚫고 저 밑바닥에 있는 진실하고도 생생한 어떤 것에 도달하지 못했을 뿐이다. 다른 대부분의 사람들도 마찬가지다. 각자 자신…</description>
-  </item>
-  <item>
-    <title>서문: If you want to write</title>
-    <link>https://hellmeone.com/p/%EC%84%9C%EB%AC%B8-if-you-want-to-write.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%84%9C%EB%AC%B8-if-you-want-to-write.html</guid>
-    <category>작법</category>
-    <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
-    <description>이 책이 당신의 생각을, 나아가 우리 모두 안에 깃든 천재성을 해방시키는 데 큰 도움이 되기를 간절히 바란다. &quot;자신의 천재성을 모르는 사람은 아무것도 가질 수 없다.&quot; - 블레이크 글을 쓰고 싶은 사람들은 혼란스러운 당혹감, 또 글쓰기의 엄청난 어려움 때문에 고통 받는다. 자기 글이 실패하는 까닭을 도무지 알 수가 없고, 왜 엄청난 노력에도 불구하고 종종 독자들에게 외면을 당하는지 고민하게 된다. 아무 생각 없이 내놓은 허튼소리로부터 또 &#x27;지루함&#x27;으로부터 학생들을 벗어나게 하기 위해서 내가 어떻게 했는지를 이 책에서 설명할 것이다…</description>
   </item>
 </channel>
 </rss>
