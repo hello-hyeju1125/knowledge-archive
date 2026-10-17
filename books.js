@@ -839,4 +839,7 @@ const BOOKS = [
   { title: "크래프터", author: "비기", publisher: "모티브", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791176880657.jpg", isbn: "9791176880657",
     summary: "《크래프터: 나는 AI로 인생을 바꿨다》는 특별한 학벌이나 기술도 없었던 평범한 사람이 AI를 만나 삶과 일을 바꿔나간 과정과, 그 과정에서 수백 번의 시행착오 끝에 완성한 프롬프트 설계 공식 ‘CRAFTER’를 담은 책입니다. 저자 비기는 처음 AI를 접했을 때만 해도 자신과는 거리가 먼, 대단한 기술을 가진 사람들의 영역이라고 생각했습니다. 하지만 매일 AI를 붙들고 수백 번 실패하면서 한 가지 사실을 깨닫습니다. AI의 결과를 결정하는 것은 단순히", review: "7년 동안의 부업 실패가 제일 흥미로웠음", rating: 3, quotes: [] },
+  { title: "편집장과 책을 씁니다", author: "조기준", publisher: "아토북(Atto Book)", genres: [], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190194297.jpg", isbn: "9791190194297",
+    summary: "출판사에서 20여 년간 원고를 검토하고, 거절하고, 끝내 책으로 만들어온 사람이 있다. 《편집장과 책을 씁니다》는 편집장 출신 작가가 한겨레문화센터, 트레바리, 한국생산성본부, 패스트캠퍼스, 클래스유 등에서 수천 명의 수강생과 부딪히며 다듬어온 책쓰기 수업을 한 권으로 옮긴 책이다. 일주일에 200여 명의 글을 읽고 코멘트를 달던 시절, 저자가 가장 하고 싶지 않았던 말은 “무조건 쓰기만 하면 잘될 겁니다” 같은 막연한 응원이었다. 대신 그는 지금 당장", review: "", rating: 3, quotes: [] },
 ];
