@@ -469,7 +469,13 @@ starEls.forEach(s => s.onclick = () => { bRating = +s.dataset.v;
   starEls.forEach(x=>x.classList.toggle("on", +x.dataset.v <= bRating)); });
 
 /* ---------- GitHub 읽기/커밋 ---------- */
-const b64encode = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+// 바이트를 한꺼번에 펼치면(...) 파일이 수백 KB를 넘을 때 "Maximum call stack size exceeded"가 나서 조각 단위로 변환
+const b64encode = s => {
+  const bytes = new TextEncoder().encode(s);
+  let bin = "";
+  for(let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+};
 const b64decode = s => new TextDecoder().decode(Uint8Array.from(atob(s), c=>c.charCodeAt(0)));
 async function ghGet(path){
   const token = localStorage.getItem("ghToken");
