@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Fri, 16 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Sun, 18 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>아낌 없이 주고 잊어라</title>
+    <link>https://hellmeone.com/p/%EC%95%84%EB%82%8C-%EC%97%86%EC%9D%B4-%EC%A3%BC%EA%B3%A0-%EC%9E%8A%EC%96%B4%EB%9D%BC.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%95%84%EB%82%8C-%EC%97%86%EC%9D%B4-%EC%A3%BC%EA%B3%A0-%EC%9E%8A%EC%96%B4%EB%9D%BC.html</guid>
+    <category>인생</category>
+    <pubDate>Sun, 18 Oct 2026 09:00:00 +0900</pubDate>
+    <description>..</description>
+  </item>
   <item>
     <title>좋은 운명은 좋은 인연과 함께 온다</title>
     <link>https://hellmeone.com/p/%EC%A2%8B%EC%9D%80-%EC%9A%B4%EB%AA%85%EC%9D%80-%EC%A2%8B%EC%9D%80-%EC%9D%B8%EC%97%B0%EA%B3%BC-%ED%95%A8%EA%BB%98-%EC%98%A8%EB%8B%A4.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
     <description>영감은 매우 천천히, 그리고 조용히 온다. 당신은 타자기나 종이 앞에 앉아서 창밖을 내다보며, 한두 시간쯤 아무 생각 없이 머리카락만 쓸어 넘길 것이다. 전혀 걱정하지 말라. 그것은 좋은 일이다. 아니 그래야만 한다. 다만 당신은 줄곧 타자기 앞에 앉아 있어야 하며 공상에 잠겨 있는 동안에도 조만간 무언가를 이야기하게 될 것이라는 점을 확신하기만 하면 된다. 또한 당신은 내일도 잠깐 틈을 낼 것이고, 또 다음날도 그 다음날도 계속, 영원히 언제나 그렇게 앉아 있으리라는 것을 깨닫기만 하면 된다. 버나드 쇼에 따르면 나폴레옹이 언제나…</description>
-  </item>
-  <item>
-    <title>왜 르네상스 귀족들은 소네트를 썼나</title>
-    <link>https://hellmeone.com/p/%EC%99%9C-%EB%A5%B4%EB%84%A4%EC%83%81%EC%8A%A4-%EA%B7%80%EC%A1%B1%EB%93%A4%EC%9D%80-%EC%86%8C%EB%84%A4%ED%8A%B8%EB%A5%BC-%EC%8D%BC%EB%82%98.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%99%9C-%EB%A5%B4%EB%84%A4%EC%83%81%EC%8A%A4-%EA%B7%80%EC%A1%B1%EB%93%A4%EC%9D%80-%EC%86%8C%EB%84%A4%ED%8A%B8%EB%A5%BC-%EC%8D%BC%EB%82%98.html</guid>
-    <category>작법</category>
-    <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
-    <description>&quot;이 일에는 돈이 따르지 않아&quot; &quot;이건 결코 출판되지 않을 거야&quot; 같은 식으로 생각하면, 당신 속 에너지의 샘이 말라붙고 자신을 아무리 밀어부쳐도 단 한 쪽도 쓸 수 없는 지경에 이를 수도 있다. 르네상스 시대에 모든 신사들은 소네트를 썼다. 그들에게는 자신의 시를 유명한 문학잡지에 싣겠다는 생각은 애당초 없었다. 그렇다면 왜 소네트를 쓴 걸까? 여러 이유로 사랑의 소네트를 섰다. 우선 사소하고 부차적인 이유는 자신이 소네트를 쓸 줄 안다는 것을 사람들에게 과시하고 싶어서였다. 하지만 가장 중요한 이유는 어떤 숙녀에게 사랑을 고백하…</description>
   </item>
 </channel>
 </rss>
