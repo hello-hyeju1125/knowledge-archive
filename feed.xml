@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sun, 18 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 19 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>큰 운이 들어올 때는 징조가 있다</title>
+    <link>https://hellmeone.com/p/%ED%81%B0-%EC%9A%B4%EC%9D%B4-%EB%93%A4%EC%96%B4%EC%98%AC-%EB%95%8C%EB%8A%94-%EC%A7%95%EC%A1%B0%EA%B0%80-%EC%9E%88%EB%8B%A4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%ED%81%B0-%EC%9A%B4%EC%9D%B4-%EB%93%A4%EC%96%B4%EC%98%AC-%EB%95%8C%EB%8A%94-%EC%A7%95%EC%A1%B0%EA%B0%80-%EC%9E%88%EB%8B%A4.html</guid>
+    <category>인생</category>
+    <pubDate>Mon, 19 Oct 2026 09:00:00 +0900</pubDate>
+    <description>가진 것이 많든 적든 불만과 걱정은 사라지지 않는 것이 인간이란 말인가. 사람은 점점 발전할 때 기쁩니다. 하지만 정점을 찍고 내려오는 길은 고통스럽습니다. 그것은 자연스러운 이치입니다. 그러나 중요한 건 남과 비교하며 위안을 찾거나 상실감을 곱씹는 것이 아니라 자신의 길을 묵묵히 가는 것입니다. 인생은 언제나 남아 있는 것 위에서 다시 시작됩니다. 젊은 날의 건강을 잃었어도 지혜가 남고, 사랑하는 사람을 떠나보냈어도 추억이 남듯이 돈도 마찬가지입니다. 지금은 잃어버린 돈이 아니라 남아 있는 인생을 세어야 할 때입니다. 운은 잃은…</description>
+  </item>
   <item>
     <title>아낌 없이 주고 잊어라</title>
     <link>https://hellmeone.com/p/%EC%95%84%EB%82%8C-%EC%97%86%EC%9D%B4-%EC%A3%BC%EA%B3%A0-%EC%9E%8A%EC%96%B4%EB%9D%BC.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
     <description>이 책에서 내가 바라는 것은 당신이 연필을 쥐고서 그 생각을 표현하거나 종이나 캔버스에 옮겨놓는 것이다. 그러면 당신은 그 생각을 바라볼 수 있고, 만약 그것이 좋지 않다고 생각된다면 계속 행동할 수 있고 또 다음에도 다시 행동할 수 있다. 생각하라. 그런 후에는 그것을 내보내라. 즉 행동으로 옮겨라. 늘 그렇게 하라. 한동안 조용히 생각에 잠기라. 나중에 그것을 조용히, 신념이나 의지에는 그다지 의존하지 말고 표현하라. 너무 많은 &#x27;해야만 한다&#x27;가 당신의 재능이 자유롭게 즐겁게 빛나는 것을 가로막고 있다. 당신에게 행동을 거부하라…</description>
-  </item>
-  <item>
-    <title>상상력은 천천히, 조용히 온다</title>
-    <link>https://hellmeone.com/p/%EC%83%81%EC%83%81%EB%A0%A5%EC%9D%80-%EC%B2%9C%EC%B2%9C%ED%9E%88-%EC%A1%B0%EC%9A%A9%ED%9E%88-%EC%98%A8%EB%8B%A4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%83%81%EC%83%81%EB%A0%A5%EC%9D%80-%EC%B2%9C%EC%B2%9C%ED%9E%88-%EC%A1%B0%EC%9A%A9%ED%9E%88-%EC%98%A8%EB%8B%A4.html</guid>
-    <category>작법</category>
-    <pubDate>Mon, 07 Sep 2026 09:00:00 +0900</pubDate>
-    <description>영감은 매우 천천히, 그리고 조용히 온다. 당신은 타자기나 종이 앞에 앉아서 창밖을 내다보며, 한두 시간쯤 아무 생각 없이 머리카락만 쓸어 넘길 것이다. 전혀 걱정하지 말라. 그것은 좋은 일이다. 아니 그래야만 한다. 다만 당신은 줄곧 타자기 앞에 앉아 있어야 하며 공상에 잠겨 있는 동안에도 조만간 무언가를 이야기하게 될 것이라는 점을 확신하기만 하면 된다. 또한 당신은 내일도 잠깐 틈을 낼 것이고, 또 다음날도 그 다음날도 계속, 영원히 언제나 그렇게 앉아 있으리라는 것을 깨닫기만 하면 된다. 버나드 쇼에 따르면 나폴레옹이 언제나…</description>
   </item>
 </channel>
 </rss>
