@@ -878,4 +878,7 @@ const BOOKS = [
   { title: "테오", author: "앨런 레비", publisher: "오팬하우스", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791175772892.jpg", isbn: "9791175772892",
     summary: "출간 즉시 전 세계를 사로잡은 “바로 그 하얀 책”, 오직 입소문만으로 역주행의 아이콘이 된 화제의 소설 《테오》가 마침내 한국 독자들을 찾아왔다. 《테오》는 변호사이자 판사를 거쳐 전업 싱어송라이터로 살아온 작가 앨런 레비가 70대에 가까운 나이에 발표한 첫 장편소설로, 원래는 출간 계획조차 없었던 작품이었다. 그러나 주위의 강한 권유에 힘입어 작가는 자비출판을 하게 되었고, 그렇게 세상에 나온 책은 독자들의 자발적인 추천과 사랑만으로 미국 전역에", review: "", rating: null, quotes: [] },
+  { title: "클릭 히어", author: "알렉스 슐츠", publisher: "알에이치코리아", genres: [], published: 2026, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788925568218.jpg", isbn: "9788925568218",
+    summary: "평평하게 만드는 것을 넘어 마케팅 그 자체로 자리 잡았다. 하지만 문제도 있다. 선택지가 많아진 만큼 무엇이 실제로 효과가 있는지 판단하기는 더 어려워졌고, 새로운 기술을 쫓기만 하다가는 본질을 놓치는 경우가 많다는 것이다. 신간 『클릭 히어(원제 : CLICK HERE: The Art and Science of Digital Marketing and Advertising)』는 이에 단순한 답을 내놓는다. “마케팅은 팔기 위해 존재한다.” 마케팅의 목적은", review: "", rating: null, quotes: [] },
 ];
