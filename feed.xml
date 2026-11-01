@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sat, 31 Oct 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Sun, 01 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>자기 검열</title>
+    <link>https://hellmeone.com/p/%EC%9E%90%EA%B8%B0-%EA%B2%80%EC%97%B4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%9E%90%EA%B8%B0-%EA%B2%80%EC%97%B4.html</guid>
+    <category>작법</category>
+    <pubDate>Sun, 01 Nov 2026 09:00:00 +0900</pubDate>
+    <description>실용서나 문서라면 경우에 따라 타깃 독자를 상정하고 쓰겠지만 에세이나 시, 소설 같은 문학 장르의 글은 쓰고 싶은 것을 쓰는 게 전부다. 독자들에게 어떻게 받아들여지고 어떻게 읽히느냐는 그 다음 문제이다. 에세이는 모호하게 숨기면서 아름답게 치장하기 보다 정직하면서도 정교하게 드러낼 때 훨씬 더 매력적이다. 내가 어떤 내용을 얼버무리고 있는지, 어떤 내용을 일부러 모호하게 흐리고 있는지, 어떤 내용을 말하기 두려워하는지 알아차리고, 내 안의 것을 있는 그대로 드러내는 것을 두려워하지 말아야 한다. &#x27;나답게&#x27;라는 것은 역설적으로 나를…</description>
+  </item>
   <item>
     <title>부조리한 기쁨</title>
     <link>https://hellmeone.com/p/%EB%B6%80%EC%A1%B0%EB%A6%AC%ED%95%9C-%EA%B8%B0%EC%81%A8.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
     <description>일기를 써야 하는 이유가 또 있다. 당신 안의 생각이 절대로 마르지 않는 샘이라는 사실을 일기쓰기를 통해 알아야 하기 때문이다. 모든 인간은 살아 있는 한, 늘 변화하고 늘 움직이는 생각의 강이 마르지 않는다. 그러나 행복하게, 자신을 신뢰하면서 글을 쓰려면 당신은 자신 안에 있는 이 무한히 깊은 상상과 지식의 샘을 찾아내야 한다. 우리 모두의 안에는 엄청 많은 것이 들어 있다. 다만 그 사실을 우리가 모를 뿐이다. 아무도 그것을 우리에게서 끄집어내지 않는다. 하지만 만일 우리가 매우 지적이고 상상력이 풍부하고 공감 능력이 큰 어떤…</description>
-  </item>
-  <item>
-    <title>무턱대고, 저돌적으로, 충동적으로, 정직하게 일기를 쓰라</title>
-    <link>https://hellmeone.com/p/%EB%AC%B4%ED%84%B1%EB%8C%80%EA%B3%A0-%EC%A0%80%EB%8F%8C%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%B6%A9%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%A0%95%EC%A7%81%ED%95%98%EA%B2%8C-%EC%9D%BC%EA%B8%B0%EB%A5%BC-%EC%93%B0%EB%9D%BC.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%AC%B4%ED%84%B1%EB%8C%80%EA%B3%A0-%EC%A0%80%EB%8F%8C%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%B6%A9%EB%8F%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%A0%95%EC%A7%81%ED%95%98%EA%B2%8C-%EC%9D%BC%EA%B8%B0%EB%A5%BC-%EC%93%B0%EB%9D%BC.html</guid>
-    <category>작법</category>
-    <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
-    <description>피할 수 없는 진실 하나. 당신이 무엇을 쓰든 그 모든 걸은 당신의 인격을 드러내고, 당신이 지금 어떻든 그 모습을 당신의 글을 통해 드러날 것이다. 만약 당신이 진실을 쓰고 싶다면, 즉 진정한 느낌을 쓰기 원한다면, 또한 그것을 서슴없이 이야기하고 싶다면, 해야 할 일이 있다. 신중함과 의도성, 일반론과 일부러 꾸며낸 야수성의 외피를 찢어 버린 뒤에, 스무 편 이상의 단편을 써라. 그리고 매일 당신의 삶을 일기로 써라. 단 진실하게, 부주의하게, 되는대로, 충동적으로, 정직하게 써야 한다. 왜 그래야 하는지 지금은 이해할 수 없더…</description>
   </item>
 </channel>
 </rss>
