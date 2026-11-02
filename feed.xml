@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sun, 01 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 02 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>성장은 좋은 것이다</title>
+    <link>https://hellmeone.com/p/%EC%84%B1%EC%9E%A5%EC%9D%80-%EC%A2%8B%EC%9D%80-%EA%B2%83%EC%9D%B4%EB%8B%A4.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EC%84%B1%EC%9E%A5%EC%9D%80-%EC%A2%8B%EC%9D%80-%EA%B2%83%EC%9D%B4%EB%8B%A4.html</guid>
+    <category>마케팅</category>
+    <pubDate>Mon, 02 Nov 2026 09:00:00 +0900</pubDate>
+    <description>성장은 좋은 것이다. 나는 때로 이 말에 반박하는 사람들을 접한다. 그들은 이 말이 마치 절제되지 않은 극단적 성장을 무조건적으로 추구하라는 주장인 것처럼 받아들인다. 성장은 분명 나름의 위험을 지니며, 걷잡을 수 없는 상황이 되면 억제해야 한다. 하지만 경제 전반을 놓고 보면 성장은 삶을 개선하고, 사람들을 빈곤으로부터 구제하며, 일자리를 제공하고, 납세와 기부를 통해 복지 비용을 대어준다. 기업이 성장하면 경제도 성장하고, 경제가 성장하면 기업도 성장한다. 기업과 경제의 성장은 사회 전반에 혜택을 안긴다. 첫 번째 원칙은 &#x27;도구…</description>
+  </item>
   <item>
     <title>자기 검열</title>
     <link>https://hellmeone.com/p/%EC%9E%90%EA%B8%B0-%EA%B2%80%EC%97%B4.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
     <description>상상력의 사용을 어렵게 만드는 유일한 원인은 두려움, 즉 졸작이 되면 어쩌나 하는 불안이다. 이제 내가 알게 된 사실은 우리가 노력하지 않을 때, 독특한 수동적 명료함을 갖게 될 때 상상력이 찾아오고 활동한다는 것이다. 자기 신뢰는 정말 중요하다. 당신이 글쓰기를 시작하면 목에서 힘을 빼고 자유롭고 선한 마음을 가져라. 그리고 게을러져라. 글을 던져 버린 것처럼 느껴라. 아무런 계획도 세우지 말고 그냥 이야기를 쓰면서 무엇이 나오는지 지켜보라. 당신도 이런 시도를 해보라. 그러면 당신 안에 있는 힘을 알게 될 것이다. 이 현생의 삶…</description>
-  </item>
-  <item>
-    <title>당신이 모르는 당신 안의 것</title>
-    <link>https://hellmeone.com/p/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EB%AA%A8%EB%A5%B4%EB%8A%94-%EB%8B%B9%EC%8B%A0-%EC%95%88%EC%9D%98-%EA%B2%83.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EB%8B%B9%EC%8B%A0%EC%9D%B4-%EB%AA%A8%EB%A5%B4%EB%8A%94-%EB%8B%B9%EC%8B%A0-%EC%95%88%EC%9D%98-%EA%B2%83.html</guid>
-    <category>작법</category>
-    <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
-    <description>일기를 써야 하는 이유가 또 있다. 당신 안의 생각이 절대로 마르지 않는 샘이라는 사실을 일기쓰기를 통해 알아야 하기 때문이다. 모든 인간은 살아 있는 한, 늘 변화하고 늘 움직이는 생각의 강이 마르지 않는다. 그러나 행복하게, 자신을 신뢰하면서 글을 쓰려면 당신은 자신 안에 있는 이 무한히 깊은 상상과 지식의 샘을 찾아내야 한다. 우리 모두의 안에는 엄청 많은 것이 들어 있다. 다만 그 사실을 우리가 모를 뿐이다. 아무도 그것을 우리에게서 끄집어내지 않는다. 하지만 만일 우리가 매우 지적이고 상상력이 풍부하고 공감 능력이 큰 어떤…</description>
   </item>
 </channel>
 </rss>
