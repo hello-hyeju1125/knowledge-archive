@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Mon, 02 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Sun, 08 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>글쓰기 경험</title>
+    <link>https://hellmeone.com/p/%EA%B8%80%EC%93%B0%EA%B8%B0-%EA%B2%BD%ED%97%98.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EA%B8%80%EC%93%B0%EA%B8%B0-%EA%B2%BD%ED%97%98.html</guid>
+    <category>작법</category>
+    <pubDate>Sun, 08 Nov 2026 09:00:00 +0900</pubDate>
+    <description>마냥 즐겁기만 한 예술가는 없어. 어느 때도 무엇에건 만족할 일은 없어. 그저 이상하고 신성한 불만족만이 우리를 앞으로 나아가게 할 뿐이야. 다른 이들보다 더욱 살아 있게 해주는 축복받은 불만만이 있을 뿐이야. 현대무용가 마사 그레이엄 편애하는 문체 글에서도 감정을 절제한, 건조하고 담백한 문체를 좋아한다. 건조한 문체는 필연적으로 간결하다. 심플하고 산뜻하고 군더더기 없다. 간결한 문체는 자의식이 없고, 무엇을 지키고 무엇을 버려야 하는지를 안다. 그것은 불완전한 취약성을 있는 그대로 받아들이고 복잡한 감정들을 견디는 사람의 문체…</description>
+  </item>
   <item>
     <title>성장은 좋은 것이다</title>
     <link>https://hellmeone.com/p/%EC%84%B1%EC%9E%A5%EC%9D%80-%EC%A2%8B%EC%9D%80-%EA%B2%83%EC%9D%B4%EB%8B%A4.html</link>
@@ -238,14 +246,6 @@
     <category>작법</category>
     <pubDate>Thu, 10 Sep 2026 09:00:00 +0900</pubDate>
     <description>그렇지만 (내가 소망하는 대로) 모든 사람이 글을 쓰고 글쓰기를 존중하며 사랑한다면, 우리는 지적이고 열렬하고 열정적인 독자들로 이루어진 한 나라를 갖게 될 것이다. 그렇게 되면 우리 모두는 기대감과 열렬한 관심을 갖고 글을 통해 서로 대화하게 될 것이다. 우리는 자유로운 형제가 될 것이고 마치 도스토옙스키가 그의 소설에서 묘사한 바와 같이 &quot;노래로뿐만 아니라 삶에서도 오로지 서로를 칭찬하기만 하는&quot; 천국의 사람들처럼 될 것이다. 그리하여 정말로 위대한 문학의 나라를 갖게 될 것이다. 당신은 재능이 있다는 것, 독창적이라는 것, 그…</description>
-  </item>
-  <item>
-    <title>상상력 사용법</title>
-    <link>https://hellmeone.com/p/%EC%83%81%EC%83%81%EB%A0%A5-%EC%82%AC%EC%9A%A9%EB%B2%95.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%83%81%EC%83%81%EB%A0%A5-%EC%82%AC%EC%9A%A9%EB%B2%95.html</guid>
-    <category>작법</category>
-    <pubDate>Wed, 09 Sep 2026 09:00:00 +0900</pubDate>
-    <description>상상력의 사용을 어렵게 만드는 유일한 원인은 두려움, 즉 졸작이 되면 어쩌나 하는 불안이다. 이제 내가 알게 된 사실은 우리가 노력하지 않을 때, 독특한 수동적 명료함을 갖게 될 때 상상력이 찾아오고 활동한다는 것이다. 자기 신뢰는 정말 중요하다. 당신이 글쓰기를 시작하면 목에서 힘을 빼고 자유롭고 선한 마음을 가져라. 그리고 게을러져라. 글을 던져 버린 것처럼 느껴라. 아무런 계획도 세우지 말고 그냥 이야기를 쓰면서 무엇이 나오는지 지켜보라. 당신도 이런 시도를 해보라. 그러면 당신 안에 있는 힘을 알게 될 것이다. 이 현생의 삶…</description>
   </item>
 </channel>
 </rss>
