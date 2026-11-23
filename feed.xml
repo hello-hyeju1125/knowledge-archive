@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Sun, 22 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Mon, 23 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>그을린 이후의 소설가</title>
+    <link>https://hellmeone.com/p/%EA%B7%B8%EC%9D%84%EB%A6%B0-%EC%9D%B4%ED%9B%84%EC%9D%98-%EC%86%8C%EC%84%A4%EA%B0%80.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/%EA%B7%B8%EC%9D%84%EB%A6%B0-%EC%9D%B4%ED%9B%84%EC%9D%98-%EC%86%8C%EC%84%A4%EA%B0%80.html</guid>
+    <category>작법</category>
+    <pubDate>Mon, 23 Nov 2026 09:00:00 +0900</pubDate>
+    <description>그게 소설이든 시든, 어떤 젊은이가 갑자기 책상에 앉아서 뭔가를 쓰기 시작한다면, 지금 그의 내면에서 불길이 있어났다는 뜻이다. 불은 결코 홀로 타오르는 법이 없다. 그러니 그 불은 바깥 어딘가에서 그의 내면으로 번졌으리라. 하지만 그 불이 어디서 왔는지는 그에게 중요하지 않다. 그 불은 어디에서든 옮겨붙을 수 있으니까. 책상에 앉아서 뭔가를 쓰기 시작하는 젊은이의 가슴속에서 이는 불 역시 마찬가지다. 순식간에 타오르고, 그는 이 열기에 놀란다. 그러나 이 불은 곧 잦아들 것이다. 그것 역시 불의 속성이다. 순식간에 타오르고, 또…</description>
+  </item>
   <item>
     <title>삶을 수습하고 있는가, 살아가고 있는가</title>
     <link>https://hellmeone.com/p/%EC%82%B6%EC%9D%84-%EC%88%98%EC%8A%B5%ED%95%98%EA%B3%A0-%EC%9E%88%EB%8A%94%EA%B0%80-%EC%82%B4%EC%95%84%EA%B0%80%EA%B3%A0-%EC%9E%88%EB%8A%94%EA%B0%80.html</link>
@@ -238,14 +246,6 @@
     <category>자기경영</category>
     <pubDate>Mon, 28 Sep 2026 09:00:00 +0900</pubDate>
     <description>좋은 운을 붙잡는 기술은 배워 익힐 수 있다. 운이 작동하는 법칙과 목표를 이루는 과정에서 이를 활용하는 법을 아는 것이 관건이다. 세상에 마법 같은 힘이란 없다. 모든 일에는 원인과 결과가 존재하기 마련이다. 우리가 지금 하는 행동은 앞으로 일어나는 일에 필연적으로 영향을 미친다. 중력처럼 운도 눈에 보이지 않지만 우리는 운의 법칙이 작동한다는 사실을 믿어야 한다. 세상일이 돌아가는 원리를 제대로 이해하면 주변 곳곳에 있는 기회를 알아차리고 이용할 수 있다. 우리가 &#x27;운&#x27;이라고 부르는 것은 의도적 행동과 꾸준한 노력이 가져오는 결…</description>
-  </item>
-  <item>
-    <title>지출은 당신의 인생을 비추는 거울이다</title>
-    <link>https://hellmeone.com/p/%EC%A7%80%EC%B6%9C%EC%9D%80-%EB%8B%B9%EC%8B%A0%EC%9D%98-%EC%9D%B8%EC%83%9D%EC%9D%84-%EB%B9%84%EC%B6%94%EB%8A%94-%EA%B1%B0%EC%9A%B8%EC%9D%B4%EB%8B%A4.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%A7%80%EC%B6%9C%EC%9D%80-%EB%8B%B9%EC%8B%A0%EC%9D%98-%EC%9D%B8%EC%83%9D%EC%9D%84-%EB%B9%84%EC%B6%94%EB%8A%94-%EA%B1%B0%EC%9A%B8%EC%9D%B4%EB%8B%A4.html</guid>
-    <category>재테크</category>
-    <pubDate>Mon, 28 Sep 2026 09:00:00 +0900</pubDate>
-    <description>하지만 당신도 이미 알고 있다. 돈이 아무리 많아도 행복하지 않은 사람이 있다는 사실을. 그렇다면 우리는 이 행복이라는 막연한 소망을 어떻게 이룰 수 있을까? 지금 하는 일에서 성공하거나 사회적으로 인정받거나 많은 재물을 소유하는 것이 과연 답이 될까? 아마도 사람에 따라 다를 것이다. 그 힌트는 바로 &#x27;지출 철학&#x27;과 &#x27;보이지 않는 자산&#x27;이다. 돈을 쓰는 방법은 단순한 경비의 증거가 아니라 그 사람의 가치관과 인생관을 비추는 거울이라는 점이다. 거대한 부를 쌓아도 오래 유지하지 못하는 사람들은 돈을 쓰는 방식이 비슷비슷하다. 반대로…</description>
   </item>
 </channel>
 </rss>
