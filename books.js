@@ -911,4 +911,7 @@ const BOOKS = [
   { title: "작가란 무엇인가 1(헤밍웨이 탄생 123주년 기념 리커버)", author: "파리 리뷰", publisher: "다른", genres: [], published: 2022, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791156330066.jpg", isbn: "9791156330066",
     summary: "희미할 때 용기를 갖게 된 것은 전적으로 이 인터뷰 덕분이다.”_오르한 파묵  “나는 『파리 리뷰』를 한 권도 빼놓지 않고 모두 가지고 있다. 이 작가 인터뷰를 엮는다면 더없이 훌륭한 책이 될 것이다.”_어니스트 헤밍웨이  『작가란 무엇인가』는 열두 명의 세계적인 작가가 미국의 저명한 문학잡지 『파리 리뷰』와 가진 인터뷰 모음집이다. 우리가 즐겨 읽고 익히 들어본 20, 21세기 대표 소설가들인 에코, 파묵, 하루키, 오스터, 매큐언, 로스, 쿤데라, 카버, 마르케스", review: "", rating: null, quotes: [] },
+  { title: "Zero to One", author: "피터 틸", publisher: "Crown Business", genres: [], published: 2014, readYear: 2026,
+    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780553418286.jpg", isbn: "9780553418286",
+    summary: "in secrets.  The great secret of our time is that there are still uncharted frontiers to explore and new inventions to create. In Zero to One, legendary entrepreneur and investor Peter Thiel shows how we can find singular ways to create those new things.  Thiel", review: "", rating: null, quotes: [] },
 ];
