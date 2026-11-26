@@ -6,7 +6,15 @@
   <atom:link href="https://hellmeone.com/feed.xml" rel="self" type="application/rss+xml" />
   <description>읽고 생각한 것을, 길게 풀어 씁니다.</description>
   <language>ko</language>
-  <lastBuildDate>Tue, 24 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <lastBuildDate>Thu, 26 Nov 2026 09:00:00 +0900</lastBuildDate>
+  <item>
+    <title>Die Empty</title>
+    <link>https://hellmeone.com/p/die-empty.html</link>
+    <guid isPermaLink="true">https://hellmeone.com/p/die-empty.html</guid>
+    <category>삶</category>
+    <pubDate>Thu, 26 Nov 2026 09:00:00 +0900</pubDate>
+    <description>오늘 당장 모든 것을 끝내라는 뜻이 아니다. 삶의 다른 영역을 제쳐두고 일만 하라는 말도 아니다. 내 모든 것을 소진한다고 걸작이 완성되는 것도 아니다. 삶의 여러 영역에서 중요한 일을 찾아 매일 의미있게 진전해야 한다. 그러면 목표를 이룰 가능성이 커지고, 그 과정도 즐길 수 있다. 내일이 없는 것처럼 살라는 뜻이 아니다. 기회에는 책임이 따른다. 오늘 일을 통해 변화를 만들 수 있지만, 그 행동이 내일 어떤 결과를 낳을지도 생각해야 한다. 내가 한 일이 다른 사람의 삶에 미칠 영향도 고려해야 한다. 오늘의 선택을 내일 후회할 수…</description>
+  </item>
   <item>
     <title>광기와 상상력의 시험장 (이언 매큐언)</title>
     <link>https://hellmeone.com/p/%EA%B4%91%EA%B8%B0%EC%99%80-%EC%83%81%EC%83%81%EB%A0%A5%EC%9D%98-%EC%8B%9C%ED%97%98%EC%9E%A5-%EC%9D%B4%EC%96%B8-%EB%A7%A4%ED%81%90%EC%96%B8.html</link>
@@ -238,14 +246,6 @@
     <category>자기경영</category>
     <pubDate>Fri, 02 Oct 2026 09:00:00 +0900</pubDate>
     <description>본질은 그대로다. 노력 없이는 그 무엇도 손에 넣을 수 없다. 노력의 성격만 달라졌을 뿐이다. 예전에는 자기 운명조차 좌우할 수 없는 가혹한 삶 속에서, 수많은 제약을 하나하나 뛰어 넘어야 했다. 오늘날에는 제약이 없는 상태를 견뎌내야 한다. 예전에는 시련이 먼저 눈앞에 들이닥쳤고, 맞서기만 하면 됐다. 이제는 스스로 시련을 향해 나아가야 한다. 심지어 시련을 직접 만들어내고, 더 짧은 길이 아니라 더 먼 길을, 평탄한 길이 아니라 가파른 비탈을 택해야 한다. 노력 없이 해방은 없다. 노력은 바로, 지금의 능력을 넘어선 목표를 달성…</description>
-  </item>
-  <item>
-    <title>아등바등에서 빈둥빈둥으로</title>
-    <link>https://hellmeone.com/p/%EC%95%84%EB%93%B1%EB%B0%94%EB%93%B1%EC%97%90%EC%84%9C-%EB%B9%88%EB%91%A5%EB%B9%88%EB%91%A5%EC%9C%BC%EB%A1%9C.html</link>
-    <guid isPermaLink="true">https://hellmeone.com/p/%EC%95%84%EB%93%B1%EB%B0%94%EB%93%B1%EC%97%90%EC%84%9C-%EB%B9%88%EB%91%A5%EB%B9%88%EB%91%A5%EC%9C%BC%EB%A1%9C.html</guid>
-    <category>자기경영</category>
-    <pubDate>Wed, 30 Sep 2026 09:00:00 +0900</pubDate>
-    <description>우리의 뇌는 엄청난 노력의 산물이지만, 정작 피할 수 있는 노력은 어떻게든 피하려 드는 기관이기도 하다. 본질적으로 뇌는 목표 달성을 위해 가장 요긴하게 쓰려고 에너지를 아낀다. 바로 그렇기에 틈만 나면 어떻게든 에너지를 안 쓰고 버티려 든다. 우리 뇌는 당면한 문제를 가장 적은 에너지로 해결하는 방식을 발달시켜 왔다. 심리학자 대니얼 카너먼이 제시한 두 가지 사고 방식, 즉 직관에 의존하는 빠른 생각과 분석이 필요한 느린 생각이 대표적인 예다. 우리가 그토록 쉽게 고정관념에 갇히는 이유도 여기에 있다. 뇌는 통계적 패턴을 포착하면…</description>
   </item>
 </channel>
 </rss>
