@@ -914,7 +914,4 @@ const BOOKS = [
   { title: "Zero to One", author: "피터 틸", publisher: "Crown Business", genres: [], published: 2014, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9780553418286.jpg", isbn: "9780553418286",
     summary: "in secrets.  The great secret of our time is that there are still uncharted frontiers to explore and new inventions to create. In Zero to One, legendary entrepreneur and investor Peter Thiel shows how we can find singular ways to create those new things.  Thiel", review: "", rating: null, quotes: [] },
-  { title: "한자와 나오키 2", author: "이케이도 준, Tsuha Keiichi", publisher: "대원씨아이", genres: [], published: 2021, readYear: 2026,
-    cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791136260109.jpg", isbn: "9791136260109",
-    summary: "거액의 채권을 회수하기 위해 서부 오사카철강의 전직 사장 히가시다를 쫓는 한자와 나오키.  융자 실패 책임을 한자와에게 떠넘긴 지점장, 아사노에게 집요한 방해를 받는 가운데, 히가시다를 쫓는 건 한자와만이 아니었다.  국세국 사찰부의 쿠로사키─과거 한 은행을 파산으로 몰고 간 남자도 히가시다의 돈을 노리고 움직이기 시작한다.  히가시다, 국세국, 그리고 한자와. 마지막에 웃는 자는 누구일까 ─.", review: "", rating: null, quotes: [] },
 ];
