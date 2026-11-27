@@ -1,6 +1,7 @@
 // build_notes.py가 만드는 파일 — 손으로 고치지 마세요.
 // 글 id → 글 페이지 주소(p/<슬러그>.html). 한 번 준 주소는 바뀌지 않습니다.
 const SLUGS = {
+  "mwy8x6yt": "die-empty-2",
   "mwxj979s": "die-empty",
   "mwujy2qa": "광기와-상상력의-시험장-이언-매큐언",
   "mwub4sat": "지식의-형태로서의-일화-폴-오스터",
