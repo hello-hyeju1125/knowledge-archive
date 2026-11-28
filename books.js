@@ -916,7 +916,7 @@ const BOOKS = [
     summary: "in secrets.  The great secret of our time is that there are still uncharted frontiers to explore and new inventions to create. In Zero to One, legendary entrepreneur and investor Peter Thiel shows how we can find singular ways to create those new things.  Thiel", review: "", rating: null, quotes: [] },
   { title: "한자와 나오키 2: 복수는 버티는 자의 것이다", author: "이케이도 준", publisher: "인플루엔셜", genres: [], published: 2019, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791189995102.jpg", isbn: "9791189995102",
-    summary: "일본에서 1980년 이후 최고의 시청률인 42.2%, 마지막회 순간 시청률 50.4%를 기록하면서 최고의 드라마로 손꼽히며 두고두고 회자되는 드라마 《한자와 나오키》의 원작소설 『한자와 나오키』 제2권 《복수는 버티는 자의 것이다》. 에도가와 란포상, 나오키상 수상에 빛나는 스토리텔러 이케이도 준의 대표작으로, 현재까지 약 570만 부 이상 판매되었고, 마지막 권이 나온 이후 지금까지도 독자들에게 그 다음 권을 요청받고 있을 정도로 열렬히 사랑받고", review: "", rating: null, quotes: [] },
+    summary: "일본에서 1980년 이후 최고의 시청률인 42.2%, 마지막회 순간 시청률 50.4%를 기록하면서 최고의 드라마로 손꼽히며 두고두고 회자되는 드라마 《한자와 나오키》의 원작소설 『한자와 나오키』 제2권 《복수는 버티는 자의 것이다》. 에도가와 란포상, 나오키상 수상에 빛나는 스토리텔러 이케이도 준의 대표작으로, 현재까지 약 570만 부 이상 판매되었고, 마지막 권이 나온 이후 지금까지도 독자들에게 그 다음 권을 요청받고 있을 정도로 열렬히 사랑받고", review: "문제를 해결했지만 결국 경질당하는구나. 직장 생활이란.", rating: 4, quotes: [] },
   { title: "다이 엠티", author: "토드 헨리", publisher: "필름(Feelm)", genres: [], published: 2026, readYear: 2026,
     cover: "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791124468500.jpg", isbn: "9791124468500",
     summary: "또다시 뒤로 밀린다. 시간은 흐르는데 어디로 가야 할지는 여전히 막막하다. 일상의 소음에 휩쓸려 자신의 가능성을 발휘하지 못하는 동안, 세상은 우리가 보탤 수 있었던 가치를 잃어간다.  최고의 동기부여 전문가 토드 헨리는 《다이 엠티》에서 우리가 중요한 일을 미루는 이유와 그 대가를 파헤친다. 안락함과 두려움, 익숙함과 자존심은 어떻게 우리의 야망을 가로막는가? 해야 할 일을 알면서도 행동하지 못하는 이유는 무엇인가? 저자는 이러한 질문을 통해 삶의", review: "후회 없이, 남김 없이 가능성을 발휘하며 살아내보자.", rating: 3, quotes: [] },
